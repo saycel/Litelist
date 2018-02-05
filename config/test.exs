@@ -15,5 +15,5 @@ config :litelist, Litelist.Repo,
   username: "postgres",
   password: "postgres",
   database: "litelist_test",
-  hostname: "localhost",
+  hostname: "db",
   pool: Ecto.Adapters.SQL.Sandbox

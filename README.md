@@ -11,6 +11,8 @@
 1. `chmod +x run.sh`
 1. `docker-compose build` Note: You only need to run this command the first time
 1. `docker-compose up`
+1. Go to localhost:4000
+1. `docker-compose exec web mix test` to run tests.
 
 ### Current Issues
 * Inconsistent live-reload while using Docker.
