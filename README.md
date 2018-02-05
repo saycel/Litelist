@@ -9,6 +9,7 @@
 1. Clone this repo
 1. `cd Litelist`
 1. `chmod +x run.sh`
+1. Make sure ports 4000 and 5432 (postgres) are free. Run `brew services stop postgresql` on Mac.
 1. `docker-compose build` Note: You only need to run this command the first time
 1. `docker-compose up`
 1. Go to localhost:4000
