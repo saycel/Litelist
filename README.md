@@ -14,6 +14,8 @@
 1. Go to localhost:4000
 1. `docker-compose exec web mix test` to run tests.
 
+Note: See Docker usage below for more commands.
+
 ### Current Issues
 * Inconsistent live-reload while using Docker.
 
@@ -21,3 +23,15 @@
 1. `mix phx.new litelist`
 1. Set up Dockerfile, docker-compose.yml and run.sh.
 1. Start from the Run Locally section above.
+
+### Docker usage
+
+Run commands prepended with `docker-compose run web`
+
+`mix ecto.migrate` becomes `docker-compose run web mix ecto.migrate`
+
+Some useful commands
+
+* `docker-compose run web mix ecto.rollback`
+* `docker-compose run web mix ecto.migrate`
+* `docker-compose exec web mix test`
