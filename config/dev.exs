@@ -54,5 +54,6 @@ config :litelist, Litelist.Repo,
   username: "postgres",
   password: "postgres",
   database: "litelist_dev",
-  hostname: "localhost",
+  hostname: "db",
+  port: "5432",
   pool_size: 10
