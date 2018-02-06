@@ -21,6 +21,7 @@
 
 ### Or Create user with factories
 1. `docker-compose run web iex -S mix`
+1. `import Litelist.Factory`
 1. `attrs = %{username: 'ADD_NAME_HERE', password: 'ADD_PASSWORD_HERE'}`
 1. `build(:neighbor, attrs)`
 

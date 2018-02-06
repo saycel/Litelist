@@ -44,7 +44,8 @@ defmodule Litelist.Mixfile do
       {:guardian, "~> 1.0"},
       {:comeonin, "~> 4.1.0"},
       {:bcrypt_elixir, "~> 0.12"},
-      {:ex_machina, "~> 2.1"}
+      {:ex_machina, "~> 2.1"},
+      {:faker_elixir_octopus, "~> 1.0.0"}
     ]
   end
 
