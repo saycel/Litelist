@@ -8,6 +8,6 @@ defmodule Litelist.Repo.Migrations.CreateNeighbors do
 
       timestamps()
     end
-
+    create unique_index(:neighbors, [:username])
   end
 end
