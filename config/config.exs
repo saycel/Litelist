@@ -25,3 +25,8 @@ config :logger, :console,
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.
 import_config "#{Mix.env}.exs"
+
+# Configure Guardian
+config :litelist, Litelist.Auth.Guardian,
+  issuer: "listlist", # Name of your app/company/product
+  secret_key: "cUb/WWOf1Pe8Q7QQ3fxwSWqnuA7oGohzLUYySEt6UrVREONqudCD3uh83jMviUpz"

@@ -43,7 +43,7 @@ defmodule Litelist.Mixfile do
       {:cowboy, "~> 1.0"},
       {:guardian, "~> 1.0"},
       {:comeonin, "~> 4.1.0"},
-      {:bcrypt_elixir, "~> 1.0.6"}
+      {:bcrypt_elixir, "~> 0.12"}
     ]
   end
 
