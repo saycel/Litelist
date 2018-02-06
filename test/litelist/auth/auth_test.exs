@@ -31,7 +31,6 @@ defmodule Litelist.AuthTest do
 
     test "create_neighbor/1 with valid data creates a neighbor" do
       assert {:ok, %Neighbor{} = neighbor} = Auth.create_neighbor(@valid_attrs)
-      assert neighbor.password == "some password"
       assert neighbor.username == "some username"
     end
 
@@ -43,7 +42,6 @@ defmodule Litelist.AuthTest do
       neighbor = neighbor_fixture()
       assert {:ok, neighbor} = Auth.update_neighbor(neighbor, @update_attrs)
       assert %Neighbor{} = neighbor
-      assert neighbor.password == "some updated password"
       assert neighbor.username == "some updated username"
     end
 
