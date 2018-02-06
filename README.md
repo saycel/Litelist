@@ -15,9 +15,11 @@
 1. Go to localhost:4000
 1. `docker-compose run web mix test` to run tests.
 
-### Create first user
+### Create first user and test authentication
 1. `docker-compose run web iex -S mix` Note: `iex -S mix` is like running `rails console`
 1. `Litelist.Auth.create_neighbor(%{username: "first", password: "pass"})`
+1. Go to localhost:4000 and login with username: first, password: pass
+1. localhost:4000/secret can only be seen by authenticated users
 
 
 Note: See Docker usage below for more commands.
