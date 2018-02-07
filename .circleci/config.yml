@@ -9,7 +9,7 @@ jobs:
     steps:
       - checkout
       - setup_remote_docker
-      - ls -l
+      - ls
       # - run:
       #     name: Install Docker Compose
       #     command: |
