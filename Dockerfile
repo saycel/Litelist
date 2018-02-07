@@ -13,6 +13,6 @@ RUN mix archive.install --force https://github.com/phoenixframework/archives/raw
 # Install NodeJS and the NPM
 RUN curl -sL https://deb.nodesource.com/setup_8.x | bash -
 RUN apt-get install -y -q nodejs
-ADD run.sh /usr/local/etc/run.sh
+
 WORKDIR /app
 EXPOSE 4000
