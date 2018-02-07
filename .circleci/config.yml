@@ -20,6 +20,9 @@ jobs:
           name: Docker Compose Build
           command: docker-compose build
       - run:
+          name: LS
+          command: ls
+      - run:
           name: Docker Compose Up
           command: docker-compose up
       - run:
