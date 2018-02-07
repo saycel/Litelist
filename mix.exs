@@ -43,6 +43,11 @@ defmodule Litelist.Mixfile do
       {:phoenix_live_reload, "~> 1.0", only: :dev},
       {:gettext, "~> 0.11"},
       {:cowboy, "~> 1.0"},
+      {:guardian, "~> 1.0"},
+      {:comeonin, "~> 4.1.0"},
+      {:bcrypt_elixir, "~> 0.12"},
+      {:ex_machina, "~> 2.1"},
+      {:faker_elixir_octopus, "~> 1.0.0"},
       {:excoveralls, "~> 0.8", only: :test}
     ]
   end

@@ -3,8 +3,7 @@
 FROM elixir:1.6.1
 # Install debian packages
 RUN apt-get update
-RUN apt-get install --yes build-essential inotify-tools postgresql-client
-
+RUN apt-get install --yes build-essential inotify-tools postgresql-client gcc mono-mcs && rm -rf /var/lib/apt/lists/*
 # Install Phoenix packages
 RUN mix local.hex --force
 RUN mix local.rebar --force
