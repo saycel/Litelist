@@ -48,7 +48,8 @@ defmodule Litelist.Mixfile do
       {:bcrypt_elixir, "~> 0.12"},
       {:ex_machina, "~> 2.1"},
       {:faker_elixir_octopus, "~> 1.0.0"},
-      {:excoveralls, "~> 0.8", only: :test}
+      {:excoveralls, "~> 0.8", only: :test},
+      {:credo, "~> 0.9.0-rc1", only: [:dev, :test], runtime: false}
     ]
   end
 
