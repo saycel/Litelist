@@ -5,7 +5,7 @@ jobs:
     docker:
       - image: circleci/elixir:1.6.1
 
-    working_directory: ~/
+    working_directory: ~/litelist
     steps:
       - checkout
       - setup_remote_docker
