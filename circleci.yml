@@ -1,0 +1,10 @@
+machine:
+  services:
+    - docker
+
+test:
+  pre:
+    - docker-compose build
+    - docker-compose up
+  override:
+    - docker-compose run web mix test
