@@ -51,3 +51,4 @@ Some useful commands
 * `docker-compose run web mix ecto.migrate`
 * `docker-compose run web mix test`
 * `docker-compose run web /bin/bash`
+* `docker-compose run web mix coveralls`

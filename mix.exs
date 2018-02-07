@@ -10,7 +10,9 @@ defmodule Litelist.Mixfile do
       compilers: [:phoenix, :gettext] ++ Mix.compilers,
       start_permanent: Mix.env == :prod,
       aliases: aliases(),
-      deps: deps()
+      deps: deps(),
+      test_coverage: [tool: ExCoveralls],
+      preferred_cli_env: ["coveralls": :test, "coveralls.detail": :test, "coveralls.post": :test, "coveralls.html": :test]
     ]
   end
 
@@ -45,7 +47,8 @@ defmodule Litelist.Mixfile do
       {:comeonin, "~> 4.1.0"},
       {:bcrypt_elixir, "~> 0.12"},
       {:ex_machina, "~> 2.1"},
-      {:faker_elixir_octopus, "~> 1.0.0"}
+      {:faker_elixir_octopus, "~> 1.0.0"},
+      {:excoveralls, "~> 0.8", only: :test}
     ]
   end
 
