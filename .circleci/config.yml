@@ -24,7 +24,7 @@ jobs:
           command: ls
       - run:
           name: Docker Compose Up
-          command: docker-compose up
+          command: cd && docker-compose up
       - run:
           name: Run tests
-          command: docker-compose run web mix test
+          command: cd && docker-compose run web mix test
