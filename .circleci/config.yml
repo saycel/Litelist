@@ -4,8 +4,6 @@ jobs:
   build:
     docker:
       - image: circleci/elixir:1.6.1
-
-    working_directory: ~/repo
     steps:
       - checkout
       - setup_remote_docker
