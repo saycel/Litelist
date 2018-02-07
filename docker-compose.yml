@@ -1,4 +1,4 @@
-version: '3.2'
+version: '3'
 services:
   db:
     image: postgres
@@ -7,9 +7,7 @@ services:
   web:
     build: .
     volumes:
-      - type: bind
-        source: .
-        target: /app
+      - .:/app
     ports:
       - "4000:4000"
     depends_on:
