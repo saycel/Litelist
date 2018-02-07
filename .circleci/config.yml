@@ -10,8 +10,8 @@ jobs:
       - checkout
       - setup_remote_docker
       - run:
-        name: LS
-        command: ls
+          name: LS
+          command: ls
       # - run:
       #     name: Install Docker Compose
       #     command: |
