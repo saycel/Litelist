@@ -7,7 +7,7 @@ defmodule Litelist.Factory do
   def neighbor_factory do
     %Neighbor{
       username: FakerElixir.Internet.user_name,
-      password: Faker.Internet.password(:normal)
+      password: Comeonin.Bcrypt.hashpwsalt(Faker.Internet.password(:normal))
     }
   end
 end
