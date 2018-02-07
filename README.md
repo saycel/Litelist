@@ -13,7 +13,7 @@
 1. `docker-compose build` Note: You only need to run this command the first time
 1. `docker-compose up`
 1. Go to localhost:4000
-1. `docker-compose exec web mix test` to run tests.
+1. `docker-compose run web mix test` to run tests.
 
 Note: See Docker usage below for more commands.
 
@@ -35,4 +35,5 @@ Some useful commands
 
 * `docker-compose run web mix ecto.rollback`
 * `docker-compose run web mix ecto.migrate`
-* `docker-compose exec web mix test`
+* `docker-compose run web mix test`
+* `docker-compose run web mix coveralls`
