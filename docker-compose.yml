@@ -12,5 +12,4 @@ services:
       - "4000:4000"
     depends_on:
       - db
-    command:
-      - ./run.sh
+    command: ./run.sh
