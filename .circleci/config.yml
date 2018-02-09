@@ -35,8 +35,8 @@ jobs:
           command: |
             set -x
             docker images
-            docker cp run.sh elixir:/app
-            docker run --volumes-from configs "$(docker images -q elixir)"
+            docker cp run.sh project_web:/app
+            docker run --volumes-from configs "$(docker images -q project_web)"
             docker-compose up -d
       - run:
           name: Run tests
