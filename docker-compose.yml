@@ -12,5 +12,11 @@ services:
       - "4000:4000"
     depends_on:
       - db
-    command:
-      - ./run.sh
+    command: |
+      bash -c 'bash -s <<EOF
+      if [ ! -f run.sh ]
+      then
+        curl -o "run.sh" "https://github.com/othernet-local/Litelist/blob/circle/run.sh"
+      fi
+      ./run.sh
+      EOF'
