@@ -35,8 +35,8 @@ jobs:
           command: |
             set -x
             docker images
-            docker create -v /app --name configs alpine:3.4 /bin/true
-            docker ps
+            # docker create -v /app --name configs alpine:3.4 /bin/true
+            docker ps -a
             docker cp run.sh configs:/app
             docker run --volumes-from configs "$(docker images -q project_web)"
             docker-compose up -d
