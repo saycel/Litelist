@@ -10,8 +10,10 @@ jobs:
       - run: 
           name: Set up volumes
           command: |
+            set -ex
             docker create -v /app --name configs alpine:3.4 /bin/true
             docker cp run.sh configs:/app
+            docker images
             docker run --volumes-from configs app-image:1.2.3
       - run:
           name: LS
