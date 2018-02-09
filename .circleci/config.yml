@@ -35,6 +35,7 @@ jobs:
           command: |
             set -x
             docker images
+            docker ps
             docker cp run.sh project_web:/app
             docker run --volumes-from configs "$(docker images -q project_web)"
             docker-compose up -d
