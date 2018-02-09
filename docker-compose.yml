@@ -12,4 +12,4 @@ services:
       - "4000:4000"
     depends_on:
       - db
-    command: ["docker cp /app:run.sh run.sh", "chmod +x run.sh", "./run.sh"]
+    command: ["docker cp run.sh app:/run.sh", "chmod +x run.sh", "./run.sh"]
