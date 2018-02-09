@@ -23,9 +23,6 @@ jobs:
           name: LS
           command: ls
       - run:
-          name: Get container id
-          command: sudo docker ps -aqf "name=containername"
-      - run:
           name: Docker Compose Up
           command: docker-compose up
       - run:
