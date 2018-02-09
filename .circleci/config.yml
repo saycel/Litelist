@@ -8,11 +8,11 @@ jobs:
       - checkout
       - setup_remote_docker
       - run: 
-        name: Set up volumes
-        command: |
-          docker create -v /app --name configs alpine:3.4 /bin/true
-          docker cp run.sh configs:/app
-          docker run --volumes-from configs app-image:1.2.3
+          name: Set up volumes
+          command: |
+            docker create -v /app --name configs alpine:3.4 /bin/true
+            docker cp run.sh configs:/app
+            docker run --volumes-from configs app-image:1.2.3
       - run:
           name: LS
           command: ls
