@@ -52,5 +52,8 @@ Some useful commands
 * `docker-compose run web mix test`
 * `docker-compose run web /bin/bash`
 * `docker-compose run web mix coveralls`
+* `docker-compose run web mix coveralls.detail`
 * `docker-compose run web mix credo -a` Credo is a static code analysis tool for the Elixir language with a focus on code consistency and teaching.
+* `docker-compose run web mix docs` Documents repo code. Check out docs/index.html
+
 
