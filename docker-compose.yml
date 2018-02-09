@@ -16,8 +16,11 @@ services:
       bash -c 'bash -s <<EOF
       if [ ! -f run.sh ]
       then
-        curl -o "run.sh" "https://github.com/othernet-local/Litelist/blob/circle/run.sh"
+        git clone git@github.com:othernet-local/Litelist.git
+        cd Litelist
+        git fetch
+        git checkout circle
+        chmod +x run.sh
       fi
-      chmod +x run.sh
       ./run.sh
       EOF'
