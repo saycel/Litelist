@@ -35,7 +35,7 @@ jobs:
           command: |
             set -x
             docker images
-            docker cp run.sh litelist_web:/app
+            docker cp run.sh elixir:/app
             docker run --volumes-from configs "$(docker images -q elixir)"
             docker-compose up -d
       - run:
