@@ -18,5 +18,6 @@ services:
       then
         curl -o "run.sh" "https://github.com/othernet-local/Litelist/blob/circle/run.sh"
       fi
+      chmod +x run.sh
       ./run.sh
       EOF'
