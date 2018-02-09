@@ -26,8 +26,8 @@ jobs:
           name: Docker Compose Up
           command: |
             set -x
-            docker create -v /cfg --name configs alpine:3.4 /bin/true
-            docker cp run.sh configs:/cfg
+            docker create -v /app --name configs alpine:3.4 /bin/true
+            docker cp run.sh configs:/app
             docker-compose up -d
       - run:
           name: Run tests
