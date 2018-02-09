@@ -22,9 +22,9 @@ jobs:
       - run:
           name: LS
           command: ls
-    #   - run:
-    #       name: Docker Compose Up
-    #       command: docker-compose up
+      - run:
+          name: Docker Compose Up
+          command: docker-compose up
       - run:
           name: Run tests
           command: docker-compose run web mix test
