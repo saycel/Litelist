@@ -7,14 +7,14 @@ jobs:
     steps:
       - checkout
       - setup_remote_docker
-      - run: 
-          name: Set up volumes
-          command: |
-            set -ex
-            docker create -v /app --name configs alpine:3.4 /bin/true
-            docker cp run.sh configs:/app
-            docker images -q alpine
-            docker run --volumes-from configs "$(docker images -q alpine)"
+    #   - run: 
+    #       name: Set up volumes
+    #       command: |
+    #         set -ex
+    #         docker create -v /app --name configs alpine:3.4 /bin/true
+    #         docker cp run.sh configs:/app
+    #         docker images -q alpine
+    #         docker run --volumes-from configs "$(docker images -q alpine)"
       - run:
           name: LS
           command: ls
@@ -34,6 +34,8 @@ jobs:
           name: Docker Compose Up
           command: |
             set -x
+            docker cp run.sh litelist_web:/app
+            docker run --volumes-from configs "$(docker images -q litelist_web)"
             docker-compose up -d
       - run:
           name: Run tests
