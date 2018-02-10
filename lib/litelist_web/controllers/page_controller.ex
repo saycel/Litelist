@@ -5,10 +5,6 @@ defmodule LitelistWeb.PageController do
   alias Litelist.Auth.Neighbor
   alias Litelist.Auth.Guardian
 
-  # def index(conn, _params) do
-  #   render conn, "index.html"
-  # end
-
   def index(conn, _params) do
     changeset = Auth.change_neighbor(%Neighbor{})
     maybe_neighbor = Guardian.Plug.current_resource(conn)
@@ -22,6 +18,7 @@ defmodule LitelistWeb.PageController do
       |> render("index.html", changeset: changeset, action: page_path(conn, :login), maybe_neighbor: maybe_neighbor)
   end
   def login(conn, %{"neighbor" => %{"username" => username, "password" => password}}) do
+    # credo:disable-for-lines:2
     Auth.authenticate_neighbor(username, password)
     |> login_reply(conn)
   end

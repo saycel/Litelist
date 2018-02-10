@@ -1,4 +1,7 @@
 defmodule Litelist.Auth.Neighbor do
+  @moduledoc """
+  Neighbor model
+  """
   use Ecto.Schema
   import Ecto.Changeset
   alias Litelist.Auth.Neighbor
@@ -22,6 +25,6 @@ defmodule Litelist.Auth.Neighbor do
   defp put_pass_hash(%Ecto.Changeset{valid?: true, changes: %{password: password}} = changeset) do
     change(changeset, password: Bcrypt.hashpwsalt(password))
   end
-  
+    
   defp put_pass_hash(changeset), do: changeset
 end

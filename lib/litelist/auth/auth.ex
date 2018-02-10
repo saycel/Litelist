@@ -106,7 +106,8 @@ defmodule Litelist.Auth do
 
   def authenticate_neighbor(username, plain_text_password) do
     query = from n in Neighbor, where: n.username == ^username
-    Repo.one(query)
+    query
+    |> Repo.one()
     |> check_password(plain_text_password)
   end
 
