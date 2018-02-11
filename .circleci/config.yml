@@ -11,7 +11,7 @@ jobs:
         environment:
           - POSTGRES_USER=postgres
           - POSTGRES_PASSWORD=postgres
-          - POSTGRES_HOST=db
+          - POSTGRES_HOST=localhost
     working_directory: ~/app
     steps:
       - checkout
