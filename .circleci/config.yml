@@ -47,7 +47,7 @@ jobs:
             - v1-yarn-cache
       - run:
           working_directory: assets
-          command: yarn install && yarn test
+          command: yarn install
       - save_cache:
           key: v1-yarn-cache-{{ .Branch }}-{{ checksum "assets/yarn.lock" }}
           paths: assets/node_modules
