@@ -9,9 +9,9 @@ jobs:
           - MIX_ENV=test
       - image: postgres:9.6.2-alpine
         environment:
-          - POSTGRES_USER=my-database-user
-          - POSTGRES_PASSWORD=my-database-password
-          - POSTGRES_HOST=localhost
+          - POSTGRES_USER=postgres
+          - POSTGRES_PASSWORD=postgres
+          - POSTGRES_HOST=db
     working_directory: ~/app
     steps:
       - checkout
