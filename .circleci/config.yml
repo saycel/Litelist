@@ -1,27 +1,62 @@
-# Elixir CircleCI 2.0 configuration file
+# .circleci/config.yml
+
 version: 2
 jobs:
   build:
     docker:
-      - image: circleci/elixir:1.6.1
+      - image: joeellis/elixir-phoenix-node:1.0
+        environment:
+          - MIX_ENV=test
+      - image: postgres:9.6.2-alpine
+        environment:
+          - POSTGRES_USER=my-database-user
+          - POSTGRES_PASSWORD=my-database-password
+          - POSTGRES_HOST=localhost
+    working_directory: ~/app
     steps:
       - checkout
-      - setup_remote_docker
+      - restore_cache:
+          keys:
+            - v1-mix-cache-{{ .Branch }}-{{ checksum "mix.lock" }}
+            - v1-mix-cache-{{ .Branch }}
+            - v1-mix-cache
+      - restore_cache:
+          keys:
+            - v1-build-cache-{{ .Branch }}
+            - v1-build-cache
+      - run: mix do deps.get, compile
+      - save_cache:
+          key: v1-mix-cache-{{ .Branch }}-{{ checksum "mix.lock" }}
+          paths: "deps"
+      - save_cache:
+          key: v1-mix-cache-{{ .Branch }}
+          paths: "deps"
+      - save_cache:
+          key: v1-mix-cache
+          paths: "deps"
+      - save_cache:
+          key: v1-build-cache-{{ .Branch }}
+          paths: "_build"
+      - save_cache:
+          key: v1-build-cache
+          paths: "_build"
+      - restore_cache:
+          keys:
+            - v1-yarn-cache-{{ .Branch }}-{{ checksum "assets/yarn.lock" }}
+            - v1-yarn-cache-{{ .Branch }}
+            - v1-yarn-cache
       - run:
-          name: LS
-          command: ls
-      - run:
-          name: Install Docker Compose
-          command: |
-            curl -L https://github.com/docker/compose/releases/download/1.11.2/docker-compose-`uname -s`-`uname -m` > ~/docker-compose
-            chmod +x ~/docker-compose
-            sudo mv ~/docker-compose /usr/local/bin/docker-compose
-      - run:
-          name: Docker Compose Build
-          command: docker-compose build
-      - run:
-          name: LS
-          command: ls
-      - run:
-          name: Run tests
-          command: docker-compose run web mix test
+          working_directory: assets
+          command: yarn install && yarn test
+      - save_cache:
+          key: v1-yarn-cache-{{ .Branch }}-{{ checksum "assets/yarn.lock" }}
+          paths: assets/node_modules
+      - save_cache:
+          key: v1-yarn-cache-{{ .Branch }}
+          paths: assets/node_modules
+      - save_cache:
+          key: v1-yarn-cache
+          paths: assets/node_modules
+      - run: mix ecto.create && mix ecto.migrate
+      - run: mix phoenix.digest
+      - run: mix test
