@@ -21,20 +21,23 @@ defmodule LitelistWeb.Router do
     plug Guardian.Plug.EnsureAuthenticated
   end
 
+
+  # Definitely logged in scope
+  scope "/", LitelistWeb do
+    pipe_through [:browser, :auth, :ensure_auth]
+    get "/secret", PageController, :secret
+    resources "/sales", ForSaleController, only: [:new, :create, :edit, :update, :delete]
+  end
+  
   scope "/", LitelistWeb do
     pipe_through [:browser, :auth]
 
     get "/", PageController, :index
     post "/", PageController, :login
     post "/logout", PageController, :logout
-    resources "/sales", ForSaleController
+    resources "/sales", ForSaleController, only: [:index, :show]
   end
 
-  # Definitely logged in scope
-  scope "/", LitelistWeb do
-    pipe_through [:browser, :auth, :ensure_auth]
-    get "/secret", PageController, :secret
-  end
 
   # Other scopes may use custom stacks.
   # scope "/api", LitelistWeb do
