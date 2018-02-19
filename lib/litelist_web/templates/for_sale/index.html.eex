@@ -1,0 +1,32 @@
+<h2>Listing For sales</h2>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Description</th>
+      <th>Price</th>
+      <th>Contact info</th>
+
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+<%= for for_sale <- @for_sales do %>
+    <tr>
+      <td><%= for_sale.title %></td>
+      <td><%= for_sale.description %></td>
+      <td><%= for_sale.price %></td>
+      <td><%= for_sale.contact_info %></td>
+
+      <td class="text-right">
+        <span><%= link "Show", to: for_sale_path(@conn, :show, for_sale), class: "btn btn-default btn-xs" %></span>
+        <span><%= link "Edit", to: for_sale_path(@conn, :edit, for_sale), class: "btn btn-default btn-xs" %></span>
+        <span><%= link "Delete", to: for_sale_path(@conn, :delete, for_sale), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" %></span>
+      </td>
+    </tr>
+<% end %>
+  </tbody>
+</table>
+
+<span><%= link "New For sale", to: for_sale_path(@conn, :new) %></span>
