@@ -30,7 +30,6 @@
 <% end %>
   </tbody>
 </table>
-<%= @current_neighbor && @current_neighbor.username%>
 <%= if @current_neighbor do %>
  <span><%= link "New For sale", to: for_sale_path(@conn, :new) %></span>
 <% end %>
