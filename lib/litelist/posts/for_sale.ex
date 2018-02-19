@@ -1,4 +1,8 @@
 defmodule Litelist.Posts.ForSale do
+  @moduledoc """
+  ForSale model
+  """
+
   use Ecto.Schema
   import Ecto.Changeset
   alias Litelist.Posts.ForSale

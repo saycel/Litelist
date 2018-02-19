@@ -1,4 +1,8 @@
 defmodule Litelist.Plugs.CurrentNeighbor do
+    @moduledoc """
+    Plug adds @current_neighbor to conn. @current_neighbor is nil if no one is signed in.
+    """
+
     def init(opts), do: opts
   
     def call(conn, _opts) do
@@ -10,3 +14,4 @@ defmodule Litelist.Plugs.CurrentNeighbor do
       end
     end
   end
+  
