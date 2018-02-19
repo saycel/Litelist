@@ -24,5 +24,7 @@
 
 </ul>
 
-<span><%= link "Edit", to: for_sale_path(@conn, :edit, @for_sale) %></span>
+<%= if @current_neighbor do %>
+  <span><%= link "Edit", to: for_sale_path(@conn, :edit, @for_sale) %></span>
+<% end %>
 <span><%= link "Back", to: for_sale_path(@conn, :index) %></span>
