@@ -21,21 +21,22 @@ defmodule LitelistWeb.ForSaleControllerTest do
     end
   end
 
-  # describe "new for_sale" do
-  #   test "renders form", %{conn: conn} do
-  #     conn = get conn, for_sale_path(conn, :new)
-  #     assert html_response(conn, 200) =~ "New For sale"
-  #   end
-  # end
+  describe "new for_sale" do
+    test "renders form", %{conn: conn} do
+      conn = conn
+        |> login_neighbor()
+        |> get(for_sale_path(conn, :new))
+      
+      assert html_response(conn, 200) =~ "New For sale"
+    end
 
-  # describe "new for_sale" do
-  #   test "renders form", %{conn: conn} do
-  #     conn
-  #       |> login_neighbor()
-  #       |> get(for_sale_path(conn, :new))
-  #     assert html_response(conn, 200) =~ "New For sale"
-  #   end
-  # end
+    test "unautorized 401 redirect if not logged in", %{conn: conn} do
+      conn = conn
+        |> get(for_sale_path(conn, :new))
+      
+      assert response(conn, 401)
+    end
+  end
 
   describe "create for_sale" do
     test "redirects to show when data is valid", %{conn: conn} do
@@ -64,53 +65,74 @@ defmodule LitelistWeb.ForSaleControllerTest do
     end
   end
 
-  # describe "edit for_sale" do
-  #   setup [:create_for_sale]
+  describe "edit for_sale" do
+    setup [:create_for_sale]
 
-  #   test "renders form for editing chosen for_sale", %{conn: conn, for_sale: for_sale} do
-  #     conn = get conn, for_sale_path(conn, :edit, for_sale)
-  #     assert html_response(conn, 200) =~ "Edit For sale"
-  #   end
-  # end
+    test "renders form for editing chosen for_sale", %{conn: conn, for_sale: for_sale} do
+      conn = conn
+        |> login_neighbor()
+        |> get(for_sale_path(conn, :edit, for_sale))
+      assert html_response(conn, 200) =~ "Edit For sale"
+    end
 
-  # describe "edit for_sale" do
-  #   setup [:create_for_sale]
-
-  #   test "renders form for editing chosen for_sale", %{conn: conn, for_sale: for_sale} do
-  #     conn
-  #       |> login_neighbor()
-  #       |> get(for_sale_path(conn, :edit, for_sale))
-  #     assert html_response(conn, 200) =~ "Edit For sale"
-  #   end
-  # end
+    test "unautorized 401 redirect if not logged in", %{conn: conn, for_sale: for_sale} do
+      conn = conn
+        |> get(for_sale_path(conn, :edit, for_sale))
+      
+      assert response(conn, 401)
+    end
+  end
 
 
-  # describe "update for_sale" do
-  #   setup [:create_for_sale]
+  describe "update for_sale" do
+    setup [:create_for_sale]
 
-  #   test "redirects when data is valid", %{conn: conn, for_sale: for_sale} do
-  #     conn = put conn, for_sale_path(conn, :update, for_sale), for_sale: @update_attrs
-  #     assert redirected_to(conn) == for_sale_path(conn, :show, for_sale)
+    test "redirects when data is valid", %{conn: conn, for_sale: for_sale} do
+      conn = conn
+        |> login_neighbor()
+        |> put(for_sale_path(conn, :update, for_sale), for_sale: @update_attrs)
 
-  #     conn = get conn, for_sale_path(conn, :show, for_sale)
-  #     assert html_response(conn, 200) =~ "some updated contact_info"
-  #   end
+      assert redirected_to(conn) == for_sale_path(conn, :show, for_sale)
 
-  #   test "renders errors when data is invalid", %{conn: conn, for_sale: for_sale} do
-  #     conn = put conn, for_sale_path(conn, :update, for_sale), for_sale: @invalid_attrs
-  #     assert html_response(conn, 200) =~ "Edit For sale"
-  #   end
-  # end
+      conn = get conn, for_sale_path(conn, :show, for_sale)
+      assert html_response(conn, 200) =~ "some updated contact_info"
+    end
+
+    test "renders errors when data is invalid", %{conn: conn, for_sale: for_sale} do
+      conn = conn
+        |> login_neighbor()
+        |> put(for_sale_path(conn, :update, for_sale), for_sale: @invalid_attrs)
+
+      assert html_response(conn, 200) =~ "Edit For sale"
+    end
+
+    test "unautorized 401 redirect if not logged in", %{conn: conn, for_sale: for_sale} do
+      conn = conn
+        |> put(for_sale_path(conn, :update, for_sale), for_sale: @invalid_attrs)
+
+      assert response(conn, 401)
+    end
+  end
 
   describe "delete for_sale" do
     setup [:create_for_sale]
 
     test "deletes chosen for_sale", %{conn: conn, for_sale: for_sale} do
-      conn = delete conn, for_sale_path(conn, :delete, for_sale)
+      conn = conn
+        |> login_neighbor()
+        |> delete(for_sale_path(conn, :delete, for_sale))
+
       assert redirected_to(conn) == for_sale_path(conn, :index)
       assert_error_sent 404, fn ->
         get conn, for_sale_path(conn, :show, for_sale)
       end
+    end
+
+    test "unautorized 401 redirect if not logged in", %{conn: conn, for_sale: for_sale} do
+      conn = conn
+        |> delete(for_sale_path(conn, :delete, for_sale))
+
+      assert response(conn, 401)
     end
   end
 
