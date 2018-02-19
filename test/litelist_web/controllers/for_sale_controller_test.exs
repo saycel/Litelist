@@ -9,11 +9,6 @@ defmodule LitelistWeb.ForSaleControllerTest do
   @update_attrs %{contact_info: "some updated contact_info", description: "some updated description", price: 456.7, title: "some updated title"}
   @invalid_attrs %{contact_info: nil, description: nil, price: nil, title: nil}
 
-  def fixture(:for_sale) do
-    {:ok, for_sale} = Posts.create_for_sale(@create_attrs)
-    for_sale
-  end
-
   describe "index" do
     test "lists all for_sales", %{conn: conn} do
       conn = get conn, for_sale_path(conn, :index)
@@ -137,7 +132,7 @@ defmodule LitelistWeb.ForSaleControllerTest do
   end
 
   defp create_for_sale(_) do
-    for_sale = fixture(:for_sale)
+    for_sale = Factory.insert(:for_sale)
     {:ok, for_sale: for_sale}
   end
 
