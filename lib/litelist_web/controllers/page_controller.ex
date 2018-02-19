@@ -6,16 +6,15 @@ defmodule LitelistWeb.PageController do
   alias Litelist.Auth.Guardian
 
   def index(conn, _params) do
-    changeset = Auth.change_neighbor(%Neighbor{})
-    maybe_neighbor = Guardian.Plug.current_resource(conn)
-    message = if maybe_neighbor != nil do
+    changeset = Auth.change_neighbor(%Neighbor{})    
+    message = if @current_neighbor != nil do
       "Someone is logged in"
     else
       "No one is logged in"
     end
     conn
       |> put_flash(:info, message)
-      |> render("index.html", changeset: changeset, action: page_path(conn, :login), maybe_neighbor: maybe_neighbor)
+      |> render("index.html", changeset: changeset, action: page_path(conn, :login))
   end
   def login(conn, %{"neighbor" => %{"username" => username, "password" => password}}) do
     # credo:disable-for-lines:2

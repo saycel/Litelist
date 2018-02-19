@@ -7,8 +7,7 @@ defmodule LitelistWeb.ForSaleController do
 
   def index(conn, _params) do
     for_sales = Posts.list_for_sales()
-    current_neighbor = Guardian.Plug.current_resource(conn)
-    render(conn, "index.html", for_sales: for_sales, current_neighbor: current_neighbor)
+    render(conn, "index.html", for_sales: for_sales)
   end
 
   def new(conn, _params) do

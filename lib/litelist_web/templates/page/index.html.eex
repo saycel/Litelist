@@ -1,5 +1,5 @@
 <h2>Login Page</h2>
-<%= if @maybe_neighbor == nil do %>
+<%= if @current_neighbor == nil do %>
   <%= form_for @changeset, @action, fn f -> %>
     
     <div class="form-group">
@@ -17,6 +17,6 @@
     </div>
   <% end %>
 <% else %>
-  <h1>Hello <%= @maybe_neighbor.username%>!</h1>
+  <h1>Hello <%= @current_neighbor.username%>!</h1>
   <span><%= link "Logout", to: page_path(@conn, :logout), method: :post%></span>
 <% end %>

@@ -15,10 +15,16 @@ defmodule LitelistWeb.Router do
 
   pipeline :auth do
     plug Litelist.Auth.Pipeline
+    plug :current_neighbor
   end
 
   pipeline :ensure_auth do
     plug Guardian.Plug.EnsureAuthenticated
+    plug :current_neighbor
+  end
+
+  pipeline :current_neighbor do
+    plug Litelist.Plugs.CurrentNeighbor
   end
 
 
