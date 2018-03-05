@@ -76,8 +76,13 @@ defmodule Litelist.Posts do
 
   """
   def update_for_sale(%ForSale{} = for_sale, attrs) do
+    slug = slugify(attrs["title"])
+    generated_attrs = %{
+      "slug" => slug
+    }
+    merged_attrs = Map.merge(generated_attrs, attrs)
     for_sale
-    |> ForSale.changeset(attrs)
+    |> ForSale.changeset(merged_attrs)
     |> Repo.update()
   end
 
