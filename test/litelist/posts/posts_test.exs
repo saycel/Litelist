@@ -11,7 +11,7 @@ defmodule Litelist.PostsTest do
     @update_attrs %{"contact_info" => "some updated contact_info", "description" => "some updated description", "price" => 456.7, "title" => "some updated title"}
     @invalid_attrs %{"contact_info" => nil, "description" => nil, "price" => nil, "title" => nil}
 
-    def for_sale_fixture(attrs \\ %{}) do
+    def for_sale_fixture() do
       neighbor = Factory.insert(:neighbor)
 
       {:ok, for_sale} = Posts.create_for_sale(neighbor.id, @valid_attrs)

@@ -104,6 +104,18 @@ defmodule Litelist.Auth do
     Neighbor.changeset(neighbor, %{})
   end
 
+  @doc """
+  Returns a neighbor with good credientials, otherwise returns and error and message.
+
+  ## Examples
+
+      iex> authenticate_neighbor("name", "correct_pass")
+      {:ok, neighbor}
+
+      iex> authenticate_neighbor("wrong name", "incorrect pass")
+      {:error, "Incorrect username or password"}
+
+  """
   def authenticate_neighbor(username, plain_text_password) do
     query = from n in Neighbor, where: n.username == ^username
     query

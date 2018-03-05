@@ -61,5 +61,22 @@ defmodule Litelist.AuthTest do
       neighbor = neighbor_fixture()
       assert %Ecto.Changeset{} = Auth.change_neighbor(neighbor)
     end
+
+    test "authenticate_neighbor/2 returns a neighbor" do
+      neighbor = neighbor_fixture()
+      {:ok, return_value} = Auth.authenticate_neighbor(neighbor.username, "some password") 
+      assert return_value == neighbor
+    end
+
+    test "authenticate_neighbor/2 returns an error if password is incorrect" do
+      neighbor = neighbor_fixture()
+      {:error, return_value} = Auth.authenticate_neighbor(neighbor.username, "incorrect password") 
+      assert return_value != nil
+    end
+
+    test "authenticate_neighbor/2 returns an error if first param is nil" do
+      {:error, return_value} = Auth.authenticate_neighbor("doesn't exist", "this will be ignored") 
+      assert !is_nil(return_value)
+    end
   end
 end
