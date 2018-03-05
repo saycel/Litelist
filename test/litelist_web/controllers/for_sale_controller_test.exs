@@ -2,7 +2,6 @@ defmodule LitelistWeb.ForSaleControllerTest do
   use LitelistWeb.ConnCase
   
   alias Litelist.Factory
-  alias Litelist.Posts
   alias Litelist.Auth.Guardian
 
   @create_attrs %{contact_info: "some contact_info", description: "some description", price: 120.5, title: "some title"}
