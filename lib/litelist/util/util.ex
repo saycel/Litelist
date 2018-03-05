@@ -3,6 +3,14 @@ defmodule Litelist.Util do
     A module to host utility functions.
     """
 
+    @doc """
+    slugify
+    iex> slugify(nil)
+    nil
+
+    iex> slugify("Some String")
+    "some-string"
+    """
     def slugify(string = nil) do
         string
     end
