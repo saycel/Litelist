@@ -102,6 +102,9 @@
     <a href="#authenticate_neighbor/2">authenticate_neighbor(username, plain_text_password)</a>
   </div>
   
+    <div class="summary-synopsis"><p>Returns a neighbor with good credientials, otherwise returns and error and message</p>
+</div>
+  
 </div>
 <div class="summary-row">
   <div class="summary-signature">
@@ -191,7 +194,18 @@
     
   </div>
   <section class="docstring">
-    
+    <p>Returns a neighbor with good credientials, otherwise returns and error and message.</p>
+<h2 id="authenticate_neighbor/2-examples" class="section-heading">
+  <a href="#authenticate_neighbor/2-examples" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Examples
+</h2>
+
+<pre><code class="iex elixir">iex&gt; authenticate_neighbor(&quot;name&quot;, &quot;correct_pass&quot;)
+{:ok, neighbor}
+
+iex&gt; authenticate_neighbor(&quot;wrong name&quot;, &quot;incorrect pass&quot;)
+{:error, &quot;Incorrect username or password&quot;}</code></pre>
+
   </section>
 </div>
 <div class="detail" id="change_neighbor/1">
