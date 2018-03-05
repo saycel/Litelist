@@ -11,6 +11,8 @@ defmodule Litelist.Util do
     iex> slugify("Some String")
     "some-string"
     """
+    # TODO We may want to set a max length or do
+    # some work to ensure a unique slug in the future.
     def slugify(nil) do
         nil
     end
