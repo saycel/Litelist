@@ -8,6 +8,7 @@ defmodule Litelist.Posts do
 
   alias Litelist.Posts.ForSale
 
+  alias Litelist.Util
   @doc """
   Returns the list of for_sales.
 
@@ -50,7 +51,7 @@ defmodule Litelist.Posts do
 
   """
   def create_for_sale(neighbor_id, attrs \\ %{}) do
-    slug = slugify(attrs["title"])
+    slug = Util.slugify(attrs["title"])
     generated_attrs = %{
       "slug" => slug,
       "neighbor_id" => neighbor_id
@@ -76,7 +77,7 @@ defmodule Litelist.Posts do
 
   """
   def update_for_sale(%ForSale{} = for_sale, attrs) do
-    slug = slugify(attrs["title"])
+    slug = Util.slugify(attrs["title"])
     generated_attrs = %{
       "slug" => slug
     }
@@ -113,15 +114,5 @@ defmodule Litelist.Posts do
   """
   def change_for_sale(%ForSale{} = for_sale) do
     ForSale.changeset(for_sale, %{})
-  end
-
-  defp slugify(string = nil) do
-    string
-  end
-
-  defp slugify(string) do
-    string
-    |> String.downcase
-    |> String.replace(" ", "-")
   end
 end

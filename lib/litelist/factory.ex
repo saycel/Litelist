@@ -6,6 +6,7 @@ defmodule Litelist.Factory do
 
   alias Litelist.Auth.Neighbor
   alias Litelist.Posts.ForSale
+  alias Litelist.Util
 
   alias FakerElixir, as: Faker
 
@@ -33,7 +34,7 @@ defmodule Litelist.Factory do
   """
   def for_sale_factory do
     title = Faker.Lorem.words(3)
-    slug = slugify(title)
+    slug = Util.slugify(title)
     
     %ForSale{
       title: title,
@@ -43,11 +44,5 @@ defmodule Litelist.Factory do
       price: Faker.Number.decimal(2, 2),
       neighbor_id: insert(:neighbor).id
     }
-  end
-
-  defp slugify(string) do 
-    string
-    |> String.downcase
-    |> String.replace(" ", "-")
   end
 end
