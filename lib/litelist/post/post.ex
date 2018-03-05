@@ -51,10 +51,12 @@ defmodule Litelist.Post do
   """
   def create_for_sale(neighbor_id, attrs \\ %{}) do
     slug = slugify(attrs["title"])
+    generated_attrs = %{
+      "slug" => slug,
+      "neighbor_id" => neighbor_id
+    }
 
-    slug_attrs = Map.merge(%{"slug" => slug}, neighbor_id)
-
-    merged_attrs = Map.merge(slug_attrs, attrs)
+    merged_attrs = Map.merge(generated_attrs, attrs)
 
     %ForSale{}
     |> ForSale.changeset(merged_attrs)
