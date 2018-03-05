@@ -1,0 +1,33 @@
+<h2>Show For sale</h2>
+
+<ul>
+
+  <li>
+    <strong>Title:</strong>
+    <%= @for_sale.title %>
+  </li>
+
+  <li>
+    <strong>Description:</strong>
+    <%= @for_sale.description %>
+  </li>
+
+  <li>
+    <strong>Price:</strong>
+    <%= @for_sale.price %>
+  </li>
+
+  <li>
+    <strong>Contact info:</strong>
+    <%= @for_sale.contact_info %>
+  </li>
+
+  <li>
+    <strong>Slug:</strong>
+    <%= @for_sale.slug %>
+  </li>
+
+</ul>
+
+<span><%= link "Edit", to: for_sale_path(@conn, :edit, @for_sale) %></span>
+<span><%= link "Back", to: for_sale_path(@conn, :index) %></span>

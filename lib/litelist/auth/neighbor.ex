@@ -11,6 +11,8 @@ defmodule Litelist.Auth.Neighbor do
     field :password, :string
     field :username, :string
 
+    has_many :for_sales, Litelist.Post.ForSale
+
     timestamps()
   end
 
