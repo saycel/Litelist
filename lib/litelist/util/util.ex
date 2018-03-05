@@ -11,8 +11,8 @@ defmodule Litelist.Util do
     iex> slugify("Some String")
     "some-string"
     """
-    def slugify(string = nil) do
-        string
+    def slugify(nil) do
+        nil
     end
 
     def slugify(string) do
