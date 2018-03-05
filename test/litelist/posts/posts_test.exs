@@ -2,20 +2,19 @@ defmodule Litelist.PostsTest do
   use Litelist.DataCase
 
   alias Litelist.Posts
+  alias Litelist.Factory
 
   describe "for_sales" do
     alias Litelist.Posts.ForSale
 
-    @valid_attrs %{contact_info: "some contact_info", description: "some description", price: 120.5, title: "some title"}
-    @update_attrs %{contact_info: "some updated contact_info", description: "some updated description", price: 456.7, title: "some updated title"}
-    @invalid_attrs %{contact_info: nil, description: nil, price: nil, title: nil}
+    @valid_attrs %{"contact_info" => "some contact_info", "description" => "some description", "price" => 120.5, "title" => "some title"}
+    @update_attrs %{"contact_info" => "some updated contact_info", "description" => "some updated description", "price" => 456.7, "title" => "some updated title"}
+    @invalid_attrs %{"contact_info" => nil, "description" => nil, "price" => nil, "title" => nil}
 
     def for_sale_fixture(attrs \\ %{}) do
-      {:ok, for_sale} =
-        attrs
-        |> Enum.into(@valid_attrs)
-        |> Posts.create_for_sale()
+      neighbor = Factory.insert(:neighbor)
 
+      {:ok, for_sale} = Posts.create_for_sale(neighbor.id, @valid_attrs)
       for_sale
     end
 
@@ -30,7 +29,8 @@ defmodule Litelist.PostsTest do
     end
 
     test "create_for_sale/1 with valid data creates a for_sale" do
-      assert {:ok, %ForSale{} = for_sale} = Posts.create_for_sale(@valid_attrs)
+      neighbor = Factory.insert(:neighbor)    
+      assert {:ok, %ForSale{} = for_sale} = Posts.create_for_sale(neighbor.id, @valid_attrs)
       assert for_sale.contact_info == "some contact_info"
       assert for_sale.description == "some description"
       assert for_sale.price == 120.5
@@ -38,7 +38,8 @@ defmodule Litelist.PostsTest do
     end
 
     test "create_for_sale/1 with invalid data returns error changeset" do
-      assert {:error, %Ecto.Changeset{}} = Posts.create_for_sale(@invalid_attrs)
+      neighbor = Factory.insert(:neighbor)    
+      assert {:error, %Ecto.Changeset{}} = Posts.create_for_sale(neighbor.id, @invalid_attrs)
     end
 
     test "update_for_sale/2 with valid data updates the for_sale" do

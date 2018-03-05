@@ -1,8 +1,7 @@
 defmodule Litelist.Posts.ForSale do
   @moduledoc """
-  ForSale model
+  ForSale schema
   """
-
   use Ecto.Schema
   import Ecto.Changeset
   alias Litelist.Posts.ForSale
@@ -12,7 +11,10 @@ defmodule Litelist.Posts.ForSale do
     field :contact_info, :string
     field :description, :string
     field :price, :float
+    field :slug, :string
     field :title, :string
+
+    belongs_to :neighbor, Litelist.Auth.Neighbor
 
     timestamps()
   end
@@ -20,7 +22,7 @@ defmodule Litelist.Posts.ForSale do
   @doc false
   def changeset(%ForSale{} = for_sale, attrs) do
     for_sale
-    |> cast(attrs, [:title, :description, :price, :contact_info])
-    |> validate_required([:title, :description, :price, :contact_info])
+    |> cast(attrs, [:title, :description, :price, :contact_info, :slug, :neighbor_id])
+    |> validate_required([:title, :description, :price, :contact_info, :neighbor_id])
   end
 end

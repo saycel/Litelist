@@ -1,6 +1,6 @@
 defmodule Litelist.Auth.Neighbor do
   @moduledoc """
-  Neighbor model
+  Neighbor schema
   """
   use Ecto.Schema
   import Ecto.Changeset

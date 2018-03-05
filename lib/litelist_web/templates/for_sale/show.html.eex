@@ -22,6 +22,11 @@
     <%= @for_sale.contact_info %>
   </li>
 
+  <li>
+    <strong>Slug:</strong>
+    <%= @for_sale.slug %>
+  </li>
+
 </ul>
 
 <%= if @current_neighbor do %>

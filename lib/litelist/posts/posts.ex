@@ -42,16 +42,25 @@ defmodule Litelist.Posts do
 
   ## Examples
 
-      iex> create_for_sale(%{field: value})
+      iex> create_for_sale(neighbor_id, %{field: value})
       {:ok, %ForSale{}}
 
-      iex> create_for_sale(%{field: bad_value})
+      iex> create_for_sale(nil, %{field: bad_value})
       {:error, %Ecto.Changeset{}}
 
   """
-  def create_for_sale(attrs \\ %{}) do
+  def create_for_sale(neighbor_id, attrs \\ %{}) do
+    IO.puts(attrs["title"])
+    slug = slugify(attrs["title"])
+    generated_attrs = %{
+      "slug" => slug,
+      "neighbor_id" => neighbor_id
+    }
+
+    merged_attrs = Map.merge(generated_attrs, attrs)
+
     %ForSale{}
-    |> ForSale.changeset(attrs)
+    |> ForSale.changeset(merged_attrs)
     |> Repo.insert()
   end
 
@@ -100,5 +109,15 @@ defmodule Litelist.Posts do
   """
   def change_for_sale(%ForSale{} = for_sale) do
     ForSale.changeset(for_sale, %{})
+  end
+
+  defp slugify(string = nil) do
+    ""
+  end
+
+  defp slugify(string) do
+    string
+    |> String.downcase
+    |> String.replace(" ", "-")
   end
 end

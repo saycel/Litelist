@@ -16,7 +16,8 @@ defmodule LitelistWeb.ForSaleController do
   end
 
   def create(conn, %{"for_sale" => for_sale_params}) do
-    case Posts.create_for_sale(for_sale_params) do
+    neighbor = Guardian.Plug.current_resource(conn)
+    case Posts.create_for_sale(neighbor.id, for_sale_params) do
       {:ok, for_sale} ->
         conn
         |> put_flash(:info, "For sale created successfully.")

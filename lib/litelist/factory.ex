@@ -24,20 +24,30 @@ defmodule Litelist.Factory do
     }
   end
 
-    @doc """
-  Neighbor factory
-
+  @doc """
+  ForSale factory
   ## How to
-    build(:neighbor)
-    build(:neighbor, %{username: 'doe'})
-    insert(:neighbor)
+    build(:for_sale)
+    build(:for_sale, %{title: '1984 Mazda'})
+    insert(:for_sale)
   """
   def for_sale_factory do
+    title = Faker.Lorem.words(3)
+    slug = slugify(title)
+    
     %ForSale{
-      title: Faker.Lorem.words(3),
-      description: FakerElixir.Lorem.sentences(3..5),
-      price: FakerElixir.Number.decimal(3, 2),
-      contact_info: FakerElixir.Internet.email
+      title: title,
+      slug: slug,
+      contact_info: Faker.Internet.email,
+      description: Faker.Lorem.sentences(3..5),
+      price: Faker.Number.decimal(2, 2),
+      neighbor_id: insert(:neighbor).id
     }
+  end
+
+  defp slugify(string) do 
+    string
+    |> String.downcase
+    |> String.replace(" ", "-")
   end
 end
