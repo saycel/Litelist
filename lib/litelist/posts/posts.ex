@@ -50,7 +50,6 @@ defmodule Litelist.Posts do
 
   """
   def create_for_sale(neighbor_id, attrs \\ %{}) do
-    IO.puts(attrs["title"])
     slug = slugify(attrs["title"])
     generated_attrs = %{
       "slug" => slug,
@@ -112,7 +111,7 @@ defmodule Litelist.Posts do
   end
 
   defp slugify(string = nil) do
-    ""
+    string
   end
 
   defp slugify(string) do
