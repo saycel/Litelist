@@ -8,7 +8,7 @@
     <title>Litelist.Posts – litelist v0.0.1</title>
     <link rel="stylesheet" href="dist/app-81d381dea4.css" />
     
-    <script src="dist/sidebar_items-e62845b6c1.js"></script>
+    <script src="dist/sidebar_items-e7394d50ce.js"></script>
     
     
     
@@ -108,7 +108,7 @@
 </div>
 <div class="summary-row">
   <div class="summary-signature">
-    <a href="#create_for_sale/1">create_for_sale(attrs \\ %{})</a>
+    <a href="#create_for_sale/2">create_for_sale(neighbor_id, attrs \\ %{})</a>
   </div>
   
     <div class="summary-synopsis"><p>Creates a for_sale</p>
@@ -196,32 +196,32 @@
 
   </section>
 </div>
-<div class="detail" id="create_for_sale/1">
+<div class="detail" id="create_for_sale/2">
   
   
-    <span id="create_for_sale/0"></span>
+    <span id="create_for_sale/1"></span>
   
   <div class="detail-header">
-    <a href="#create_for_sale/1" class="detail-link" title="Link to this function">
+    <a href="#create_for_sale/2" class="detail-link" title="Link to this function">
       <span class="icon-link" aria-hidden="true"></span>
       <span class="sr-only">Link to this function</span>
     </a>
-    <span class="signature">create_for_sale(attrs \\ %{})</span>
+    <span class="signature">create_for_sale(neighbor_id, attrs \\ %{})</span>
     
     
     
   </div>
   <section class="docstring">
     <p>Creates a for_sale.</p>
-<h2 id="create_for_sale/1-examples" class="section-heading">
-  <a href="#create_for_sale/1-examples" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+<h2 id="create_for_sale/2-examples" class="section-heading">
+  <a href="#create_for_sale/2-examples" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
   Examples
 </h2>
 
-<pre><code class="iex elixir">iex&gt; create_for_sale(%{field: value})
+<pre><code class="iex elixir">iex&gt; create_for_sale(neighbor_id, %{field: value})
 {:ok, %ForSale{}}
 
-iex&gt; create_for_sale(%{field: bad_value})
+iex&gt; create_for_sale(nil, %{field: bad_value})
 {:error, %Ecto.Changeset{}}</code></pre>
 
   </section>
