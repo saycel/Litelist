@@ -16,8 +16,11 @@ defmodule LitelistWeb.ForSaleControllerTest do
   end
 
   describe "index" do
-    test "lists all for_sales", %{conn: conn} do
-      conn = get conn, for_sale_path(conn, :index)
+    test "lists all for_sales", %{conn: conn, neighbor: neighbor} do
+      conn = conn
+        |> login_neighbor(neighbor)
+        |> get(for_sale_path(conn, :index))
+
       assert html_response(conn, 200) =~ "Listing For sales"
     end
   end
@@ -47,6 +50,10 @@ defmodule LitelistWeb.ForSaleControllerTest do
 
       assert %{id: id} = redirected_params(conn)
       assert redirected_to(conn) == for_sale_path(conn, :show, id)
+
+      conn = conn
+        |> recycle()
+        |> login_neighbor(neighbor)
 
       conn = get conn, for_sale_path(conn, :show, id)
       assert html_response(conn, 200) =~ "Show For sale"
@@ -88,9 +95,15 @@ defmodule LitelistWeb.ForSaleControllerTest do
     test "redirects when data is valid", %{conn: conn, for_sale: for_sale, neighbor: neighbor} do
       conn = conn
         |> login_neighbor(neighbor)
+
+      conn = conn
         |> put(for_sale_path(conn, :update, for_sale), for_sale: @update_attrs)
 
       assert redirected_to(conn) == for_sale_path(conn, :show, for_sale)
+
+      conn = conn
+        |> recycle()
+        |> login_neighbor(neighbor)
 
       conn = get conn, for_sale_path(conn, :show, for_sale)
       assert html_response(conn, 200) =~ "some updated contact_info"
@@ -137,6 +150,5 @@ defmodule LitelistWeb.ForSaleControllerTest do
     {:ok, token, _} = Guardian.encode_and_sign(neighbor, %{}, token_type: :access)
     conn
       |> put_req_header("authorization", "bearer: " <> token)
-      |> Plug.Conn.assign(:current_neighbor, neighbor)
   end
 end

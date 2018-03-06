@@ -3,7 +3,6 @@ defmodule LitelistWeb.ForSaleController do
 
   alias Litelist.Posts
   alias Litelist.Posts.ForSale
-  alias Litelist.Auth.Guardian
 
   def index(conn, _params) do
     for_sales = Posts.list_for_sales()
@@ -16,7 +15,7 @@ defmodule LitelistWeb.ForSaleController do
   end
 
   def create(conn, %{"for_sale" => for_sale_params}) do
-    neighbor = Guardian.Plug.current_resource(conn)
+    neighbor = conn.assigns.current_neighbor
     case Posts.create_for_sale(neighbor.id, for_sale_params) do
       {:ok, for_sale} ->
         conn
@@ -29,8 +28,8 @@ defmodule LitelistWeb.ForSaleController do
 
   def show(conn, %{"id" => id}) do
     for_sale = Posts.get_for_sale!(id)
-    current_neighbor = Guardian.Plug.current_resource(conn)
-    render(conn, "show.html", for_sale: for_sale, current_neighbor: current_neighbor)
+    neighbor = conn.assigns.current_neighbor
+    render(conn, "show.html", for_sale: for_sale, current_neighbor: neighbor)
   end
 
   def edit(conn, %{"id" => id}) do

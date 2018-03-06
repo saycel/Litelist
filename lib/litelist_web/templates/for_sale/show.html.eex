@@ -29,7 +29,7 @@
 
 </ul>
 
-<%= if @current_neighbor do %>
+<%= if @current_neighbor && @current_neighbor.id == @for_sale.neighbor_id do %>
   <span><%= link "Edit", to: for_sale_path(@conn, :edit, @for_sale) %></span>
 <% end %>
 <span><%= link "Back", to: for_sale_path(@conn, :index) %></span>
