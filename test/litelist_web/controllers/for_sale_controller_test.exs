@@ -81,6 +81,13 @@ defmodule LitelistWeb.ForSaleControllerTest do
       assert html_response(conn, 200) =~ "Edit For sale"
     end
 
+    test "redirects to index if for_sale was not created by the neighbor", %{conn: conn, neighbor: neighbor, not_my_for_sale: not_my_for_sale} do
+      conn = conn
+        |> login_neighbor(neighbor)
+        |> get(for_sale_path(conn, :edit, not_my_for_sale))
+      assert redirected_to(conn) == for_sale_path(conn, :index)
+    end
+
     test "unautorized 401 redirect if not logged in", %{conn: conn, for_sale: for_sale} do
       conn = conn
         |> get(for_sale_path(conn, :edit, for_sale))
@@ -117,6 +124,14 @@ defmodule LitelistWeb.ForSaleControllerTest do
       assert html_response(conn, 200) =~ "Edit For sale"
     end
 
+    test "redirects to index if for_sale was not created by the neighbor", %{conn: conn, neighbor: neighbor, not_my_for_sale: not_my_for_sale} do
+      conn = conn
+        |> login_neighbor(neighbor)
+        |> put(for_sale_path(conn, :update, not_my_for_sale), for_sale: @invalid_attrs)
+
+        assert redirected_to(conn) == for_sale_path(conn, :index)
+    end
+
     test "unautorized 401 redirect if not logged in", %{conn: conn, for_sale: for_sale} do
       conn = conn
         |> put(for_sale_path(conn, :update, for_sale), for_sale: @invalid_attrs)
@@ -136,6 +151,14 @@ defmodule LitelistWeb.ForSaleControllerTest do
       assert_error_sent 404, fn ->
         get conn, for_sale_path(conn, :show, for_sale)
       end
+    end
+
+    test "redirects to index if for_sale was not created by the neighbor", %{conn: conn, neighbor: neighbor, not_my_for_sale: not_my_for_sale} do
+      conn = conn
+        |> login_neighbor(neighbor)
+        |> delete(for_sale_path(conn, :delete, not_my_for_sale))
+
+        assert redirected_to(conn) == for_sale_path(conn, :index)
     end
 
     test "unautorized 401 redirect if not logged in", %{conn: conn, for_sale: for_sale} do
