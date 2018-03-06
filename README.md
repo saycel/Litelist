@@ -18,7 +18,7 @@
 ### Create a user/neighbor
 1. `docker-compose run web iex -S mix`
 1. `import Litelist.Factory`
-1. `attrs = %{username: 'ADD_NAME_HERE'}` Note: Don't change the password attr. The password will default to 'password'.
+1. `attrs = %{username: "ADD_NAME_HERE"}` Note: Don't change the password attr. The password will default to 'password'.
 1. `insert(:neighbor, attrs)`
 
 ### Test authentication
