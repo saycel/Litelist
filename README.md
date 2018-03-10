@@ -18,8 +18,8 @@
 ### Create first user
 1. `docker-compose run web iex -S mix`
 1. `import Litelist.Factory`
-1. `attrs = %{username: 'ADD_NAME_HERE'}` Note: Don't change the password attr. The password will default to 'password'.
-1. `build(:neighbor, attrs)`
+1. `attrs = %{username: "ADD_NAME_HERE"}` Note: Don't change the password attr. The password will default to 'password'.
+1. `insert(:neighbor, attrs)`
 
 ### Test authentication
 1. Go to localhost:4000 and login with credentials created from above
