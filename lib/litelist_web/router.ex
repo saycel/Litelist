@@ -27,6 +27,7 @@ defmodule LitelistWeb.Router do
     get "/", PageController, :index
     post "/", PageController, :login
     post "/logout", PageController, :logout
+    resources "/sales", ForSaleController
   end
 
   # Definitely logged in scope

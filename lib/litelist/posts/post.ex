@@ -27,6 +27,6 @@ defmodule Litelist.Posts.Post do
   def changeset(%Post{} = post, attrs) do
     post
     |> cast(attrs, [:type, :start_date, :end_date, :title, :description, :price, :slug, :url, :location, :contact_info, :salary, :position_name, :company_name, :neighbor_id])
-    |> validate_required([:type, :start_date, :end_date, :title, :description, :price, :slug, :url, :location, :contact_info, :salary, :position_name, :company_name, :neighbor_id])
+    # |> validate_required([:type, :start_date, :end_date, :title, :description, :price, :slug, :url, :location, :contact_info, :salary, :position_name, :company_name, :neighbor_id])
   end
 end
