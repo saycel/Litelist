@@ -51,7 +51,7 @@ defmodule LitelistWeb.JobController do
 
   def edit(conn, %{"id" => id}) do
     job = Posts.get_post!(id)
-    if SharedUtils.permission?(conn.assigns.current_neighbor, job) do
+    if SharedUtils.permission?(conn.assigns.current_neighbor, job, @job_type) do
       changeset = Posts.change_post(job)
       render(conn, "edit.html", job: job, changeset: changeset)
     else
@@ -61,7 +61,7 @@ defmodule LitelistWeb.JobController do
 
   def update(conn, %{"id" => id, "post" => job_params}) do
     job = Posts.get_post!(id)
-    if SharedUtils.permission?(conn.assigns.current_neighbor, job) do
+    if SharedUtils.permission?(conn.assigns.current_neighbor, job, @job_type) do
       job_params = job_params
         |> SharedUtils.permitted_params(@permitted_params)
         |> SharedUtils.add_generated_params(:update)
@@ -81,7 +81,7 @@ defmodule LitelistWeb.JobController do
 
   def delete(conn, %{"id" => id}) do
     job = Posts.get_post!(id)
-    if SharedUtils.permission?(conn.assigns.current_neighbor, job) do
+    if SharedUtils.permission?(conn.assigns.current_neighbor, job, @job_type) do
       {:ok, _job} = Posts.delete_post(job)
 
       conn

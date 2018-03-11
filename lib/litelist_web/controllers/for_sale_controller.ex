@@ -41,7 +41,7 @@ defmodule LitelistWeb.ForSaleController do
 
   def edit(conn, %{"id" => id}) do
     for_sale = Posts.get_post!(id)
-    if SharedUtils.permission?(conn.assigns.current_neighbor, for_sale) do
+    if SharedUtils.permission?(conn.assigns.current_neighbor, for_sale, @for_sale_type) do
       changeset = Posts.change_post(for_sale)
       render(conn, "edit.html", for_sale: for_sale, changeset: changeset)
     else
@@ -51,7 +51,7 @@ defmodule LitelistWeb.ForSaleController do
 
   def update(conn, %{"id" => id, "post" => for_sale_params}) do
     for_sale = Posts.get_post!(id)
-    if SharedUtils.permission?(conn.assigns.current_neighbor, for_sale) do
+    if SharedUtils.permission?(conn.assigns.current_neighbor, for_sale, @for_sale_type) do
       for_sale_params = for_sale_params
         |> SharedUtils.permitted_params(@permitted_params)
         |> SharedUtils.add_generated_params(:update)
@@ -71,7 +71,7 @@ defmodule LitelistWeb.ForSaleController do
 
   def delete(conn, %{"id" => id}) do
     for_sale = Posts.get_post!(id)
-    if SharedUtils.permission?(conn.assigns.current_neighbor, for_sale) do
+    if SharedUtils.permission?(conn.assigns.current_neighbor, for_sale, @for_sale_type) do
       {:ok, _for_sale} = Posts.delete_post(for_sale)
 
       conn

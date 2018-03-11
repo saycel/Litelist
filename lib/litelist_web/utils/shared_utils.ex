@@ -42,11 +42,15 @@ defmodule LitelistWeb.Utils.SharedUtils do
     end
 
     @doc """
-    permission(neighbor, resource)
-    tests if a resource was created by the neighbor
+    permission(neighbor, resource, type)
+    tests if a resource was created by the neighbor, and if the given type matches the resource
     """
-    def permission?(neighbor, resource) do
-        if !is_nil(neighbor) and neighbor.id == resource.neighbor_id do
+    def permission?(neighbor, resource, type) do
+        if is_nil(neighbor) or is_nil(resource)do
+            false
+        end
+
+        if neighbor.id == resource.neighbor_id and resource.type == type do
             true
         else
             false
