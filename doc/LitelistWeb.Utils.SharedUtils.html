@@ -8,7 +8,7 @@
     <title>LitelistWeb.Utils.SharedUtils – litelist v0.0.1</title>
     <link rel="stylesheet" href="dist/app-81d381dea4.css" />
     
-    <script src="dist/sidebar_items-561f693d9a.js"></script>
+    <script src="dist/sidebar_items-d3c8beb9ec.js"></script>
     
     
     
@@ -119,11 +119,21 @@ adds params like current_neighbor for create</p>
 </div>
 <div class="summary-row">
   <div class="summary-signature">
-    <a href="#permission?/2">permission?(neighbor, resource)</a>
+    <a href="#match_type?/2">match_type?(resource, type)</a>
   </div>
   
-    <div class="summary-synopsis"><p>permission(neighbor, resource)
-tests if a resource was created by the neighbor</p>
+    <div class="summary-synopsis"><p>match_type?(resource, type)
+tests if a resource was created by the neighbor, and if the given type matches the resource</p>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#permission?/3">permission?(neighbor, resource, type)</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>permission(neighbor, resource, type)
+tests if a resource was created by the neighbor, and if the given type matches the resource</p>
 </div>
   
 </div>
@@ -208,22 +218,41 @@ adds params like current_neighbor for create</p>
 
   </section>
 </div>
-<div class="detail" id="permission?/2">
+<div class="detail" id="match_type?/2">
   
   
   <div class="detail-header">
-    <a href="#permission?/2" class="detail-link" title="Link to this function">
+    <a href="#match_type?/2" class="detail-link" title="Link to this function">
       <span class="icon-link" aria-hidden="true"></span>
       <span class="sr-only">Link to this function</span>
     </a>
-    <span class="signature">permission?(neighbor, resource)</span>
+    <span class="signature">match_type?(resource, type)</span>
     
     
     
   </div>
   <section class="docstring">
-    <p>permission(neighbor, resource)
-tests if a resource was created by the neighbor</p>
+    <p>match_type?(resource, type)
+tests if a resource was created by the neighbor, and if the given type matches the resource</p>
+
+  </section>
+</div>
+<div class="detail" id="permission?/3">
+  
+  
+  <div class="detail-header">
+    <a href="#permission?/3" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <span class="signature">permission?(neighbor, resource, type)</span>
+    
+    
+    
+  </div>
+  <section class="docstring">
+    <p>permission(neighbor, resource, type)
+tests if a resource was created by the neighbor, and if the given type matches the resource</p>
 
   </section>
 </div>

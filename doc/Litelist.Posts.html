@@ -8,7 +8,7 @@
     <title>Litelist.Posts – litelist v0.0.1</title>
     <link rel="stylesheet" href="dist/app-81d381dea4.css" />
     
-    <script src="dist/sidebar_items-561f693d9a.js"></script>
+    <script src="dist/sidebar_items-d3c8beb9ec.js"></script>
     
     
     
@@ -136,6 +136,15 @@
 <div class="summary-row">
   <div class="summary-signature">
     <a href="#list_posts/0">list_posts()</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>Returns the list of posts</p>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#list_posts_by_type/1">list_posts_by_type(type)</a>
   </div>
   
     <div class="summary-synopsis"><p>Returns the list of posts</p>
@@ -304,6 +313,31 @@ iex&gt; get_post!(456)
 </h2>
 
 <pre><code class="iex elixir">iex&gt; list_posts()
+[%Post{}, ...]</code></pre>
+
+  </section>
+</div>
+<div class="detail" id="list_posts_by_type/1">
+  
+  
+  <div class="detail-header">
+    <a href="#list_posts_by_type/1" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <span class="signature">list_posts_by_type(type)</span>
+    
+    
+    
+  </div>
+  <section class="docstring">
+    <p>Returns the list of posts.</p>
+<h2 id="list_posts_by_type/1-examples" class="section-heading">
+  <a href="#list_posts_by_type/1-examples" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Examples
+</h2>
+
+<pre><code class="iex elixir">iex&gt; list_posts_by_type(type)
 [%Post{}, ...]</code></pre>
 
   </section>
