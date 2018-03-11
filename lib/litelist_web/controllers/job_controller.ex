@@ -49,7 +49,7 @@ defmodule LitelistWeb.JobController do
     end
   end
 
-  def update(conn, %{"id" => id, "job" => job_params}) do
+  def update(conn, %{"id" => id, "post" => job_params}) do
     job = Posts.get_post!(id)
     if SharedUtils.permission?(conn.assigns.current_neighbor, job) do
       case Posts.update_post(job, job_params) do
