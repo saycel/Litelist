@@ -95,7 +95,6 @@ defmodule LitelistWeb.EventController do
   end
 
   defp unauthorized_redirect(conn) do
-    
     conn
     |> put_flash(:error, "Unauthorized.")
     |> redirect(to: event_path(conn, :index))
