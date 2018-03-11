@@ -2,13 +2,14 @@ defmodule Litelist.PostsTest do
   use Litelist.DataCase
 
   alias Litelist.Posts
+  alias Litelist.Factory
 
   describe "posts" do
     alias Litelist.Posts.Post
 
-    @valid_attrs %{company_name: "some company_name", contact_info: "some contact_info", description: "some description", end_date: ~D[2010-04-17], location: "some location", neighbor_id: 42, position_name: "some position_name", price: 120.5, salary: "some salary", slug: "some slug", start_date: ~D[2010-04-17], title: "some title", type: "some type", url: "some url"}
-    @update_attrs %{company_name: "some updated company_name", contact_info: "some updated contact_info", description: "some updated description", end_date: ~D[2011-05-18], location: "some updated location", neighbor_id: 43, position_name: "some updated position_name", price: 456.7, salary: "some updated salary", slug: "some updated slug", start_date: ~D[2011-05-18], title: "some updated title", type: "some updated type", url: "some updated url"}
-    @invalid_attrs %{company_name: nil, contact_info: nil, description: nil, end_date: nil, location: nil, neighbor_id: nil, position_name: nil, price: nil, salary: nil, slug: nil, start_date: nil, title: nil, type: nil, url: nil}
+    @valid_attrs %{company_name: "some company_name", contact_info: "some contact_info", description: "some description", location: "some location", neighbor_id: 42, position_name: "some position_name", price: 120.5, salary: "some salary", slug: "some slug", title: "some title", type: "some type", url: "some url"}
+    @update_attrs %{company_name: "some updated company_name", contact_info: "some updated contact_info", description: "some updated description", location: "some updated location", neighbor_id: 43, position_name: "some updated position_name", price: 456.7, salary: "some updated salary", slug: "some updated slug", title: "some updated title", type: "some updated type", url: "some updated url"}
+    @invalid_attrs %{company_name: nil, contact_info: nil, description: nil, location: nil, neighbor_id: nil, position_name: nil, price: nil, salary: nil, slug: nil, title: nil, type: nil, url: nil}
 
     def post_fixture(attrs \\ %{}) do
       {:ok, post} =
@@ -34,14 +35,12 @@ defmodule Litelist.PostsTest do
       assert post.company_name == "some company_name"
       assert post.contact_info == "some contact_info"
       assert post.description == "some description"
-      assert post.end_date == ~D[2010-04-17]
       assert post.location == "some location"
       assert post.neighbor_id == 42
       assert post.position_name == "some position_name"
       assert post.price == 120.5
       assert post.salary == "some salary"
       assert post.slug == "some slug"
-      assert post.start_date == ~D[2010-04-17]
       assert post.title == "some title"
       assert post.type == "some type"
       assert post.url == "some url"
@@ -58,14 +57,12 @@ defmodule Litelist.PostsTest do
       assert post.company_name == "some updated company_name"
       assert post.contact_info == "some updated contact_info"
       assert post.description == "some updated description"
-      assert post.end_date == ~D[2011-05-18]
       assert post.location == "some updated location"
       assert post.neighbor_id == 43
       assert post.position_name == "some updated position_name"
       assert post.price == 456.7
       assert post.salary == "some updated salary"
       assert post.slug == "some updated slug"
-      assert post.start_date == ~D[2011-05-18]
       assert post.title == "some updated title"
       assert post.type == "some updated type"
       assert post.url == "some updated url"

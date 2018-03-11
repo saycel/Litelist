@@ -4,8 +4,6 @@ defmodule Litelist.Repo.Migrations.CreatePosts do
   def change do
     create table(:posts) do
       add :type, :string
-      add :start_date, :date
-      add :end_date, :date
       add :title, :string
       add :description, :text
       add :price, :float
@@ -24,6 +22,6 @@ defmodule Litelist.Repo.Migrations.CreatePosts do
     create index(:posts, [:neighbor_id])
     create index(:posts, [:title])
     create index(:posts, [:type])
-    create index(:posts, [:url])
+    create unique_index(:posts, [:url])
   end
 end
