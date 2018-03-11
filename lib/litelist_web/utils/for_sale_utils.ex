@@ -62,8 +62,8 @@ defmodule LitelistWeb.Utils.ForSaleUtils do
     add_generated_params()
     adds params like current_neighbor for create
     """
-    def add_generated_params(params, conn, type = :create) do
-        params = params
+    def add_generated_params(params, conn, :create) do
+        params
             |> add_neighbor_id(conn)
             |> add_slug()
             |> add_type()
@@ -73,8 +73,8 @@ defmodule LitelistWeb.Utils.ForSaleUtils do
     add_generated_params()
     adds params like current_neighbor for update
     """
-    def add_generated_params(params, type = :update) do
-        params = params
+    def add_generated_params(params, :update) do
+        params
             |> update_slug()
     end
 end
