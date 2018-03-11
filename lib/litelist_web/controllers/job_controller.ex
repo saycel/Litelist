@@ -5,8 +5,7 @@ defmodule LitelistWeb.JobController do
   alias Litelist.Posts.Post
 
   alias LitelistWeb.Utils.SharedUtils
-  alias LitelistWeb.Utils.JobUtils
-
+  
   @job_type "job"
   @permitted_params ["contact_info",
     "description",
