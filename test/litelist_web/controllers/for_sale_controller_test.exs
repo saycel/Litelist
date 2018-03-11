@@ -4,9 +4,9 @@ defmodule LitelistWeb.ForSaleControllerTest do
   alias Litelist.Factory
   alias Litelist.Auth.Guardian
 
-  @create_attrs %{contact_info: "some contact_info", description: "some description", price: 120.5, title: "some title"}
-  @update_attrs %{contact_info: "some updated contact_info", description: "some updated description", price: 456.7, title: "some updated title"}
-  @invalid_attrs %{contact_info: nil, description: nil, price: nil, title: nil}
+  @create_attrs %{"contact_info" => "some contact_info", "description" => "some description", "price" => 120.5, "title" => "some title", "url" => "my-cool-url"}
+  @update_attrs %{"contact_info" => "some updated contact_info", "description" => "some updated description", "price" => 456.7, "title" => "some updated title"}
+  @invalid_attrs %{"contact_info" => nil, "description" => nil, "price" => nil, "title" => nil}
 
   setup do
     neighbor = Factory.insert(:neighbor)

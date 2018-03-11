@@ -41,7 +41,9 @@ defmodule Litelist.Factory do
       contact_info: Faker.Internet.email,
       description: Faker.Lorem.sentences(3..5),
       price: Faker.Number.decimal(2, 2),
-      neighbor_id: insert(:neighbor).id
+      neighbor_id: insert(:neighbor).id,
+      type: "for_sale",
+      url: FakerElixir.Lorem.characters(5..10)
     }
   end
 end
