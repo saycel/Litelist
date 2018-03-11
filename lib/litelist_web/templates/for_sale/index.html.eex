@@ -3,6 +3,7 @@
 <table class="table">
   <thead>
     <tr>
+      <th>Type</th>
       <th>Title</th>
       <th>Description</th>
       <th>Price</th>
@@ -17,6 +18,7 @@
   <tbody>
 <%= for for_sale <- @for_sales do %>
     <tr>
+      <td><%= for_sale.type %></td>
       <td><%= for_sale.title %></td>
       <td><%= for_sale.description %></td>
       <td><%= for_sale.price %></td>

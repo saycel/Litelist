@@ -6,6 +6,7 @@ defmodule Litelist.Factory do
 
   alias Litelist.Auth.Neighbor
   alias Litelist.Posts.Post
+  alias LitelistWeb.Utils.SharedUtils
   alias FakerElixir, as: Faker
 
   @doc """
@@ -32,10 +33,11 @@ defmodule Litelist.Factory do
     insert(:for_sale)
   """
   def for_sale_factory do
+    title = Faker.Lorem.words(3)
+    slug = SharedUtils.slugify(title)
     %Post{
       title: Faker.Lorem.words(3),
-      # TODO Update slug
-      slug: "slug",
+      slug: slug,
       contact_info: Faker.Internet.email,
       description: Faker.Lorem.sentences(3..5),
       price: Faker.Number.decimal(2, 2),

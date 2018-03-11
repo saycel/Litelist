@@ -3,6 +3,11 @@
 <ul>
 
   <li>
+    <strong>Type:</strong>
+    <%= @for_sale.type %>
+  </li>
+
+  <li>
     <strong>Title:</strong>
     <%= @for_sale.title %>
   </li>
