@@ -41,6 +41,10 @@ defmodule LitelistWeb.Utils.SharedUtils do
             |> update_slug()
     end
 
+    @doc """
+    permission(neighbor, resource)
+    tests if a resource was created by the neighbor
+    """
     def permission?(neighbor, resource) do
         if !is_nil(neighbor) and neighbor.id == resource.neighbor_id do
             true
@@ -84,17 +88,5 @@ defmodule LitelistWeb.Utils.SharedUtils do
             },
             params
         )
-    end
-
-    def add_generated_params44(params, conn, type, :create) do
-        params
-            |> add_neighbor_id(conn)
-            |> add_slug()
-            |> add_type(type)
-    end
-
-    def add_generated_params44(params, :update) do
-        params
-            |> update_slug()
     end
   end
