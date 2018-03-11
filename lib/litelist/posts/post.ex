@@ -1,4 +1,7 @@
 defmodule Litelist.Posts.Post do
+  @moduledoc """
+  The Posts schema.
+  """
   use Ecto.Schema
   import Ecto.Changeset
   alias Litelist.Posts.Post
