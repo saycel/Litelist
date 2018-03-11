@@ -60,7 +60,7 @@ defmodule LitelistWeb.EventController do
     end
   end
 
-  def update(conn, %{"id" => id, "event" => event_params}) do
+  def update(conn, %{"id" => id, "post" => event_params}) do
     event = Posts.get_post!(id)
     if SharedUtils.permission?(conn.assigns.current_neighbor, event, @post_type) do
 
