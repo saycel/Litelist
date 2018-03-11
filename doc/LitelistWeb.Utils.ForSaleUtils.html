@@ -8,7 +8,7 @@
     <title>LitelistWeb.Utils.ForSaleUtils – litelist v0.0.1</title>
     <link rel="stylesheet" href="dist/app-81d381dea4.css" />
     
-    <script src="dist/sidebar_items-cfca39ceba.js"></script>
+    <script src="dist/sidebar_items-8145234dc6.js"></script>
     
     
     
@@ -99,31 +99,21 @@
     </h2>
     <div class="summary-row">
   <div class="summary-signature">
-    <a href="#add_neighbor_id/2">add_neighbor_id(params, conn)</a>
+    <a href="#add_generated_params/2">add_generated_params(params, atom)</a>
   </div>
   
-    <div class="summary-synopsis"><p>add_neighbor_id()
-adds a neighbor id from the conn, to the params Map</p>
+    <div class="summary-synopsis"><p>add_generated_params()
+adds params like current_neighbor for update</p>
 </div>
   
 </div>
 <div class="summary-row">
   <div class="summary-signature">
-    <a href="#add_slug/1">add_slug(params)</a>
+    <a href="#add_generated_params/3">add_generated_params(params, conn, atom)</a>
   </div>
   
-    <div class="summary-synopsis"><p>add_slug()
-adds a slug attribute to the params Map</p>
-</div>
-  
-</div>
-<div class="summary-row">
-  <div class="summary-signature">
-    <a href="#add_type/1">add_type(params)</a>
-  </div>
-  
-    <div class="summary-synopsis"><p>add_type()
-adds a type attribute to the params Map</p>
+    <div class="summary-synopsis"><p>add_generated_params()
+adds params like current_neighbor for create</p>
 </div>
   
 </div>
@@ -134,16 +124,6 @@ adds a type attribute to the params Map</p>
   
     <div class="summary-synopsis"><p>permitted_params()
 removes any non-white-listed params</p>
-</div>
-  
-</div>
-<div class="summary-row">
-  <div class="summary-signature">
-    <a href="#update_slug/1">update_slug(params)</a>
-  </div>
-  
-    <div class="summary-synopsis"><p>update_slug()
-removes existing slug attribute and generates a new slug and adds it to the params Map</p>
 </div>
   
 </div>
@@ -167,60 +147,41 @@ removes existing slug attribute and generates a new slug and adds it to the para
             </a>
             Functions
           </h1>
-          <div class="detail" id="add_neighbor_id/2">
+          <div class="detail" id="add_generated_params/2">
   
   
   <div class="detail-header">
-    <a href="#add_neighbor_id/2" class="detail-link" title="Link to this function">
+    <a href="#add_generated_params/2" class="detail-link" title="Link to this function">
       <span class="icon-link" aria-hidden="true"></span>
       <span class="sr-only">Link to this function</span>
     </a>
-    <span class="signature">add_neighbor_id(params, conn)</span>
+    <span class="signature">add_generated_params(params, atom)</span>
     
     
     
   </div>
   <section class="docstring">
-    <p>add_neighbor_id()
-adds a neighbor id from the conn, to the params Map</p>
+    <p>add_generated_params()
+adds params like current_neighbor for update</p>
 
   </section>
 </div>
-<div class="detail" id="add_slug/1">
+<div class="detail" id="add_generated_params/3">
   
   
   <div class="detail-header">
-    <a href="#add_slug/1" class="detail-link" title="Link to this function">
+    <a href="#add_generated_params/3" class="detail-link" title="Link to this function">
       <span class="icon-link" aria-hidden="true"></span>
       <span class="sr-only">Link to this function</span>
     </a>
-    <span class="signature">add_slug(params)</span>
+    <span class="signature">add_generated_params(params, conn, atom)</span>
     
     
     
   </div>
   <section class="docstring">
-    <p>add_slug()
-adds a slug attribute to the params Map</p>
-
-  </section>
-</div>
-<div class="detail" id="add_type/1">
-  
-  
-  <div class="detail-header">
-    <a href="#add_type/1" class="detail-link" title="Link to this function">
-      <span class="icon-link" aria-hidden="true"></span>
-      <span class="sr-only">Link to this function</span>
-    </a>
-    <span class="signature">add_type(params)</span>
-    
-    
-    
-  </div>
-  <section class="docstring">
-    <p>add_type()
-adds a type attribute to the params Map</p>
+    <p>add_generated_params()
+adds params like current_neighbor for create</p>
 
   </section>
 </div>
@@ -240,25 +201,6 @@ adds a type attribute to the params Map</p>
   <section class="docstring">
     <p>permitted_params()
 removes any non-white-listed params</p>
-
-  </section>
-</div>
-<div class="detail" id="update_slug/1">
-  
-  
-  <div class="detail-header">
-    <a href="#update_slug/1" class="detail-link" title="Link to this function">
-      <span class="icon-link" aria-hidden="true"></span>
-      <span class="sr-only">Link to this function</span>
-    </a>
-    <span class="signature">update_slug(params)</span>
-    
-    
-    
-  </div>
-  <section class="docstring">
-    <p>update_slug()
-removes existing slug attribute and generates a new slug and adds it to the params Map</p>
 
   </section>
 </div>
