@@ -20,7 +20,7 @@ defmodule LitelistWeb.JobController do
   ]
 
   def index(conn, _params) do
-    jobs = Posts.list_posts()
+    jobs = Posts.list_posts_by_type(@job_type)
     render(conn, "index.html", jobs: jobs)
   end
 

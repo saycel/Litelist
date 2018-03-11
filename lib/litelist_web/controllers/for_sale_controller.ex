@@ -10,7 +10,7 @@ defmodule LitelistWeb.ForSaleController do
   @permitted_params ["contact_info", "description", "price", "slug", "title", "url"]
 
   def index(conn, _params) do
-    for_sales = Posts.list_posts()
+    for_sales = Posts.list_posts_by_type(@for_sale_type)
     render(conn, "index.html", for_sales: for_sales)
   end
 
