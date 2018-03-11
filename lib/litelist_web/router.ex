@@ -27,6 +27,14 @@ defmodule LitelistWeb.Router do
     plug Litelist.Plugs.CurrentNeighbor
   end
 
+  # Definitely logged in scope
+  scope "/", LitelistWeb do
+    pipe_through [:browser, :auth, :ensure_auth]
+
+    get "/secret", PageController, :secret
+    resources "/sales", ForSaleController, only: [:new, :create, :edit, :update, :delete]
+  end
+
   scope "/", LitelistWeb do
     pipe_through [:browser, :auth]
 
@@ -34,14 +42,6 @@ defmodule LitelistWeb.Router do
     post "/", PageController, :login
     post "/logout", PageController, :logout
     resources "/sales", ForSaleController, only: [:show, :index]
-  end
-
-  # Definitely logged in scope
-  scope "/", LitelistWeb do
-    pipe_through [:browser, :auth, :ensure_auth]
-
-    get "/secret", PageController, :secret
-    resources "/sales", ForSaleController, only: [:new, :create, :edit, :update, :delete]
   end
 
   # Other scopes may use custom stacks.
