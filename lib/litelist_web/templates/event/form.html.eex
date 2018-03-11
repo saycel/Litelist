@@ -36,18 +36,6 @@
   </div>
 
   <div class="form-group">
-    <%= label f, :slug, class: "control-label" %>
-    <%= text_input f, :slug, class: "form-control" %>
-    <%= error_tag f, :slug %>
-  </div>
-
-  <div class="form-group">
-    <%= label f, :type, class: "control-label" %>
-    <%= text_input f, :type, class: "form-control" %>
-    <%= error_tag f, :type %>
-  </div>
-
-  <div class="form-group">
     <%= label f, :start_time, class: "control-label" %>
     <%= datetime_select f, :start_time, class: "form-control" %>
     <%= error_tag f, :start_time %>

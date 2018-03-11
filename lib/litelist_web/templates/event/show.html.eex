@@ -49,5 +49,7 @@
 
 </ul>
 
-<span><%= link "Edit", to: event_path(@conn, :edit, @event) %></span>
+<%= if @current_neighbor && @current_neighbor.id == @event.neighbor_id do %>
+  <span><%= link "Edit", to: event_path(@conn, :edit, @event) %></span>
+<% end %>
 <span><%= link "Back", to: event_path(@conn, :index) %></span>
