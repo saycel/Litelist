@@ -51,7 +51,7 @@ defmodule LitelistWeb.ForSaleController do
     for_sale = Posts.get_post!(id)
     if permission?(conn.assigns.current_neighbor, for_sale) do
       for_sale_params = for_sale_params
-        |> ForSaleUtils.add_slug()
+        |> ForSaleUtils.update_slug()
 
       case Posts.update_post(for_sale, for_sale_params) do
         {:ok, for_sale} ->

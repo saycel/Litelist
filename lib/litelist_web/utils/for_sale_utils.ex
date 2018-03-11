@@ -35,6 +35,16 @@ defmodule LitelistWeb.Utils.ForSaleUtils do
         )
     end
 
+    def update_slug(params) do
+        params = Map.delete(params, "slug")
+        Map.merge(
+            %{
+                "slug" => SharedUtils.slugify(params["title"])
+            },
+            params
+        )
+    end
+
     def add_type(params) do
         Map.merge(
             %{
