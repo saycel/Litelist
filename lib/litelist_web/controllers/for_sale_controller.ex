@@ -36,7 +36,11 @@ defmodule LitelistWeb.ForSaleController do
 
   def show(conn, %{"id" => id}) do
     for_sale = Posts.get_post!(id)
-    render(conn, "show.html", for_sale: for_sale)
+    if SharedUtils.match_type?(for_sale, @for_sale_type) do
+      render(conn, "show.html", for_sale: for_sale)
+    else
+      unauthorized_redirect(conn)
+    end
   end
 
   def edit(conn, %{"id" => id}) do

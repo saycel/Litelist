@@ -58,6 +58,22 @@ defmodule LitelistWeb.Utils.SharedUtils do
     end
 
     @doc """
+    match_type?(resource, type)
+    tests if a resource was created by the neighbor, and if the given type matches the resource
+    """
+    def match_type?(resource, type) do
+        if is_nil(resource) or is_nil(type)do
+            false
+        end
+
+        if resource.type == type do
+            true
+        else
+            false
+        end
+    end
+
+    @doc """
     permitted_params(params, whitelist)
     Removes any non whitelisted attrs from params
     """
