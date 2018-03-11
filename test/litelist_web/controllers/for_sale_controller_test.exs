@@ -102,8 +102,6 @@ defmodule LitelistWeb.ForSaleControllerTest do
     test "redirects when data is valid", %{conn: conn, for_sale: for_sale, neighbor: neighbor} do
       conn = conn
         |> login_neighbor(neighbor)
-
-      conn = conn
         |> put(for_sale_path(conn, :update, for_sale), post: @update_attrs)
 
       assert redirected_to(conn) == for_sale_path(conn, :show, for_sale)
