@@ -1,0 +1,65 @@
+<h2>Show Job</h2>
+
+<ul>
+
+  <li>
+    <strong>Title:</strong>
+    <%= @job.title %>
+  </li>
+
+  <li>
+    <strong>Start date:</strong>
+    <%= @job.start_date %>
+  </li>
+
+  <li>
+    <strong>End date:</strong>
+    <%= @job.end_date %>
+  </li>
+
+  <li>
+    <strong>Salary:</strong>
+    <%= @job.salary %>
+  </li>
+
+  <li>
+    <strong>Description:</strong>
+    <%= @job.description %>
+  </li>
+
+  <li>
+    <strong>Location:</strong>
+    <%= @job.location %>
+  </li>
+
+  <li>
+    <strong>Contact info:</strong>
+    <%= @job.contact_info %>
+  </li>
+
+  <li>
+    <strong>Url:</strong>
+    <%= @job.url %>
+  </li>
+
+  <li>
+    <strong>Company name:</strong>
+    <%= @job.company_name %>
+  </li>
+
+  <li>
+    <strong>Position name:</strong>
+    <%= @job.position_name %>
+  </li>
+
+    <li>
+      <strong>Slug:</strong>
+      <%= @job.slug %>
+    </li>
+
+</ul>
+
+<%= if @current_neighbor && @current_neighbor.id == @job.neighbor_id do %>
+  <span><%= link "Edit", to: job_path(@conn, :edit, @job) %></span>
+<% end %>
+<span><%= link "Back", to: job_path(@conn, :index) %></span>

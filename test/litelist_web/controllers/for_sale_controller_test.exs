@@ -16,9 +16,8 @@ defmodule LitelistWeb.ForSaleControllerTest do
   end
 
   describe "index" do
-    test "lists all for_sales", %{conn: conn, neighbor: neighbor} do
+    test "lists all for_sales", %{conn: conn} do
       conn = conn
-        |> login_neighbor(neighbor)
         |> get(for_sale_path(conn, :index))
 
       assert html_response(conn, 200) =~ "Listing For sales"
@@ -68,7 +67,7 @@ defmodule LitelistWeb.ForSaleControllerTest do
 
     test "unautorized 401 redirect if not logged in", %{conn: conn} do
       conn = conn
-        |> post(for_sale_path(conn, :create), for_sale: @create_attrs)
+        |> post(for_sale_path(conn, :create), job: @create_attrs)
       assert response(conn, 401)
     end
 

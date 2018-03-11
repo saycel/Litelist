@@ -33,6 +33,8 @@ defmodule LitelistWeb.Router do
 
     get "/secret", PageController, :secret
     resources "/sales", ForSaleController, only: [:new, :create, :edit, :update, :delete]
+    resources "/jobs", JobController, only: [:new, :create, :edit, :update, :delete]
+
   end
 
   scope "/", LitelistWeb do
@@ -42,6 +44,7 @@ defmodule LitelistWeb.Router do
     post "/", PageController, :login
     post "/logout", PageController, :logout
     resources "/sales", ForSaleController, only: [:show, :index]
+    resources "/jobs", JobController, only: [:show, :index]
   end
 
   # Other scopes may use custom stacks.

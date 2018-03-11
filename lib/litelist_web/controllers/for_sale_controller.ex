@@ -4,10 +4,13 @@ defmodule LitelistWeb.ForSaleController do
   alias Litelist.Posts
   alias Litelist.Posts.Post
 
-  alias LitelistWeb.Utils.ForSaleUtils
+  alias LitelistWeb.Utils.SharedUtils
+
+  @post_type "for_sale"
+  @permitted_params ["contact_info", "description", "price", "slug", "title", "url"]
 
   def index(conn, _params) do
-    for_sales = Posts.list_posts()
+    for_sales = Posts.list_posts_by_type(@post_type)
     render(conn, "index.html", for_sales: for_sales)
   end
 
@@ -18,8 +21,8 @@ defmodule LitelistWeb.ForSaleController do
 
   def create(conn, %{"post" => for_sale_params}) do
     for_sale_params = for_sale_params
-      |> ForSaleUtils.permitted_params()
-      |> ForSaleUtils.add_generated_params(conn, :create)
+      |> SharedUtils.permitted_params(@permitted_params)
+      |> SharedUtils.add_generated_params(conn, @post_type, :create)
 
     case Posts.create_post(for_sale_params) do
       {:ok, for_sale} ->
@@ -33,12 +36,16 @@ defmodule LitelistWeb.ForSaleController do
 
   def show(conn, %{"id" => id}) do
     for_sale = Posts.get_post!(id)
-    render(conn, "show.html", for_sale: for_sale)
+    if SharedUtils.match_type?(for_sale, @post_type) do
+      render(conn, "show.html", for_sale: for_sale)
+    else
+      unauthorized_redirect(conn)
+    end
   end
 
   def edit(conn, %{"id" => id}) do
     for_sale = Posts.get_post!(id)
-    if permission?(conn.assigns.current_neighbor, for_sale) do
+    if SharedUtils.permission?(conn.assigns.current_neighbor, for_sale, @post_type) do
       changeset = Posts.change_post(for_sale)
       render(conn, "edit.html", for_sale: for_sale, changeset: changeset)
     else
@@ -48,10 +55,10 @@ defmodule LitelistWeb.ForSaleController do
 
   def update(conn, %{"id" => id, "post" => for_sale_params}) do
     for_sale = Posts.get_post!(id)
-    if permission?(conn.assigns.current_neighbor, for_sale) do
+    if SharedUtils.permission?(conn.assigns.current_neighbor, for_sale, @post_type) do
       for_sale_params = for_sale_params
-        |> ForSaleUtils.permitted_params()
-        |> ForSaleUtils.add_generated_params(:update)
+        |> SharedUtils.permitted_params(@permitted_params)
+        |> SharedUtils.add_generated_params(:update)
 
       case Posts.update_post(for_sale, for_sale_params) do
         {:ok, for_sale} ->
@@ -68,7 +75,7 @@ defmodule LitelistWeb.ForSaleController do
 
   def delete(conn, %{"id" => id}) do
     for_sale = Posts.get_post!(id)
-    if permission?(conn.assigns.current_neighbor, for_sale) do
+    if SharedUtils.permission?(conn.assigns.current_neighbor, for_sale, @post_type) do
       {:ok, _for_sale} = Posts.delete_post(for_sale)
 
       conn
@@ -76,14 +83,6 @@ defmodule LitelistWeb.ForSaleController do
       |> redirect(to: for_sale_path(conn, :index))
     else
       unauthorized_redirect(conn)
-    end
-  end
-
-  defp permission?(neighbor, resource) do
-    if neighbor.id == resource.neighbor_id and resource.type == "for_sale" do
-      true
-    else
-      false
     end
   end
   

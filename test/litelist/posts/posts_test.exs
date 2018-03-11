@@ -89,5 +89,20 @@ defmodule Litelist.PostsTest do
       Factory.insert(:for_sale, @valid_attrs)
       assert_raise Ecto.ConstraintError, fn -> Factory.insert(:for_sale, @valid_attrs) end
     end
+
+    test "list_posts_by_type/1 will only return posts of a given type" do
+      same_type = "same_type"
+      different_type = "different_type"
+
+      Factory.insert(:for_sale, %{type: same_type})
+      Factory.insert(:for_sale, %{type: same_type})
+      Factory.insert(:for_sale, %{type: different_type})
+
+      posts_with_same_type = Posts.list_posts_by_type(same_type)
+      posts_with_different_type = Posts.list_posts_by_type(different_type)
+
+      assert length(posts_with_same_type) == 2
+      assert length(posts_with_different_type) == 1
+    end
   end
 end

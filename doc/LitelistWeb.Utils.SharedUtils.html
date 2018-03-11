@@ -8,7 +8,7 @@
     <title>LitelistWeb.Utils.SharedUtils – litelist v0.0.1</title>
     <link rel="stylesheet" href="dist/app-81d381dea4.css" />
     
-    <script src="dist/sidebar_items-8145234dc6.js"></script>
+    <script src="dist/sidebar_items-d3c8beb9ec.js"></script>
     
     
     
@@ -99,6 +99,56 @@
     </h2>
     <div class="summary-row">
   <div class="summary-signature">
+    <a href="#add_generated_params/2">add_generated_params(params, atom)</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>add_generated_params()
+adds params like current_neighbor for update</p>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#add_generated_params/4">add_generated_params(params, conn, type, atom)</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>add_generated_params()
+adds params like current_neighbor for create</p>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#match_type?/2">match_type?(resource, type)</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>match_type?(resource, type)
+tests if a resource was created by the neighbor, and if the given type matches the resource</p>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#permission?/3">permission?(neighbor, resource, type)</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>permission(neighbor, resource, type)
+tests if a resource was created by the neighbor, and if the given type matches the resource</p>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#permitted_params/2">permitted_params(params, whitelist)</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>permitted_params(params, whitelist)
+Removes any non whitelisted attrs from params</p>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
     <a href="#slugify/1">slugify(string)</a>
   </div>
   
@@ -130,7 +180,102 @@ iex&gt; slugify(“Some String”)
             </a>
             Functions
           </h1>
-          <div class="detail" id="slugify/1">
+          <div class="detail" id="add_generated_params/2">
+  
+  
+  <div class="detail-header">
+    <a href="#add_generated_params/2" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <span class="signature">add_generated_params(params, atom)</span>
+    
+    
+    
+  </div>
+  <section class="docstring">
+    <p>add_generated_params()
+adds params like current_neighbor for update</p>
+
+  </section>
+</div>
+<div class="detail" id="add_generated_params/4">
+  
+  
+  <div class="detail-header">
+    <a href="#add_generated_params/4" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <span class="signature">add_generated_params(params, conn, type, atom)</span>
+    
+    
+    
+  </div>
+  <section class="docstring">
+    <p>add_generated_params()
+adds params like current_neighbor for create</p>
+
+  </section>
+</div>
+<div class="detail" id="match_type?/2">
+  
+  
+  <div class="detail-header">
+    <a href="#match_type?/2" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <span class="signature">match_type?(resource, type)</span>
+    
+    
+    
+  </div>
+  <section class="docstring">
+    <p>match_type?(resource, type)
+tests if a resource was created by the neighbor, and if the given type matches the resource</p>
+
+  </section>
+</div>
+<div class="detail" id="permission?/3">
+  
+  
+  <div class="detail-header">
+    <a href="#permission?/3" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <span class="signature">permission?(neighbor, resource, type)</span>
+    
+    
+    
+  </div>
+  <section class="docstring">
+    <p>permission(neighbor, resource, type)
+tests if a resource was created by the neighbor, and if the given type matches the resource</p>
+
+  </section>
+</div>
+<div class="detail" id="permitted_params/2">
+  
+  
+  <div class="detail-header">
+    <a href="#permitted_params/2" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <span class="signature">permitted_params(params, whitelist)</span>
+    
+    
+    
+  </div>
+  <section class="docstring">
+    <p>permitted_params(params, whitelist)
+Removes any non whitelisted attrs from params</p>
+
+  </section>
+</div>
+<div class="detail" id="slugify/1">
   
   
   <div class="detail-header">

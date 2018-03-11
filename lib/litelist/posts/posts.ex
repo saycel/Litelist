@@ -22,6 +22,19 @@ defmodule Litelist.Posts do
   end
 
   @doc """
+  Returns the list of posts.
+
+  ## Examples
+
+      iex> list_posts_by_type(type)
+      [%Post{}, ...]
+
+  """
+  def list_posts_by_type(type) do
+    Repo.all(from p in Post, where: p.type == ^type)
+  end
+
+  @doc """
   Gets a single post.
 
   Raises `Ecto.NoResultsError` if the Post does not exist.
