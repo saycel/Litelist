@@ -19,9 +19,7 @@ defmodule LitelistWeb.ForSaleController do
   def create(conn, %{"post" => for_sale_params}) do
     for_sale_params = for_sale_params
       |> ForSaleUtils.permitted_params()
-      |> ForSaleUtils.add_neighbor_id(conn)
-      |> ForSaleUtils.add_slug()
-      |> ForSaleUtils.add_type()
+      |> ForSaleUtils.add_generated_params(conn, :create)
 
     case Posts.create_post(for_sale_params) do
       {:ok, for_sale} ->
@@ -53,7 +51,7 @@ defmodule LitelistWeb.ForSaleController do
     if permission?(conn.assigns.current_neighbor, for_sale) do
       for_sale_params = for_sale_params
         |> ForSaleUtils.permitted_params()
-        |> ForSaleUtils.update_slug()
+        |> ForSaleUtils.add_generated_params(:update)
 
       case Posts.update_post(for_sale, for_sale_params) do
         {:ok, for_sale} ->
