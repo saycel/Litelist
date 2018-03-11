@@ -54,5 +54,7 @@
 
 </ul>
 
-<span><%= link "Edit", to: job_path(@conn, :edit, @job) %></span>
+<%= if @current_neighbor && @current_neighbor.id == @job.neighbor_id do %>
+  <span><%= link "Edit", to: job_path(@conn, :edit, @job) %></span>
+<% end %>
 <span><%= link "Back", to: job_path(@conn, :index) %></span>

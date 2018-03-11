@@ -42,7 +42,7 @@ defmodule LitelistWeb.Utils.SharedUtils do
     end
 
     def permission?(neighbor, resource) do
-        if neighbor.id == resource.neighbor_id and resource.type == "for_sale" do
+        if !is_nil(neighbor) and neighbor.id == resource.neighbor_id and resource.type == "for_sale" do
             true
         else
             false
