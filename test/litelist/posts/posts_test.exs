@@ -2,8 +2,7 @@ defmodule Litelist.PostsTest do
   use Litelist.DataCase
 
   alias Litelist.Posts
-  alias Litelist.Factory
-
+  
   describe "posts" do
     alias Litelist.Posts.Post
 
