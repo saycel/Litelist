@@ -13,7 +13,7 @@
       <th>Url</th>
       <th>Company name</th>
       <th>Position name</th>
-
+      <th>Slug</th>
       <th></th>
     </tr>
   </thead>
@@ -30,6 +30,7 @@
       <td><%= job.url %></td>
       <td><%= job.company_name %></td>
       <td><%= job.position_name %></td>
+      <td><%= job.slug %></td>
 
       <td class="text-right">
         <span><%= link "Show", to: job_path(@conn, :show, job), class: "btn btn-default btn-xs" %></span>

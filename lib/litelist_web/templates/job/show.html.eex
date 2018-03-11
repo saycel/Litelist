@@ -52,6 +52,11 @@
     <%= @job.position_name %>
   </li>
 
+    <li>
+      <strong>Slug:</strong>
+      <%= @job.slug %>
+    </li>
+
 </ul>
 
 <%= if @current_neighbor && @current_neighbor.id == @job.neighbor_id do %>
