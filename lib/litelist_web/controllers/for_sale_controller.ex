@@ -4,7 +4,10 @@ defmodule LitelistWeb.ForSaleController do
   alias Litelist.Posts
   alias Litelist.Posts.Post
 
+  alias LitelistWeb.Utils.SharedUtils
   alias LitelistWeb.Utils.ForSaleUtils
+
+  @for_sale_type "for_sale"
 
   def index(conn, _params) do
     for_sales = Posts.list_posts()
@@ -19,7 +22,7 @@ defmodule LitelistWeb.ForSaleController do
   def create(conn, %{"post" => for_sale_params}) do
     for_sale_params = for_sale_params
       |> ForSaleUtils.permitted_params()
-      |> ForSaleUtils.add_generated_params(conn, :create)
+      |> SharedUtils.add_generated_params(conn, @for_sale_type, :create)
 
     case Posts.create_post(for_sale_params) do
       {:ok, for_sale} ->
@@ -38,7 +41,7 @@ defmodule LitelistWeb.ForSaleController do
 
   def edit(conn, %{"id" => id}) do
     for_sale = Posts.get_post!(id)
-    if permission?(conn.assigns.current_neighbor, for_sale) do
+    if SharedUtils.permission?(conn.assigns.current_neighbor, for_sale) do
       changeset = Posts.change_post(for_sale)
       render(conn, "edit.html", for_sale: for_sale, changeset: changeset)
     else
@@ -48,10 +51,10 @@ defmodule LitelistWeb.ForSaleController do
 
   def update(conn, %{"id" => id, "post" => for_sale_params}) do
     for_sale = Posts.get_post!(id)
-    if permission?(conn.assigns.current_neighbor, for_sale) do
+    if SharedUtils.permission?(conn.assigns.current_neighbor, for_sale) do
       for_sale_params = for_sale_params
         |> ForSaleUtils.permitted_params()
-        |> ForSaleUtils.add_generated_params(:update)
+        |> SharedUtils.add_generated_params(:update)
 
       case Posts.update_post(for_sale, for_sale_params) do
         {:ok, for_sale} ->
@@ -68,7 +71,7 @@ defmodule LitelistWeb.ForSaleController do
 
   def delete(conn, %{"id" => id}) do
     for_sale = Posts.get_post!(id)
-    if permission?(conn.assigns.current_neighbor, for_sale) do
+    if SharedUtils.permission?(conn.assigns.current_neighbor, for_sale) do
       {:ok, _for_sale} = Posts.delete_post(for_sale)
 
       conn
@@ -76,14 +79,6 @@ defmodule LitelistWeb.ForSaleController do
       |> redirect(to: for_sale_path(conn, :index))
     else
       unauthorized_redirect(conn)
-    end
-  end
-
-  defp permission?(neighbor, resource) do
-    if neighbor.id == resource.neighbor_id and resource.type == "for_sale" do
-      true
-    else
-      false
     end
   end
   

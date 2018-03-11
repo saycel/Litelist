@@ -15,6 +15,8 @@ defmodule Litelist.Repo.Migrations.CreatePosts do
       add :position_name, :string
       add :company_name, :string
       add :neighbor_id, :integer
+      add :start_date, :date
+      add :end_date, :date
 
       timestamps()
     end

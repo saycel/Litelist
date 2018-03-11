@@ -42,6 +42,7 @@ defmodule LitelistWeb.Router do
     post "/", PageController, :login
     post "/logout", PageController, :logout
     resources "/sales", ForSaleController, only: [:show, :index]
+    resources "/jobs", JobController
   end
 
   # Other scopes may use custom stacks.
