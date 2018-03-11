@@ -5,7 +5,7 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="ExDoc v0.18.2">
-    <title>LitelistWeb.ErrorHelpers – litelist v0.0.1</title>
+    <title>Litelist.Plugs.CurrentNeighbor – litelist v0.0.1</title>
     <link rel="stylesheet" href="dist/app-81d381dea4.css" />
     
     <script src="dist/sidebar_items-cfca39ceba.js"></script>
@@ -70,13 +70,13 @@
 
       <h1>
         <small class="visible-xs">litelist v0.0.1</small>
-        LitelistWeb.ErrorHelpers
+        Litelist.Plugs.CurrentNeighbor
         
       </h1>
 
       
         <section id="moduledoc">
-          <p>Conveniences for translating and building error messages.</p>
+          <p>Plug adds @current_neighbor to conn. @current_neighbor is nil if no one is signed in.</p>
 
         </section>
       
@@ -99,20 +99,14 @@
     </h2>
     <div class="summary-row">
   <div class="summary-signature">
-    <a href="#error_tag/2">error_tag(form, field)</a>
+    <a href="#call/2">call(conn, opts)</a>
   </div>
-  
-    <div class="summary-synopsis"><p>Generates tag for inlined form input errors</p>
-</div>
   
 </div>
 <div class="summary-row">
   <div class="summary-signature">
-    <a href="#translate_error/1">translate_error(arg)</a>
+    <a href="#init/1">init(opts)</a>
   </div>
-  
-    <div class="summary-synopsis"><p>Translates an error message using gettext</p>
-</div>
   
 </div>
 
@@ -135,40 +129,38 @@
             </a>
             Functions
           </h1>
-          <div class="detail" id="error_tag/2">
+          <div class="detail" id="call/2">
   
   
   <div class="detail-header">
-    <a href="#error_tag/2" class="detail-link" title="Link to this function">
+    <a href="#call/2" class="detail-link" title="Link to this function">
       <span class="icon-link" aria-hidden="true"></span>
       <span class="sr-only">Link to this function</span>
     </a>
-    <span class="signature">error_tag(form, field)</span>
+    <span class="signature">call(conn, opts)</span>
     
     
     
   </div>
   <section class="docstring">
-    <p>Generates tag for inlined form input errors.</p>
-
+    
   </section>
 </div>
-<div class="detail" id="translate_error/1">
+<div class="detail" id="init/1">
   
   
   <div class="detail-header">
-    <a href="#translate_error/1" class="detail-link" title="Link to this function">
+    <a href="#init/1" class="detail-link" title="Link to this function">
       <span class="icon-link" aria-hidden="true"></span>
       <span class="sr-only">Link to this function</span>
     </a>
-    <span class="signature">translate_error(arg)</span>
+    <span class="signature">init(opts)</span>
     
     
     
   </div>
   <section class="docstring">
-    <p>Translates an error message using gettext.</p>
-
+    
   </section>
 </div>
 

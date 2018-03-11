@@ -5,7 +5,7 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="ExDoc v0.18.2">
-    <title>LitelistWeb.ErrorHelpers – litelist v0.0.1</title>
+    <title>LitelistWeb.Utils.ForSaleUtils – litelist v0.0.1</title>
     <link rel="stylesheet" href="dist/app-81d381dea4.css" />
     
     <script src="dist/sidebar_items-cfca39ceba.js"></script>
@@ -70,13 +70,13 @@
 
       <h1>
         <small class="visible-xs">litelist v0.0.1</small>
-        LitelistWeb.ErrorHelpers
+        LitelistWeb.Utils.ForSaleUtils
         
       </h1>
 
       
         <section id="moduledoc">
-          <p>Conveniences for translating and building error messages.</p>
+          <p>ForSale Utility functions</p>
 
         </section>
       
@@ -99,19 +99,51 @@
     </h2>
     <div class="summary-row">
   <div class="summary-signature">
-    <a href="#error_tag/2">error_tag(form, field)</a>
+    <a href="#add_neighbor_id/2">add_neighbor_id(params, conn)</a>
   </div>
   
-    <div class="summary-synopsis"><p>Generates tag for inlined form input errors</p>
+    <div class="summary-synopsis"><p>add_neighbor_id()
+adds a neighbor id from the conn, to the params Map</p>
 </div>
   
 </div>
 <div class="summary-row">
   <div class="summary-signature">
-    <a href="#translate_error/1">translate_error(arg)</a>
+    <a href="#add_slug/1">add_slug(params)</a>
   </div>
   
-    <div class="summary-synopsis"><p>Translates an error message using gettext</p>
+    <div class="summary-synopsis"><p>add_slug()
+adds a slug attribute to the params Map</p>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#add_type/1">add_type(params)</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>add_type()
+adds a type attribute to the params Map</p>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#permitted_params/1">permitted_params(params)</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>permitted_params()
+removes any non-white-listed params</p>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#update_slug/1">update_slug(params)</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>update_slug()
+removes existing slug attribute and generates a new slug and adds it to the params Map</p>
 </div>
   
 </div>
@@ -135,39 +167,98 @@
             </a>
             Functions
           </h1>
-          <div class="detail" id="error_tag/2">
+          <div class="detail" id="add_neighbor_id/2">
   
   
   <div class="detail-header">
-    <a href="#error_tag/2" class="detail-link" title="Link to this function">
+    <a href="#add_neighbor_id/2" class="detail-link" title="Link to this function">
       <span class="icon-link" aria-hidden="true"></span>
       <span class="sr-only">Link to this function</span>
     </a>
-    <span class="signature">error_tag(form, field)</span>
+    <span class="signature">add_neighbor_id(params, conn)</span>
     
     
     
   </div>
   <section class="docstring">
-    <p>Generates tag for inlined form input errors.</p>
+    <p>add_neighbor_id()
+adds a neighbor id from the conn, to the params Map</p>
 
   </section>
 </div>
-<div class="detail" id="translate_error/1">
+<div class="detail" id="add_slug/1">
   
   
   <div class="detail-header">
-    <a href="#translate_error/1" class="detail-link" title="Link to this function">
+    <a href="#add_slug/1" class="detail-link" title="Link to this function">
       <span class="icon-link" aria-hidden="true"></span>
       <span class="sr-only">Link to this function</span>
     </a>
-    <span class="signature">translate_error(arg)</span>
+    <span class="signature">add_slug(params)</span>
     
     
     
   </div>
   <section class="docstring">
-    <p>Translates an error message using gettext.</p>
+    <p>add_slug()
+adds a slug attribute to the params Map</p>
+
+  </section>
+</div>
+<div class="detail" id="add_type/1">
+  
+  
+  <div class="detail-header">
+    <a href="#add_type/1" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <span class="signature">add_type(params)</span>
+    
+    
+    
+  </div>
+  <section class="docstring">
+    <p>add_type()
+adds a type attribute to the params Map</p>
+
+  </section>
+</div>
+<div class="detail" id="permitted_params/1">
+  
+  
+  <div class="detail-header">
+    <a href="#permitted_params/1" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <span class="signature">permitted_params(params)</span>
+    
+    
+    
+  </div>
+  <section class="docstring">
+    <p>permitted_params()
+removes any non-white-listed params</p>
+
+  </section>
+</div>
+<div class="detail" id="update_slug/1">
+  
+  
+  <div class="detail-header">
+    <a href="#update_slug/1" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <span class="signature">update_slug(params)</span>
+    
+    
+    
+  </div>
+  <section class="docstring">
+    <p>update_slug()
+removes existing slug attribute and generates a new slug and adds it to the params Map</p>
 
   </section>
 </div>
