@@ -5,9 +5,9 @@ defmodule LitelistWeb.ForSaleController do
   alias Litelist.Posts.Post
 
   alias LitelistWeb.Utils.SharedUtils
-  alias LitelistWeb.Utils.ForSaleUtils
 
   @for_sale_type "for_sale"
+  @permitted_params ["contact_info", "description", "price", "slug", "title", "url"]
 
   def index(conn, _params) do
     for_sales = Posts.list_posts()
@@ -21,7 +21,7 @@ defmodule LitelistWeb.ForSaleController do
 
   def create(conn, %{"post" => for_sale_params}) do
     for_sale_params = for_sale_params
-      |> ForSaleUtils.permitted_params()
+      |> SharedUtils.permitted_params(@permitted_params)
       |> SharedUtils.add_generated_params(conn, @for_sale_type, :create)
 
     case Posts.create_post(for_sale_params) do
@@ -53,7 +53,7 @@ defmodule LitelistWeb.ForSaleController do
     for_sale = Posts.get_post!(id)
     if SharedUtils.permission?(conn.assigns.current_neighbor, for_sale) do
       for_sale_params = for_sale_params
-        |> ForSaleUtils.permitted_params()
+        |> SharedUtils.permitted_params(@permitted_params)
         |> SharedUtils.add_generated_params(:update)
 
       case Posts.update_post(for_sale, for_sale_params) do

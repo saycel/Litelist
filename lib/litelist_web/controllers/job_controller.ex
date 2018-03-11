@@ -8,6 +8,17 @@ defmodule LitelistWeb.JobController do
   alias LitelistWeb.Utils.JobUtils
 
   @job_type "job"
+  @permitted_params ["contact_info",
+    "description",
+    "salary",
+    "title",
+    "url",
+    "start_date",
+    "end_date",
+    "company_name",
+    "position_name",
+    "location"
+  ]
 
   def index(conn, _params) do
     jobs = Posts.list_posts()
@@ -21,7 +32,7 @@ defmodule LitelistWeb.JobController do
 
   def create(conn, %{"post" => job_params}) do
     job_params = job_params
-      |> JobUtils.permitted_params()
+      |> SharedUtils.permitted_params(@permitted_params)
       |> SharedUtils.add_generated_params(conn, @job_type, :create)
 
     case Posts.create_post(job_params) do
@@ -52,6 +63,10 @@ defmodule LitelistWeb.JobController do
   def update(conn, %{"id" => id, "post" => job_params}) do
     job = Posts.get_post!(id)
     if SharedUtils.permission?(conn.assigns.current_neighbor, job) do
+      job_params = job_params
+        |> SharedUtils.permitted_params(@permitted_params)
+        |> SharedUtils.add_generated_params(:update)
+
       case Posts.update_post(job, job_params) do
         {:ok, job} ->
           conn

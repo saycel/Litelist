@@ -53,6 +53,19 @@ defmodule LitelistWeb.Utils.SharedUtils do
         end
     end
 
+    @doc """
+    permitted_params(params, whitelist)
+    Removes any non whitelisted attrs from params
+    """
+    def permitted_params(params, whitelist) do
+        Enum.each params, fn key ->
+            if key not in whitelist do
+                Map.delete(params, key)
+            end
+        end
+        params
+    end
+
     defp add_neighbor_id(params, conn) do
         Map.merge(
             %{
