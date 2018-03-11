@@ -18,6 +18,7 @@ defmodule LitelistWeb.ForSaleController do
 
   def create(conn, %{"post" => for_sale_params}) do
     for_sale_params = for_sale_params
+      |> ForSaleUtils.permitted_params()
       |> ForSaleUtils.add_neighbor_id(conn)
       |> ForSaleUtils.add_slug()
       |> ForSaleUtils.add_type()
@@ -51,6 +52,7 @@ defmodule LitelistWeb.ForSaleController do
     for_sale = Posts.get_post!(id)
     if permission?(conn.assigns.current_neighbor, for_sale) do
       for_sale_params = for_sale_params
+        |> ForSaleUtils.permitted_params()
         |> ForSaleUtils.update_slug()
 
       case Posts.update_post(for_sale, for_sale_params) do
@@ -80,7 +82,7 @@ defmodule LitelistWeb.ForSaleController do
   end
 
   defp permission?(neighbor, resource) do
-    if neighbor.id == resource.neighbor_id do
+    if neighbor.id == resource.neighbor_id and resource.type == "for_sale" do
       true
     else
       false

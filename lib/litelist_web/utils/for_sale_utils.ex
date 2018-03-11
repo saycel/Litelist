@@ -16,6 +16,7 @@ defmodule LitelistWeb.Utils.ForSaleUtils do
     alias LitelistWeb.Utils.SharedUtils
 
     @for_sale_type "for_sale"
+    @permitted_params ["contact_info", "description", "price", "slug", "title", "url"]
 
     def add_neighbor_id(params, conn) do
         Map.merge(
@@ -52,5 +53,14 @@ defmodule LitelistWeb.Utils.ForSaleUtils do
             },
             params
         )
+    end
+
+    def permitted_params(params) do
+        Enum.each params, fn key ->
+            if key not in @permitted_params do
+                Map.delete(params, key)
+            end
+        end
+        params
     end
 end
