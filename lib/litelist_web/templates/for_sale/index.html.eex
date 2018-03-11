@@ -1,0 +1,43 @@
+<h2>Listing For sales</h2>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Type</th>
+      <th>Title</th>
+      <th>Description</th>
+      <th>Price</th>
+      <th>Contact info</th>
+      <th>Slug</th>
+      <th>Url</th>
+      <th>Slug</th>
+
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+<%= for for_sale <- @for_sales do %>
+    <tr>
+      <td><%= for_sale.type %></td>
+      <td><%= for_sale.title %></td>
+      <td><%= for_sale.description %></td>
+      <td><%= for_sale.price %></td>
+      <td><%= for_sale.contact_info %></td>
+      <td><%= for_sale.slug %></td>
+      <td><%= for_sale.url %></td>
+
+      <td class="text-right">
+        <span><%= link "Show", to: for_sale_path(@conn, :show, for_sale), class: "btn btn-default btn-xs" %></span>
+        <%= if @current_neighbor && @current_neighbor.id == for_sale.neighbor_id do %>
+          <span><%= link "Edit", to: for_sale_path(@conn, :edit, for_sale), class: "btn btn-default btn-xs" %></span>
+          <span><%= link "Delete", to: for_sale_path(@conn, :delete, for_sale), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" %></span>
+        <% end %>
+      </td>
+    </tr>
+<% end %>
+  </tbody>
+</table>
+
+<%= if @current_neighbor do %>
+  <span><%= link "New For sale", to: for_sale_path(@conn, :new) %></span>
+<% end %>

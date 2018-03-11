@@ -5,7 +5,7 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="ExDoc v0.18.2">
-    <title>LitelistWeb.Router – litelist v0.0.1</title>
+    <title>LitelistWeb.Utils.ForSaleUtils – litelist v0.0.1</title>
     <link rel="stylesheet" href="dist/app-81d381dea4.css" />
     
     <script src="dist/sidebar_items-8145234dc6.js"></script>
@@ -70,10 +70,15 @@
 
       <h1>
         <small class="visible-xs">litelist v0.0.1</small>
-        LitelistWeb.Router
+        LitelistWeb.Utils.ForSaleUtils
         
       </h1>
 
+      
+        <section id="moduledoc">
+          <p>ForSale Utility functions</p>
+
+        </section>
       
 
       
@@ -94,50 +99,31 @@
     </h2>
     <div class="summary-row">
   <div class="summary-signature">
-    <a href="#api/2">api(conn, _)</a>
+    <a href="#add_generated_params/2">add_generated_params(params, atom)</a>
   </div>
   
-</div>
-<div class="summary-row">
-  <div class="summary-signature">
-    <a href="#auth/2">auth(conn, _)</a>
-  </div>
-  
-</div>
-<div class="summary-row">
-  <div class="summary-signature">
-    <a href="#browser/2">browser(conn, _)</a>
-  </div>
-  
-</div>
-<div class="summary-row">
-  <div class="summary-signature">
-    <a href="#call/2">call(conn, opts)</a>
-  </div>
-  
-    <div class="summary-synopsis"><p>Callback invoked by Plug on every request</p>
+    <div class="summary-synopsis"><p>add_generated_params()
+adds params like current_neighbor for update</p>
 </div>
   
 </div>
 <div class="summary-row">
   <div class="summary-signature">
-    <a href="#current_neighbor/2">current_neighbor(conn, _)</a>
+    <a href="#add_generated_params/3">add_generated_params(params, conn, atom)</a>
   </div>
+  
+    <div class="summary-synopsis"><p>add_generated_params()
+adds params like current_neighbor for create</p>
+</div>
   
 </div>
 <div class="summary-row">
   <div class="summary-signature">
-    <a href="#ensure_auth/2">ensure_auth(conn, _)</a>
+    <a href="#permitted_params/1">permitted_params(params)</a>
   </div>
   
-</div>
-<div class="summary-row">
-  <div class="summary-signature">
-    <a href="#init/1">init(opts)</a>
-  </div>
-  
-    <div class="summary-synopsis"><p>Callback required by Plug that initializes the router
-for serving web requests</p>
+    <div class="summary-synopsis"><p>permitted_params()
+removes any non-white-listed params</p>
 </div>
   
 </div>
@@ -161,125 +147,60 @@ for serving web requests</p>
             </a>
             Functions
           </h1>
-          <div class="detail" id="api/2">
+          <div class="detail" id="add_generated_params/2">
   
   
   <div class="detail-header">
-    <a href="#api/2" class="detail-link" title="Link to this function">
+    <a href="#add_generated_params/2" class="detail-link" title="Link to this function">
       <span class="icon-link" aria-hidden="true"></span>
       <span class="sr-only">Link to this function</span>
     </a>
-    <span class="signature">api(conn, _)</span>
+    <span class="signature">add_generated_params(params, atom)</span>
     
     
     
   </div>
   <section class="docstring">
-    
-  </section>
-</div>
-<div class="detail" id="auth/2">
-  
-  
-  <div class="detail-header">
-    <a href="#auth/2" class="detail-link" title="Link to this function">
-      <span class="icon-link" aria-hidden="true"></span>
-      <span class="sr-only">Link to this function</span>
-    </a>
-    <span class="signature">auth(conn, _)</span>
-    
-    
-    
-  </div>
-  <section class="docstring">
-    
-  </section>
-</div>
-<div class="detail" id="browser/2">
-  
-  
-  <div class="detail-header">
-    <a href="#browser/2" class="detail-link" title="Link to this function">
-      <span class="icon-link" aria-hidden="true"></span>
-      <span class="sr-only">Link to this function</span>
-    </a>
-    <span class="signature">browser(conn, _)</span>
-    
-    
-    
-  </div>
-  <section class="docstring">
-    
-  </section>
-</div>
-<div class="detail" id="call/2">
-  
-  
-  <div class="detail-header">
-    <a href="#call/2" class="detail-link" title="Link to this function">
-      <span class="icon-link" aria-hidden="true"></span>
-      <span class="sr-only">Link to this function</span>
-    </a>
-    <span class="signature">call(conn, opts)</span>
-    
-    
-    
-  </div>
-  <section class="docstring">
-    <p>Callback invoked by Plug on every request.</p>
+    <p>add_generated_params()
+adds params like current_neighbor for update</p>
 
   </section>
 </div>
-<div class="detail" id="current_neighbor/2">
+<div class="detail" id="add_generated_params/3">
   
   
   <div class="detail-header">
-    <a href="#current_neighbor/2" class="detail-link" title="Link to this function">
+    <a href="#add_generated_params/3" class="detail-link" title="Link to this function">
       <span class="icon-link" aria-hidden="true"></span>
       <span class="sr-only">Link to this function</span>
     </a>
-    <span class="signature">current_neighbor(conn, _)</span>
+    <span class="signature">add_generated_params(params, conn, atom)</span>
     
     
     
   </div>
   <section class="docstring">
-    
+    <p>add_generated_params()
+adds params like current_neighbor for create</p>
+
   </section>
 </div>
-<div class="detail" id="ensure_auth/2">
+<div class="detail" id="permitted_params/1">
   
   
   <div class="detail-header">
-    <a href="#ensure_auth/2" class="detail-link" title="Link to this function">
+    <a href="#permitted_params/1" class="detail-link" title="Link to this function">
       <span class="icon-link" aria-hidden="true"></span>
       <span class="sr-only">Link to this function</span>
     </a>
-    <span class="signature">ensure_auth(conn, _)</span>
+    <span class="signature">permitted_params(params)</span>
     
     
     
   </div>
   <section class="docstring">
-    
-  </section>
-</div>
-<div class="detail" id="init/1">
-  
-  
-  <div class="detail-header">
-    <a href="#init/1" class="detail-link" title="Link to this function">
-      <span class="icon-link" aria-hidden="true"></span>
-      <span class="sr-only">Link to this function</span>
-    </a>
-    <span class="signature">init(opts)</span>
-    
-    
-    
-  </div>
-  <section class="docstring">
-    <p>Callback required by Plug that initializes the router
-for serving web requests.</p>
+    <p>permitted_params()
+removes any non-white-listed params</p>
 
   </section>
 </div>

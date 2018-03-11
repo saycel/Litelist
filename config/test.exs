@@ -17,3 +17,6 @@ config :litelist, Litelist.Repo,
   database: "litelist_test",
   hostname: "db",
   pool: Ecto.Adapters.SQL.Sandbox
+
+# Speed up tests that use bcrypt
+config :comeonin, :bcrypt_log_rounds, 4
