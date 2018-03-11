@@ -17,6 +17,8 @@ defmodule Litelist.Repo.Migrations.CreatePosts do
       add :neighbor_id, :integer
       add :start_date, :date
       add :end_date, :date
+      add :start_time, :utc_datetime
+      add :end_time, :utc_datetime
 
       timestamps()
     end
@@ -26,5 +28,6 @@ defmodule Litelist.Repo.Migrations.CreatePosts do
     create index(:posts, [:type])
     create unique_index(:posts, [:url])
     create index(:posts, [:start_date])
+    create index(:posts, [:start_time])
   end
 end

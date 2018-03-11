@@ -26,7 +26,7 @@ defmodule Litelist.Factory do
 
   @doc """
   ForSale factory
-  ForSale's use the Post Schema
+  ForSales use the Post Schema
   ## How to
     build(:for_sale)
     build(:for_sale, %{title: '1984 Mazda'})
@@ -49,7 +49,7 @@ defmodule Litelist.Factory do
 
   @doc """
   Job factory
-  Job's use the Post Schema
+  Jobs use the Post Schema
   ## How to
     build(:job)
     build(:job, %{title: 'summer job'})
@@ -71,6 +71,31 @@ defmodule Litelist.Factory do
       salary: "$10/hr",
       neighbor_id: insert(:neighbor).id,
       type: "job",
+      url: FakerElixir.Lorem.characters(5..10)
+    }
+  end
+
+  @doc """
+  Event factory
+  Events use the Post Schema
+  ## How to
+    build(:event)
+    build(:event, %{title: 'block party'})
+    insert(:event)
+  """
+  def event_factory do
+    title = Faker.Lorem.words(3)
+    slug = SharedUtils.slugify(title)
+    %Post{
+      title: Faker.Lorem.words(3),
+      slug: slug,
+      location: FakerElixir.Address.street_address,
+      contact_info: Faker.Internet.email,
+      start_time: FakerElixir.Date.forward(1..2),
+      end_time: FakerElixir.Date.forward(11..12),
+      description: Faker.Lorem.sentences(3..5),
+      neighbor_id: insert(:neighbor).id,
+      type: "event",
       url: FakerElixir.Lorem.characters(5..10)
     }
   end

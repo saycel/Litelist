@@ -4,7 +4,7 @@ fonts/icomoon.eot
 fonts/icomoon.svg
 fonts/icomoon.ttf
 fonts/icomoon.woff
-dist/sidebar_items-d3c8beb9ec.js
+dist/sidebar_items-2456accc29.js
 api-reference.html
 search.html
 404.html
@@ -25,6 +25,8 @@ LitelistWeb.html
 LitelistWeb.Endpoint.html
 LitelistWeb.ErrorHelpers.html
 LitelistWeb.ErrorView.html
+LitelistWeb.EventController.html
+LitelistWeb.EventView.html
 LitelistWeb.ForSaleController.html
 LitelistWeb.ForSaleView.html
 LitelistWeb.Gettext.html
