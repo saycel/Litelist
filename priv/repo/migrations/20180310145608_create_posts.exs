@@ -25,5 +25,6 @@ defmodule Litelist.Repo.Migrations.CreatePosts do
     create index(:posts, [:title])
     create index(:posts, [:type])
     create unique_index(:posts, [:url])
+    create index(:posts, [:start_date])
   end
 end
