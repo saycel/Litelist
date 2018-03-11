@@ -71,6 +71,15 @@ defmodule LitelistWeb.ForSaleControllerTest do
         |> post(for_sale_path(conn, :create), for_sale: @create_attrs)
       assert response(conn, 401)
     end
+
+    test "renders errors when url is not unique", %{conn: conn, neighbor: neighbor} do
+      Factory.insert(:for_sale, %{url: "my-cool-url"})
+
+      conn = conn
+        |> login_neighbor(neighbor)
+        |> post(for_sale_path(conn, :create), post: @create_attrs)
+      assert html_response(conn, 200) =~ "New For sale"
+    end
   end
 
   describe "edit for_sale" do
