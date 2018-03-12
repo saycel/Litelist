@@ -1,0 +1,41 @@
+<h2>Show Business</h2>
+
+<ul>
+
+  <li>
+    <strong>Title:</strong>
+    <%= @business.title %>
+  </li>
+
+  <li>
+    <strong>Description:</strong>
+    <%= @business.description %>
+  </li>
+
+  <li>
+    <strong>Location:</strong>
+    <%= @business.location %>
+  </li>
+
+  <li>
+    <strong>Contact info:</strong>
+    <%= @business.contact_info %>
+  </li>
+
+  <li>
+    <strong>Url:</strong>
+    <%= @business.url %>
+  </li>
+
+  <li>
+    <strong>Company name:</strong>
+    <%= @business.company_name %>
+  </li>
+
+</ul>
+
+<%= if @current_neighbor && @current_neighbor.id == @business.neighbor_id do %>
+  <span><%= link "Edit", to: business_path(@conn, :edit, @business) %></span>
+<% end %>
+
+<span><%= link "Back", to: business_path(@conn, :index) %></span>

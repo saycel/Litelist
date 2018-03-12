@@ -99,4 +99,27 @@ defmodule Litelist.Factory do
       url: FakerElixir.Lorem.characters(5..10)
     }
   end
+
+  @doc """
+  Business factory
+  Businesses use the Post Schema
+  ## How to
+    build(:business)
+    build(:business, %{title: 'block party'})
+    insert(:business)
+  """
+  def business_factory do
+    title = Faker.Lorem.words(3)
+    slug = SharedUtils.slugify(title)
+    %Post{
+      title: Faker.Lorem.words(3),
+      slug: slug,
+      location: FakerElixir.Address.street_address,
+      contact_info: Faker.Internet.email,
+      description: Faker.Lorem.sentences(3..5),
+      neighbor_id: insert(:neighbor).id,
+      type: "business",
+      url: FakerElixir.Lorem.characters(5..10)
+    }
+  end
 end
