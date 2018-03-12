@@ -39,5 +39,7 @@
 
 </ul>
 
-<span><%= link "Edit", to: emergency_information_path(@conn, :edit, @emergency_information) %></span>
+<%= if @current_neighbor && @current_neighbor.id == @emergency_information.neighbor_id do %>
+  <span><%= link "Edit", to: emergency_information_path(@conn, :edit, @emergency_information) %></span>
+<% end %>
 <span><%= link "Back", to: emergency_information_path(@conn, :index) %></span>
