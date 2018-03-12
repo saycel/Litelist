@@ -34,7 +34,7 @@
 
 </ul>
 
-<%= if @current_neighbor && @current_neighbor.id == @for_sale.neighbor_id do %>
+<%= if @current_neighbor && @current_neighbor.id == @business.neighbor_id do %>
   <span><%= link "Edit", to: business_path(@conn, :edit, @business) %></span>
 <% end %>
 
