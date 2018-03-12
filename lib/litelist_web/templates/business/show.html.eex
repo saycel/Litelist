@@ -28,21 +28,14 @@
   </li>
 
   <li>
-    <strong>Slug:</strong>
-    <%= @business.slug %>
-  </li>
-
-  <li>
-    <strong>Type:</strong>
-    <%= @business.type %>
-  </li>
-
-  <li>
     <strong>Company name:</strong>
     <%= @business.company_name %>
   </li>
 
 </ul>
 
-<span><%= link "Edit", to: business_path(@conn, :edit, @business) %></span>
+<%= if @current_neighbor && @current_neighbor.id == @for_sale.neighbor_id do %>
+  <span><%= link "Edit", to: business_path(@conn, :edit, @business) %></span>
+<% end %>
+
 <span><%= link "Back", to: business_path(@conn, :index) %></span>

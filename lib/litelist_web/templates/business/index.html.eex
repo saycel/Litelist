@@ -29,12 +29,16 @@
 
       <td class="text-right">
         <span><%= link "Show", to: business_path(@conn, :show, business), class: "btn btn-default btn-xs" %></span>
-        <span><%= link "Edit", to: business_path(@conn, :edit, business), class: "btn btn-default btn-xs" %></span>
-        <span><%= link "Delete", to: business_path(@conn, :delete, business), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" %></span>
+        <%= if @current_neighbor && @current_neighbor.id == for_sale.neighbor_id do %>
+          <span><%= link "Edit", to: business_path(@conn, :edit, business), class: "btn btn-default btn-xs" %></span>
+          <span><%= link "Delete", to: business_path(@conn, :delete, business), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" %></span>
+        <% end %>
       </td>
     </tr>
 <% end %>
   </tbody>
 </table>
 
-<span><%= link "New Business", to: business_path(@conn, :new) %></span>
+<%= if @current_neighbor do %>
+  <span><%= link "New Business", to: business_path(@conn, :new) %></span>
+<% end %>
