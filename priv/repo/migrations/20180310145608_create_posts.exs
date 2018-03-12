@@ -19,6 +19,7 @@ defmodule Litelist.Repo.Migrations.CreatePosts do
       add :end_date, :date
       add :start_time, :utc_datetime
       add :end_time, :utc_datetime
+      add :organization_name, :string
 
       timestamps()
     end
