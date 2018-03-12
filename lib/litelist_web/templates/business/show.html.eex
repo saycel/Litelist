@@ -1,0 +1,48 @@
+<h2>Show Business</h2>
+
+<ul>
+
+  <li>
+    <strong>Title:</strong>
+    <%= @business.title %>
+  </li>
+
+  <li>
+    <strong>Description:</strong>
+    <%= @business.description %>
+  </li>
+
+  <li>
+    <strong>Location:</strong>
+    <%= @business.location %>
+  </li>
+
+  <li>
+    <strong>Contact info:</strong>
+    <%= @business.contact_info %>
+  </li>
+
+  <li>
+    <strong>Url:</strong>
+    <%= @business.url %>
+  </li>
+
+  <li>
+    <strong>Slug:</strong>
+    <%= @business.slug %>
+  </li>
+
+  <li>
+    <strong>Type:</strong>
+    <%= @business.type %>
+  </li>
+
+  <li>
+    <strong>Company name:</strong>
+    <%= @business.company_name %>
+  </li>
+
+</ul>
+
+<span><%= link "Edit", to: business_path(@conn, :edit, @business) %></span>
+<span><%= link "Back", to: business_path(@conn, :index) %></span>

@@ -1,0 +1,40 @@
+<h2>Listing Businesses</h2>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Description</th>
+      <th>Location</th>
+      <th>Contact info</th>
+      <th>Url</th>
+      <th>Slug</th>
+      <th>Type</th>
+      <th>Company name</th>
+
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+<%= for business <- @businesses do %>
+    <tr>
+      <td><%= business.title %></td>
+      <td><%= business.description %></td>
+      <td><%= business.location %></td>
+      <td><%= business.contact_info %></td>
+      <td><%= business.url %></td>
+      <td><%= business.slug %></td>
+      <td><%= business.type %></td>
+      <td><%= business.company_name %></td>
+
+      <td class="text-right">
+        <span><%= link "Show", to: business_path(@conn, :show, business), class: "btn btn-default btn-xs" %></span>
+        <span><%= link "Edit", to: business_path(@conn, :edit, business), class: "btn btn-default btn-xs" %></span>
+        <span><%= link "Delete", to: business_path(@conn, :delete, business), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" %></span>
+      </td>
+    </tr>
+<% end %>
+  </tbody>
+</table>
+
+<span><%= link "New Business", to: business_path(@conn, :new) %></span>
