@@ -81,7 +81,7 @@ defmodule LitelistWeb.EmergencyInformationController do
   def delete(conn, %{"id" => id}) do
     emergency_information = Posts.get_post!(id)
     if SharedUtils.permission?(conn.assigns.current_neighbor, emergency_information, @post_type) do
-      {:ok, _emergency_information} = Posts.delete_emergency_information(emergency_information)
+      {:ok, _emergency_information} = Posts.delete_post(emergency_information)
 
       conn
       |> put_flash(:info, "Emergency information deleted successfully.")
