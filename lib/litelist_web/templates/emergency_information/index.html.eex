@@ -1,0 +1,38 @@
+<h2>Listing Emergency information</h2>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Description</th>
+      <th>Contact info</th>
+      <th>Url</th>
+      <th>Slug</th>
+      <th>Type</th>
+      <th>Organization name</th>
+
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+<%= for emergency_information <- @emergency_information do %>
+    <tr>
+      <td><%= emergency_information.title %></td>
+      <td><%= emergency_information.description %></td>
+      <td><%= emergency_information.contact_info %></td>
+      <td><%= emergency_information.url %></td>
+      <td><%= emergency_information.slug %></td>
+      <td><%= emergency_information.type %></td>
+      <td><%= emergency_information.organization_name %></td>
+
+      <td class="text-right">
+        <span><%= link "Show", to: emergency_information_path(@conn, :show, emergency_information), class: "btn btn-default btn-xs" %></span>
+        <span><%= link "Edit", to: emergency_information_path(@conn, :edit, emergency_information), class: "btn btn-default btn-xs" %></span>
+        <span><%= link "Delete", to: emergency_information_path(@conn, :delete, emergency_information), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" %></span>
+      </td>
+    </tr>
+<% end %>
+  </tbody>
+</table>
+
+<span><%= link "New Emergency information", to: emergency_information_path(@conn, :new) %></span>

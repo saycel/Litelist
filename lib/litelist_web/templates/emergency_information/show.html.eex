@@ -1,0 +1,43 @@
+<h2>Show Emergency information</h2>
+
+<ul>
+
+  <li>
+    <strong>Title:</strong>
+    <%= @emergency_information.title %>
+  </li>
+
+  <li>
+    <strong>Description:</strong>
+    <%= @emergency_information.description %>
+  </li>
+
+  <li>
+    <strong>Contact info:</strong>
+    <%= @emergency_information.contact_info %>
+  </li>
+
+  <li>
+    <strong>Url:</strong>
+    <%= @emergency_information.url %>
+  </li>
+
+  <li>
+    <strong>Slug:</strong>
+    <%= @emergency_information.slug %>
+  </li>
+
+  <li>
+    <strong>Type:</strong>
+    <%= @emergency_information.type %>
+  </li>
+
+  <li>
+    <strong>Organization name:</strong>
+    <%= @emergency_information.organization_name %>
+  </li>
+
+</ul>
+
+<span><%= link "Edit", to: emergency_information_path(@conn, :edit, @emergency_information) %></span>
+<span><%= link "Back", to: emergency_information_path(@conn, :index) %></span>
