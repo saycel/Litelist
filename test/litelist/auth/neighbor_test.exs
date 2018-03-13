@@ -11,6 +11,7 @@ defmodule Litelist.NeighborTest do
             my_post = Factory.insert(:for_sale, %{neighbor_id: neighbor.id})
             Factory.insert(:for_sale) # This post does not belong to the neighbor
 
+            # credo:disable-for-lines:1
             neighbor_result = Repo.get(Neighbor, neighbor.id) |> Repo.preload([:posts])
 
             assert length(neighbor_result.posts) == 1
