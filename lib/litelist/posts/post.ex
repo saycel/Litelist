@@ -14,7 +14,6 @@ defmodule Litelist.Posts.Post do
     field :end_date, :date
     field :end_time, :utc_datetime
     field :location, :string
-    field :neighbor_id, :integer
     field :organization_name, :string
     field :position_name, :string
     field :price, :float
@@ -27,6 +26,8 @@ defmodule Litelist.Posts.Post do
     field :url, :string
 
     timestamps()
+
+    belongs_to :neighbor, Litelist.Auth.Neighbor
   end
 
   @doc false
