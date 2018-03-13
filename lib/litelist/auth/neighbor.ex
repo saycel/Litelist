@@ -12,6 +12,8 @@ defmodule Litelist.Auth.Neighbor do
     field :username, :string
 
     timestamps()
+
+    has_many :posts, Litelist.Posts.Post
   end
 
   @doc false
