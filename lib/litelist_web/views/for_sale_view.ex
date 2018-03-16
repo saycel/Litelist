@@ -3,16 +3,16 @@ defmodule LitelistWeb.ForSaleView do
   import LitelistWeb.FormHelpers
   
   def data([]) do
-  	%{action: "/sales", fields: build_fields()}
+  	%{action: "/sales", fields: build_fields([])}
   end
 
-  def build_fields() do
+  def build_fields([]) do
   	[
-  		%{title: "TITLE",type: "text", po_body: "Choose a title for your post", id: "post_title"},
-  		%{title: "DESCRIPTION",type: "text", po_body: "Describe the item you are trying to sell. Be detailed.", id: "post_description"},
-  		%{title: "PRICE",type: "number", po_body: "How much are you selling this for?", id: "post_price"},
-  		%{title: "CONTACT",type: "text", po_body: "How can someone who is interested in buying this item reach you?", id: "post_contact"},
-  		%{title: "URL",type: "text", po_body: "What URL do you want this post to be found at.  For instance: Ayashas-FORD-BRONCO.4sale.othernet or great-new-car.4sale.othernet", id: "post_url"}
+  		%{select: false, title: "TITLE",type: "text", po_body: "Choose a title for your post", id: "post_title"},
+  		%{select: false, title: "DESCRIPTION",type: "text", po_body: "Describe the item you are trying to sell. Be detailed.", id: "post_description"},
+  		%{select: false, title: "PRICE",type: "number", po_body: "How much are you selling this for?", id: "post_price"},
+  		%{select: false, title: "CONTACT_INFO",type: "text", po_body: "How can someone who is interested in buying this item reach you?", id: "post_contact"},
+  		%{select: false, title: "URL",type: "text", po_body: "What URL do you want this post to be found at.  For instance: Ayashas-FORD-BRONCO.4sale.othernet or great-new-car.4sale.othernet", id: "post_url"}
 
   	]
   end

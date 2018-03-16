@@ -3,16 +3,20 @@ defmodule LitelistWeb.JobView do
   import LitelistWeb.FormHelpers
   
   def data([]) do
-  	%{action: "/sales", fields: build_fields()}
+  	%{action: "/jobs", fields: build_fields()}
   end
 
   def build_fields() do
   	[
-  		%{title: "TITLE",type: "text", po_body: "Choose a title for your post", id: "post_title"},
-  		%{title: "DESCRIPTION",type: "text", po_body: "Describe the item you are trying to sell. Be detailed.", id: "post_description"},
-  		%{title: "PRICE",type: "number", po_body: "How much are you selling this for?", id: "post_price"},
-  		%{title: "CONTACT",type: "text", po_body: "How can someone who is interested in buying this item reach you?", id: "post_contact"},
-  		%{title: "URL",type: "text", po_body: "What URL do you want this post to be found at.  For instance: Ayashas-FORD-BRONCO.4sale.othernet or great-new-car.4sale.othernet", id: "post_url"}
+  		%{select: false, title: "TITLE",type: "text", po_body: "Choose a title for your job posting", id: "post_title"},
+      %{select: true, title: "START_DATE",type: "select", po_body: "When do you need this position filled?", id: "post_start_date"},
+  		%{select: false, title: "DESCRIPTION",type: "text", po_body: "Describe the job you are offering. Be detailed.", id: "post_description"},
+  		%{select: false, title: "LOCATION",type: "text", po_body: "Where are you located? Where does the work need to be performed?", id: "post_location"},
+  		%{select: false, title: "CONTACT_INFO",type: "text", po_body: "How can someone who is interested in applying for this job reach you?", id: "post_contact"},
+  		%{select: false, title: "URL",type: "text", po_body: "What URL do you want this post to be found at.  For instance: Ayashas-FORD-BRONCO.4sale.othernet or great-new-car.4sale.othernet", id: "post_url"},
+      %{select: false, title: "POSITION_NAME",type: "text", po_body: "What is the name of the position.  For instance: Barista, Engineer, Contractor", id: "post_position_name"},
+      %{select: false, title: "COMPANY_NAME",type: "text", po_body: "What is the name of your business or company", id: "post_company_name"},
+      %{select: false, title: "SALARY",type: "text", po_body: "What is the salary of the position, or how much $/hr", id: "post_salary"},
 
   	]
   end
