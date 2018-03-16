@@ -15,7 +15,11 @@
             <%= render LitelistWeb.SharedView,"_popover.html", title: "TITLE",body: d.po_body %>
           </div>
           <div class="column col-12">
-            <input class="full-width form-control" step="any" id="<%=d.id%>" name="post[<%=String.downcase(d.title)%>]" type="<%=d.type%>">
+            <%= if d.title == "START_DATE" do %>
+               <%= date_select f, :start_date, class: "form-control" %>
+            <% else %>
+              <input class="full-width form-control" step="any" id="<%=d.id%>" name="post[<%=String.downcase(d.title)%>]" type="<%=d.type%>">
+            <%end%>
           </div>
 
           <div class="column col-12 "><%= error_tag f, :title%> </div>
