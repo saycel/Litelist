@@ -1,9 +1,9 @@
 <div class="divider text-center" data-content="POSTINGS"></div>
 
-<div class="container ">
-  <div class="columns grid" data-masonry='{ "itemSelector": ".grid-item", "columnWidth": 300 }'>
+<div class="container grid ">
+  <div class="columns">
     <%= for post <- @posts do %>
-      <div class="column col-4 col-md-6 col-sm-12 grid-item">
+      <div class="column col-4 col-md-6 col-sm-12">
         <div class="card">
           <div class="card-image">
             <img src="" class="img-responsive">
@@ -20,6 +20,7 @@
           </div>
         </div>
       </div> 
+      <div class="divider-vert" data-content="*"></div>
     <%end%>
 
   </div>
