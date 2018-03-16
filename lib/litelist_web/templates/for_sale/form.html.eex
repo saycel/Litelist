@@ -1,41 +1,128 @@
-<%= form_for @changeset, @action, fn f -> %>
-  <%= if @changeset.action do %>
-    <div class="alert alert-danger">
-      <p>Oops, something went wrong! Please check the errors below.</p>
+<div class="columns">
+  <div class="column col-3 col-md-12">
+    <div class="tile">
+      <div class="tile-icon">
+        <div class="example-tile-icon">
+          <i class="icon icon-file centered"></i>
+        </div>
+      </div>
+      <div class="tile-content">
+        <p class="tile-title">RULES</p>
+        <ol class="tile-subtitle text-gray">
+          <li></li>
+          <li></li>
+          <li></li>
+        </ol>
+      </div>
+
     </div>
+  </div>
+  <div class="divider-vert" data-content="NEW"></div>
+
+  <div class="column col-8 col-md-12">
+  <%= form_for @changeset, @action, fn f -> %>
+    <%= if @changeset.action do %>
+      <div class="alert alert-danger">
+        <p>Oops, something went wrong! Please check the errors below.</p>
+      </div>
+    <% end %>
+    <!-- Title -->
+    <div class="form-group container">
+      <div class="columns">
+        <div class="column col-2 popover popover-right">
+          <label class="col-2" for="input-example-4">TITLE</label>
+          <%= render LitelistWeb.SharedView,"_popover.html", title: "TITLE",body: "Choose a title for your post" %>
+        </div>
+        <div class="column col-12">
+          <%= text_input f, :title, class: "full-width form-control" %>
+        </div>
+
+        <div class="column col-12 "><%= error_tag f, :title %></div>
+      </div>
+    </div>
+    <!-- END -->
+
+    <!-- description -->
+    <div class="form-group container">
+      <div class="columns">
+        <div class="column col-2 popover popover-right">
+          <label class="col-2" for="input-example-4">DESCRIPTION</label>
+          <%= render LitelistWeb.SharedView,"_popover.html", title: "DESCRIPTION",body: "Describe the item you are trying to sell. Be detailed." %>
+        </div>
+        <div class="column col-12">
+          <%= text_input f, :description, class: "full-width form-control" %>
+        </div>
+
+        <div class="column col-12 "><%= error_tag f, :title %></div>
+      </div>
+    </div>
+    <!-- END -->
+
+    <!-- price -->
+    <div class="form-group container">
+      <div class="columns">
+        <div class="column col-2 popover popover-right">
+          <label class="col-2" for="input-example-4">PRICE</label>
+          <%= render LitelistWeb.SharedView,"_popover.html", title: "PRICE",body: "How much are you selling this for?" %>
+
+        </div>
+        <div class="column col-12">
+          <%= number_input f, :price, step: "any", class: "form-control" %>
+        </div>
+
+        <div class="column col-12 "><%= error_tag f, :title %></div>
+      </div>
+    </div>
+    <!-- END -->
+
+    <!-- Contact -->
+    <div class="form-group container">
+      <div class="columns">
+        <div class="column col-2 popover popover-right">
+          <label class="col-2" for="input-example-4">CONTACT</label>
+          <%= render LitelistWeb.SharedView,"_popover.html", title: "CONTACT",body: "How can someone who is interested in buying this item reach you?" %>
+
+        </div>
+        <div class="column col-12">
+          <%= text_input f, :contact_info, class: "form-control" %>
+        </div>
+
+          <div class="column col-12 "><%= error_tag f, :title %></div>
+      </div>
+    </div>
+    <!-- END -->
+
+    <!-- URL -->
+    <div class="form-group container">
+      <div class="columns">
+        <div class="column col-2 popover popover-right">
+          <label class="col-2" for="input-example-4">URL</label>
+          <%= render LitelistWeb.SharedView,"_popover.html", title: "URL",body: "What URL do you want this post to be found at.  For instance: Ayashas-FORD-BRONCO.4sale.othernet or great-new-car.4sale.othernet" %>
+
+        </div>
+        <div class="column col-12">
+          <%= text_input f, :url, class: "form-control" %>
+        </div>
+
+          <div class="column col-12 "><%= error_tag f, :title %></div>
+      </div>
+    </div>
+    <!-- Submit -->
+    <div class="form-group container">
+      <div class="columns">
+        <div class="column col-2 popover popover-right">
+          <label class="col-2" for="input-example-4"></label>
+          <%= render LitelistWeb.SharedView,"_popover.html", title: "URL",body: "What URL do you want this post to be found at.  For instance: Ayashas-FORD-BRONCO.4sale.othernet or great-new-car.4sale.othernet" %>
+
+        </div>
+        <div class="column col-12">
+           <%= submit "Submit", class: "btn btn-primary" %>
+        </div>
+
+          <div class="column col-12 "><%= error_tag f, :title %></div>
+      </div>
+    </div>   
   <% end %>
-
-  <div class="form-group">
-    <%= label f, :title, class: "control-label" %>
-    <%= text_input f, :title, class: "form-control" %>
-    <%= error_tag f, :title %>
   </div>
 
-  <div class="form-group">
-    <%= label f, :description, class: "control-label" %>
-    <%= textarea f, :description, class: "form-control" %>
-    <%= error_tag f, :description %>
-  </div>
-
-  <div class="form-group">
-    <%= label f, :price, class: "control-label" %>
-    <%= number_input f, :price, step: "any", class: "form-control" %>
-    <%= error_tag f, :price %>
-  </div>
-
-  <div class="form-group">
-    <%= label f, :contact_info, class: "control-label" %>
-    <%= text_input f, :contact_info, class: "form-control" %>
-    <%= error_tag f, :contact_info %>
-  </div>
-
-  <div class="form-group">
-    <%= label f, :url, class: "control-label" %>
-    <%= text_input f, :url, class: "form-control" %>
-    <%= error_tag f, :url %>
-  </div>
-
-  <div class="form-group">
-    <%= submit "Submit", class: "btn btn-primary" %>
-  </div>
-<% end %>
+<div>

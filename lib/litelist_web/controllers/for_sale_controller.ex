@@ -5,6 +5,7 @@ defmodule LitelistWeb.ForSaleController do
   alias Litelist.Posts.Post
 
   alias LitelistWeb.Utils.SharedUtils
+  plug :put_layout, false when action in [:show]
 
   @post_type "for_sale"
   @permitted_params ["contact_info", "description", "price", "slug", "title", "url"]

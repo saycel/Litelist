@@ -7,24 +7,29 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Hello Litelist!</title>
+    <title>Litelist</title>
     <link rel="stylesheet" href="<%= static_path(@conn, "/css/app.css") %>">
-  </head>
+   </head>
 
   <body>
     <div class="container">
-      <header class="header">
-        <nav role="navigation">
-          <ul class="nav nav-pills pull-right">
-            <li><a href="http://www.phoenixframework.org/docs">Get Started</a></li>
-          </ul>
-        </nav>
-        <span class="logo"></span>
+      <header class="navbar">
+        <section class="navbar-section">
+          <a href="#" class="navbar-brand mr-2">Othernet</a>
+          <a href="#" class="btn btn-link">Post 2 List</a>
+          <a href="https://github.com/picturepan2/spectre" class="btn btn-link">My Account</a>
+        </section>
+        <section class="navbar-section">
+          <div class="input-group input-inline">
+            <input class="form-input" type="text" placeholder="search">
+            <button class="btn btn-primary input-group-btn">Search</button>
+          </div>
+        </section>
       </header>
-
+<!-- 
       <p class="alert alert-info" role="alert"><%= get_flash(@conn, :info) %></p>
       <p class="alert alert-danger" role="alert"><%= get_flash(@conn, :error) %></p>
-
+ -->
       <main role="main">
         <%= render @view_module, @view_template, assigns %>
       </main>
