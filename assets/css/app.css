@@ -1,1 +1,7 @@
 /* This file is for your main application css. */
+.full-width{
+	width:100%;
+}
+.blue{
+	background:blue;
+}
