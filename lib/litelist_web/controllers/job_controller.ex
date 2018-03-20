@@ -25,7 +25,9 @@ defmodule LitelistWeb.JobController do
   end
 
   def new(conn, _params) do
-    changeset = Posts.change_post(%Post{})
+    changeset = Posts.change_post(%Post{
+      images: [%Litelist.Image{}, %Litelist.Image{}, %Litelist.Image{}]
+    })
     render(conn, "new.html", changeset: changeset)
   end
 

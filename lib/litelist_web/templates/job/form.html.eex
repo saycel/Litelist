@@ -65,6 +65,13 @@
     <%= error_tag f, :position_name %>
   </div>
 
+  <%= inputs_for f, :images, fn image_form -> %>
+    <%= label image_form, :url, class: "control-label" %>
+    <%= text_input image_form, :url, class: "form-control" %>
+    <%= error_tag image_form, :url %>
+  <% end %>
+  
+
   <div class="form-group">
     <%= submit "Submit", class: "btn btn-primary" %>
   </div>

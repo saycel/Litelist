@@ -28,6 +28,7 @@ defmodule Litelist.Posts.Post do
     timestamps()
 
     belongs_to :neighbor, Litelist.Auth.Neighbor
+    has_many :images, Litelist.Image
   end
 
   @doc false
