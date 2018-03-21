@@ -1,30 +1,31 @@
-<div class="divider text-center" data-content="POSTINGS"></div>
+<div class="divider text-center"></div>
 
-<div class="container grid ">
-  <div class="columns">
-    <%= for post <- @posts do %>
-      <div class="column col-4 col-md-6 col-sm-12">
-        <div class="card">
-          <div class="card-image">
-            <img src="" class="img-responsive">
+<div class="cc">   
+  <div class="grid" data-content="POSTINGS" data-masonry='{ "itemSelector": ".grid-item", "columnWidth": 200 }'>
+    <div class="columns">
+      <%= for post <- @posts do %>
+        <div class="column grid-item col-2 col-lg-12" >
+          <div class="card">
+            <div class="card-image">
+              <img src="" class="img-responsive">
+            </div>
+            <div class="card-header">
+              <div class="card-title h5"><%=post.title%></div>
+              <div class="card-subtitle text-gray"><%=post.type%></div>
+            </div>
+            <div class="card-body">
+              <%=post.description |> String.slice(0..100)%>
+            </div>
+            <div class="card-footer">
+              <button class="btn btn-primary">More</button>
+            </div>
           </div>
-          <div class="card-header">
-            <div class="card-title h5"><%=post.title%></div>
-            <div class="card-subtitle text-gray"><%=post.type%></div>
-          </div>
-          <div class="card-body">
-            <%=post.description%>
-          </div>
-          <div class="card-footer">
-            <button class="btn btn-primary">More</button>
-          </div>
-        </div>
-            <div class="divider-vert" data-content="*"></div>
+        <div class="divider-vert" data-content="*"></div>
+        </div> 
 
-      </div> 
-    <%end%>
+      <%end%>
+
+    </div>
 
   </div>
-
 </div>
-
