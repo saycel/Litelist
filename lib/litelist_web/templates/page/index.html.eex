@@ -19,8 +19,9 @@
             <button class="btn btn-primary">More</button>
           </div>
         </div>
+            <div class="divider-vert" data-content="*"></div>
+
       </div> 
-      <div class="divider-vert" data-content="*"></div>
     <%end%>
 
   </div>
