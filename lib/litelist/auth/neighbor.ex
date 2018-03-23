@@ -10,6 +10,7 @@ defmodule Litelist.Auth.Neighbor do
   schema "neighbors" do
     field :password, :string
     field :username, :string
+    field :admin, :boolean
 
     timestamps()
 
@@ -19,7 +20,7 @@ defmodule Litelist.Auth.Neighbor do
   @doc false
   def changeset(%Neighbor{} = neighbor, attrs) do
     neighbor
-    |> cast(attrs, [:username, :password])
+    |> cast(attrs, [:username, :password, :admin])
     |> validate_required([:username, :password])
     |> put_pass_hash()  
   end
