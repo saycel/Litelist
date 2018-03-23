@@ -83,7 +83,7 @@ defmodule LitelistWeb.SharedUtilsTest do
         end
     end
 
-    describe "owner_and_type_check?" do
+    describe "resource_owner_and_match_type?" do
         test "returns expected value" do
             neighbor_id = 1
             wrong_id = 2
@@ -94,9 +94,9 @@ defmodule LitelistWeb.SharedUtilsTest do
             wrong_neighbor = %{id: wrong_id}
             resource = %{neighbor_id: neighbor_id, type: type}
 
-            assert SharedUtils.owner_and_type_check?(neighbor, resource, type) == true      
-            assert SharedUtils.owner_and_type_check?(wrong_neighbor, resource, type) == false   
-            assert SharedUtils.owner_and_type_check?(neighbor, resource, wrong_type) == false                 
+            assert SharedUtils.resource_owner_and_match_type?(neighbor, resource, type) == true      
+            assert SharedUtils.resource_owner_and_match_type?(wrong_neighbor, resource, type) == false   
+            assert SharedUtils.resource_owner_and_match_type?(neighbor, resource, wrong_type) == false                 
         end
     end
 

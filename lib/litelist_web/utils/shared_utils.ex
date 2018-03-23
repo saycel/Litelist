@@ -46,7 +46,7 @@ defmodule LitelistWeb.Utils.SharedUtils do
     tests if a resource was created by the neighbor, and if the given type matches the resource
     """
     def permission?(neighbor, resource, type) do
-        if owner_and_type_check?(neighbor, resource, type) or admin?(neighbor) do
+        if resource_owner_and_match_type?(neighbor, resource, type) or admin?(neighbor) do
             true
         else
             false
@@ -54,10 +54,10 @@ defmodule LitelistWeb.Utils.SharedUtils do
     end
 
     @doc """
-    owner_and_type_check?(neighbor, resource, type)
+    resource_owner_and_match_type?(neighbor, resource, type)
     ensures that the resource is owned by the neighbor, and that the types match (job != for_sale)
     """
-    def owner_and_type_check?(neighbor, resource, type) do
+    def resource_owner_and_match_type?(neighbor, resource, type) do
         resource_owner?(neighbor, resource) and match_type?(resource, type)
     end
 
