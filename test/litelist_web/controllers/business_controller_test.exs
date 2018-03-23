@@ -10,9 +10,10 @@ defmodule LitelistWeb.BusinessControllerTest do
 
   setup do
     neighbor = Factory.insert(:neighbor)
+    admin = Factory.insert(:neighbor, %{admin: true})
     business = Factory.insert(:business, neighbor_id: neighbor.id)
     not_my_business = Factory.insert(:business)
-    {:ok, neighbor: neighbor, business: business, not_my_business: not_my_business}
+    {:ok, neighbor: neighbor, business: business, not_my_business: not_my_business, admin: admin}
   end
 
   describe "index" do
@@ -89,6 +90,13 @@ defmodule LitelistWeb.BusinessControllerTest do
       assert html_response(conn, 200) =~ "Edit Business"
     end
 
+    test "renders form for editing chosen business as an admin", %{conn: conn, business: business, admin: admin} do
+      conn = conn
+        |> login_neighbor(admin)
+        |> get(business_path(conn, :edit, business))
+      assert html_response(conn, 200) =~ "Edit Business"
+    end
+
     test "redirects to index if business was not created by the neighbor", %{conn: conn, neighbor: neighbor, not_my_business: not_my_business} do
       conn = conn
         |> login_neighbor(neighbor)
@@ -116,6 +124,21 @@ defmodule LitelistWeb.BusinessControllerTest do
       conn = conn
         |> recycle()
         |> login_neighbor(neighbor)
+
+      conn = get conn, business_path(conn, :show, business)
+      assert html_response(conn, 200) =~ "some updated contact_info"
+    end
+
+    test "redirects when data is valid as an admin", %{conn: conn, business: business, admin: admin} do
+      conn = conn
+        |> login_neighbor(admin)
+        |> put(business_path(conn, :update, business), post: @update_attrs)
+
+      assert redirected_to(conn) == business_path(conn, :show, business)
+
+      conn = conn
+        |> recycle()
+        |> login_neighbor(admin)
 
       conn = get conn, business_path(conn, :show, business)
       assert html_response(conn, 200) =~ "some updated contact_info"
@@ -150,6 +173,17 @@ defmodule LitelistWeb.BusinessControllerTest do
     test "deletes chosen business", %{conn: conn, business: business, neighbor: neighbor} do
       conn = conn
         |> login_neighbor(neighbor)
+        |> delete(business_path(conn, :delete, business))
+
+      assert redirected_to(conn) == business_path(conn, :index)
+      assert_error_sent 404, fn ->
+        get conn, business_path(conn, :show, business)
+      end
+    end
+
+    test "deletes chosen business as an admin", %{conn: conn, business: business, admin: admin} do
+      conn = conn
+        |> login_neighbor(admin)
         |> delete(business_path(conn, :delete, business))
 
       assert redirected_to(conn) == business_path(conn, :index)

@@ -10,9 +10,10 @@ defmodule LitelistWeb.EventControllerTest do
 
   setup do
     neighbor = Factory.insert(:neighbor)
+    admin = Factory.insert(:neighbor, %{admin: true})
     event = Factory.insert(:event, neighbor_id: neighbor.id)
     not_my_event = Factory.insert(:event)
-    {:ok, neighbor: neighbor, event: event, not_my_event: not_my_event}
+    {:ok, neighbor: neighbor, event: event, not_my_event: not_my_event, admin: admin}
   end
 
   describe "index" do
@@ -89,6 +90,13 @@ defmodule LitelistWeb.EventControllerTest do
       assert html_response(conn, 200) =~ "Edit Event"
     end
 
+    test "renders form for editing chosen event as an admin", %{conn: conn, event: event, admin: admin} do
+      conn = conn
+        |> login_neighbor(admin)
+        |> get(event_path(conn, :edit, event))
+      assert html_response(conn, 200) =~ "Edit Event"
+    end
+
     test "redirects to index if event was not created by the neighbor", %{conn: conn, neighbor: neighbor, not_my_event: not_my_event} do
       conn = conn
         |> login_neighbor(neighbor)
@@ -116,6 +124,21 @@ defmodule LitelistWeb.EventControllerTest do
       conn = conn
         |> recycle()
         |> login_neighbor(neighbor)
+
+      conn = get conn, event_path(conn, :show, event)
+      assert html_response(conn, 200) =~ "some updated contact_info"
+    end
+
+    test "redirects when data is valid as an admin", %{conn: conn, event: event, admin: admin} do
+      conn = conn
+        |> login_neighbor(admin)
+        |> put(event_path(conn, :update, event), post: @update_attrs)
+
+      assert redirected_to(conn) == event_path(conn, :show, event)
+
+      conn = conn
+        |> recycle()
+        |> login_neighbor(admin)
 
       conn = get conn, event_path(conn, :show, event)
       assert html_response(conn, 200) =~ "some updated contact_info"
@@ -150,6 +173,17 @@ defmodule LitelistWeb.EventControllerTest do
     test "deletes chosen event", %{conn: conn, event: event, neighbor: neighbor} do
       conn = conn
         |> login_neighbor(neighbor)
+        |> delete(event_path(conn, :delete, event))
+
+      assert redirected_to(conn) == event_path(conn, :index)
+      assert_error_sent 404, fn ->
+        get conn, event_path(conn, :show, event)
+      end
+    end
+
+    test "deletes chosen event as an admin", %{conn: conn, event: event, admin: admin} do
+      conn = conn
+        |> login_neighbor(admin)
         |> delete(event_path(conn, :delete, event))
 
       assert redirected_to(conn) == event_path(conn, :index)

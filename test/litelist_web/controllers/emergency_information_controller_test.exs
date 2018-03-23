@@ -10,9 +10,10 @@ defmodule LitelistWeb.EmergencyInformationControllerTest do
 
   setup do
     neighbor = Factory.insert(:neighbor)
+    admin = Factory.insert(:neighbor, %{admin: true})
     emergency_information = Factory.insert(:emergency_information, neighbor_id: neighbor.id)
     not_my_emergency_information = Factory.insert(:emergency_information)
-    {:ok, neighbor: neighbor, emergency_information: emergency_information, not_my_emergency_information: not_my_emergency_information}
+    {:ok, neighbor: neighbor, emergency_information: emergency_information, not_my_emergency_information: not_my_emergency_information, admin: admin}
   end
 
   describe "index" do
@@ -89,6 +90,13 @@ defmodule LitelistWeb.EmergencyInformationControllerTest do
       assert html_response(conn, 200) =~ "Edit Emergency information"
     end
 
+    test "renders form for editing chosen emergency_information as an admin", %{conn: conn, emergency_information: emergency_information, admin: admin} do
+      conn = conn
+        |> login_neighbor(admin)
+        |> get(emergency_information_path(conn, :edit, emergency_information))
+      assert html_response(conn, 200) =~ "Edit Emergency information"
+    end
+
     test "redirects to index if emergency_information was not created by the neighbor", %{conn: conn, neighbor: neighbor, not_my_emergency_information: not_my_emergency_information} do
       conn = conn
         |> login_neighbor(neighbor)
@@ -116,6 +124,21 @@ defmodule LitelistWeb.EmergencyInformationControllerTest do
       conn = conn
         |> recycle()
         |> login_neighbor(neighbor)
+
+      conn = get conn, emergency_information_path(conn, :show, emergency_information)
+      assert html_response(conn, 200) =~ "some updated contact_info"
+    end
+
+    test "redirects when data is valid as an admin", %{conn: conn, emergency_information: emergency_information, admin: admin} do
+      conn = conn
+        |> login_neighbor(admin)
+        |> put(emergency_information_path(conn, :update, emergency_information), post: @update_attrs)
+
+      assert redirected_to(conn) == emergency_information_path(conn, :show, emergency_information)
+
+      conn = conn
+        |> recycle()
+        |> login_neighbor(admin)
 
       conn = get conn, emergency_information_path(conn, :show, emergency_information)
       assert html_response(conn, 200) =~ "some updated contact_info"
@@ -150,6 +173,17 @@ defmodule LitelistWeb.EmergencyInformationControllerTest do
     test "deletes chosen emergency_information", %{conn: conn, emergency_information: emergency_information, neighbor: neighbor} do
       conn = conn
         |> login_neighbor(neighbor)
+        |> delete(emergency_information_path(conn, :delete, emergency_information))
+
+      assert redirected_to(conn) == emergency_information_path(conn, :index)
+      assert_error_sent 404, fn ->
+        get conn, emergency_information_path(conn, :show, emergency_information)
+      end
+    end
+
+    test "deletes chosen emergency_information as an admin", %{conn: conn, emergency_information: emergency_information, admin: admin} do
+      conn = conn
+        |> login_neighbor(admin)
         |> delete(emergency_information_path(conn, :delete, emergency_information))
 
       assert redirected_to(conn) == emergency_information_path(conn, :index)

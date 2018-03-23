@@ -10,9 +10,10 @@ defmodule LitelistWeb.JobControllerTest do
 
   setup do
     neighbor = Factory.insert(:neighbor)
+    admin = Factory.insert(:neighbor, %{admin: true})
     job = Factory.insert(:job, neighbor_id: neighbor.id)
     not_my_job = Factory.insert(:job)
-    {:ok, neighbor: neighbor, job: job, not_my_job: not_my_job}
+    {:ok, neighbor: neighbor, job: job, not_my_job: not_my_job, admin: admin}
   end
 
   describe "index" do
@@ -89,6 +90,13 @@ defmodule LitelistWeb.JobControllerTest do
       assert html_response(conn, 200) =~ "Edit Job"
     end
 
+    test "renders form for editing chosen job if admin", %{conn: conn, job: job, admin: admin} do
+      conn = conn
+        |> login_neighbor(admin)
+        |> get(job_path(conn, :edit, job))
+      assert html_response(conn, 200) =~ "Edit Job"
+    end
+
     test "redirects to index if job was not created by the neighbor", %{conn: conn, neighbor: neighbor, not_my_job: not_my_job} do
       conn = conn
         |> login_neighbor(neighbor)
@@ -116,6 +124,21 @@ defmodule LitelistWeb.JobControllerTest do
       conn = conn
         |> recycle()
         |> login_neighbor(neighbor)
+
+      conn = get conn, job_path(conn, :show, job)
+      assert html_response(conn, 200) =~ "some updated contact_info"
+    end
+
+    test "redirects when data is valid as an admin", %{conn: conn, job: job, admin: admin} do
+      conn = conn
+        |> login_neighbor(admin)
+        |> put(job_path(conn, :update, job), post: @update_attrs)
+
+      assert redirected_to(conn) == job_path(conn, :show, job)
+
+      conn = conn
+        |> recycle()
+        |> login_neighbor(admin)
 
       conn = get conn, job_path(conn, :show, job)
       assert html_response(conn, 200) =~ "some updated contact_info"
@@ -150,6 +173,17 @@ defmodule LitelistWeb.JobControllerTest do
     test "deletes chosen job", %{conn: conn, job: job, neighbor: neighbor} do
       conn = conn
         |> login_neighbor(neighbor)
+        |> delete(job_path(conn, :delete, job))
+
+      assert redirected_to(conn) == job_path(conn, :index)
+      assert_error_sent 404, fn ->
+        get conn, job_path(conn, :show, job)
+      end
+    end
+
+    test "deletes chosen job as an admin", %{conn: conn, job: job, admin: admin} do
+      conn = conn
+        |> login_neighbor(admin)
         |> delete(job_path(conn, :delete, job))
 
       assert redirected_to(conn) == job_path(conn, :index)

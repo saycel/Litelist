@@ -10,9 +10,10 @@ defmodule LitelistWeb.ForSaleControllerTest do
 
   setup do
     neighbor = Factory.insert(:neighbor)
+    admin = Factory.insert(:neighbor, %{admin: true})
     for_sale = Factory.insert(:for_sale, neighbor_id: neighbor.id)
     not_my_for_sale = Factory.insert(:for_sale)
-    {:ok, neighbor: neighbor, for_sale: for_sale, not_my_for_sale: not_my_for_sale}
+    {:ok, neighbor: neighbor, for_sale: for_sale, not_my_for_sale: not_my_for_sale, admin: admin}
   end
 
   describe "index" do
@@ -89,6 +90,13 @@ defmodule LitelistWeb.ForSaleControllerTest do
       assert html_response(conn, 200) =~ "Edit For sale"
     end
 
+    test "renders form for editing chosen for_sale as an admin", %{conn: conn, for_sale: for_sale, admin: admin} do
+      conn = conn
+        |> login_neighbor(admin)
+        |> get(for_sale_path(conn, :edit, for_sale))
+      assert html_response(conn, 200) =~ "Edit For sale"
+    end
+
     test "redirects to index if for_sale was not created by the neighbor", %{conn: conn, neighbor: neighbor, not_my_for_sale: not_my_for_sale} do
       conn = conn
         |> login_neighbor(neighbor)
@@ -117,6 +125,21 @@ defmodule LitelistWeb.ForSaleControllerTest do
       conn = conn
         |> recycle()
         |> login_neighbor(neighbor)
+
+      conn = get conn, for_sale_path(conn, :show, for_sale)
+      assert html_response(conn, 200) =~ "some updated contact_info"
+    end
+
+    test "redirects when data is valid as an admin", %{conn: conn, for_sale: for_sale, admin: admin} do
+      conn = conn
+        |> login_neighbor(admin)
+        |> put(for_sale_path(conn, :update, for_sale), post: @update_attrs)
+
+      assert redirected_to(conn) == for_sale_path(conn, :show, for_sale)
+
+      conn = conn
+        |> recycle()
+        |> login_neighbor(admin)
 
       conn = get conn, for_sale_path(conn, :show, for_sale)
       assert html_response(conn, 200) =~ "some updated contact_info"
@@ -158,6 +181,18 @@ defmodule LitelistWeb.ForSaleControllerTest do
         get conn, for_sale_path(conn, :show, for_sale)
       end
     end
+
+    test "deletes chosen for_sale as an admin", %{conn: conn, for_sale: for_sale, admin: admin} do
+      conn = conn
+        |> login_neighbor(admin)
+        |> delete(for_sale_path(conn, :delete, for_sale))
+
+      assert redirected_to(conn) == for_sale_path(conn, :index)
+      assert_error_sent 404, fn ->
+        get conn, for_sale_path(conn, :show, for_sale)
+      end
+    end
+
 
     test "redirects to index if for_sale was not created by the neighbor", %{conn: conn, neighbor: neighbor, not_my_for_sale: not_my_for_sale} do
       conn = conn
