@@ -30,7 +30,7 @@ defmodule LitelistWeb.EventControllerTest do
         |> login_neighbor(neighbor)
         |> get(event_path(conn, :new))
       
-      assert html_response(conn, 200) =~ "New Event"
+      assert html_response(conn, 200) =~ "EVENT POST"
     end
 
     test "unautorized 401 redirect if not logged in", %{conn: conn} do
@@ -62,7 +62,7 @@ defmodule LitelistWeb.EventControllerTest do
       conn = conn
         |> login_neighbor(neighbor)
         |> post(event_path(conn, :create), post: @invalid_attrs)
-      assert html_response(conn, 200) =~ "New Event"
+      assert html_response(conn, 200) =~ "EVENT POST"
     end
 
     test "unautorized 401 redirect if not logged in", %{conn: conn} do
@@ -77,7 +77,7 @@ defmodule LitelistWeb.EventControllerTest do
       conn = conn
         |> login_neighbor(neighbor)
         |> post(event_path(conn, :create), post: @create_attrs)
-      assert html_response(conn, 200) =~ "New Event"
+      assert html_response(conn, 200) =~ "EVENT POST"
     end
   end
 

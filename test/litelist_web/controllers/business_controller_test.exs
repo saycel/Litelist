@@ -30,7 +30,7 @@ defmodule LitelistWeb.BusinessControllerTest do
         |> login_neighbor(neighbor)
         |> get(business_path(conn, :new))
       
-      assert html_response(conn, 200) =~ "New Business"
+      assert html_response(conn, 200) =~ "Local Business Posting"
     end
 
     test "unautorized 401 redirect if not logged in", %{conn: conn} do
@@ -62,7 +62,7 @@ defmodule LitelistWeb.BusinessControllerTest do
       conn = conn
         |> login_neighbor(neighbor)
         |> post(business_path(conn, :create), post: @invalid_attrs)
-      assert html_response(conn, 200) =~ "New Business"
+      assert html_response(conn, 200) =~ "Local Business Posting"
     end
 
     test "unautorized 401 redirect if not logged in", %{conn: conn} do
@@ -77,7 +77,7 @@ defmodule LitelistWeb.BusinessControllerTest do
       conn = conn
         |> login_neighbor(neighbor)
         |> post(business_path(conn, :create), post: @create_attrs)
-      assert html_response(conn, 200) =~ "New Business"
+      assert html_response(conn, 200) =~ "Local Business Posting"
     end
   end
 

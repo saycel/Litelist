@@ -1,3 +1,5 @@
+<h2>Show for sale</h2>
+
 <link rel="stylesheet" href="<%= static_path(@conn, "/css/app.css") %>">
 <div class="card">
   <div class="card-image">

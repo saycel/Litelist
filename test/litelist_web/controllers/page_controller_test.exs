@@ -3,6 +3,6 @@ defmodule LitelistWeb.PageControllerTest do
 
   test "GET /", %{conn: conn} do
     conn = get conn, "/"
-    assert html_response(conn, 200) =~ "Login Page"
+    assert html_response(conn, 200) =~ "Othernet"
   end
 end

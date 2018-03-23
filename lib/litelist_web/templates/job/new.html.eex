@@ -1,4 +1,4 @@
-<div class="divider text-center" data-content="4 SALE POST"></div>
+<div class="divider text-center" data-content="JOB POST"></div>
 <%= render "_rules.html" %>
 <%= render LitelistWeb.SharedView,"_form.html",Map.put(assigns, :data, get_form_data("Events")) %>
 

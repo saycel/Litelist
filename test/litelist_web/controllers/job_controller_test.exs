@@ -30,7 +30,7 @@ defmodule LitelistWeb.JobControllerTest do
         |> login_neighbor(neighbor)
         |> get(job_path(conn, :new))
       
-      assert html_response(conn, 200) =~ "New Job"
+      assert html_response(conn, 200) =~ "JOB POST"
     end
 
     test "unautorized 401 redirect if not logged in", %{conn: conn} do
@@ -62,7 +62,7 @@ defmodule LitelistWeb.JobControllerTest do
       conn = conn
         |> login_neighbor(neighbor)
         |> post(job_path(conn, :create), post: @invalid_attrs)
-      assert html_response(conn, 200) =~ "New Job"
+      assert html_response(conn, 200) =~ "JOB POST"
     end
 
     test "unautorized 401 redirect if not logged in", %{conn: conn} do
@@ -77,7 +77,7 @@ defmodule LitelistWeb.JobControllerTest do
       conn = conn
         |> login_neighbor(neighbor)
         |> post(job_path(conn, :create), post: @create_attrs)
-      assert html_response(conn, 200) =~ "New Job"
+      assert html_response(conn, 200) =~ "JOB POST"
     end
   end
 
