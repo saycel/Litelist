@@ -8,7 +8,7 @@
     <title>LitelistWeb.Utils.SharedUtils – litelist v0.0.1</title>
     <link rel="stylesheet" href="dist/app-81d381dea4.css" />
     
-    <script src="dist/sidebar_items-80b4677b9c.js"></script>
+    <script src="dist/sidebar_items-a918bfc19f.js"></script>
     
     
     
@@ -119,6 +119,16 @@ adds params like current_neighbor for create</p>
 </div>
 <div class="summary-row">
   <div class="summary-signature">
+    <a href="#admin?/1">admin?(neighbor)</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>admin?(neighbor)
+If neighbor.admin, return true. Otherwise return false</p>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
     <a href="#match_type?/2">match_type?(resource, type)</a>
   </div>
   
@@ -129,10 +139,20 @@ tests if a resource was created by the neighbor, and if the given type matches t
 </div>
 <div class="summary-row">
   <div class="summary-signature">
+    <a href="#owner_and_type_check?/3">owner_and_type_check?(neighbor, resource, type)</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>owner_and_type_check?(neighbor, resource, type)
+ensures that the resource is owned by the neighbor, and that the types match (job != for_sale)</p>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
     <a href="#permission?/3">permission?(neighbor, resource, type)</a>
   </div>
   
-    <div class="summary-synopsis"><p>permission(neighbor, resource, type)
+    <div class="summary-synopsis"><p>permission?(neighbor, resource, type)
 tests if a resource was created by the neighbor, and if the given type matches the resource</p>
 </div>
   
@@ -144,6 +164,16 @@ tests if a resource was created by the neighbor, and if the given type matches t
   
     <div class="summary-synopsis"><p>permitted_params(params, whitelist)
 Removes any non whitelisted attrs from params</p>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#resource_owner?/2">resource_owner?(neighbor, resource)</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>resource_owner?(neighbor, resource)
+Returns true if neighbor.id == resource.neighbor_id</p>
 </div>
   
 </div>
@@ -218,6 +248,25 @@ adds params like current_neighbor for create</p>
 
   </section>
 </div>
+<div class="detail" id="admin?/1">
+  
+  
+  <div class="detail-header">
+    <a href="#admin?/1" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <span class="signature">admin?(neighbor)</span>
+    
+    
+    
+  </div>
+  <section class="docstring">
+    <p>admin?(neighbor)
+If neighbor.admin, return true. Otherwise return false</p>
+
+  </section>
+</div>
 <div class="detail" id="match_type?/2">
   
   
@@ -237,6 +286,25 @@ tests if a resource was created by the neighbor, and if the given type matches t
 
   </section>
 </div>
+<div class="detail" id="owner_and_type_check?/3">
+  
+  
+  <div class="detail-header">
+    <a href="#owner_and_type_check?/3" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <span class="signature">owner_and_type_check?(neighbor, resource, type)</span>
+    
+    
+    
+  </div>
+  <section class="docstring">
+    <p>owner_and_type_check?(neighbor, resource, type)
+ensures that the resource is owned by the neighbor, and that the types match (job != for_sale)</p>
+
+  </section>
+</div>
 <div class="detail" id="permission?/3">
   
   
@@ -251,7 +319,7 @@ tests if a resource was created by the neighbor, and if the given type matches t
     
   </div>
   <section class="docstring">
-    <p>permission(neighbor, resource, type)
+    <p>permission?(neighbor, resource, type)
 tests if a resource was created by the neighbor, and if the given type matches the resource</p>
 
   </section>
@@ -272,6 +340,25 @@ tests if a resource was created by the neighbor, and if the given type matches t
   <section class="docstring">
     <p>permitted_params(params, whitelist)
 Removes any non whitelisted attrs from params</p>
+
+  </section>
+</div>
+<div class="detail" id="resource_owner?/2">
+  
+  
+  <div class="detail-header">
+    <a href="#resource_owner?/2" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <span class="signature">resource_owner?(neighbor, resource)</span>
+    
+    
+    
+  </div>
+  <section class="docstring">
+    <p>resource_owner?(neighbor, resource)
+Returns true if neighbor.id == resource.neighbor_id</p>
 
   </section>
 </div>
