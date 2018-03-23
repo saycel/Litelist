@@ -6,7 +6,7 @@ defmodule Litelist.AuthTest do
   describe "neighbors" do
     alias Litelist.Auth.Neighbor
 
-    @valid_attrs %{password: "some password", username: "some username"}
+    @valid_attrs %{password: "some password", username: "some username", admin: false}
     @update_attrs %{password: "some updated password", username: "some updated username"}
     @invalid_attrs %{password: nil, username: nil}
 
