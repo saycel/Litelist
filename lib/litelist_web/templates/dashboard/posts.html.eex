@@ -1,4 +1,5 @@
 <h2>My Posts</h2>
+<span><%= link "Delete All", to: event_path(@conn, :index), method: :delete, data: [confirm: "This will delete all of your posts and cannot be undone. Are you sure?"], class: "btn btn-danger btn-xs" %></span>
 
 <table class="table">
   <thead>
@@ -13,6 +14,11 @@
     <tr>
       <td><%= post.title %></td>
       <td><%= post.url %></td>
+      <td class="text-right">
+        <span><%= link "Show", to: path_builder(post), class: "btn btn-default btn-xs" %></span>
+        <span><%= link "Edit or Delete", to: path_builder(post) <> "/edit", class: "btn btn-default btn-xs" %></span>
+        <span><%= link "Delete", to: path_builder(post), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" %></span>
+      </td>
     </tr>
 <% end %>
   </tbody>
