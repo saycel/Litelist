@@ -51,5 +51,6 @@
 
 <%= if @current_neighbor && @current_neighbor.id == @event.neighbor_id do %>
   <span><%= link "Edit", to: event_path(@conn, :edit, @event) %></span>
+  <span><%= link "Delete", to: event_path(@conn, :delete, @event), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" %></span>
 <% end %>
 <span><%= link "Back", to: event_path(@conn, :index) %></span>

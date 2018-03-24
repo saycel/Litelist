@@ -3,3 +3,5 @@
 <%= render "form.html", Map.put(assigns, :action, job_path(@conn, :update, @job)) %>
 
 <span><%= link "Back", to: job_path(@conn, :index) %></span>
+
+<span><%= link "Delete", to: job_path(@conn, :delete, @job), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" %></span>
