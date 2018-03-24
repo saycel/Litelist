@@ -11,8 +11,8 @@ defmodule LitelistWeb.DashboardController do
         render(conn, "posts.html", posts: posts)
     end
 
-    def delete(conn, _params) do
-        {total, _posts} = Posts.delete_all_by_neighbor(conn.assigns.current_neighbor)
+    def delete_all(conn, _params) do
+        {_total, _posts} = Posts.delete_all_by_neighbor(conn.assigns.current_neighbor)
         conn
             |> put_flash(:info, "All posts permanently deleted.")
             |> redirect(to: dashboard_path(conn, :index))
