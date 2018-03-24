@@ -7,7 +7,7 @@ defmodule LitelistWeb.DashboardController do
     end
 
     def posts(conn, _params) do
-        posts = Posts.list_posts()
+        posts = Posts.list_posts_by_neighbor(conn.assigns.current_neighbor)
         render(conn, "posts.html", posts: posts)
     end
 end
