@@ -1,6 +1,7 @@
 defmodule LitelistWeb.DashboardController do
     use LitelistWeb, :controller
     alias Litelist.Posts
+    alias LitelistWeb.Utils.SharedUtils
 
     def index(conn, _params) do
         render(conn, "index.html")
@@ -16,5 +17,24 @@ defmodule LitelistWeb.DashboardController do
         conn
             |> put_flash(:info, "All posts permanently deleted.")
             |> redirect(to: dashboard_path(conn, :index))
+    end
+
+    def delete(conn, %{"id" => id}) do
+        job = Posts.get_post!(id)
+        if SharedUtils.permission?(conn.assigns.current_neighbor, job, job.type) do
+          {:ok, _job} = Posts.delete_post(job)
+    
+          conn
+          |> put_flash(:info, "Job deleted successfully.")
+          |> redirect(to: dashboard_path(conn, :posts))
+        else
+          unauthorized_redirect(conn)
+        end
+    end
+
+    defp unauthorized_redirect(conn) do
+        conn
+        |> put_flash(:error, "Unauthorized.")
+        |> redirect(to: dashboard_path(conn, :index))
     end
 end

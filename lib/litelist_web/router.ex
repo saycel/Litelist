@@ -40,7 +40,7 @@ defmodule LitelistWeb.Router do
     get "/dashboard", DashboardController, :index
     get "/dashboard/posts", DashboardController, :posts
     delete "/dashboard/posts", DashboardController, :delete_all
-
+    delete "/dashboard/posts/delete/:id", DashboardController, :delete
   end
 
   scope "/", LitelistWeb do
