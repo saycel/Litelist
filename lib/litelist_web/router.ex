@@ -39,6 +39,7 @@ defmodule LitelistWeb.Router do
     resources "/emergency_info", EmergencyInformationController, only: [:new, :create, :edit, :update, :delete]
     get "/dashboard", DashboardController, :index
     get "/dashboard/posts", DashboardController, :posts
+    delete "/dashboard/posts/delete", DashboardController, :delete
 
   end
 

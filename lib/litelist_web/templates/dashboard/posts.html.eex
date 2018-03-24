@@ -1,5 +1,5 @@
 <h2>My Posts</h2>
-<span><%= link "Delete All", to: event_path(@conn, :index), method: :delete, data: [confirm: "This will delete all of your posts and cannot be undone. Are you sure?"], class: "btn btn-danger btn-xs" %></span>
+<span><%= link "Delete All", to: dashboard_path(@conn, :delete), method: :delete, data: [confirm: "This will delete all of your posts and cannot be undone. Are you sure?"], class: "btn btn-danger btn-xs" %></span>
 
 <table class="table">
   <thead>

@@ -116,6 +116,16 @@ defmodule Litelist.Posts do
   end
 
   @doc """
+  Deletes all Posts created by a given Neighbor.
+
+  ## Examples
+      iex> delete_post_by_neighbor(neighbor)
+  """
+  def delete_all_by_neighbor(neighbor) do
+    Repo.delete_all(from p in Post, where: p.neighbor_id == ^neighbor.id)
+  end
+
+  @doc """
   Returns an `%Ecto.Changeset{}` for tracking post changes.
 
   ## Examples
