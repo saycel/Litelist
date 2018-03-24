@@ -37,6 +37,9 @@ defmodule LitelistWeb.Router do
     resources "/events", EventController, only: [:new, :create, :edit, :update, :delete]
     resources "/businesses", BusinessController, only: [:new, :create, :edit, :update, :delete]
     resources "/emergency_info", EmergencyInformationController, only: [:new, :create, :edit, :update, :delete]
+    get "/dashboard", DashboardController, :index
+    get "/dashboard/posts", DashboardController, :posts
+
   end
 
   scope "/", LitelistWeb do

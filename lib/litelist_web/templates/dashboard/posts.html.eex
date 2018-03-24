@@ -1,0 +1,19 @@
+<h2>My Posts</h2>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Url</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+<%= for post <- @posts do %>
+    <tr>
+      <td><%= post.title %></td>
+      <td><%= post.url %></td>
+    </tr>
+<% end %>
+  </tbody>
+</table>
