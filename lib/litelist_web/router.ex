@@ -41,6 +41,7 @@ defmodule LitelistWeb.Router do
     get "/dashboard/posts", DashboardController, :posts
     delete "/dashboard/posts", DashboardController, :delete_all
     delete "/dashboard/posts/delete/:id", DashboardController, :delete
+    get "/dashboard/posts/export", DashboardController, :export_posts
   end
 
   scope "/", LitelistWeb do
