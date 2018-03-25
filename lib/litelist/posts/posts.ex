@@ -22,7 +22,7 @@ defmodule Litelist.Posts do
   end
 
   @doc """
-  Returns the list of posts.
+  Returns the list of posts based on the type of post (eg. for_sale, job).
 
   ## Examples
 
@@ -32,6 +32,19 @@ defmodule Litelist.Posts do
   """
   def list_posts_by_type(type) do
     Repo.all(from p in Post, where: p.type == ^type)
+  end
+
+  @doc """
+  Returns the list of posts created by a given neighbor.
+
+  ## Examples
+
+      iex> list_posts_by_type(type)
+      [%Post{}, ...]
+
+  """
+  def list_posts_by_neighbor(neighbor) do
+    Repo.all(from p in Post, where: p.neighbor_id == ^neighbor.id)
   end
 
   @doc """
@@ -100,6 +113,16 @@ defmodule Litelist.Posts do
   """
   def delete_post(%Post{} = post) do
     Repo.delete(post)
+  end
+
+  @doc """
+  Deletes all Posts created by a given Neighbor.
+
+  ## Examples
+      iex> delete_post_by_neighbor(neighbor)
+  """
+  def delete_all_by_neighbor(neighbor) do
+    Repo.delete_all(from p in Post, where: p.neighbor_id == ^neighbor.id)
   end
 
   @doc """

@@ -1,0 +1,3 @@
+<h2>Dashboard</h2>
+
+<span><%= link "My Posts", to: dashboard_path(@conn, :posts), class: "btn btn-default btn-xs" %></span>

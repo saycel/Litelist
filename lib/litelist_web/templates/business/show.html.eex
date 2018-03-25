@@ -36,6 +36,7 @@
 
 <%= if @current_neighbor && @current_neighbor.id == @business.neighbor_id do %>
   <span><%= link "Edit", to: business_path(@conn, :edit, @business) %></span>
+  <span><%= link "Delete", to: business_path(@conn, :delete, @business), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" %></span>
 <% end %>
 
 <span><%= link "Back", to: business_path(@conn, :index) %></span>

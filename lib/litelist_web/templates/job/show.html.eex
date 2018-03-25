@@ -61,5 +61,6 @@
 
 <%= if @current_neighbor && @current_neighbor.id == @job.neighbor_id do %>
   <span><%= link "Edit", to: job_path(@conn, :edit, @job) %></span>
+  <span><%= link "Delete", to: job_path(@conn, :delete, @job), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" %></span>
 <% end %>
 <span><%= link "Back", to: job_path(@conn, :index) %></span>

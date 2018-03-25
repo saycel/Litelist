@@ -41,5 +41,7 @@
 
 <%= if @current_neighbor && @current_neighbor.id == @emergency_information.neighbor_id do %>
   <span><%= link "Edit", to: emergency_information_path(@conn, :edit, @emergency_information) %></span>
+  <span><%= link "Delete", to: emergency_information_path(@conn, :delete, @emergency_information), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" %></span>
 <% end %>
 <span><%= link "Back", to: emergency_information_path(@conn, :index) %></span>
+

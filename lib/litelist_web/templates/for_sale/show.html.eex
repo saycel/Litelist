@@ -41,6 +41,7 @@
 
 <%= if @current_neighbor && @current_neighbor.id == @for_sale.neighbor_id do %>
   <span><%= link "Edit", to: for_sale_path(@conn, :edit, @for_sale) %></span>
+  <span><%= link "Delete", to: for_sale_path(@conn, :delete, @for_sale), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" %></span>
 <% end %>
 
 <span><%= link "Back", to: for_sale_path(@conn, :index) %></span>
