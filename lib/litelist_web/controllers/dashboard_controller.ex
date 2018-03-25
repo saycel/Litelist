@@ -45,7 +45,7 @@ defmodule LitelistWeb.DashboardController do
     defp unauthorized_redirect(conn) do
         conn
         |> put_flash(:error, "Unauthorized.")
-        |> redirect(to: dashboard_path(conn, :index))
+        |> redirect(to: dashboard_path(conn, :posts))
     end
 
     defp build_csv(neighbor) do 
