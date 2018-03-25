@@ -42,12 +42,6 @@ defmodule LitelistWeb.DashboardController do
         |> send_resp(200, csv)
     end
 
-    defp thing(p1) do
-        IO.inspect p1
-        IO.inspect "*****"
-        p1
-    end
-
     defp unauthorized_redirect(conn) do
         conn
         |> put_flash(:error, "Unauthorized.")

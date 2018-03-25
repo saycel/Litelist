@@ -72,6 +72,17 @@ defmodule Litelist.PostsTest do
       assert_raise Ecto.NoResultsError, fn -> Posts.get_post!(post.id) end
     end
 
+    test "delete_all_by_neighbor/1 deletes all posts for a neighbor" do
+      neighbor = Factory.insert(:neighbor)
+      Factory.insert(:for_sale, %{neighbor_id: neighbor.id})
+      Factory.insert(:for_sale, %{neighbor_id: neighbor.id})
+      Factory.insert(:for_sale)
+
+      assert length(Repo.all(Post)) == 3
+      Posts.delete_all_by_neighbor(neighbor)
+      assert length(Repo.all(Post)) == 1
+    end
+
     test "change_post/1 returns a post changeset" do
       post = Factory.insert(:for_sale, @valid_attrs)
       assert %Ecto.Changeset{} = Posts.change_post(post)
@@ -95,6 +106,21 @@ defmodule Litelist.PostsTest do
 
       assert length(posts_with_same_type) == 2
       assert length(posts_with_different_type) == 1
+    end
+
+    test "list_posts_by_neighbor/1 will only return posts created by a given neighbor" do
+      neighbor = Factory.insert(:neighbor)
+      different_neighbor = Factory.insert(:neighbor)
+
+      Factory.insert(:for_sale, %{neighbor_id: neighbor.id})
+      Factory.insert(:for_sale, %{neighbor_id: neighbor.id})
+      Factory.insert(:for_sale, %{neighbor_id: different_neighbor.id})
+
+      posts_with_same_neighbor = Posts.list_posts_by_neighbor(neighbor)
+      posts_with_different_neighbor = Posts.list_posts_by_neighbor(different_neighbor)
+
+      assert length(posts_with_same_neighbor) == 2
+      assert length(posts_with_different_neighbor) == 1
     end
   end
 end
