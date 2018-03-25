@@ -40,7 +40,7 @@ defmodule Litelist.Factory do
       title: title,
       slug: slug,
       contact_info: Faker.Internet.email,
-      description: Faker.Lorem.sentences(3..5),
+      description: Faker.Lorem.sentences(1..2),
       price: Faker.Number.decimal(2, 2),
       neighbor_id: insert(:neighbor).id,
       type: "for_sale",
@@ -57,7 +57,7 @@ defmodule Litelist.Factory do
     insert(:job)
   """
   def job_factory do
-    title = Faker.Lorem.words(3)
+    title = FakerElixir.Commerce.product
     slug = SharedUtils.slugify(title)
     %Post{
       title: Faker.Lorem.words(3),
@@ -68,7 +68,7 @@ defmodule Litelist.Factory do
       contact_info: Faker.Internet.email,
       start_date: FakerElixir.Date.forward(1..2),
       end_date: FakerElixir.Date.forward(11..12),
-      description: Faker.Lorem.sentences(3..5),
+      description: Faker.Lorem.sentences(1..2),
       salary: "$10/hr",
       neighbor_id: insert(:neighbor).id,
       type: "job",
@@ -85,7 +85,7 @@ defmodule Litelist.Factory do
     insert(:event)
   """
   def event_factory do
-    title = Faker.Lorem.words(3)
+    title = FakerElixir.Commerce.product
     slug = SharedUtils.slugify(title)
     %Post{
       title: Faker.Lorem.words(3),
@@ -94,7 +94,7 @@ defmodule Litelist.Factory do
       contact_info: Faker.Internet.email,
       start_time: FakerElixir.Date.forward(1..2),
       end_time: FakerElixir.Date.forward(11..12),
-      description: Faker.Lorem.sentences(3..5),
+      description: Faker.Lorem.sentences(1..2),
       neighbor_id: insert(:neighbor).id,
       type: "event",
       url: FakerElixir.Lorem.characters(5..10)
@@ -110,14 +110,14 @@ defmodule Litelist.Factory do
     insert(:business)
   """
   def business_factory do
-    title = Faker.Lorem.words(3)
+    title = FakerElixir.Commerce.product
     slug = SharedUtils.slugify(title)
     %Post{
       title: Faker.Lorem.words(3),
       slug: slug,
       location: FakerElixir.Address.street_address,
       contact_info: Faker.Internet.email,
-      description: Faker.Lorem.sentences(3..5),
+      description: Faker.Lorem.sentences(1..2),
       neighbor_id: insert(:neighbor).id,
       type: "business",
       url: FakerElixir.Lorem.characters(5..10)
@@ -133,13 +133,13 @@ defmodule Litelist.Factory do
     insert(:business)
   """
   def emergency_information_factory do
-    title = Faker.Lorem.words(3)
+    title = FakerElixir.Commerce.product
     slug = SharedUtils.slugify(title)
     %Post{
       title: Faker.Lorem.words(3),
       slug: slug,
       contact_info: Faker.Internet.email,
-      description: Faker.Lorem.sentences(3..5),
+      description: Faker.Lorem.sentences(1..2),
       neighbor_id: insert(:neighbor).id,
       type: "emergency_information",
       url: FakerElixir.Lorem.characters(5..10)
