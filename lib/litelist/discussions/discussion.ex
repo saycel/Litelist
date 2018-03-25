@@ -7,15 +7,17 @@ defmodule Litelist.Discussions.Discussion do
   schema "discussions" do
     field :description, :string
     field :title, :string
-    field :neighbor_id, :id
 
     timestamps()
+
+    belongs_to :neighbor, Litelist.Auth.Neighbor
   end
 
   @doc false
   def changeset(%Discussion{} = discussion, attrs) do
     discussion
     |> cast(attrs, [:title, :description])
+    |> foreign_key_constraint(:discussions, name: :discussions_neighbor_id_fkey)
     |> validate_required([:title, :description])
   end
 end
