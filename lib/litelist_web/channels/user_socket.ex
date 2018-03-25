@@ -3,6 +3,7 @@ defmodule LitelistWeb.UserSocket do
 
   ## Channels
   # channel "room:*", LitelistWeb.RoomChannel
+  channel "discussions:*", LitelistWeb.DiscussionsChannel
 
   ## Transports
   transport :websocket, Phoenix.Transports.WebSocket

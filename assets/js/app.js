@@ -20,3 +20,4 @@ import "phoenix_html"
 
 // import socket from "./socket"
 import "masonry-layout"
+import socket from "./socket"
