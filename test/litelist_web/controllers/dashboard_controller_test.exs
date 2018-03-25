@@ -3,6 +3,7 @@ defmodule LitelistWeb.DashboardControllerTest do
   
     alias Litelist.Factory
     alias Litelist.Auth.Guardian
+    alias Litelist.Posts
   
     setup do
       neighbor = Factory.insert(:neighbor)
@@ -13,7 +14,7 @@ defmodule LitelistWeb.DashboardControllerTest do
     end
   
     describe "index" do
-      test "lists all businesss", %{conn: conn, neighbor: neighbor} do
+      test "shows the dashboard", %{conn: conn, neighbor: neighbor} do
         conn = conn
           |> login_neighbor(neighbor)
           |> get(dashboard_path(conn, :index))
@@ -23,7 +24,7 @@ defmodule LitelistWeb.DashboardControllerTest do
     end
 
     describe "posts" do
-        test "lists all businesss", %{conn: conn, neighbor: neighbor} do
+        test "lists all posts", %{conn: conn, neighbor: neighbor} do
           conn = conn
             |> login_neighbor(neighbor)
             |> get(dashboard_path(conn, :posts))
@@ -32,13 +33,29 @@ defmodule LitelistWeb.DashboardControllerTest do
         end
       end
   
+
+    describe "delete_all" do
+      test "deletes all posts created by the neighbor", %{conn: conn, neighbor: neighbor} do
+        Factory.insert(:business, %{neighbor_id: neighbor.id})
+        Factory.insert(:business, %{neighbor_id: neighbor.id})
+        Factory.insert(:business, %{neighbor_id: neighbor.id})
+        assert length(Posts.list_posts_by_neighbor(neighbor)) == 4 #including the post created in setup
+        conn = conn
+          |> login_neighbor(neighbor)
+          |> delete(dashboard_path(conn, :delete_all))
+  
+        assert redirected_to(conn) == dashboard_path(conn, :posts)
+
+        assert length(Posts.list_posts_by_neighbor(neighbor)) == 0
+      end
+    end
     describe "delete post" do
   
       test "deletes chosen post", %{conn: conn, business: business, neighbor: neighbor} do
         conn = conn
           |> login_neighbor(neighbor)
           |> delete(dashboard_path(conn, :delete, business))
-  
+
         assert redirected_to(conn) == dashboard_path(conn, :posts)
         assert_error_sent 404, fn ->
           get conn, business_path(conn, :show, business)

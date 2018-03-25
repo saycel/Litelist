@@ -14,10 +14,11 @@ defmodule LitelistWeb.DashboardController do
     end
 
     def delete_all(conn, _params) do
+        IO.inspect("*****")
         {_total, _posts} = Posts.delete_all_by_neighbor(conn.assigns.current_neighbor)
         conn
             |> put_flash(:info, "All posts permanently deleted.")
-            |> redirect(to: dashboard_path(conn, :index))
+            |> redirect(to: dashboard_path(conn, :posts))
     end
 
     def delete(conn, %{"id" => id}) do
