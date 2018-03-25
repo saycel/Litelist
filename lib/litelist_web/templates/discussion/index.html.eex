@@ -1,0 +1,28 @@
+<h2>Listing Discussions</h2>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Description</th>
+
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+<%= for discussion <- @discussions do %>
+    <tr>
+      <td><%= discussion.title %></td>
+      <td><%= discussion.description %></td>
+
+      <td class="text-right">
+        <span><%= link "Show", to: discussion_path(@conn, :show, discussion), class: "btn btn-default btn-xs" %></span>
+        <span><%= link "Edit", to: discussion_path(@conn, :edit, discussion), class: "btn btn-default btn-xs" %></span>
+        <span><%= link "Delete", to: discussion_path(@conn, :delete, discussion), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" %></span>
+      </td>
+    </tr>
+<% end %>
+  </tbody>
+</table>
+
+<span><%= link "New Discussion", to: discussion_path(@conn, :new) %></span>
