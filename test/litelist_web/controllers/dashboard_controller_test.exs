@@ -37,16 +37,14 @@ defmodule LitelistWeb.DashboardControllerTest do
     describe "delete_all" do
       test "deletes all posts created by the neighbor", %{conn: conn, neighbor: neighbor} do
         Factory.insert(:business, %{neighbor_id: neighbor.id})
-        Factory.insert(:business, %{neighbor_id: neighbor.id})
-        Factory.insert(:business, %{neighbor_id: neighbor.id})
-        assert length(Posts.list_posts_by_neighbor(neighbor)) == 4 #including the post created in setup
+        assert Enum.empty?(Posts.list_posts_by_neighbor(neighbor)) == false
         conn = conn
           |> login_neighbor(neighbor)
           |> delete(dashboard_path(conn, :delete_all))
   
         assert redirected_to(conn) == dashboard_path(conn, :posts)
 
-        assert length(Posts.list_posts_by_neighbor(neighbor)) == 0
+        assert Enum.empty?(Posts.list_posts_by_neighbor(neighbor)) == true
       end
     end
     describe "delete post" do

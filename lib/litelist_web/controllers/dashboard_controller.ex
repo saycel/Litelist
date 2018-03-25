@@ -14,7 +14,6 @@ defmodule LitelistWeb.DashboardController do
     end
 
     def delete_all(conn, _params) do
-        IO.inspect("*****")
         {_total, _posts} = Posts.delete_all_by_neighbor(conn.assigns.current_neighbor)
         conn
             |> put_flash(:info, "All posts permanently deleted.")
@@ -49,7 +48,9 @@ defmodule LitelistWeb.DashboardController do
         |> redirect(to: dashboard_path(conn, :posts))
     end
 
-    defp build_csv(neighbor) do 
+    defp build_csv(neighbor) do
+        # FIXME We will need a better create csv function in the future
+
         columns_array = ~w(id type url title description company_name contact_info start_date end_date start_time end_time location organization_name position_name price salary)
         columns = "id,type,url,title,description,company_name,contact_info,start_date,end_date,start_time,end_time,location,organization_name,position_name,price,salary\n"
        
