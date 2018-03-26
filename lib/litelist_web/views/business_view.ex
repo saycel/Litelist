@@ -2,6 +2,7 @@ defmodule LitelistWeb.BusinessView do
   use LitelistWeb, :view
   import LitelistWeb.FormHelpers
   
+
   def data(resource) do
     if resource == 0 do
       %{action: "/businesses", fields: build_fields(),resource: resource}
@@ -11,6 +12,7 @@ defmodule LitelistWeb.BusinessView do
   end
 
   def build_fields() do
+
   	[
   		%{select: false, title: "TITLE",type: "text", po_body: "Choose a title for your post", id: "post_title"},
   		%{select: false, title: "DESCRIPTION",type: "text", po_body: "Describe the item you are trying to sell. Be detailed.", id: "post_description"},

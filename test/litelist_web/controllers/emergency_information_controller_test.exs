@@ -31,7 +31,7 @@ defmodule LitelistWeb.EmergencyInformationControllerTest do
         |> login_neighbor(neighbor)
         |> get(emergency_information_path(conn, :new))
       
-      assert html_response(conn, 200) =~ "New Emergency information"
+      assert html_response(conn, 200) =~ "Emergency Information Posting"
     end
 
     test "unautorized 401 redirect if not logged in", %{conn: conn} do
@@ -63,7 +63,7 @@ defmodule LitelistWeb.EmergencyInformationControllerTest do
       conn = conn
         |> login_neighbor(neighbor)
         |> post(emergency_information_path(conn, :create), post: @invalid_attrs)
-      assert html_response(conn, 200) =~ "New Emergency information"
+      assert html_response(conn, 200) =~ "Emergency Information Posting"
     end
 
     test "unautorized 401 redirect if not logged in", %{conn: conn} do
@@ -78,7 +78,7 @@ defmodule LitelistWeb.EmergencyInformationControllerTest do
       conn = conn
         |> login_neighbor(neighbor)
         |> post(emergency_information_path(conn, :create), post: @create_attrs)
-      assert html_response(conn, 200) =~ "New Emergency information"
+      assert html_response(conn, 200) =~ "Emergency Information Posting"
     end
   end
 
