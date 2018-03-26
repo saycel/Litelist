@@ -2,8 +2,12 @@ defmodule LitelistWeb.JobView do
   use LitelistWeb, :view
   import LitelistWeb.FormHelpers
   
-  def data([]) do
-  	%{action: "/jobs", fields: build_fields()}
+  def data(resource) do
+    if resource == 0 do
+      %{action: "/jobs", fields: build_fields(),resource: resource}
+    else
+      %{action: "/jobs/#{resource.id}", fields: build_fields(),resource: resource}
+    end
   end
 
   def build_fields() do

@@ -2,11 +2,15 @@ defmodule LitelistWeb.ForSaleView do
   use LitelistWeb, :view
   import LitelistWeb.FormHelpers
   
-  def data([]) do
-  	%{action: "/sales", fields: build_fields([])}
+  def data(resource) do
+    if resource == 0 do
+      %{action: "/sales", fields: build_fields(),resource: resource}
+    else
+      %{action: "/sales/#{resource.id}", fields: build_fields(),resource: resource}
+    end
   end
 
-  def build_fields([]) do
+  def build_fields() do
   	[
   		%{select: false, title: "TITLE",type: "text", po_body: "Choose a title for your post", id: "post_title"},
   		%{select: false, title: "DESCRIPTION",type: "text", po_body: "Describe the item you are trying to sell. Be detailed.", id: "post_description"},
