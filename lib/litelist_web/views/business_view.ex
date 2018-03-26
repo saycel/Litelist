@@ -4,7 +4,7 @@ defmodule LitelistWeb.BusinessView do
   
 
   def data(resource) do
-    if resource == 0 do
+    if !resource do
       %{action: "/businesses", fields: build_fields(),resource: resource}
     else
       %{action: "/businesses/#{resource.id}", fields: build_fields(),resource: resource}

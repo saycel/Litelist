@@ -3,7 +3,7 @@ defmodule LitelistWeb.JobView do
   import LitelistWeb.FormHelpers
   
   def data(resource) do
-    if resource == 0 do
+    if !resource do
       %{action: "/jobs", fields: build_fields(),resource: resource}
     else
       %{action: "/jobs/#{resource.id}", fields: build_fields(),resource: resource}

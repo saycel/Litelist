@@ -87,14 +87,14 @@ defmodule LitelistWeb.BusinessControllerTest do
       conn = conn
         |> login_neighbor(neighbor)
         |> get(business_path(conn, :edit, business))
-      assert html_response(conn, 200) =~ "Edit Business"
+      assert html_response(conn, 200) =~ "TITLE"
     end
 
     test "renders form for editing chosen business as an admin", %{conn: conn, business: business, admin: admin} do
       conn = conn
         |> login_neighbor(admin)
         |> get(business_path(conn, :edit, business))
-      assert html_response(conn, 200) =~ "Edit Business"
+      assert html_response(conn, 200) =~ "TITLE"
     end
 
     test "redirects to index if business was not created by the neighbor", %{conn: conn, neighbor: neighbor, not_my_business: not_my_business} do
@@ -149,7 +149,7 @@ defmodule LitelistWeb.BusinessControllerTest do
         |> login_neighbor(neighbor)
         |> put(business_path(conn, :update, business), post: @invalid_attrs)
 
-      assert html_response(conn, 200) =~ "Edit Business"
+      assert html_response(conn, 200) =~ "TITLE"
     end
 
     test "redirects to index if business was not created by the neighbor", %{conn: conn, neighbor: neighbor, not_my_business: not_my_business} do

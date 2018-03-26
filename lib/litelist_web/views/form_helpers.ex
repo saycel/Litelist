@@ -1,7 +1,7 @@
 defmodule LitelistWeb.FormHelpers do
   alias LitelistWeb.Form
 
-  def get_form_data(type, resource \\ 0) do
+  def get_form_data(type, resource \\ nil) do
   	
 	cond do
 	   	type == "ForSale" ->

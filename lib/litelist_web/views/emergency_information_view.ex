@@ -3,7 +3,7 @@ defmodule LitelistWeb.EmergencyInformationView do
   import LitelistWeb.FormHelpers
   
   def data(resource) do
-  	if resource == 0 do
+  	if !resource do
       %{action: "/emergency_info", fields: build_fields(),resource: resource}
     else
       %{action: "/emergency_info/#{resource.id}", fields: build_fields(),resource: resource}

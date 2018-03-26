@@ -87,14 +87,14 @@ defmodule LitelistWeb.EventControllerTest do
       conn = conn
         |> login_neighbor(neighbor)
         |> get(event_path(conn, :edit, event))
-      assert html_response(conn, 200) =~ "Edit Event"
+      assert html_response(conn, 200) =~ "TITLE"
     end
 
     test "renders form for editing chosen event as an admin", %{conn: conn, event: event, admin: admin} do
       conn = conn
         |> login_neighbor(admin)
         |> get(event_path(conn, :edit, event))
-      assert html_response(conn, 200) =~ "Edit Event"
+      assert html_response(conn, 200) =~ "TITLE"
     end
 
     test "redirects to index if event was not created by the neighbor", %{conn: conn, neighbor: neighbor, not_my_event: not_my_event} do
@@ -149,7 +149,7 @@ defmodule LitelistWeb.EventControllerTest do
         |> login_neighbor(neighbor)
         |> put(event_path(conn, :update, event), post: @invalid_attrs)
 
-      assert html_response(conn, 200) =~ "Edit Event"
+      assert html_response(conn, 200) =~ "TITLE"
     end
 
     test "redirects to index if event was not created by the neighbor", %{conn: conn, neighbor: neighbor, not_my_event: not_my_event} do

@@ -4,7 +4,7 @@ defmodule LitelistWeb.ForSaleView do
   
 
   def data(resource) do
-    if resource == 0 do
+    if !resource do
       %{action: "/sales", fields: build_fields(),resource: resource}
     else
       %{action: "/sales/#{resource.id}", fields: build_fields(),resource: resource}

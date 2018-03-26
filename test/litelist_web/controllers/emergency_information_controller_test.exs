@@ -87,14 +87,14 @@ defmodule LitelistWeb.EmergencyInformationControllerTest do
       conn = conn
         |> login_neighbor(neighbor)
         |> get(emergency_information_path(conn, :edit, emergency_information))
-      assert html_response(conn, 200) =~ "Edit Emergency information"
+      assert html_response(conn, 200) =~ "Emergency Information Rules"
     end
 
     test "renders form for editing chosen emergency_information as an admin", %{conn: conn, emergency_information: emergency_information, admin: admin} do
       conn = conn
         |> login_neighbor(admin)
         |> get(emergency_information_path(conn, :edit, emergency_information))
-      assert html_response(conn, 200) =~ "Edit Emergency information"
+      assert html_response(conn, 200) =~ "Emergency Information Rules"
     end
 
     test "redirects to index if emergency_information was not created by the neighbor", %{conn: conn, neighbor: neighbor, not_my_emergency_information: not_my_emergency_information} do
@@ -149,7 +149,7 @@ defmodule LitelistWeb.EmergencyInformationControllerTest do
         |> login_neighbor(neighbor)
         |> put(emergency_information_path(conn, :update, emergency_information), post: @invalid_attrs)
 
-      assert html_response(conn, 200) =~ "Edit Emergency information"
+      assert html_response(conn, 200) =~ "TITLE"
     end
 
     test "redirects to index if emergency_information was not created by the neighbor", %{conn: conn, neighbor: neighbor, not_my_emergency_information: not_my_emergency_information} do

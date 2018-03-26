@@ -1,7 +1,7 @@
 defmodule LitelistWeb.SharedView do
   use LitelistWeb, :view
   def getVal(resource,title) do
- 	if resource != 0 do
+ 	if resource do
   	  cond do
 	   	title == "TITLE" ->
 	    	resource.title
