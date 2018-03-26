@@ -5,6 +5,7 @@ defmodule Litelist.Repo.Migrations.CreateDiscussions do
     create table(:discussions) do
       add :title, :string
       add :description, :text
+      add :slug, :string
       add :neighbor_id, references(:neighbors, on_delete: :nothing)
 
       timestamps()

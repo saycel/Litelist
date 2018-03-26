@@ -42,6 +42,16 @@ defmodule LitelistWeb.Utils.SharedUtils do
     end
 
     @doc """
+    add_generated_params()
+    adds params like current_neighbor for create, without post_type
+    """
+    def add_generated_params(params, conn, :create) do
+        params
+            |> add_neighbor_id(conn)
+            |> add_slug()
+    end
+    
+    @doc """
     permission?(neighbor, resource, type)
     tests if a resource was created by the neighbor, and if the given type matches the resource
     """

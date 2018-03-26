@@ -6,6 +6,7 @@ defmodule Litelist.Factory do
 
   alias Litelist.Auth.Neighbor
   alias Litelist.Posts.Post
+  alias Litelist.Discussions.Discussion
   alias LitelistWeb.Utils.SharedUtils
   alias FakerElixir, as: Faker
 
@@ -60,7 +61,7 @@ defmodule Litelist.Factory do
     title = FakerElixir.Commerce.product
     slug = SharedUtils.slugify(title)
     %Post{
-      title: Faker.Lorem.words(3),
+      title: title,
       slug: slug,
       location: FakerElixir.Address.street_address,
       position_name: FakerElixir.Name.title,
@@ -88,7 +89,7 @@ defmodule Litelist.Factory do
     title = FakerElixir.Commerce.product
     slug = SharedUtils.slugify(title)
     %Post{
-      title: Faker.Lorem.words(3),
+      title: title,
       slug: slug,
       location: FakerElixir.Address.street_address,
       contact_info: Faker.Internet.email,
@@ -113,7 +114,7 @@ defmodule Litelist.Factory do
     title = FakerElixir.Commerce.product
     slug = SharedUtils.slugify(title)
     %Post{
-      title: Faker.Lorem.words(3),
+      title: title,
       slug: slug,
       location: FakerElixir.Address.street_address,
       contact_info: Faker.Internet.email,
@@ -136,13 +137,29 @@ defmodule Litelist.Factory do
     title = FakerElixir.Commerce.product
     slug = SharedUtils.slugify(title)
     %Post{
-      title: Faker.Lorem.words(3),
+      title: title,
       slug: slug,
       contact_info: Faker.Internet.email,
       description: Faker.Lorem.sentences(1..2),
       neighbor_id: insert(:neighbor).id,
       type: "emergency_information",
       url: FakerElixir.Lorem.characters(5..10)
+    }
+  end
+
+  @doc """
+  Discussion factory
+  ## How to
+    build(:discussion)
+    build(:discussion, %{title: 'block party'})
+    insert(:discussion)
+  """
+  def discussion_factory do
+    title = FakerElixir.Commerce.product
+    slug = SharedUtils.slugify(title)
+    %Discussion{
+      title: title,
+      description: Faker.Lorem.sentences(1..2),
     }
   end
 end
