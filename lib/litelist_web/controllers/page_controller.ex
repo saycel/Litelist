@@ -5,7 +5,6 @@ defmodule LitelistWeb.PageController do
   alias Litelist.Auth.Neighbor
   alias Litelist.Auth.Guardian
   alias Litelist.Posts
-  alias Litelist.Posts.Post
 
   def index(conn, _params) do
     changeset = Auth.change_neighbor(%Neighbor{})
@@ -18,7 +17,7 @@ defmodule LitelistWeb.PageController do
     posts = Posts.list_posts
     conn
       |> put_flash(:info, message)
-      |> render("index.html",posts: posts, changeset: changeset, action: page_path(conn, :login), maybe_neighbor: maybe_neighbor)
+      |> render("index.html", posts: posts, changeset: changeset, action: page_path(conn, :login), maybe_neighbor: maybe_neighbor)
   end
   def information(conn, _params) do
     maybe_neighbor = Guardian.Plug.current_resource(conn)

@@ -49,6 +49,7 @@ defmodule LitelistWeb.DashboardController do
     end
 
     defp build_csv(neighbor) do
+        # credo:disable-for-lines:1
         # FIXME We will need a better create csv function in the future
 
         columns_array = ~w(id type url title description company_name contact_info start_date end_date start_time end_time location organization_name position_name price salary)

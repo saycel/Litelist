@@ -1,33 +1,25 @@
 defmodule LitelistWeb.SharedView do
   use LitelistWeb, :view
-  def getVal(resource,title) do
- 	if resource do
-  	  cond do
-	   	title == "TITLE" ->
-	    	resource.title
-	    title == "DESCRIPTION" ->
-			resource.description
-	    title == "CONTACT_INFO" ->
-			resource.contact_info
-	    title == "ORGANIZATION_NAME" ->
-			resource.organization_name
-	    title == "URL" ->
-			resource.url
-		title == "COMPANY_NAME" ->
-			resource.company_name
-		title == "LOCATION" ->
-			resource.location
-		title == "PRICE" ->
-			resource.price
-		title == "SALARY" ->
-			resource.salary
-		title == "POSITION_NAME" ->
-			resource.position_name
-	  end
-	 else
-	 	""
-	 end
 
+  @attributes %{
+    "TITLE" => :title,
+    "DESCRIPTION" => :description,
+    "CONTACT_INFO" => :contact_info,
+    "ORGANIZATION_NAME" => :organization_name,
+    "URL" => :url,
+    "COMPANY_NAME" => :company_name,
+    "LOCATION" => :location,
+    "PRICE" => :price,
+    "SALARY" => :salary,
+    "POSITION_NAME" => :position_name
+  }
+
+  def getVal(resource, attr) do
+    if resource do
+      mapped_resource = Map.from_struct(resource)
+      mapped_resource[@attributes[attr]]
+    else
+      ""
+    end
   end
-
 end
