@@ -8,7 +8,7 @@
     <title>LitelistWeb.EventView – litelist v0.0.1</title>
     <link rel="stylesheet" href="dist/app-81d381dea4.css" />
     
-    <script src="dist/sidebar_items-a918bfc19f.js"></script>
+    <script src="dist/sidebar_items-ab7082e319.js"></script>
     
     
     
@@ -121,6 +121,24 @@
 </div>
 <div class="summary-row">
   <div class="summary-signature">
+    <a href="#build_fields/0">build_fields()</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>This will return the proper form fields for the Business post</p>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#data/1">data(resource)</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>This will return a struct with a route for where a form should submit to, the fields necessary for a form, and what the pop-over text should be for each field</p>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
     <a href="#render/2">render(template, assigns \\ %{})</a>
   </div>
   
@@ -210,6 +228,68 @@ to render a particular template</p>
   </div>
   <section class="docstring">
     <p>Returns the template root alongside all templates.</p>
+
+  </section>
+</div>
+<div class="detail" id="build_fields/0">
+  
+  
+  <div class="detail-header">
+    <a href="#build_fields/0" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <span class="signature">build_fields()</span>
+    
+    
+    
+  </div>
+  <section class="docstring">
+    <p>This will return the proper form fields for the Business post</p>
+<h2 id="build_fields/0-examples" class="section-heading">
+  <a href="#build_fields/0-examples" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Examples
+</h2>
+
+<pre><code class="iex elixir">iex&gt; LitelistWeb.build_fields()
+[%{...}]
+
+returns an array of structs that define the form field and the popover text. </code></pre>
+
+  </section>
+</div>
+<div class="detail" id="data/1">
+  
+  
+  <div class="detail-header">
+    <a href="#data/1" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <span class="signature">data(resource)</span>
+    
+    
+    
+  </div>
+  <section class="docstring">
+    <p>This will return a struct with a route for where a form should submit to, the fields necessary for a form, and what the pop-over text should be for each field.  </p>
+<h2 id="data/1-parameters" class="section-heading">
+  <a href="#data/1-parameters" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Parameters
+</h2>
+
+<ul>
+<li>resource: Pass through the post you are trying to build a form for.
+</li>
+</ul>
+<h2 id="data/1-examples" class="section-heading">
+  <a href="#data/1-examples" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Examples
+</h2>
+
+<pre><code class="iex elixir">iex&gt; LitelistWeb.EventView.data(@current_event_post)
+%{action: ..., fields: build_fields(), resource: resource}</code></pre>
+<p>  Returns the struct the form partial requires</p>
 
   </section>
 </div>

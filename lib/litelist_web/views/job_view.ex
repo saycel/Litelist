@@ -1,7 +1,21 @@
 defmodule LitelistWeb.JobView do
   use LitelistWeb, :view
   import LitelistWeb.FormHelpers
+  @doc """
+  This will return a struct with a route for where a form should submit to, the fields necessary for a form, and what the pop-over text should be for each field.  
+
+  ## Parameters
+
+    - resource: Pass through the post you are trying to build a form for.
+
+  ## Examples
+
+      iex> LitelistWeb.jobs.data(@current_jobs_post)
+      %{action: ..., fields: build_fields(), resource: resource}
   
+    Returns the struct the form partial requires
+  
+  """
   def data(resource) do
     if resource do
       %{action: "/jobs/#{resource.id}", fields: build_fields(), resource: resource}
@@ -9,7 +23,17 @@ defmodule LitelistWeb.JobView do
       %{action: "/jobs", fields: build_fields(), resource: resource}
     end
   end
+  @doc """
+  This will return the proper form fields for the Business post
 
+
+  ## Examples
+
+      iex> LitelistWeb.build_fields()
+      [%{...}]
+
+      returns an array of structs that define the form field and the popover text. 
+  """
   def build_fields() do
   	[
   		%{select: false, title: "TITLE", type: "text", po_body: "Choose a title for your job posting", id: "post_title"},
