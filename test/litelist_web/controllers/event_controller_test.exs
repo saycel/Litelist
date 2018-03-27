@@ -31,7 +31,7 @@ defmodule LitelistWeb.EventControllerTest do
         |> login_neighbor(neighbor)
         |> get(event_path(conn, :new))
       
-      assert html_response(conn, 200) =~ "New Event"
+      assert html_response(conn, 200) =~ "EVENT POST"
     end
 
     test "unautorized 401 redirect if not logged in", %{conn: conn} do
@@ -63,7 +63,7 @@ defmodule LitelistWeb.EventControllerTest do
       conn = conn
         |> login_neighbor(neighbor)
         |> post(event_path(conn, :create), post: @invalid_attrs)
-      assert html_response(conn, 200) =~ "New Event"
+      assert html_response(conn, 200) =~ "EVENT POST"
     end
 
     test "unautorized 401 redirect if not logged in", %{conn: conn} do
@@ -78,7 +78,7 @@ defmodule LitelistWeb.EventControllerTest do
       conn = conn
         |> login_neighbor(neighbor)
         |> post(event_path(conn, :create), post: @create_attrs)
-      assert html_response(conn, 200) =~ "New Event"
+      assert html_response(conn, 200) =~ "EVENT POST"
     end
   end
 
@@ -87,14 +87,14 @@ defmodule LitelistWeb.EventControllerTest do
       conn = conn
         |> login_neighbor(neighbor)
         |> get(event_path(conn, :edit, event))
-      assert html_response(conn, 200) =~ "Edit Event"
+      assert html_response(conn, 200) =~ "TITLE"
     end
 
     test "renders form for editing chosen event as an admin", %{conn: conn, event: event, admin: admin} do
       conn = conn
         |> login_neighbor(admin)
         |> get(event_path(conn, :edit, event))
-      assert html_response(conn, 200) =~ "Edit Event"
+      assert html_response(conn, 200) =~ "TITLE"
     end
 
     test "redirects to index if event was not created by the neighbor", %{conn: conn, neighbor: neighbor, not_my_event: not_my_event} do
@@ -149,7 +149,7 @@ defmodule LitelistWeb.EventControllerTest do
         |> login_neighbor(neighbor)
         |> put(event_path(conn, :update, event), post: @invalid_attrs)
 
-      assert html_response(conn, 200) =~ "Edit Event"
+      assert html_response(conn, 200) =~ "TITLE"
     end
 
     test "redirects to index if event was not created by the neighbor", %{conn: conn, neighbor: neighbor, not_my_event: not_my_event} do

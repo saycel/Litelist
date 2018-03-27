@@ -1,1 +1,21 @@
 /* This file is for your main application css. */
+.full-width{
+	width:100%;
+}
+.blue{
+	background:blue;
+}
+.cc{
+	max-width: 1000px;
+    margin: auto;
+}
+.col-cent{
+	width: 85%;
+    margin: auto;
+}
+.mt-60{
+	margin-top:60px;
+}
+.white{
+	color:white;
+}

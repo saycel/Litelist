@@ -31,7 +31,7 @@ defmodule LitelistWeb.BusinessControllerTest do
         |> login_neighbor(neighbor)
         |> get(business_path(conn, :new))
       
-      assert html_response(conn, 200) =~ "New Business"
+      assert html_response(conn, 200) =~ "Local Business Posting"
     end
 
     test "unautorized 401 redirect if not logged in", %{conn: conn} do
@@ -63,7 +63,7 @@ defmodule LitelistWeb.BusinessControllerTest do
       conn = conn
         |> login_neighbor(neighbor)
         |> post(business_path(conn, :create), post: @invalid_attrs)
-      assert html_response(conn, 200) =~ "New Business"
+      assert html_response(conn, 200) =~ "Local Business Posting"
     end
 
     test "unautorized 401 redirect if not logged in", %{conn: conn} do
@@ -78,7 +78,7 @@ defmodule LitelistWeb.BusinessControllerTest do
       conn = conn
         |> login_neighbor(neighbor)
         |> post(business_path(conn, :create), post: @create_attrs)
-      assert html_response(conn, 200) =~ "New Business"
+      assert html_response(conn, 200) =~ "Local Business Posting"
     end
   end
 
@@ -87,14 +87,14 @@ defmodule LitelistWeb.BusinessControllerTest do
       conn = conn
         |> login_neighbor(neighbor)
         |> get(business_path(conn, :edit, business))
-      assert html_response(conn, 200) =~ "Edit Business"
+      assert html_response(conn, 200) =~ "TITLE"
     end
 
     test "renders form for editing chosen business as an admin", %{conn: conn, business: business, admin: admin} do
       conn = conn
         |> login_neighbor(admin)
         |> get(business_path(conn, :edit, business))
-      assert html_response(conn, 200) =~ "Edit Business"
+      assert html_response(conn, 200) =~ "TITLE"
     end
 
     test "redirects to index if business was not created by the neighbor", %{conn: conn, neighbor: neighbor, not_my_business: not_my_business} do
@@ -149,7 +149,7 @@ defmodule LitelistWeb.BusinessControllerTest do
         |> login_neighbor(neighbor)
         |> put(business_path(conn, :update, business), post: @invalid_attrs)
 
-      assert html_response(conn, 200) =~ "Edit Business"
+      assert html_response(conn, 200) =~ "TITLE"
     end
 
     test "redirects to index if business was not created by the neighbor", %{conn: conn, neighbor: neighbor, not_my_business: not_my_business} do

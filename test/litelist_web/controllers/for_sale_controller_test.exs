@@ -31,7 +31,7 @@ defmodule LitelistWeb.ForSaleControllerTest do
         |> login_neighbor(neighbor)
         |> get(for_sale_path(conn, :new))
       
-      assert html_response(conn, 200) =~ "New For sale"
+      assert html_response(conn, 200) =~ "SALE POST"
     end
 
     test "unautorized 401 redirect if not logged in", %{conn: conn} do
@@ -56,14 +56,14 @@ defmodule LitelistWeb.ForSaleControllerTest do
         |> login_neighbor(neighbor)
 
       conn = get conn, for_sale_path(conn, :show, id)
-      assert html_response(conn, 200) =~ "Show For sale"
+      assert html_response(conn, 200) =~ "title"
     end
 
     test "renders errors when data is invalid", %{conn: conn, neighbor: neighbor} do
       conn = conn
         |> login_neighbor(neighbor)
         |> post(for_sale_path(conn, :create), post: @invalid_attrs)
-      assert html_response(conn, 200) =~ "New For sale"
+      assert html_response(conn, 200) =~ "SALE POST"
     end
 
     test "unautorized 401 redirect if not logged in", %{conn: conn} do
@@ -78,7 +78,7 @@ defmodule LitelistWeb.ForSaleControllerTest do
       conn = conn
         |> login_neighbor(neighbor)
         |> post(for_sale_path(conn, :create), post: @create_attrs)
-      assert html_response(conn, 200) =~ "New For sale"
+      assert html_response(conn, 200) =~ "SALE POST"
     end
   end
 
@@ -87,14 +87,14 @@ defmodule LitelistWeb.ForSaleControllerTest do
       conn = conn
         |> login_neighbor(neighbor)
         |> get(for_sale_path(conn, :edit, for_sale))
-      assert html_response(conn, 200) =~ "Edit For sale"
+      assert html_response(conn, 200) =~ "TITLE"
     end
 
     test "renders form for editing chosen for_sale as an admin", %{conn: conn, for_sale: for_sale, admin: admin} do
       conn = conn
         |> login_neighbor(admin)
         |> get(for_sale_path(conn, :edit, for_sale))
-      assert html_response(conn, 200) =~ "Edit For sale"
+      assert html_response(conn, 200) =~ "TITLE"
     end
 
     test "redirects to index if for_sale was not created by the neighbor", %{conn: conn, neighbor: neighbor, not_my_for_sale: not_my_for_sale} do
@@ -150,7 +150,7 @@ defmodule LitelistWeb.ForSaleControllerTest do
         |> login_neighbor(neighbor)
         |> put(for_sale_path(conn, :update, for_sale), post: @invalid_attrs)
 
-      assert html_response(conn, 200) =~ "Edit For sale"
+      assert html_response(conn, 200) =~ "TITLE"
     end
 
     test "redirects to index if for_sale was not created by the neighbor", %{conn: conn, neighbor: neighbor, not_my_for_sale: not_my_for_sale} do

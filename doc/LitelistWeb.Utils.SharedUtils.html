@@ -8,7 +8,7 @@
     <title>LitelistWeb.Utils.SharedUtils – litelist v0.0.1</title>
     <link rel="stylesheet" href="dist/app-81d381dea4.css" />
     
-    <script src="dist/sidebar_items-a918bfc19f.js"></script>
+    <script src="dist/sidebar_items-ab7082e319.js"></script>
     
     
     
@@ -139,16 +139,6 @@ tests if a resource was created by the neighbor, and if the given type matches t
 </div>
 <div class="summary-row">
   <div class="summary-signature">
-    <a href="#owner_and_type_check?/3">owner_and_type_check?(neighbor, resource, type)</a>
-  </div>
-  
-    <div class="summary-synopsis"><p>owner_and_type_check?(neighbor, resource, type)
-ensures that the resource is owned by the neighbor, and that the types match (job != for_sale)</p>
-</div>
-  
-</div>
-<div class="summary-row">
-  <div class="summary-signature">
     <a href="#permission?/3">permission?(neighbor, resource, type)</a>
   </div>
   
@@ -174,6 +164,16 @@ Removes any non whitelisted attrs from params</p>
   
     <div class="summary-synopsis"><p>resource_owner?(neighbor, resource)
 Returns true if neighbor.id == resource.neighbor_id</p>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#resource_owner_and_match_type?/3">resource_owner_and_match_type?(neighbor, resource, type)</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>resource_owner_and_match_type?(neighbor, resource, type)
+ensures that the resource is owned by the neighbor, and that the types match (job != for_sale)</p>
 </div>
   
 </div>
@@ -286,25 +286,6 @@ tests if a resource was created by the neighbor, and if the given type matches t
 
   </section>
 </div>
-<div class="detail" id="owner_and_type_check?/3">
-  
-  
-  <div class="detail-header">
-    <a href="#owner_and_type_check?/3" class="detail-link" title="Link to this function">
-      <span class="icon-link" aria-hidden="true"></span>
-      <span class="sr-only">Link to this function</span>
-    </a>
-    <span class="signature">owner_and_type_check?(neighbor, resource, type)</span>
-    
-    
-    
-  </div>
-  <section class="docstring">
-    <p>owner_and_type_check?(neighbor, resource, type)
-ensures that the resource is owned by the neighbor, and that the types match (job != for_sale)</p>
-
-  </section>
-</div>
 <div class="detail" id="permission?/3">
   
   
@@ -359,6 +340,25 @@ Removes any non whitelisted attrs from params</p>
   <section class="docstring">
     <p>resource_owner?(neighbor, resource)
 Returns true if neighbor.id == resource.neighbor_id</p>
+
+  </section>
+</div>
+<div class="detail" id="resource_owner_and_match_type?/3">
+  
+  
+  <div class="detail-header">
+    <a href="#resource_owner_and_match_type?/3" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <span class="signature">resource_owner_and_match_type?(neighbor, resource, type)</span>
+    
+    
+    
+  </div>
+  <section class="docstring">
+    <p>resource_owner_and_match_type?(neighbor, resource, type)
+ensures that the resource is owned by the neighbor, and that the types match (job != for_sale)</p>
 
   </section>
 </div>

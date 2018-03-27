@@ -8,7 +8,7 @@
     <title>Litelist.Posts – litelist v0.0.1</title>
     <link rel="stylesheet" href="dist/app-81d381dea4.css" />
     
-    <script src="dist/sidebar_items-a918bfc19f.js"></script>
+    <script src="dist/sidebar_items-ab7082e319.js"></script>
     
     
     
@@ -117,6 +117,15 @@
 </div>
 <div class="summary-row">
   <div class="summary-signature">
+    <a href="#delete_all_by_neighbor/1">delete_all_by_neighbor(neighbor)</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>Deletes all Posts created by a given Neighbor</p>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
     <a href="#delete_post/1">delete_post(post)</a>
   </div>
   
@@ -144,10 +153,19 @@
 </div>
 <div class="summary-row">
   <div class="summary-signature">
+    <a href="#list_posts_by_neighbor/1">list_posts_by_neighbor(neighbor)</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>Returns the list of posts created by a given neighbor</p>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
     <a href="#list_posts_by_type/1">list_posts_by_type(type)</a>
   </div>
   
-    <div class="summary-synopsis"><p>Returns the list of posts</p>
+    <div class="summary-synopsis"><p>Returns the list of posts based on the type of post (eg. for_sale, job)</p>
 </div>
   
 </div>
@@ -235,6 +253,30 @@ iex&gt; create_post(%{field: bad_value})
 
   </section>
 </div>
+<div class="detail" id="delete_all_by_neighbor/1">
+  
+  
+  <div class="detail-header">
+    <a href="#delete_all_by_neighbor/1" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <span class="signature">delete_all_by_neighbor(neighbor)</span>
+    
+    
+    
+  </div>
+  <section class="docstring">
+    <p>Deletes all Posts created by a given Neighbor.</p>
+<h2 id="delete_all_by_neighbor/1-examples" class="section-heading">
+  <a href="#delete_all_by_neighbor/1-examples" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Examples
+</h2>
+
+<pre><code class="iex elixir">iex&gt; delete_post_by_neighbor(neighbor)</code></pre>
+
+  </section>
+</div>
 <div class="detail" id="delete_post/1">
   
   
@@ -317,6 +359,31 @@ iex&gt; get_post!(456)
 
   </section>
 </div>
+<div class="detail" id="list_posts_by_neighbor/1">
+  
+  
+  <div class="detail-header">
+    <a href="#list_posts_by_neighbor/1" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <span class="signature">list_posts_by_neighbor(neighbor)</span>
+    
+    
+    
+  </div>
+  <section class="docstring">
+    <p>Returns the list of posts created by a given neighbor.</p>
+<h2 id="list_posts_by_neighbor/1-examples" class="section-heading">
+  <a href="#list_posts_by_neighbor/1-examples" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Examples
+</h2>
+
+<pre><code class="iex elixir">iex&gt; list_posts_by_type(type)
+[%Post{}, ...]</code></pre>
+
+  </section>
+</div>
 <div class="detail" id="list_posts_by_type/1">
   
   
@@ -331,7 +398,7 @@ iex&gt; get_post!(456)
     
   </div>
   <section class="docstring">
-    <p>Returns the list of posts.</p>
+    <p>Returns the list of posts based on the type of post (eg. for_sale, job).</p>
 <h2 id="list_posts_by_type/1-examples" class="section-heading">
   <a href="#list_posts_by_type/1-examples" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
   Examples

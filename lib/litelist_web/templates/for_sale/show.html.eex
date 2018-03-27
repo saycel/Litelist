@@ -1,43 +1,19 @@
-<h2>Show For sale</h2>
-
-<ul>
-
-  <li>
-    <strong>Type:</strong>
-    <%= @for_sale.type %>
-  </li>
-
-  <li>
-    <strong>Title:</strong>
-    <%= @for_sale.title %>
-  </li>
-
-  <li>
-    <strong>Description:</strong>
-    <%= @for_sale.description %>
-  </li>
-
-  <li>
-    <strong>Price:</strong>
-    <%= @for_sale.price %>
-  </li>
-
-  <li>
-    <strong>Contact info:</strong>
+<div class="card">
+  <div class="card-image">
+    <%# <img src="img/osx-el-capitan.jpg" class="img-responsive"> %>
+  </div>
+  <div class="card-header">
+    <div class="card-title h5"><%= @for_sale.title %></div>
+    <div class="card-subtitle text-gray"><%= @for_sale.price %></div>
+  </div>
+  <div class="card-body">
+     <%= @for_sale.description %>
+  </div>
+  <div class="card-footer">
     <%= @for_sale.contact_info %>
-  </li>
-
-  <li>
-    <strong>Slug:</strong>
-    <%= @for_sale.slug %>
-  </li>
-
-  <li>
-    <strong>Url:</strong>
-    <%= @for_sale.url %>
-  </li>
-
-</ul>
+  </div>
+</div>
+<ul>
 
 <%= if @current_neighbor && @current_neighbor.id == @for_sale.neighbor_id do %>
   <span><%= link "Edit", to: for_sale_path(@conn, :edit, @for_sale) %></span>

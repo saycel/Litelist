@@ -1,6 +1,4 @@
-<h2>Edit For sale</h2>
+<%= render "_rules.html" %>
 
-<%= render "form.html", Map.put(assigns, :action, for_sale_path(@conn, :update, @for_sale)) %>
-
+<%= render LitelistWeb.SharedView,"_form.html",Map.put(assigns, :data, get_form_data("ForSale",@for_sale)) %>
 <span><%= link "Back", to: for_sale_path(@conn, :index) %></span>
-<span><%= link "Delete", to: for_sale_path(@conn, :delete, @for_sale), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" %></span>

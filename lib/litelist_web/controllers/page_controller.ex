@@ -4,19 +4,45 @@ defmodule LitelistWeb.PageController do
   alias Litelist.Auth
   alias Litelist.Auth.Neighbor
   alias Litelist.Auth.Guardian
+  alias Litelist.Posts
 
   def index(conn, _params) do
     changeset = Auth.change_neighbor(%Neighbor{})
     maybe_neighbor = Guardian.Plug.current_resource(conn)
     message = if maybe_neighbor != nil do
-      "Someone is logged in"
+      
     else
-      "No one is logged in"
+      
+    end
+    posts = Posts.list_posts
+    conn
+      |> put_flash(:info, message)
+      |> render("index.html", posts: posts, changeset: changeset, action: page_path(conn, :login), maybe_neighbor: maybe_neighbor)
+  end
+  def information(conn, _params) do
+    maybe_neighbor = Guardian.Plug.current_resource(conn)
+    message = if maybe_neighbor != nil do
+  
+    else
+      "Remember, you must be logged in to post"      
     end
     conn
       |> put_flash(:info, message)
-      |> render("index.html", changeset: changeset, action: page_path(conn, :login), maybe_neighbor: maybe_neighbor)
+      |> render("post2list.html")
   end
+
+  def neighbor_login(conn, _params) do
+    changeset = Auth.change_neighbor(%Neighbor{})
+    maybe_neighbor = Guardian.Plug.current_resource(conn)
+    if maybe_neighbor do
+      conn
+      |> redirect(to: "/", message: "Welcome back #{maybe_neighbor.username}")
+    else
+      conn
+      |> render("neighbor_login.html", changeset: changeset, action: page_path(conn, :login))
+    end
+  end
+
   def login(conn, %{"neighbor" => %{"username" => username, "password" => password}}) do
     # credo:disable-for-lines:2
     Auth.authenticate_neighbor(username, password)
@@ -25,7 +51,7 @@ defmodule LitelistWeb.PageController do
   defp login_reply({:error, error}, conn) do
     conn
     |> put_flash(:error, error)
-    |> redirect(to: "/")
+    |> redirect(to: "/neighbor-login")
   end
   defp login_reply({:ok, neighbor}, conn) do
     conn
