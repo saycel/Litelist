@@ -56,7 +56,7 @@ defmodule LitelistWeb.ForSaleControllerTest do
         |> login_neighbor(neighbor)
 
       conn = get conn, for_sale_path(conn, :show, id)
-      assert html_response(conn, 200) =~ "TITLE"
+      assert html_response(conn, 200) =~ "title"
     end
 
     test "renders errors when data is invalid", %{conn: conn, neighbor: neighbor} do
