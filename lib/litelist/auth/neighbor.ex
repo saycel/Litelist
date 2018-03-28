@@ -16,6 +16,7 @@ defmodule Litelist.Auth.Neighbor do
 
     has_many :posts, Litelist.Posts.Post
     has_many :discussions, Litelist.Discussions.Discussion
+    has_many :discussion_comments, Litelist.Discussions.Comment
   end
 
   @doc false

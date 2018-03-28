@@ -7,6 +7,7 @@ defmodule Litelist.Factory do
   alias Litelist.Auth.Neighbor
   alias Litelist.Posts.Post
   alias Litelist.Discussions.Discussion
+  alias Litelist.Discussions.Comment
   alias LitelistWeb.Utils.SharedUtils
   alias FakerElixir, as: Faker
 
@@ -160,6 +161,23 @@ defmodule Litelist.Factory do
     %Discussion{
       title: title,
       description: Faker.Lorem.sentences(1..2),
+      slug: slug,
+      neighbor_id: insert(:neighbor).id,
+    }
+  end
+
+  @doc """
+  Comment factory
+  ## How to
+    build(:comment)
+    build(:comment, %{body: "woo block party"})
+    insert(:comment)
+  """
+  def comment_factory do
+    %Comment{
+      body: Faker.Lorem.sentences(1..2),
+      neighbor_id: insert(:neighbor).id,
+      discussion_id: insert(:discussion).id
     }
   end
 end
