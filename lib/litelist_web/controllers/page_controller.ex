@@ -31,7 +31,6 @@ defmodule LitelistWeb.PageController do
 
   def post_login(conn, %{"neighbor" => %{"username" => username, "password" => password}}) do
     # credo:disable-for-lines:2
-    IO.inspect("**********")
     Auth.authenticate_neighbor(username, password)
     |> login_reply(conn)
   end
