@@ -21,6 +21,10 @@ defmodule Litelist.Posts do
     Repo.all(Post)
   end
 
+  def list_recent_posts do
+    Repo.all(Post)
+  end
+
   @doc """
   Returns the list of posts based on the type of post (eg. for_sale, job).
 

@@ -1,0 +1,17 @@
+<div class="columns mt-60">
+  <div class="column col-5 col-sm-12 hide-sm ">
+    <div class="fixed" style="width:35%">
+    <h4>about our moderation</h4>
+    <p> <%= render "_content_moderation.html" %></p>
+    
+    When you feel comfortable with our content moderation rules click here:
+
+    <button class="btn btn-primary btn-sm"><a class='white' href="/admin/moderate">Moderate Offensive Content</a></button>
+          
+</div>
+  
+  </div>
+  <div class="column col-7 col-sm-12">
+    <%= render "_rules.html" %>
+  </div>
+</div>

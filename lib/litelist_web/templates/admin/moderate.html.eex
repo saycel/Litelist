@@ -1,0 +1,42 @@
+<div class="columns mt-60">
+	<div class="column col-5 col-sm-12 hide-sm ">
+    	<div class="fixed" style="width:35%">
+    		<h4>about our moderation</h4>
+    		<p> <%= render "_rules.html" %></p>
+    
+    		When you feel comfortable with our content moderation rules click here:
+
+    		<button class="btn btn-primary btn-sm"><a class='white' href="/admin/moderate">Moderate Offensive Content</a></button>
+          
+		</div>
+	</div>
+  <div class="column col-7 col-sm-12">
+	<h2>Flagged Posts</h2>
+	<span><%= link "Unflag All", to: dashboard_path(@conn, :delete_all), method: :delete, data: [confirm: "This will delete all of your posts and cannot be undone. Are you sure?"], class: "btn btn-danger btn-xs" %></span>
+	<span><%= link "Export All", to: dashboard_path(@conn, :export_posts), class: "btn btn-default btn-xs" %></span>
+	<table class="table">
+	  <thead>
+	    <tr>
+	      <th>Title</th>
+	      <th>Url</th>
+	      <th></th>
+	    </tr>
+	  </thead>
+	  <tbody>
+	<%= for post <- @posts do %>
+	    <tr>
+	      <td><%= post.title %></td>
+	      <td><%= post.url %></td>
+	      <td class="text-right">
+	        <span><%= link "Show", to: path_builder(post), class: "btn btn-default btn-xs" %></span>
+	        <span><%= link "Unflag", to: "/dashboard/posts/delete/#{post.id}", method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" %></span>
+	      </td>
+	    </tr>
+	<% end %>
+	  </tbody>
+	</table>
+  </div>
+
+</div> 
+  
+  

@@ -43,7 +43,16 @@ defmodule LitelistWeb.Router do
     delete "/dashboard/posts/delete/:id", DashboardController, :delete
     get "/dashboard/posts/export", DashboardController, :export_posts
   end
+  # I don't know if this is the right way to do this, or if I should add my routes to the above scope...seems better to separate. 
+  scope "/admin",LitelistWeb do
+    pipe_through [:browser, :auth, :ensure_auth]
+    get "/dashboard", AdminController, :index
+    get "/configure", AdminController, :configure
+    get "/moderation", AdminController, :moderation_information
+    get "/moderate", AdminController, :moderate
 
+
+  end
   scope "/", LitelistWeb do
     pipe_through [:browser, :auth]
 

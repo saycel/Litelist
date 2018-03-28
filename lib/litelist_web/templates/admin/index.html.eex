@@ -1,0 +1,43 @@
+<div class="columns">
+  <div class="column col-6 col-sm-12">
+    <div class="empty">
+      <div class="empty-icon">
+        <i class="icon icon-3x icon-flag"></i>
+      </div>
+      <p class="empty-title h5"> Recent Flagged Posts</p>
+      <p class="empty-subtitle">Click the button to start a conversation</p>
+      <div class="empty-action">
+        <button class="btn btn-primary">See all</button>
+      </div>
+    </div>
+  </div>
+  <div class="column col-6 col-sm-12">
+    <div class="empty">
+      <div class="empty-icon">
+        <i class="icon icon-3x icon-message"></i>
+      </div>
+      <p class="empty-title h5">New Internal Discussions</p>
+      <p class="empty-subtitle">Click the button to invite your friends</p>
+      <div class="empty-action">
+        <button class="btn btn-primary">See all</button>
+      </div>
+      <div class="empty-action">
+        <button class="btn btn-link">Skip</button>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="columns">
+  <div class="column col-sm-12">
+    <div class="empty">
+      <div class="empty-icon">
+        <i class="icon icon-3x icon-apps"></i>
+      </div>
+      <p class="empty-title h5">Current Settings</p>
+      <p class="empty-subtitle"></p>
+      <div class="empty-action input-group input-inline">
+      
+      </div>
+    </div>
+  </div>
+</div>
