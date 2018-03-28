@@ -49,7 +49,7 @@ defmodule LitelistWeb.Router do
 
     get "/", PageController, :index
     get "/post2list", PageController, :information
-    get "/neighbor-login", PageController, :neighbor_login
+    get "/login", PageController, :neighbor_login
     post "/", PageController, :login
     post "/logout", PageController, :logout
     resources "/sales", ForSaleController, only: [:show, :index]
