@@ -13,10 +13,10 @@ defmodule Litelist.DiscussionsTest do
 
     def discussion_fixture(attrs \\ %{}) do
       neighbor = Factory.insert(:neighbor)
-      attrs = Map.merge(@valid_attrs, %{neighbor_id: neighbor.id})
+      merged_attrs = Map.merge(@valid_attrs, %{neighbor_id: neighbor.id})
       {:ok, discussion} =
         attrs
-        |> Enum.into(attrs)
+        |> Enum.into(merged_attrs)
         |> Discussions.create_discussion()
 
       discussion
@@ -78,11 +78,13 @@ defmodule Litelist.DiscussionsTest do
     @invalid_attrs %{body: nil}
 
     def comment_fixture(attrs \\ %{}) do
+      neighbor = Factory.insert(:neighbor)
+      discussion = Factory.insert(:discussion)
+      merged_attrs = Map.merge(@valid_attrs, %{neighbor_id: neighbor.id, discussion_id: discussion.id})
       {:ok, comment} =
         attrs
-        |> Enum.into(@valid_attrs)
+        |> Enum.into(merged_attrs)
         |> Discussions.create_comment()
-
       comment
     end
 
@@ -97,7 +99,10 @@ defmodule Litelist.DiscussionsTest do
     end
 
     test "create_comment/1 with valid data creates a comment" do
-      assert {:ok, %Comment{} = comment} = Discussions.create_comment(@valid_attrs)
+      neighbor = Factory.insert(:neighbor)
+      discussion = Factory.insert(:discussion)
+      attrs = Map.merge(@valid_attrs, %{neighbor_id: neighbor.id, discussion_id: discussion.id})
+      assert {:ok, %Comment{} = comment} = Discussions.create_comment(attrs)
       assert comment.body == "some body"
     end
 
