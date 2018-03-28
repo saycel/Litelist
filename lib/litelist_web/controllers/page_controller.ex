@@ -9,14 +9,15 @@ defmodule LitelistWeb.PageController do
   def index(conn, _params) do
     posts = Posts.list_posts
     conn
-      |> render("index.html", posts: posts, action: page_path(conn, :login))
+      |> render("index.html", posts: posts)
   end
+
   def information(conn, _params) do
     conn
       |> render("post2list.html")
   end
 
-  def neighbor_login(conn, _params) do
+  def login(conn, _params) do
     changeset = Auth.change_neighbor(%Neighbor{})
     if conn.assigns.current_neighbor do
       conn
@@ -24,33 +25,34 @@ defmodule LitelistWeb.PageController do
       |> redirect(to: "/")
     else
       conn
-      |> render("neighbor_login.html", changeset: changeset, action: page_path(conn, :login))
+      |> render("login.html", changeset: changeset, action: page_path(conn, :index))
     end
   end
 
-  def login(conn, %{"neighbor" => %{"username" => username, "password" => password}}) do
+  def post_login(conn, %{"neighbor" => %{"username" => username, "password" => password}}) do
     # credo:disable-for-lines:2
+    IO.inspect("**********")
     Auth.authenticate_neighbor(username, password)
     |> login_reply(conn)
   end
 
   defp login_reply({:error, error}, conn) do
     conn
-    |> put_flash(:error, "Username and password do not match")
-    |> redirect(to: page_path(conn, :neighbor_login))
+    |> put_flash(:error, error)
+    |> redirect(to: page_path(conn, :login))
   end
 
   defp login_reply({:ok, neighbor}, conn) do
     conn
     |> Guardian.Plug.sign_in(neighbor)
-    |> redirect(to: page_path(conn, :login))
+    |> redirect(to: page_path(conn, :index))
   end
 
   def logout(conn, _) do
     conn
     |> Guardian.Plug.sign_out()
     |> put_flash(:info, "Logged out")
-    |> redirect(to: page_path(conn, :login))
+    |> redirect(to: page_path(conn, :index))
   end
 
   def secret(conn, _params) do

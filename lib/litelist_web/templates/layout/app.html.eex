@@ -22,7 +22,7 @@
           <%= if @conn.assigns.current_neighbor do %>
             <span><%= link "Logout", to: page_path(@conn, :logout), method: :post%></span>
           <% else %>
-            <span><%= link "Login", to: page_path(@conn, :neighbor_login), method: :get%></span>
+            <span><%= link "Login", to: page_path(@conn, :login), method: :get%></span>
           <% end %>
         </section>
         <section class="navbar-section">
