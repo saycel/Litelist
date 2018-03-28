@@ -18,8 +18,12 @@
 
           <a href="/" class="navbar-brand mr-2">Othernet</a>
           <a href="/post2list" class="btn btn-link">Post 2 List</a>
-          <a href="/dashboard" class="btn btn-link">Dashboard</a> 
-
+          <a href="/dashboard" class="btn btn-link">Dashboard</a>
+          <%= if @conn.assigns.current_neighbor do %>
+            <span><%= link "Logout", to: page_path(@conn, :logout), method: :post%></span>
+          <% else %>
+            <span><%= link "Login", to: page_path(@conn, :login), method: :get%></span>
+          <% end %>
         </section>
         <section class="navbar-section">
           <div class="input-group input-inline">

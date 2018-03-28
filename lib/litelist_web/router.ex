@@ -32,16 +32,17 @@ defmodule LitelistWeb.Router do
     pipe_through [:browser, :auth, :ensure_auth]
 
     get "/secret", PageController, :secret
-    resources "/sales", ForSaleController, only: [:new, :create, :edit, :update, :delete]
-    resources "/jobs", JobController, only: [:new, :create, :edit, :update, :delete]
-    resources "/events", EventController, only: [:new, :create, :edit, :update, :delete]
-    resources "/businesses", BusinessController, only: [:new, :create, :edit, :update, :delete]
-    resources "/emergency_info", EmergencyInformationController, only: [:new, :create, :edit, :update, :delete]
     get "/dashboard", DashboardController, :index
     get "/dashboard/posts", DashboardController, :posts
     delete "/dashboard/posts", DashboardController, :delete_all
     delete "/dashboard/posts/delete/:id", DashboardController, :delete
     get "/dashboard/posts/export", DashboardController, :export_posts
+
+    resources "/sales", ForSaleController, only: [:new, :create, :edit, :update, :delete]
+    resources "/jobs", JobController, only: [:new, :create, :edit, :update, :delete]
+    resources "/events", EventController, only: [:new, :create, :edit, :update, :delete]
+    resources "/businesses", BusinessController, only: [:new, :create, :edit, :update, :delete]
+    resources "/emergency_info", EmergencyInformationController, only: [:new, :create, :edit, :update, :delete]
   end
 
   scope "/", LitelistWeb do
@@ -49,9 +50,10 @@ defmodule LitelistWeb.Router do
 
     get "/", PageController, :index
     get "/post2list", PageController, :information
-    get "/neighbor-login", PageController, :neighbor_login
-    post "/", PageController, :login
+    get "/login", PageController, :login
+    post "/", PageController, :post_login
     post "/logout", PageController, :logout
+    
     resources "/sales", ForSaleController, only: [:show, :index]
     resources "/jobs", JobController, only: [:show, :index]
     resources "/events", EventController, only: [:show, :index]
