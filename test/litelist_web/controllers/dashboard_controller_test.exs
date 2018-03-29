@@ -14,12 +14,37 @@ defmodule LitelistWeb.DashboardControllerTest do
     end
   
     describe "index" do
-      test "shows the dashboard", %{conn: conn, neighbor: neighbor} do
+      test "shows the dashboard if logged in", %{conn: conn, neighbor: neighbor} do
         conn = conn
           |> login_neighbor(neighbor)
           |> get(dashboard_path(conn, :index))
   
         assert html_response(conn, 200) =~ "Dashboard"
+      end
+
+      test "redirects if not logged in", %{conn: conn} do
+        conn = conn
+          |> get(dashboard_path(conn, :index))
+  
+        assert response(conn, 401)
+      end
+    end
+
+    describe "export" do
+      test "exports if logged in", %{conn: conn, neighbor: neighbor} do
+        conn = conn
+          |> login_neighbor(neighbor)
+          |> get(dashboard_path(conn, :export_posts))
+  
+        assert get_resp_header(conn, "content-type") == ["text/csv; charset=utf-8"]
+        assert response(conn, 200)
+      end
+
+      test "redirects if not logged in", %{conn: conn} do
+        conn = conn
+          |> get(dashboard_path(conn, :export_posts))
+  
+        assert response(conn, 401)
       end
     end
 
