@@ -8,7 +8,6 @@ defmodule LitelistWeb.SearchController do
         render(conn, "index.html", posts: posts)
     end
     def index(conn, _params) do
-        posts = Posts.list_posts()
-        render(conn, "index.html", posts: posts)
+        render(conn, "index.html", posts: [])
     end
 end

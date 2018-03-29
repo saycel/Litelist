@@ -1,6 +1,9 @@
 <div class="divider text-center"></div>
-
-<div class="cc">   
+<h1>Search</h1>
+<%= if Enum.empty?(@posts) do %>
+  <p>Add a search term using the search bar on the top right.</p>
+<% end %>
+<div class="cc">
   <div class="grid" data-content="POSTINGS" data-masonry='{ "itemSelector": ".grid-item", "columnWidth": 200 }'>
     <div class="columns">
       <%= for post <- @posts do %>

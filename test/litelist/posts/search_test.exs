@@ -75,5 +75,14 @@ defmodule Litelist.SearchTest do
       results = Repo.all(p)
       assert length(results) == 3
     end
+
+    test "handles whitespace" do
+      p =
+        Post
+        |> Search.run("  title  ")
+
+      results = Repo.all(p)
+      assert length(results) == 2
+    end
   end
 end
