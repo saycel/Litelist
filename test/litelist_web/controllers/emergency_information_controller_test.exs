@@ -13,7 +13,8 @@ defmodule LitelistWeb.EmergencyInformationControllerTest do
     admin = Factory.insert(:neighbor, %{admin: true})
     emergency_information = Factory.insert(:emergency_information, neighbor_id: neighbor.id)
     not_my_emergency_information = Factory.insert(:emergency_information)
-    {:ok, neighbor: neighbor, emergency_information: emergency_information, not_my_emergency_information: not_my_emergency_information, admin: admin}
+    not_a_emergency = Factory.insert(:job)
+    {:ok, neighbor: neighbor, emergency_information: emergency_information, not_my_emergency_information: not_my_emergency_information, not_a_emergency: not_a_emergency, admin: admin}
   end
 
   describe "index" do
@@ -22,6 +23,22 @@ defmodule LitelistWeb.EmergencyInformationControllerTest do
         |> get(emergency_information_path(conn, :index))
 
       assert html_response(conn, 200) =~ "Listing Emergency information"
+    end
+  end
+
+  describe "show" do
+    test "shows an emergency info post if the type matches", %{conn: conn, emergency_information: emergency_information} do
+      conn = conn
+        |> get(emergency_information_path(conn, :show, emergency_information))
+
+      assert html_response(conn, 200) =~ emergency_information.title
+    end
+
+    test "redirects to index if the type does not match", %{conn: conn, not_a_emergency: not_a_emergency} do
+      conn = conn
+        |> get(emergency_information_path(conn, :show, not_a_emergency))
+
+        assert redirected_to(conn) == emergency_information_path(conn, :index)
     end
   end
 

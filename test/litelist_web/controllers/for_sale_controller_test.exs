@@ -13,7 +13,8 @@ defmodule LitelistWeb.ForSaleControllerTest do
     admin = Factory.insert(:neighbor, %{admin: true})
     for_sale = Factory.insert(:for_sale, neighbor_id: neighbor.id)
     not_my_for_sale = Factory.insert(:for_sale)
-    {:ok, neighbor: neighbor, for_sale: for_sale, not_my_for_sale: not_my_for_sale, admin: admin}
+    not_a_for_sale = Factory.insert(:job)
+    {:ok, neighbor: neighbor, for_sale: for_sale, not_my_for_sale: not_my_for_sale, not_a_for_sale: not_a_for_sale, admin: admin}
   end
 
   describe "index" do
@@ -22,6 +23,22 @@ defmodule LitelistWeb.ForSaleControllerTest do
         |> get(for_sale_path(conn, :index))
 
       assert html_response(conn, 200) =~ "Listing For sales"
+    end
+  end
+
+  describe "show" do
+    test "shows a for sale if the type matches", %{conn: conn, for_sale: for_sale} do
+      conn = conn
+        |> get(for_sale_path(conn, :show, for_sale))
+
+      assert html_response(conn, 200) =~ for_sale.title
+    end
+
+    test "redirects to index if the type does not match", %{conn: conn, not_a_for_sale: not_a_for_sale} do
+      conn = conn
+        |> get(for_sale_path(conn, :show, not_a_for_sale))
+
+        assert redirected_to(conn) == for_sale_path(conn, :index)
     end
   end
 

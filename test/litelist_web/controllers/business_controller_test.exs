@@ -13,7 +13,8 @@ defmodule LitelistWeb.BusinessControllerTest do
     admin = Factory.insert(:neighbor, %{admin: true})
     business = Factory.insert(:business, neighbor_id: neighbor.id)
     not_my_business = Factory.insert(:business)
-    {:ok, neighbor: neighbor, business: business, not_my_business: not_my_business, admin: admin}
+    not_a_business = Factory.insert(:job)
+    {:ok, neighbor: neighbor, business: business, not_my_business: not_my_business, not_a_business: not_a_business, admin: admin}
   end
 
   describe "index" do
@@ -22,6 +23,22 @@ defmodule LitelistWeb.BusinessControllerTest do
         |> get(business_path(conn, :index))
 
       assert html_response(conn, 200) =~ "Listing Business"
+    end
+  end
+
+  describe "show" do
+    test "shows a business if the type matches", %{conn: conn, business: business} do
+      conn = conn
+        |> get(business_path(conn, :show, business))
+
+      assert html_response(conn, 200) =~ business.title
+    end
+
+    test "redirects to index if the type does not match", %{conn: conn, not_a_business: not_a_business} do
+      conn = conn
+        |> get(business_path(conn, :show, not_a_business))
+
+        assert redirected_to(conn) == business_path(conn, :index)
     end
   end
 
