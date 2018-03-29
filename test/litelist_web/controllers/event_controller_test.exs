@@ -13,7 +13,8 @@ defmodule LitelistWeb.EventControllerTest do
     admin = Factory.insert(:neighbor, %{admin: true})
     event = Factory.insert(:event, neighbor_id: neighbor.id)
     not_my_event = Factory.insert(:event)
-    {:ok, neighbor: neighbor, event: event, not_my_event: not_my_event, admin: admin}
+    not_a_event = Factory.insert(:job)
+    {:ok, neighbor: neighbor, event: event, not_my_event: not_my_event, not_a_event: not_a_event, admin: admin}
   end
 
   describe "index" do
@@ -22,6 +23,22 @@ defmodule LitelistWeb.EventControllerTest do
         |> get(event_path(conn, :index))
 
       assert html_response(conn, 200) =~ "Listing Events"
+    end
+  end
+
+  describe "show" do
+    test "shows an event if the type matches", %{conn: conn, event: event} do
+      conn = conn
+        |> get(event_path(conn, :show, event))
+
+      assert html_response(conn, 200) =~ event.title
+    end
+
+    test "redirects to index if the type does not match", %{conn: conn, not_a_event: not_a_event} do
+      conn = conn
+        |> get(event_path(conn, :show, not_a_event))
+
+        assert redirected_to(conn) == event_path(conn, :index)
     end
   end
 

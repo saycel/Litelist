@@ -13,7 +13,8 @@ defmodule LitelistWeb.JobControllerTest do
     admin = Factory.insert(:neighbor, %{admin: true})
     job = Factory.insert(:job, neighbor_id: neighbor.id)
     not_my_job = Factory.insert(:job)
-    {:ok, neighbor: neighbor, job: job, not_my_job: not_my_job, admin: admin}
+    not_a_job = Factory.insert(:event)
+    {:ok, neighbor: neighbor, job: job, not_my_job: not_my_job, not_a_job: not_a_job, admin: admin}
   end
 
   describe "index" do
@@ -22,6 +23,22 @@ defmodule LitelistWeb.JobControllerTest do
         |> get(job_path(conn, :index))
 
       assert html_response(conn, 200) =~ "Listing Jobs"
+    end
+  end
+
+  describe "show" do
+    test "shows a job if the type matches", %{conn: conn, job: job} do
+      conn = conn
+        |> get(job_path(conn, :show, job))
+
+      assert html_response(conn, 200) =~ job.title
+    end
+
+    test "redirects to index if the type does not match", %{conn: conn, not_a_job: not_a_job} do
+      conn = conn
+        |> get(job_path(conn, :show, not_a_job))
+
+        assert redirected_to(conn) == job_path(conn, :index)
     end
   end
 
