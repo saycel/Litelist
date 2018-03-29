@@ -12,7 +12,7 @@ defmodule Litelist.Posts.Search do
           fragment(
             "to_tsvector('english', coalesce(title, ' ') || ' ' || coalesce(location, ' ') || ' ' || coalesce(description, ' ')) @@
             to_tsquery(?)",
-            ^prefix_search(search_term)
+            ^prefix_search(String.trim(search_term))
           )
         )
     end
