@@ -6,6 +6,7 @@ defmodule Litelist.Factory do
 
   alias Litelist.Auth.Neighbor
   alias Litelist.Posts.Post
+  alias Litelist.Settings.Setting
   alias LitelistWeb.Utils.SharedUtils
   alias FakerElixir, as: Faker
 
@@ -22,6 +23,13 @@ defmodule Litelist.Factory do
       username: Faker.Internet.user_name,
       password: Comeonin.Bcrypt.hashpwsalt("password"),
       admin: false
+    }
+  end
+  def setting_factory do
+    %Setting{
+      flag_count: 5,
+      site_name: "Bushwick",
+      default_replyable: false
     }
   end
 

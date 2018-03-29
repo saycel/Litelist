@@ -5,7 +5,6 @@ defmodule Litelist.Posts do
 
   import Ecto.Query, warn: false
   alias Litelist.Repo
-
   alias Litelist.Posts.Post
 
   @doc """

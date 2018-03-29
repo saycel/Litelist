@@ -48,6 +48,7 @@ defmodule LitelistWeb.Router do
     pipe_through [:browser, :auth, :ensure_auth]
     get "/", AdminController, :index
     get "/configure", AdminController, :configure
+    put "/update_configuration", AdminController, :update_configuration
     get "/moderation", AdminController, :moderation_information
     get "/moderate", AdminController, :moderate
   end

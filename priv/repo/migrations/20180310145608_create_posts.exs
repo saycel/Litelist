@@ -20,7 +20,7 @@ defmodule Litelist.Repo.Migrations.CreatePosts do
       add :start_time, :utc_datetime
       add :end_time, :utc_datetime
       add :organization_name, :string
-
+      add :flag_count, :integer
       timestamps()
     end
 

@@ -1,9 +1,12 @@
 defmodule LitelistWeb.AdminController do
     use LitelistWeb, :controller
     plug :put_layout, "admin.html"   
-    alias Litelist.Posts
+
     alias LitelistWeb.Utils.SharedUtils
     alias Litelist.Repo
+    alias Litelist.Posts
+    alias Litelist.Settings
+    @permitted_params ["id", "site_name", "flag_count", "default_replyable"]
 
     def index(conn, _params) do
         render(conn, "index.html")
@@ -16,8 +19,28 @@ defmodule LitelistWeb.AdminController do
         render(conn, "moderation_information.html")
     end
 
+    def update_configuration(conn, %{"setting" => setting_params}) do
+      setting = Settings.get_global_setting
+      changeset = Settings.change_setting(setting)
+
+      setting_params = setting_params
+        |> SharedUtils.permitted_params(@permitted_params)
+
+      case Settings.update_setting(setting, setting_params) do
+        {:ok, setting} ->
+            render(conn, "configure.html",setting: setting, changeset: changeset)
+        {:error, %Ecto.Changeset{} = changeset} ->
+          render(conn, "configure.html",setting: setting, changeset: changeset)
+      end
+
+    end
     def configure(conn, _params) do
-        render(conn, "configure.html")
+
+        setting = Settings.get_global_setting
+        # check admin permissions here
+        changeset = Settings.change_setting(setting)
+
+        render(conn, "configure.html",setting: setting, changeset: changeset)
     end
     def export_posts(conn, _params) do
         csv = build_csv(conn.assigns.current_neighbor)
