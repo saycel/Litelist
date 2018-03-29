@@ -7,6 +7,7 @@ defmodule Litelist.Posts do
   alias Litelist.Repo
 
   alias Litelist.Posts.Post
+  alias Litelist.Posts.Search
 
   @doc """
   Returns the list of posts.
@@ -45,6 +46,21 @@ defmodule Litelist.Posts do
   """
   def list_posts_by_neighbor(neighbor) do
     Repo.all(from p in Post, where: p.neighbor_id == ^neighbor.id)
+  end
+
+  @doc """
+  Returns the list of posts with a given search query.
+
+  ## Examples
+
+      iex> list_posts_by_search_term(search_term)
+      [%Post{}, ...]
+
+  """
+  def list_posts_by_search_term(search_term) do
+    query = Post
+      |> Search.run(search_term)
+    Repo.all(query)
   end
 
   @doc """
