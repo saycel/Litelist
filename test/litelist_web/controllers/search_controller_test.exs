@@ -1,4 +1,4 @@
-defmodule LitelistWeb.DashboardControllerTest do
+defmodule LitelistWeb.SearchControllerTest do
   use LitelistWeb.ConnCase
 
   alias Litelist.Factory
