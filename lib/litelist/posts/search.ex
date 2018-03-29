@@ -10,14 +10,14 @@ defmodule Litelist.Posts.Search do
         where(
           query,
           fragment(
-            "to_tsvector('english', title || ' ' || location || ' ' || coalesce(description, ' ')) @@
+            "to_tsvector('english', coalesce(title, ' ') || ' ' || coalesce(location, ' ') || ' ' || coalesce(description, ' ')) @@
             to_tsquery(?)",
             ^prefix_search(search_term)
           )
         )
     end
 
-    defp prefix_search(term), do: String.replace(term, ~r/\W/u, "") <> ":*"
+    defp prefix_search(term), do: String.replace(term, ~r/\W/u, " | ") <> ":*"
 end
 
 

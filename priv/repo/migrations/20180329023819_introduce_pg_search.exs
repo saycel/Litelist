@@ -1,6 +1,4 @@
 defmodule Litelist.Repo.Migrations.IntroducePgSearch do
-  use Ecto.Migration
-
   @moduledoc """
   Create postgres extension and indices
   """
@@ -12,7 +10,7 @@ defmodule Litelist.Repo.Migrations.IntroducePgSearch do
 
     execute("""
     CREATE INDEX posts_trgm_idx ON posts USING GIN (to_tsvector('english',
-      title || ' ' || location || ' ' || coalesce(description, ' ')))
+      coalesce(title, ' ') || ' ' || coalesce(location, ' ') || ' ' || coalesce(description, ' ')))
     """)
   end
 
