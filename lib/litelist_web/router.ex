@@ -54,6 +54,8 @@ defmodule LitelistWeb.Router do
     post "/", PageController, :post_login
     post "/logout", PageController, :logout
     
+    get "/search", SearchController, :index
+
     resources "/sales", ForSaleController, only: [:show, :index]
     resources "/jobs", JobController, only: [:show, :index]
     resources "/events", EventController, only: [:show, :index]

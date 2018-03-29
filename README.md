@@ -45,6 +45,7 @@ Some useful commands
 
 * `docker-compose run web mix ecto.rollback`
 * `docker-compose run web mix ecto.migrate`
+* `docker-compose run web mix ecto.seed` Seeds the database
 * `docker-compose run web mix test`
 * `docker-compose run web /bin/bash`
 * `MIX_ENV=test mix ecto.reset` Note: Reset test database after running the above command.
@@ -52,5 +53,7 @@ Some useful commands
 * `docker-compose run web mix coveralls.detail`
 * `docker-compose run web mix credo -a` Credo is a static code analysis tool for the Elixir language with a focus on code consistency and teaching.
 * `docker-compose run web mix docs` Documents repo code. Check out docs/index.html
+* `docker-compose run web mix format FILENAME` Formats a file according to Elixir standards
+
 
 

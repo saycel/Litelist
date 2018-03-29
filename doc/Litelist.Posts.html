@@ -8,7 +8,7 @@
     <title>Litelist.Posts – litelist v0.0.1</title>
     <link rel="stylesheet" href="dist/app-81d381dea4.css" />
     
-    <script src="dist/sidebar_items-ab7082e319.js"></script>
+    <script src="dist/sidebar_items-cab5fb3412.js"></script>
     
     
     
@@ -157,6 +157,15 @@
   </div>
   
     <div class="summary-synopsis"><p>Returns the list of posts created by a given neighbor</p>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#list_posts_by_search_term/1">list_posts_by_search_term(search_term)</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>Returns the list of posts with a given search query</p>
 </div>
   
 </div>
@@ -380,6 +389,31 @@ iex&gt; get_post!(456)
 </h2>
 
 <pre><code class="iex elixir">iex&gt; list_posts_by_type(type)
+[%Post{}, ...]</code></pre>
+
+  </section>
+</div>
+<div class="detail" id="list_posts_by_search_term/1">
+  
+  
+  <div class="detail-header">
+    <a href="#list_posts_by_search_term/1" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <span class="signature">list_posts_by_search_term(search_term)</span>
+    
+    
+    
+  </div>
+  <section class="docstring">
+    <p>Returns the list of posts with a given search query.</p>
+<h2 id="list_posts_by_search_term/1-examples" class="section-heading">
+  <a href="#list_posts_by_search_term/1-examples" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Examples
+</h2>
+
+<pre><code class="iex elixir">iex&gt; list_posts_by_search_term(search_term)
 [%Post{}, ...]</code></pre>
 
   </section>

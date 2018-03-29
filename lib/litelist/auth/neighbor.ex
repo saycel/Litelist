@@ -21,6 +21,7 @@ defmodule Litelist.Auth.Neighbor do
   def changeset(%Neighbor{} = neighbor, attrs) do
     neighbor
     |> cast(attrs, [:username, :password, :admin])
+    |> unique_constraint(:username, message: "That username already exists. Try another one.")
     |> validate_required([:username, :password])
     |> put_pass_hash()  
   end
