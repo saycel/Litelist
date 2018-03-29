@@ -4,7 +4,7 @@ fonts/icomoon.eot
 fonts/icomoon.svg
 fonts/icomoon.ttf
 fonts/icomoon.woff
-dist/sidebar_items-cab5fb3412.js
+dist/sidebar_items-7fc75ec11a.js
 api-reference.html
 search.html
 404.html
@@ -49,5 +49,6 @@ LitelistWeb.SearchController.html
 LitelistWeb.SearchView.html
 LitelistWeb.SharedView.html
 LitelistWeb.UserSocket.html
+LitelistWeb.Utils.ExportUtils.html
 LitelistWeb.Utils.SharedUtils.html
 index.html
