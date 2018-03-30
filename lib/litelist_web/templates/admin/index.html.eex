@@ -1,1 +1,3 @@
 <h1>Admin</h1>
+
+<span><%= link "All Posts", to: admin_path(@conn, :posts), class: "btn btn-default btn-xs" %></span>
