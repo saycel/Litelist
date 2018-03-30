@@ -14,17 +14,26 @@ defmodule LitelistWeb.Router do
   end
 
   pipeline :auth do
+    :error_handler
     plug Litelist.Auth.Pipeline
     plug :current_neighbor
   end
 
   pipeline :ensure_auth do
-    plug Guardian.Plug.EnsureAuthenticated
+    plug Guardian.Plug.EnsureAuthenticated, error_handler: Litelist.Auth.ErrorHandler
     plug :current_neighbor
   end
 
   pipeline :current_neighbor do
     plug Litelist.Plugs.CurrentNeighbor
+  end
+
+  pipeline :ensure_admin do
+    plug Litelist.Plugs.EnsureAdmin
+  end
+
+  pipeline :error_handler do
+    plug Guardian.Plug.Pipeline, error_handler: Litelist.Auth.ErrorHandler
   end
 
   # Definitely logged in scope
@@ -43,6 +52,13 @@ defmodule LitelistWeb.Router do
     resources "/events", EventController, only: [:new, :create, :edit, :update, :delete]
     resources "/businesses", BusinessController, only: [:new, :create, :edit, :update, :delete]
     resources "/emergency_info", EmergencyInformationController, only: [:new, :create, :edit, :update, :delete]
+  end
+
+  # Admin scope
+  scope "/admin", LitelistWeb do
+    pipe_through [:browser, :auth, :ensure_admin]
+
+    get "/", AdminController, :index
   end
 
   scope "/", LitelistWeb do
