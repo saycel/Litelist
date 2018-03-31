@@ -40,13 +40,24 @@ Note: See Docker usage below for more commands.
 
 Run commands prepended with `docker-compose run web`
 
+`mix ecto.migrate` becomes `docker-compose run web mix ecto.migrate`
+
+`mix ecto.migrate` becomes `docker-compose run web mix ecto.migrate`
+
 ### Amnesia database
 
 Amnesia is an elixir wrapper around erlang's Mnesia database.
 
 This database is used for settings because it has a stronger guarantee that it will be read than postgres has. As long as the site is up, the Mnesia SettingsDatabase should be available.
 
-`mix ecto.migrate` becomes `docker-compose run web mix ecto.migrate`
+#### Setup
+
+1. `docker-compose run web mix amnesia.create --database Litelist.Settings.SettingsDatabase --disk`
+
+#### Test environment setup
+
+1. `docker-compose run web /bin/bash`
+2. `MIX_ENV=test mix amnesia.create --database Litelist.Settings.SettingsDatabase --disk`
 
 Some useful commands
 
