@@ -62,6 +62,7 @@ defmodule Litelist.Settings do
         Amnesia.transaction do
             if Settings.count() == 0 do
                 create_default_settings()
+                Settings.first
             else
                 Settings.first
             end
