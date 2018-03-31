@@ -19,7 +19,7 @@ defmodule LitelistWeb.DashboardControllerTest do
           |> login_neighbor(neighbor)
           |> get(dashboard_path(conn, :index))
   
-        assert html_response(conn, 200) =~ "Admin"
+        assert html_response(conn, 200) =~ "Dashboard"
       end
 
       test "redirects if not logged in", %{conn: conn} do
@@ -49,12 +49,12 @@ defmodule LitelistWeb.DashboardControllerTest do
     end
 
     describe "posts" do
-        test "lists all posts", %{conn: conn, neighbor: neighbor} do
+        test "lists my posts", %{conn: conn, neighbor: neighbor} do
           conn = conn
             |> login_neighbor(neighbor)
             |> get(dashboard_path(conn, :posts))
     
-          assert html_response(conn, 200) =~ "All Posts"
+          assert html_response(conn, 200) =~ "My Posts"
         end
       end
   
