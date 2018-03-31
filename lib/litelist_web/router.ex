@@ -29,7 +29,7 @@ defmodule LitelistWeb.Router do
   end
 
   pipeline :ensure_admin do
-    plug Litelist.Plugs.EnsureAdmin
+    plug Litelist.Plugs.EnsureAdmin, error_handler: Litelist.Auth.ErrorHandler
   end
 
   pipeline :error_handler do
