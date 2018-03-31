@@ -58,7 +58,7 @@ defmodule Litelist.Settings do
         end
     end
 
-    defp create_default_settings() do
+    defp create_default_settings() do        
         Amnesia.transaction do 
             if Settings.count() != 0 do
                 {:error, :already_exists}
@@ -70,9 +70,10 @@ defmodule Litelist.Settings do
     end
 
     defp default_settings() do
+        default_values = Application.get_env(:default_admin_settings, :values)
         %{
-            max_flagged_posts: 5,
-            allow_replies: false
+            max_flagged_posts: default_values.max_flagged_posts,
+            allow_replies: default_values.allow_replies
         }
     end
   end
