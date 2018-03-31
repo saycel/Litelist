@@ -2,6 +2,7 @@ defmodule LitelistWeb.AdminController do
     use LitelistWeb, :controller
 
     alias Litelist.Posts
+    alias Litelist.Settings.SettingsDatabase
   
     def index(conn, _params) do
       conn
@@ -15,8 +16,20 @@ defmodule LitelistWeb.AdminController do
     end
 
     def settings(conn, _params) do
+        settings = SettingsDatabase.get_settings().map
         conn
-          |> render("settings.html")
+          |> render("settings.html", settings: settings)
     end
-end
+
+    def update_settings(conn, %{"name" => name, "max_flagged_posts" => max_flagged_posts, "allow_replies" => allow_replies}) do
+        SettingsDatabase.update_settings(%{
+            name: name,
+            max_flagged_posts: max_flagged_posts,
+            allow_replies: allow_replies
+        })
+        conn
+            |> put_flash(:info, "Settings updated.")
+            |> redirect(to: admin_path(conn, :settings))
+    end
+end 
   

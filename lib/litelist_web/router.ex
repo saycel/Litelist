@@ -61,6 +61,7 @@ defmodule LitelistWeb.Router do
     get "/", AdminController, :index
     get "/posts", AdminController, :posts
     get "/settings", AdminController, :settings
+    post "/settings", AdminController, :update_settings
   end
 
   scope "/", LitelistWeb do

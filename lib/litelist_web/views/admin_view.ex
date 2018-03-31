@@ -10,4 +10,9 @@ defmodule LitelistWeb.AdminView do
           "event" -> "/events/#{resource.id}"
         end
     end
+
+    def get_value(settings, value) do
+        Map.get(settings, value)
+    end
+    
 end
