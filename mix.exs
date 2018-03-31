@@ -50,7 +50,8 @@ defmodule Litelist.Mixfile do
       {:faker_elixir_octopus, "~> 1.0.0"},
       {:excoveralls, "~> 0.8", only: :test},
       {:credo, "~> 0.9.0-rc1", only: [:dev, :test], runtime: false},
-      {:ex_doc, "~> 0.16"}
+      {:ex_doc, "~> 0.16"},
+      {:amnesia, "~> 0.2.7"}
     ]
   end
 

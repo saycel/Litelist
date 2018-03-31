@@ -11,6 +11,7 @@
 1. `chmod +x run.sh`
 1. Make sure ports 4000 and 5432 (postgres) are free. Run `brew services stop postgresql` on Mac.
 1. `docker-compose build` Note: You only need to run this command the first time
+1. `docker-compose run web mix amnesia.create --database Litelist.Settings.SettingsDatabase --disk` For more, see the Amnesia section below
 1. `docker-compose up`
 1. Go to localhost:4000
 1. `docker-compose run web mix test` to run tests.
@@ -41,6 +42,24 @@ Run commands prepended with `docker-compose run web`
 
 `mix ecto.migrate` becomes `docker-compose run web mix ecto.migrate`
 
+`mix ecto.migrate` becomes `docker-compose run web mix ecto.migrate`
+
+### Amnesia database
+
+Amnesia is an elixir wrapper around erlang's Mnesia database.
+
+This database is used for settings because it has a stronger guarantee that it will be read than postgres has. As long as the site is up, the Mnesia SettingsDatabase should be available.
+
+#### Setup
+
+1. `docker-compose run web mix amnesia.create --database Litelist.Settings.SettingsDatabase --disk`
+
+#### Test environment setup
+
+1. `docker-compose run web /bin/bash`
+1. `mkdir mnesia`
+1. `MIX_ENV=test mix amnesia.create --database Litelist.Settings.SettingsDatabase --disk`
+
 Some useful commands
 
 * `docker-compose run web mix ecto.rollback`
@@ -54,6 +73,8 @@ Some useful commands
 * `docker-compose run web mix credo -a` Credo is a static code analysis tool for the Elixir language with a focus on code consistency and teaching.
 * `docker-compose run web mix docs` Documents repo code. Check out docs/index.html
 * `docker-compose run web mix format FILENAME` Formats a file according to Elixir standards
+* `docker-compose run web mix amnesia.create --database Litelist.Settings.SettingsDatabase --disk` Create Mnesia database
+* `docrw mix amnesia.drop -d Litelist.Settings.SettingsDatabase` Drop Mnesia database
 
 
 

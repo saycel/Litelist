@@ -20,6 +20,9 @@
           <a href="/post2list" class="btn btn-link">Post 2 List</a>
           <a href="/dashboard" class="btn btn-link">Dashboard</a>
           <%= if @conn.assigns.current_neighbor do %>
+            <%= if @conn.assigns.current_neighbor.admin do %>
+              <span><%= link "Admin", to: admin_path(@conn, :index), method: :get%></span>
+            <% end %>
             <span><%= link "Logout", to: page_path(@conn, :logout), method: :post%></span>
           <% else %>
             <span><%= link "Login", to: page_path(@conn, :login), method: :get%></span>
