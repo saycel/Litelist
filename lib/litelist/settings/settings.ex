@@ -70,10 +70,9 @@ defmodule Litelist.Settings do
     end
 
     defp default_settings() do
-        default_values = Application.get_env(:default_admin_settings, :values)
         %{
-            max_flagged_posts: default_values.max_flagged_posts,
-            allow_replies: default_values.allow_replies
+            max_flagged_posts: 5,
+            allow_replies: false
         }
     end
   end

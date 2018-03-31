@@ -30,9 +30,3 @@ import_config "#{Mix.env}.exs"
 config :litelist, Litelist.Auth.Guardian,
   issuer: "listlist", # Name of your app/company/product
   secret_key: "cUb/WWOf1Pe8Q7QQ3fxwSWqnuA7oGohzLUYySEt6UrVREONqudCD3uh83jMviUpz"
-
-config :default_admin_settings,
-  values: %{
-    allow_replies: false,
-    max_flagged_posts: 5
-  }
