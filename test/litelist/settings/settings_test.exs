@@ -3,10 +3,20 @@ defmodule Litelist.SettingsTest do
     use Amnesia
 
     alias Litelist.Settings.SettingsDatabase
+    alias Litelist.Settings.SettingsDatabase.Settings
 
     describe "SettingsDatabase" do
         test "get_settings/0 returns a Map with keys" do
             return_value = SettingsDatabase.get_settings()
+            assert Map.keys(return_value) > 0
+        end
+
+        test "get_settings/0 generates and returns default data" do
+            delete_settings()
+            assert get_settings_count() == 0
+
+            return_value = SettingsDatabase.get_settings()
+            assert get_settings_count() == 1
             assert Map.keys(return_value) > 0
         end
 
@@ -68,9 +78,32 @@ defmodule Litelist.SettingsTest do
             SettingsDatabase.update_settings(attr)
             SettingsDatabase.update_settings(attr)
 
-            Amnesia.transaction do
-                assert SettingsDatabase.Settings.count == 1
-            end
+            assert get_settings_count() == 1
+        end
+    end
+
+    defp delete_settings() do
+        keys = get_settings_keys()
+        Enum.each keys, fn key ->
+            delete_by_key(key)
+        end
+    end
+
+    defp get_settings_keys() do
+        Amnesia.transaction do
+            Settings.keys
+        end
+    end
+
+    defp delete_by_key(key) do
+        Amnesia.transaction do
+            Settings.delete(key)
+        end
+    end
+
+    defp get_settings_count() do
+        Amnesia.transaction do
+            Settings.count
         end
     end
 end
