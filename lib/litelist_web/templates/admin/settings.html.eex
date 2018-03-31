@@ -10,7 +10,7 @@
   </label>
   <br><br>
   <label>
-    Do you want to allow replies to all posts?: <%= checkbox f, :allow_replies, checked: get_value(@settings, :allow_replies) %>
+    Do you want to allow replies to all posts?: <%= checkbox f, :allow_replies, checked: get_value(@settings, :allow_replies) == true %>
   </label>
   <br><br>
   <%= submit "Submit" %>
