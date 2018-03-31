@@ -4,7 +4,6 @@ defmodule Litelist.SettingsTest do
 
     alias Litelist.Settings.SettingsDatabase
 
-
     describe "SettingsDatabase" do
         test "get_settings/0 returns a Map with keys" do
             return_value = SettingsDatabase.get_settings()

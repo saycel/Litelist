@@ -57,7 +57,8 @@ This database is used for settings because it has a stronger guarantee that it w
 #### Test environment setup
 
 1. `docker-compose run web /bin/bash`
-2. `MIX_ENV=test mix amnesia.create --database Litelist.Settings.SettingsDatabase --disk`
+1. `mkdir mnesia`
+1. `MIX_ENV=test mix amnesia.create --database Litelist.Settings.SettingsDatabase --disk`
 
 Some useful commands
 
