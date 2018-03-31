@@ -1,4 +1,5 @@
 %{
+  "amnesia": {:hex, :amnesia, "0.2.7", "ffc2221bf72da4cfafbbb497adf9cf7e52138f1333cec5836187a53f94ae0665", [:mix], [{:exquisite, "~> 0.1.7", [hex: :exquisite, repo: "hexpm", optional: false]}], "hexpm"},
   "base64url": {:hex, :base64url, "0.0.1", "36a90125f5948e3afd7be97662a1504b934dd5dac78451ca6e9abf85a10286be", [:rebar], [], "hexpm"},
   "bcrypt_elixir": {:hex, :bcrypt_elixir, "0.12.1", "41ff5a4739fcff365fe840637462dc9e22beac07a9dcf3cb5e79b127f5b3a099", [:make, :mix], [{:elixir_make, "~> 0.4", [hex: :elixir_make, repo: "hexpm", optional: false]}], "hexpm"},
   "bunt": {:hex, :bunt, "0.2.0", "951c6e801e8b1d2cbe58ebbd3e616a869061ddadcc4863d0a2182541acae9a38", [:mix], [], "hexpm"},
@@ -17,6 +18,7 @@
   "ex_machina": {:hex, :ex_machina, "2.1.0", "4874dc9c78e7cf2d429f24dc3c4005674d4e4da6a08be961ffccc08fb528e28b", [:mix], [{:ecto, "~> 2.1", [hex: :ecto, repo: "hexpm", optional: true]}], "hexpm"},
   "excoveralls": {:hex, :excoveralls, "0.8.1", "0bbf67f22c7dbf7503981d21a5eef5db8bbc3cb86e70d3798e8c802c74fa5e27", [:mix], [{:exjsx, ">= 3.0.0", [hex: :exjsx, repo: "hexpm", optional: false]}, {:hackney, ">= 0.12.0", [hex: :hackney, repo: "hexpm", optional: false]}], "hexpm"},
   "exjsx": {:hex, :exjsx, "4.0.0", "60548841e0212df401e38e63c0078ec57b33e7ea49b032c796ccad8cde794b5c", [:mix], [{:jsx, "~> 2.8.0", [hex: :jsx, repo: "hexpm", optional: false]}], "hexpm"},
+  "exquisite": {:hex, :exquisite, "0.1.8", "ee8f56aae477287ce5e7dfcbc163a420cccbb73e680a6d80a09203e9ef514fa4", [:mix], [], "hexpm"},
   "faker_elixir_octopus": {:hex, :faker_elixir_octopus, "1.0.2", "9895a5cbd08ba47ec70aa04dd91077ff57abe6e49239e853c5f6969e106ce997", [:mix], [], "hexpm"},
   "file_system": {:hex, :file_system, "0.2.4", "f0bdda195c0e46e987333e986452ec523aed21d784189144f647c43eaf307064", [:mix], [], "hexpm"},
   "gettext": {:hex, :gettext, "0.14.0", "1a019a2e51d5ad3d126efe166dcdf6563768e5d06c32a99ad2281a1fa94b4c72", [:mix], [], "hexpm"},

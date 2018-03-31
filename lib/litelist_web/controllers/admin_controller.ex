@@ -13,5 +13,10 @@ defmodule LitelistWeb.AdminController do
         conn
           |> render("posts.html", posts: posts)
     end
+
+    def settings(conn, _params) do
+        conn
+          |> render("settings.html")
+    end
 end
   
