@@ -17,6 +17,7 @@ defmodule Litelist.Application do
       supervisor(LitelistWeb.Endpoint, []),
       # Start your own worker by calling: Litelist.Worker.start_link(arg1, arg2, arg3)
       # worker(Litelist.Worker, [arg1, arg2, arg3]),
+      worker(Litelist.Scheduler, [])
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html
