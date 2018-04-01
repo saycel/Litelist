@@ -4,7 +4,7 @@ fonts/icomoon.eot
 fonts/icomoon.svg
 fonts/icomoon.ttf
 fonts/icomoon.woff
-dist/sidebar_items-7fc75ec11a.js
+dist/sidebar_items-cf21306aae.js
 api-reference.html
 search.html
 404.html
@@ -18,11 +18,17 @@ Litelist.Auth.Neighbor.html
 Litelist.Auth.Pipeline.html
 Litelist.Factory.html
 Litelist.Plugs.CurrentNeighbor.html
+Litelist.Plugs.EnsureAdmin.html
 Litelist.Posts.html
 Litelist.Posts.Post.html
 Litelist.Posts.Search.html
 Litelist.Repo.html
+Litelist.Settings.html
+Litelist.Settings.SettingsDatabase.html
+Litelist.Settings.SettingsDatabase.Settings.html
 LitelistWeb.html
+LitelistWeb.AdminController.html
+LitelistWeb.AdminView.html
 LitelistWeb.BusinessController.html
 LitelistWeb.BusinessView.html
 LitelistWeb.DashboardController.html
@@ -51,4 +57,5 @@ LitelistWeb.SharedView.html
 LitelistWeb.UserSocket.html
 LitelistWeb.Utils.ExportUtils.html
 LitelistWeb.Utils.SharedUtils.html
+LitelistWeb.UtilsView.html
 index.html

@@ -5,7 +5,7 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="ExDoc v0.18.2">
-    <title>LitelistWeb.DashboardController – litelist v0.0.1</title>
+    <title>LitelistWeb.UtilsView – litelist v0.0.1</title>
     <link rel="stylesheet" href="dist/app-81d381dea4.css" />
     
     <script src="dist/sidebar_items-cf21306aae.js"></script>
@@ -70,10 +70,15 @@
 
       <h1>
         <small class="visible-xs">litelist v0.0.1</small>
-        LitelistWeb.DashboardController
+        LitelistWeb.UtilsView
         
       </h1>
 
+      
+        <section id="moduledoc">
+          <p>Utility functions for views</p>
+
+        </section>
       
 
       
@@ -94,32 +99,12 @@
     </h2>
     <div class="summary-row">
   <div class="summary-signature">
-    <a href="#delete/2">delete(conn, map)</a>
+    <a href="#path_builder/1">path_builder(resource)</a>
   </div>
   
+    <div class="summary-synopsis"><p>Given a resource, this function creates a path that can be used for show, edit or delete.</p>
+<h2>Examples</h2>
 </div>
-<div class="summary-row">
-  <div class="summary-signature">
-    <a href="#delete_all/2">delete_all(conn, params)</a>
-  </div>
-  
-</div>
-<div class="summary-row">
-  <div class="summary-signature">
-    <a href="#export_posts/2">export_posts(conn, params)</a>
-  </div>
-  
-</div>
-<div class="summary-row">
-  <div class="summary-signature">
-    <a href="#index/2">index(conn, params)</a>
-  </div>
-  
-</div>
-<div class="summary-row">
-  <div class="summary-signature">
-    <a href="#posts/2">posts(conn, params)</a>
-  </div>
   
 </div>
 
@@ -142,89 +127,29 @@
             </a>
             Functions
           </h1>
-          <div class="detail" id="delete/2">
+          <div class="detail" id="path_builder/1">
   
   
   <div class="detail-header">
-    <a href="#delete/2" class="detail-link" title="Link to this function">
+    <a href="#path_builder/1" class="detail-link" title="Link to this function">
       <span class="icon-link" aria-hidden="true"></span>
       <span class="sr-only">Link to this function</span>
     </a>
-    <span class="signature">delete(conn, map)</span>
+    <span class="signature">path_builder(resource)</span>
     
     
     
   </div>
   <section class="docstring">
-    
-  </section>
-</div>
-<div class="detail" id="delete_all/2">
-  
-  
-  <div class="detail-header">
-    <a href="#delete_all/2" class="detail-link" title="Link to this function">
-      <span class="icon-link" aria-hidden="true"></span>
-      <span class="sr-only">Link to this function</span>
-    </a>
-    <span class="signature">delete_all(conn, params)</span>
-    
-    
-    
-  </div>
-  <section class="docstring">
-    
-  </section>
-</div>
-<div class="detail" id="export_posts/2">
-  
-  
-  <div class="detail-header">
-    <a href="#export_posts/2" class="detail-link" title="Link to this function">
-      <span class="icon-link" aria-hidden="true"></span>
-      <span class="sr-only">Link to this function</span>
-    </a>
-    <span class="signature">export_posts(conn, params)</span>
-    
-    
-    
-  </div>
-  <section class="docstring">
-    
-  </section>
-</div>
-<div class="detail" id="index/2">
-  
-  
-  <div class="detail-header">
-    <a href="#index/2" class="detail-link" title="Link to this function">
-      <span class="icon-link" aria-hidden="true"></span>
-      <span class="sr-only">Link to this function</span>
-    </a>
-    <span class="signature">index(conn, params)</span>
-    
-    
-    
-  </div>
-  <section class="docstring">
-    
-  </section>
-</div>
-<div class="detail" id="posts/2">
-  
-  
-  <div class="detail-header">
-    <a href="#posts/2" class="detail-link" title="Link to this function">
-      <span class="icon-link" aria-hidden="true"></span>
-      <span class="sr-only">Link to this function</span>
-    </a>
-    <span class="signature">posts(conn, params)</span>
-    
-    
-    
-  </div>
-  <section class="docstring">
-    
+    <p>Given a resource, this function creates a path that can be used for show, edit or delete.</p>
+<h2 id="path_builder/1-examples" class="section-heading">
+  <a href="#path_builder/1-examples" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Examples
+</h2>
+
+<p>iex&gt; path_builder(for_sale)
+“/sales/:id”</p>
+
   </section>
 </div>
 
