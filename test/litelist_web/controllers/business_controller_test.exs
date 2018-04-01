@@ -8,15 +8,6 @@ defmodule LitelistWeb.BusinessControllerTest do
   @update_attrs %{company_name: "some updated company_name", contact_info: "some updated contact_info", description: "some updated description", location: "some updated location", slug: "some updated slug", title: "some updated title", url: "some updated url"}
   @invalid_attrs %{company_name: nil, contact_info: nil, description: nil, location: nil, slug: nil, title: nil, type: nil, url: nil}
 
-  setup do
-    neighbor = Factory.insert(:neighbor)
-    admin = Factory.insert(:neighbor, %{admin: true})
-    business = Factory.insert(:business, neighbor_id: neighbor.id)
-    not_my_business = Factory.insert(:business)
-    not_a_business = Factory.insert(:job)
-    {:ok, neighbor: neighbor, business: business, not_my_business: not_my_business, not_a_business: not_a_business, admin: admin}
-  end
-
   describe "index" do
     test "lists all businesss", %{conn: conn} do
       conn = conn
@@ -27,14 +18,18 @@ defmodule LitelistWeb.BusinessControllerTest do
   end
 
   describe "show" do
-    test "shows a business if the type matches", %{conn: conn, business: business} do
+    test "shows a business if the type matches", %{conn: conn} do
+      business = Factory.insert(:business)
+
       conn = conn
         |> get(business_path(conn, :show, business))
 
       assert html_response(conn, 200) =~ business.title
     end
 
-    test "redirects to index if the type does not match", %{conn: conn, not_a_business: not_a_business} do
+    test "redirects to index if the type does not match", %{conn: conn} do
+      not_a_business = Factory.insert(:job)
+
       conn = conn
         |> get(business_path(conn, :show, not_a_business))
 
@@ -43,7 +38,9 @@ defmodule LitelistWeb.BusinessControllerTest do
   end
 
   describe "new business" do
-    test "renders form", %{conn: conn, neighbor: neighbor} do
+    test "renders form", %{conn: conn} do
+      neighbor = Factory.insert(:neighbor)
+
       conn = conn
         |> login_neighbor(neighbor)
         |> get(business_path(conn, :new))
@@ -60,7 +57,9 @@ defmodule LitelistWeb.BusinessControllerTest do
   end
   
   describe "create business" do
-    test "redirects to show when data is valid", %{conn: conn, neighbor: neighbor} do
+    test "redirects to show when data is valid", %{conn: conn} do
+      neighbor = Factory.insert(:neighbor)
+
       conn = conn
         |> login_neighbor(neighbor)
         |> post(business_path(conn, :create), post: @create_attrs)
@@ -76,7 +75,9 @@ defmodule LitelistWeb.BusinessControllerTest do
       assert html_response(conn, 200) =~ "Show Business"
     end
 
-    test "renders errors when data is invalid", %{conn: conn, neighbor: neighbor} do
+    test "renders errors when data is invalid", %{conn: conn} do
+      neighbor = Factory.insert(:neighbor)
+
       conn = conn
         |> login_neighbor(neighbor)
         |> post(business_path(conn, :create), post: @invalid_attrs)
@@ -89,7 +90,8 @@ defmodule LitelistWeb.BusinessControllerTest do
       assert response(conn, 401)
     end
 
-    test "renders errors when url is not unique", %{conn: conn, neighbor: neighbor} do
+    test "renders errors when url is not unique", %{conn: conn} do
+      neighbor = Factory.insert(:neighbor)
       Factory.insert(:business, %{url: "my-cool-url"})
 
       conn = conn
@@ -100,28 +102,39 @@ defmodule LitelistWeb.BusinessControllerTest do
   end
 
   describe "edit business" do
-    test "renders form for editing chosen business", %{conn: conn, business: business, neighbor: neighbor} do
+    test "renders form for editing chosen business", %{conn: conn} do
+      neighbor = Factory.insert(:neighbor)
+      business = Factory.insert(:business, %{neighbor_id: neighbor.id})
+
       conn = conn
         |> login_neighbor(neighbor)
         |> get(business_path(conn, :edit, business))
       assert html_response(conn, 200) =~ "TITLE"
     end
 
-    test "renders form for editing chosen business as an admin", %{conn: conn, business: business, admin: admin} do
+    test "renders form for editing chosen business as an admin", %{conn: conn} do
+      admin = Factory.insert(:admin)
+      business = Factory.insert(:business)
+
       conn = conn
         |> login_neighbor(admin)
         |> get(business_path(conn, :edit, business))
       assert html_response(conn, 200) =~ "TITLE"
     end
 
-    test "redirects to index if business was not created by the neighbor", %{conn: conn, neighbor: neighbor, not_my_business: not_my_business} do
+    test "redirects to index if business was not created by the neighbor", %{conn: conn} do
+      neighbor = Factory.insert(:neighbor)
+      not_my_business = Factory.insert(:business)
+
       conn = conn
         |> login_neighbor(neighbor)
         |> get(business_path(conn, :edit, not_my_business))
       assert redirected_to(conn) == business_path(conn, :index)
     end
 
-    test "unautorized 401 redirect if not logged in", %{conn: conn, business: business} do
+    test "unautorized 401 redirect if not logged in", %{conn: conn} do
+      business = Factory.insert(:business)
+
       conn = conn
         |> get(business_path(conn, :edit, business))
       
@@ -131,7 +144,10 @@ defmodule LitelistWeb.BusinessControllerTest do
 
   describe "update business" do
 
-    test "redirects when data is valid", %{conn: conn, business: business, neighbor: neighbor} do
+    test "redirects when data is valid", %{conn: conn} do
+      neighbor = Factory.insert(:neighbor)
+      business = Factory.insert(:business, %{neighbor_id: neighbor.id})
+
       conn = conn
         |> login_neighbor(neighbor)
         |> put(business_path(conn, :update, business), post: @update_attrs)
@@ -146,7 +162,10 @@ defmodule LitelistWeb.BusinessControllerTest do
       assert html_response(conn, 200) =~ "some updated contact_info"
     end
 
-    test "redirects when data is valid as an admin", %{conn: conn, business: business, admin: admin} do
+    test "redirects when data is valid as an admin", %{conn: conn} do
+      admin = Factory.insert(:admin)
+      business = Factory.insert(:business)
+
       conn = conn
         |> login_neighbor(admin)
         |> put(business_path(conn, :update, business), post: @update_attrs)
@@ -161,7 +180,10 @@ defmodule LitelistWeb.BusinessControllerTest do
       assert html_response(conn, 200) =~ "some updated contact_info"
     end
 
-    test "renders errors when data is invalid", %{conn: conn, business: business, neighbor: neighbor} do
+    test "renders errors when data is invalid", %{conn: conn} do
+      neighbor = Factory.insert(:neighbor)
+      business = Factory.insert(:business, %{neighbor_id: neighbor.id})
+
       conn = conn
         |> login_neighbor(neighbor)
         |> put(business_path(conn, :update, business), post: @invalid_attrs)
@@ -169,7 +191,10 @@ defmodule LitelistWeb.BusinessControllerTest do
       assert html_response(conn, 200) =~ "TITLE"
     end
 
-    test "redirects to index if business was not created by the neighbor", %{conn: conn, neighbor: neighbor, not_my_business: not_my_business} do
+    test "redirects to index if business was not created by the neighbor", %{conn: conn} do
+      neighbor = Factory.insert(:neighbor)
+      not_my_business = Factory.insert(:business)
+
       conn = conn
         |> login_neighbor(neighbor)
         |> put(business_path(conn, :update, not_my_business), post: @invalid_attrs)
@@ -177,7 +202,9 @@ defmodule LitelistWeb.BusinessControllerTest do
         assert redirected_to(conn) == business_path(conn, :index)
     end
 
-    test "unautorized 401 redirect if not logged in", %{conn: conn, business: business} do
+    test "unautorized 401 redirect if not logged in", %{conn: conn} do
+      business = Factory.insert(:business)
+
       conn = conn
         |> put(business_path(conn, :update, business), business: @invalid_attrs)
 
@@ -187,7 +214,10 @@ defmodule LitelistWeb.BusinessControllerTest do
 
   describe "delete business" do
 
-    test "deletes chosen business", %{conn: conn, business: business, neighbor: neighbor} do
+    test "deletes chosen business", %{conn: conn} do
+      neighbor = Factory.insert(:neighbor)
+      business = Factory.insert(:business, %{neighbor_id: neighbor.id})
+
       conn = conn
         |> login_neighbor(neighbor)
         |> delete(business_path(conn, :delete, business))
@@ -198,7 +228,10 @@ defmodule LitelistWeb.BusinessControllerTest do
       end
     end
 
-    test "deletes chosen business as an admin", %{conn: conn, business: business, admin: admin} do
+    test "deletes chosen business as an admin", %{conn: conn} do
+      admin = Factory.insert(:admin)
+      business = Factory.insert(:business)
+
       conn = conn
         |> login_neighbor(admin)
         |> delete(business_path(conn, :delete, business))
@@ -209,7 +242,10 @@ defmodule LitelistWeb.BusinessControllerTest do
       end
     end
 
-    test "redirects to index if business was not created by the neighbor", %{conn: conn, neighbor: neighbor, not_my_business: not_my_business} do
+    test "redirects to index if business was not created by the neighbor", %{conn: conn} do
+      neighbor = Factory.insert(:neighbor)
+      not_my_business = Factory.insert(:business)
+
       conn = conn
         |> login_neighbor(neighbor)
         |> delete(business_path(conn, :delete, not_my_business))
@@ -217,7 +253,9 @@ defmodule LitelistWeb.BusinessControllerTest do
         assert redirected_to(conn) == business_path(conn, :index)
     end
 
-    test "unautorized 401 redirect if not logged in", %{conn: conn, business: business} do
+    test "unautorized 401 redirect if not logged in", %{conn: conn} do
+      business = Factory.insert(:business)
+
       conn = conn
         |> delete(business_path(conn, :delete, business))
 

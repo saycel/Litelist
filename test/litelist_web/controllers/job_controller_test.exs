@@ -8,15 +8,6 @@ defmodule LitelistWeb.JobControllerTest do
   @update_attrs %{"contact_info" => "some updated contact_info", "description" => "some updated description", "salary" => "$11/hr", "title" => "some updated title", "company_name" => "new company name", "position_name" => "new position name", "location" => "5432 1st st bronx"}
   @invalid_attrs %{"contact_info" => nil, "description" => nil, "salary" => nil, "title" => nil}
 
-  # setup do
-  #   neighbor = Factory.insert(:neighbor)
-  #   admin = Factory.insert(:neighbor, %{admin: true})
-  #   job = Factory.insert(:job, neighbor_id: neighbor.id)
-  #   not_my_job = Factory.insert(:job)
-  #   not_a_job = Factory.insert(:event)
-  #   {:ok, neighbor: neighbor, job: job, not_my_job: not_my_job, not_a_job: not_a_job, admin: admin}
-  # end
-
   describe "index" do
     test "lists all jobs", %{conn: conn} do
       conn = conn

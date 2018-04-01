@@ -4,14 +4,10 @@ defmodule LitelistWeb.AdminControllerTest do
     alias Litelist.Factory
     alias Litelist.Auth.Guardian
   
-    setup do
-      neighbor = Factory.insert(:neighbor)
-      admin = Factory.insert(:neighbor, %{admin: true})
-      {:ok, neighbor: neighbor, admin: admin}
-    end
-  
     describe "index" do
-      test "shows the dashboard if logged in as an admin", %{conn: conn, admin: admin} do
+      test "shows the dashboard if logged in as an admin", %{conn: conn} do
+        admin = Factory.insert(:admin)
+
         conn = conn
           |> login_neighbor(admin)
           |> get(admin_path(conn, :index))
@@ -19,7 +15,9 @@ defmodule LitelistWeb.AdminControllerTest do
         assert html_response(conn, 200) =~ "Dashboard"
       end
 
-      test "redirects if logged in as non-admin", %{conn: conn, neighbor: neighbor} do
+      test "redirects if logged in as non-admin", %{conn: conn} do
+        neighbor = Factory.insert(:neighbor)
+
         conn = conn
           |> login_neighbor(neighbor)
           |> get(admin_path(conn, :index))
@@ -36,7 +34,9 @@ defmodule LitelistWeb.AdminControllerTest do
     end
 
     describe "posts" do
-        test "shows the dashboard if logged in as an admin", %{conn: conn, admin: admin} do
+        test "shows the dashboard if logged in as an admin", %{conn: conn} do
+          admin = Factory.insert(:admin)
+
           conn = conn
             |> login_neighbor(admin)
             |> get(admin_path(conn, :posts))
@@ -44,7 +44,9 @@ defmodule LitelistWeb.AdminControllerTest do
           assert html_response(conn, 200) =~ "Dashboard"
         end
   
-        test "redirects if logged in as a non-admin", %{conn: conn, neighbor: neighbor} do
+        test "redirects if logged in as a non-admin", %{conn: conn} do
+          neighbor = Factory.insert(:neighbor)
+
           conn = conn
             |> login_neighbor(neighbor)
             |> get(admin_path(conn, :posts))
@@ -61,7 +63,9 @@ defmodule LitelistWeb.AdminControllerTest do
     end
 
     describe "settings" do
-        test "shows the dashboard if logged in as an admin", %{conn: conn, admin: admin} do
+        test "shows the dashboard if logged in as an admin", %{conn: conn} do
+          admin = Factory.insert(:admin)
+
           conn = conn
             |> login_neighbor(admin)
             |> get(admin_path(conn, :settings))
@@ -69,7 +73,9 @@ defmodule LitelistWeb.AdminControllerTest do
           assert html_response(conn, 200) =~ "Settings"
         end
   
-        test "redirects if logged in as a non-admin", %{conn: conn, neighbor: neighbor} do
+        test "redirects if logged in as a non-admin", %{conn: conn} do
+          neighbor = Factory.insert(:neighbor)
+
           conn = conn
             |> login_neighbor(neighbor)
             |> get(admin_path(conn, :settings))
