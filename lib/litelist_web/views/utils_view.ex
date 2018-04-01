@@ -8,7 +8,7 @@ defmodule LitelistWeb.UtilsView do
     ## Examples
 
     iex> path_builder(for_sale)
-    "/sales/#{for_sale.id}"
+    "/sales/:id"
     """
     def path_builder(resource) do
         case resource.type do

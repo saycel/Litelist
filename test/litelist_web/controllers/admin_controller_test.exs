@@ -1,5 +1,5 @@
 defmodule LitelistWeb.AdminControllerTest do
-    use LitelistWeb.ConnCase
+    use LitelistWeb.ConnCase, async: true
   
     alias Litelist.Factory
     alias Litelist.Auth.Guardian

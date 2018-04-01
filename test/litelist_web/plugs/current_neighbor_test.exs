@@ -1,5 +1,5 @@
 defmodule LitelistWeb.Plugs.CurrentNeighborTest do
-    use LitelistWeb.ConnCase
+    use LitelistWeb.ConnCase, async: true
     alias Litelist.Plugs.CurrentNeighbor
 
     describe "current neighbor plug" do

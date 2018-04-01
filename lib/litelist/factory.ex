@@ -26,6 +26,22 @@ defmodule Litelist.Factory do
   end
 
   @doc """
+  Admin factory
+
+  ## How to
+    build(:admin)
+    build(:admin, %{username: 'doe'})
+    insert(:admin)
+  """
+  def admin_factory do
+    %Neighbor{
+      username: Faker.Internet.user_name,
+      password: Comeonin.Bcrypt.hashpwsalt("password"),
+      admin: true
+    }
+  end
+
+  @doc """
   ForSale factory
   ForSales use the Post Schema
   ## How to

@@ -1,5 +1,5 @@
 defmodule LitelistWeb.ExportUtilsTest do
-    use Litelist.DataCase
+    use Litelist.DataCase, async: true
     alias LitelistWeb.Utils.ExportUtils
     alias Litelist.Factory
 

@@ -1,5 +1,5 @@
 defmodule LitelistWeb.SharedUtilsTest do
-    use Litelist.DataCase
+    use Litelist.DataCase, async: true
     alias LitelistWeb.Utils.SharedUtils
 
     describe "slugify" do

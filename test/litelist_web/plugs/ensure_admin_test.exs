@@ -1,5 +1,5 @@
 defmodule LitelistWeb.Plugs.EnsureAdminTest do
-    use LitelistWeb.ConnCase
+    use LitelistWeb.ConnCase, async: true
     alias Litelist.Plugs.EnsureAdmin
 
     describe "current neighbor plug" do
