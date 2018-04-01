@@ -5,7 +5,7 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="ExDoc v0.18.2">
-    <title>LitelistWeb.Utils.ExportUtils – litelist v0.0.1</title>
+    <title>Litelist.Settings – litelist v0.0.1</title>
     <link rel="stylesheet" href="dist/app-81d381dea4.css" />
     
     <script src="dist/sidebar_items-cf21306aae.js"></script>
@@ -70,47 +70,16 @@
 
       <h1>
         <small class="visible-xs">litelist v0.0.1</small>
-        LitelistWeb.Utils.ExportUtils
+        Litelist.Settings
         
       </h1>
 
       
         <section id="moduledoc">
-          <p>Utility functions for exporting data</p>
-
-        </section>
-      
-
-      
-        <section id="summary" class="details-list">
-          <h1 class="section-heading">
-            <a class="hover-link" href="#summary">
-              <span class="icon-link" aria-hidden="true"></span>
-              <span class="sr-only">Link to this section</span>
-            </a>
-            Summary
-          </h1>
-          
-
-          
-  <div class="summary-functions summary">
-    <h2>
-      <a href="#functions">Functions</a>
-    </h2>
-    <div class="summary-row">
-  <div class="summary-signature">
-    <a href="#build_posts_csv/1">build_posts_csv(neighbor)</a>
-  </div>
-  
-    <div class="summary-synopsis"><p>build_posts_csv(neighbor)</p>
-</div>
-  
-</div>
-
-  </div>
-
-
-          
+          <p>Settings using Mnesia and Amnesia wrapper.</p>
+<p>Sets up the %Settings table to use a row as a Singleton.
+As long as you use this API, you will only ever have one row in the DB.</p>
+<p>We’re using the mnesia database to guarantee the availability of user-defined settings (as opposed to a separate database which may not be reachable for various reasons).</p>
 
         </section>
       
@@ -118,35 +87,7 @@
       
 
       
-        <section id="functions" class="details-list">
-          <h1 class="section-heading">
-            <a class="hover-link" href="#functions">
-              <span class="icon-link" aria-hidden="true"></span>
-              <span class="sr-only">Link to this section</span>
-            </a>
-            Functions
-          </h1>
-          <div class="detail" id="build_posts_csv/1">
-  
-  
-  <div class="detail-header">
-    <a href="#build_posts_csv/1" class="detail-link" title="Link to this function">
-      <span class="icon-link" aria-hidden="true"></span>
-      <span class="sr-only">Link to this function</span>
-    </a>
-    <span class="signature">build_posts_csv(neighbor)</span>
-    
-    
-    
-  </div>
-  <section class="docstring">
-    <p>build_posts_csv(neighbor)</p>
-<p>Runs a SQL query to return a csv of a neighbors posts</p>
 
-  </section>
-</div>
-
-        </section>
       
 
       

@@ -1,0 +1,483 @@
+    <!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="ExDoc v0.18.2">
+    <title>Litelist.Settings.SettingsDatabase – litelist v0.0.1</title>
+    <link rel="stylesheet" href="dist/app-81d381dea4.css" />
+    
+    <script src="dist/sidebar_items-cf21306aae.js"></script>
+    
+    
+    
+    
+  </head>
+  <body data-type="modules">
+    <script>try { if(localStorage.getItem('night-mode')) document.body.className += ' night-mode'; } catch (e) { }</script>
+
+    <div class="main">
+<button class="sidebar-button sidebar-toggle">
+  <span class="icon-menu" aria-hidden="true"></span>
+  <span class="sr-only">Toggle Sidebar</span>
+</button>
+<button class="sidebar-button night-mode-toggle">
+  <span class="icon-theme" aria-hidden="true"></span>
+  <span class="sr-only">Toggle Theme</span>
+</button>
+<section class="sidebar">
+
+  
+  <a href="api-reference.html" class="sidebar-projectLink">
+    <div class="sidebar-projectDetails">
+      <h1 class="sidebar-projectName">
+        litelist
+      </h1>
+      <h2 class="sidebar-projectVersion">
+        v0.0.1
+      </h2>
+    </div>
+    
+  </a>
+
+  <form class="sidebar-search" action="search.html">
+    <button type="submit" class="search-button">
+      <span class="icon-search" aria-hidden="true"></span>
+    </button>
+    <input name="q" type="text" id="search-list" class="search-input" placeholder="Search" aria-label="Search" autocomplete="off" />
+  </form>
+
+  <ul class="sidebar-listNav">
+    <li><a id="extras-list" href="#full-list">Pages</a></li>
+
+    
+      <li><a id="modules-list" href="#full-list">Modules</a></li>
+    
+
+    
+
+    
+  </ul>
+  <div class="gradient"></div>
+  <ul id="full-list" class="sidebar-fullList"></ul>
+</section>
+
+<section class="content">
+  <div class="content-outer">
+    <div id="content" class="content-inner">
+
+
+      <h1>
+        <small class="visible-xs">litelist v0.0.1</small>
+        Litelist.Settings.SettingsDatabase
+        
+      </h1>
+
+      
+
+      
+        <section id="summary" class="details-list">
+          <h1 class="section-heading">
+            <a class="hover-link" href="#summary">
+              <span class="icon-link" aria-hidden="true"></span>
+              <span class="sr-only">Link to this section</span>
+            </a>
+            Summary
+          </h1>
+          
+
+          
+  <div class="summary-functions summary">
+    <h2>
+      <a href="#functions">Functions</a>
+    </h2>
+    <div class="summary-row">
+  <div class="summary-signature">
+    <a href="#__using__/1">__using__(opts)</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>Alias all the table names in the current scope and require what’s
+needed</p>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#create/1">create(copying \\ [])</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>Create the database, it calls <code class="inline">.create</code> on every defined table</p>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#create!/1">create!(copying \\ [])</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>Create the database, it calls <code class="inline">.create</code> on every defined table, raises
+in case of error</p>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#destroy/0">destroy()</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>Destroy the database, it calls <code class="inline">.destroy</code> on every defined table</p>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#destroy!/0">destroy!()</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>Destroy the database, it calls <code class="inline">.destroy</code> on every defined table,
+raises in case of error</p>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#get_settings/0">get_settings()</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>Gets the current settings. Creates default settings if current settings don’t exist.
+Returns %Settings{}</p>
+<h2>Examples</h2>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#metadata/0">metadata()</a>
+  </div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#tables/0">tables()</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>List of atoms of the defined tables in the database</p>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#update_settings/1">update_settings(attrs)</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>Updates settings.</p>
+<h2>Examples</h2>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#wait/1">wait(timeout \\ :infinity)</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>Wait for the database to be loaded</p>
+</div>
+  
+</div>
+
+  </div>
+
+
+          
+
+        </section>
+      
+
+      
+
+      
+        <section id="functions" class="details-list">
+          <h1 class="section-heading">
+            <a class="hover-link" href="#functions">
+              <span class="icon-link" aria-hidden="true"></span>
+              <span class="sr-only">Link to this section</span>
+            </a>
+            Functions
+          </h1>
+          <div class="detail" id="__using__/1">
+  
+  
+  <div class="detail-header">
+    <a href="#__using__/1" class="detail-link" title="Link to this macro">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this macro</span>
+    </a>
+    <span class="signature">__using__(opts)</span>
+    
+    
+      <span class="note">(macro)</span>
+    
+    
+  </div>
+  <section class="docstring">
+    <p>Alias all the table names in the current scope and require what’s
+needed.</p>
+
+  </section>
+</div>
+<div class="detail" id="create/1">
+  
+  
+    <span id="create/0"></span>
+  
+  <div class="detail-header">
+    <a href="#create/1" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <span class="signature">create(copying \\ [])</span>
+    
+    
+    
+      <div class="specs">
+        
+          <pre>create(<a href="https://hexdocs.pm/amnesia/0.2.7/Amnesia.Table.html#t:c/0">Amnesia.Table.c</a>()) :: [<a href="https://hexdocs.pm/amnesia/0.2.7/Amnesia.Table.html#t:o/0">Amnesia.Table.o</a>()]</pre>
+        
+      </div>
+    
+  </div>
+  <section class="docstring">
+    <p>Create the database, it calls <code class="inline">.create</code> on every defined table.</p>
+
+  </section>
+</div>
+<div class="detail" id="create!/1">
+  
+  
+    <span id="create!/0"></span>
+  
+  <div class="detail-header">
+    <a href="#create!/1" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <span class="signature">create!(copying \\ [])</span>
+    
+    
+    
+      <div class="specs">
+        
+          <pre>create!(<a href="https://hexdocs.pm/amnesia/0.2.7/Amnesia.Table.html#t:c/0">Amnesia.Table.c</a>()) :: [<a href="https://hexdocs.pm/amnesia/0.2.7/Amnesia.Table.html#t:o/0">Amnesia.Table.o</a>()]</pre>
+        
+      </div>
+    
+  </div>
+  <section class="docstring">
+    <p>Create the database, it calls <code class="inline">.create</code> on every defined table, raises
+in case of error.</p>
+
+  </section>
+</div>
+<div class="detail" id="destroy/0">
+  
+  
+  <div class="detail-header">
+    <a href="#destroy/0" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <span class="signature">destroy()</span>
+    
+    
+    
+      <div class="specs">
+        
+          <pre>destroy() :: [<a href="https://hexdocs.pm/amnesia/0.2.7/Amnesia.Table.html#t:o/0">Amnesia.Table.o</a>()]</pre>
+        
+      </div>
+    
+  </div>
+  <section class="docstring">
+    <p>Destroy the database, it calls <code class="inline">.destroy</code> on every defined table.</p>
+
+  </section>
+</div>
+<div class="detail" id="destroy!/0">
+  
+  
+  <div class="detail-header">
+    <a href="#destroy!/0" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <span class="signature">destroy!()</span>
+    
+    
+    
+      <div class="specs">
+        
+          <pre>destroy!() :: [<a href="https://hexdocs.pm/amnesia/0.2.7/Amnesia.Table.html#t:o/0">Amnesia.Table.o</a>()]</pre>
+        
+      </div>
+    
+  </div>
+  <section class="docstring">
+    <p>Destroy the database, it calls <code class="inline">.destroy</code> on every defined table,
+raises in case of error.</p>
+
+  </section>
+</div>
+<div class="detail" id="get_settings/0">
+  
+  
+  <div class="detail-header">
+    <a href="#get_settings/0" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <span class="signature">get_settings()</span>
+    
+    
+    
+  </div>
+  <section class="docstring">
+    <p>Gets the current settings. Creates default settings if current settings don’t exist.
+Returns %Settings{}</p>
+<h2 id="get_settings/0-examples" class="section-heading">
+  <a href="#get_settings/0-examples" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Examples
+</h2>
+
+<p>  iex&gt; get_settings()
+  %Settings{…}</p>
+
+  </section>
+</div>
+<div class="detail" id="metadata/0">
+  
+  
+  <div class="detail-header">
+    <a href="#metadata/0" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <span class="signature">metadata()</span>
+    
+    
+    
+      <div class="specs">
+        
+          <pre>metadata() :: <a href="https://hexdocs.pm/amnesia/0.2.7/Amnesia.Metadata.html#t:t/0">Amnesia.Metadata.t</a>()</pre>
+        
+      </div>
+    
+  </div>
+  <section class="docstring">
+    
+  </section>
+</div>
+<div class="detail" id="tables/0">
+  
+  
+  <div class="detail-header">
+    <a href="#tables/0" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <span class="signature">tables()</span>
+    
+    
+    
+      <div class="specs">
+        
+          <pre>tables() :: [<a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">atom</a>()]</pre>
+        
+      </div>
+    
+  </div>
+  <section class="docstring">
+    <p>List of atoms of the defined tables in the database.</p>
+
+  </section>
+</div>
+<div class="detail" id="update_settings/1">
+  
+  
+  <div class="detail-header">
+    <a href="#update_settings/1" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <span class="signature">update_settings(attrs)</span>
+    
+    
+    
+  </div>
+  <section class="docstring">
+    <p>Updates settings.</p>
+<h2 id="update_settings/1-examples" class="section-heading">
+  <a href="#update_settings/1-examples" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Examples
+</h2>
+
+<p>  iex&gt; update_settings(attrs)
+  %Settings{attrs}</p>
+
+  </section>
+</div>
+<div class="detail" id="wait/1">
+  
+  
+    <span id="wait/0"></span>
+  
+  <div class="detail-header">
+    <a href="#wait/1" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <span class="signature">wait(timeout \\ :infinity)</span>
+    
+    
+    
+      <div class="specs">
+        
+          <pre>wait(<a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">integer</a>() | :infinity) :: :ok | {:timeout, [<a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">atom</a>()]} | {:error, <a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">atom</a>()}</pre>
+        
+      </div>
+    
+  </div>
+  <section class="docstring">
+    <p>Wait for the database to be loaded.</p>
+
+  </section>
+</div>
+
+        </section>
+      
+
+      
+          <footer class="footer">
+        <p>
+          <span class="line">
+            Built using
+            <a href="https://github.com/elixir-lang/ex_doc" title="ExDoc" rel="help" target="_blank">ExDoc</a> (v0.18.2),
+          </span>
+          <span class="line">
+            designed by
+            <a href="https://twitter.com/dignifiedquire" target="_blank" title="@dignifiedquire">Friedel Ziegelmayer</a>.
+            </span>
+        </p>
+      </footer>
+    </div>
+  </div>
+</section>
+</div>
+  <script src="dist/app-ad33bc0e7d.js"></script>
+  
+  
+  
+  
+  </body>
+</html>
+
