@@ -9,9 +9,9 @@ defmodule LitelistWeb.Router do
     plug :put_secure_browser_headers
   end
 
-  pipeline :api do
-    plug :accepts, ["json"]
-  end
+  # pipeline :api do
+  #   plug :accepts, ["json"]
+  # end
 
   pipeline :auth do
     :error_handler
@@ -40,7 +40,6 @@ defmodule LitelistWeb.Router do
   scope "/", LitelistWeb do
     pipe_through [:browser, :auth, :ensure_auth]
 
-    get "/secret", PageController, :secret
     get "/dashboard", DashboardController, :index
     get "/dashboard/posts", DashboardController, :posts
     delete "/dashboard/posts", DashboardController, :delete_all

@@ -53,8 +53,4 @@ defmodule LitelistWeb.PageController do
     |> put_flash(:info, "Logged out")
     |> redirect(to: page_path(conn, :index))
   end
-
-  def secret(conn, _params) do
-    render(conn, "secret.html")
-  end
 end

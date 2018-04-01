@@ -1,25 +1,18 @@
 defmodule LitelistWeb.DashboardControllerTest do
-    use LitelistWeb.ConnCase
+    use LitelistWeb.ConnCase, async: true
   
     alias Litelist.Factory
     alias Litelist.Auth.Guardian
     alias Litelist.Posts
   
-    setup do
-      neighbor = Factory.insert(:neighbor)
-      admin = Factory.insert(:neighbor, %{admin: true})
-      business = Factory.insert(:business, neighbor_id: neighbor.id)
-      not_my_business = Factory.insert(:business)
-      {:ok, neighbor: neighbor, business: business, not_my_business: not_my_business, admin: admin}
-    end
-  
     describe "index" do
-      test "shows the dashboard if logged in", %{conn: conn, neighbor: neighbor} do
+      test "shows the dashboard if logged in", %{conn: conn} do
+        neighbor = Factory.insert(:neighbor)
         conn = conn
           |> login_neighbor(neighbor)
           |> get(dashboard_path(conn, :index))
   
-        assert html_response(conn, 200) =~ "Admin"
+        assert html_response(conn, 200) =~ "Dashboard"
       end
 
       test "redirects if not logged in", %{conn: conn} do
@@ -31,7 +24,9 @@ defmodule LitelistWeb.DashboardControllerTest do
     end
 
     describe "export" do
-      test "exports if logged in", %{conn: conn, neighbor: neighbor} do
+      test "exports if logged in", %{conn: conn} do
+        neighbor = Factory.insert(:neighbor)
+
         conn = conn
           |> login_neighbor(neighbor)
           |> get(dashboard_path(conn, :export_posts))
@@ -49,18 +44,21 @@ defmodule LitelistWeb.DashboardControllerTest do
     end
 
     describe "posts" do
-        test "lists all posts", %{conn: conn, neighbor: neighbor} do
+        test "lists my posts", %{conn: conn} do
+          neighbor = Factory.insert(:neighbor)
+
           conn = conn
             |> login_neighbor(neighbor)
             |> get(dashboard_path(conn, :posts))
     
-          assert html_response(conn, 200) =~ "All Posts"
+          assert html_response(conn, 200) =~ "My Posts"
         end
       end
   
 
     describe "delete_all" do
-      test "deletes all posts created by the neighbor", %{conn: conn, neighbor: neighbor} do
+      test "deletes all posts created by the neighbor", %{conn: conn} do
+        neighbor = Factory.insert(:neighbor)
         Factory.insert(:business, %{neighbor_id: neighbor.id})
         assert Enum.empty?(Posts.list_posts_by_neighbor(neighbor)) == false
         conn = conn
@@ -74,7 +72,10 @@ defmodule LitelistWeb.DashboardControllerTest do
     end
     describe "delete post" do
   
-      test "deletes chosen post", %{conn: conn, business: business, neighbor: neighbor} do
+      test "deletes chosen post", %{conn: conn} do
+        neighbor = Factory.insert(:neighbor)
+        business = Factory.insert(:business, %{neighbor_id: neighbor.id})
+
         conn = conn
           |> login_neighbor(neighbor)
           |> delete(dashboard_path(conn, :delete, business))
@@ -85,7 +86,10 @@ defmodule LitelistWeb.DashboardControllerTest do
         end
       end
   
-      test "deletes chosen post as an admin", %{conn: conn, business: business, admin: admin} do
+      test "deletes chosen post as an admin", %{conn: conn} do
+        admin = Factory.insert(:admin)
+        business = Factory.insert(:business)
+
         conn = conn
           |> login_neighbor(admin)
           |> delete(dashboard_path(conn, :delete, business))
@@ -96,7 +100,10 @@ defmodule LitelistWeb.DashboardControllerTest do
         end
       end
   
-      test "redirects to index if business was not created by the neighbor", %{conn: conn, neighbor: neighbor, not_my_business: not_my_business} do
+      test "redirects to index if business was not created by the neighbor", %{conn: conn} do
+        neighbor = Factory.insert(:neighbor)
+        not_my_business = Factory.insert(:business)
+
         conn = conn
           |> login_neighbor(neighbor)
           |> delete(dashboard_path(conn, :delete, not_my_business))
@@ -104,7 +111,9 @@ defmodule LitelistWeb.DashboardControllerTest do
           assert redirected_to(conn) == dashboard_path(conn, :posts)
       end
   
-      test "unautorized 401 redirect if not logged in", %{conn: conn, business: business} do
+      test "unautorized 401 redirect if not logged in", %{conn: conn} do
+        business = Factory.insert(:business)
+
         conn = conn
           |> delete(dashboard_path(conn, :delete, business))
   

@@ -1,5 +1,5 @@
 defmodule LitelistWeb.ForSaleControllerTest do
-  use LitelistWeb.ConnCase
+  use LitelistWeb.ConnCase, async: true
   
   alias Litelist.Factory
   alias Litelist.Auth.Guardian
@@ -7,15 +7,6 @@ defmodule LitelistWeb.ForSaleControllerTest do
   @create_attrs %{"contact_info" => "some contact_info", "description" => "some description", "price" => 120.5, "title" => "some title", "url" => "my-cool-url"}
   @update_attrs %{"contact_info" => "some updated contact_info", "description" => "some updated description", "price" => 456.7, "title" => "some updated title"}
   @invalid_attrs %{"contact_info" => nil, "description" => nil, "price" => nil, "title" => nil}
-
-  setup do
-    neighbor = Factory.insert(:neighbor)
-    admin = Factory.insert(:neighbor, %{admin: true})
-    for_sale = Factory.insert(:for_sale, neighbor_id: neighbor.id)
-    not_my_for_sale = Factory.insert(:for_sale)
-    not_a_for_sale = Factory.insert(:job)
-    {:ok, neighbor: neighbor, for_sale: for_sale, not_my_for_sale: not_my_for_sale, not_a_for_sale: not_a_for_sale, admin: admin}
-  end
 
   describe "index" do
     test "lists all for_sales", %{conn: conn} do
@@ -27,14 +18,17 @@ defmodule LitelistWeb.ForSaleControllerTest do
   end
 
   describe "show" do
-    test "shows a for sale if the type matches", %{conn: conn, for_sale: for_sale} do
+    test "shows a for sale if the type matches", %{conn: conn} do
+      for_sale = Factory.insert(:for_sale)
+
       conn = conn
         |> get(for_sale_path(conn, :show, for_sale))
 
       assert html_response(conn, 200) =~ for_sale.title
     end
 
-    test "redirects to index if the type does not match", %{conn: conn, not_a_for_sale: not_a_for_sale} do
+    test "redirects to index if the type does not match", %{conn: conn} do
+      not_a_for_sale = Factory.insert(:job)
       conn = conn
         |> get(for_sale_path(conn, :show, not_a_for_sale))
 
@@ -43,7 +37,8 @@ defmodule LitelistWeb.ForSaleControllerTest do
   end
 
   describe "new for_sale" do
-    test "renders form", %{conn: conn, neighbor: neighbor} do
+    test "renders form", %{conn: conn} do
+      neighbor = Factory.insert(:neighbor)
       conn = conn
         |> login_neighbor(neighbor)
         |> get(for_sale_path(conn, :new))
@@ -60,7 +55,9 @@ defmodule LitelistWeb.ForSaleControllerTest do
   end
 
   describe "create for_sale" do
-    test "redirects to show when data is valid", %{conn: conn, neighbor: neighbor} do
+    test "redirects to show when data is valid", %{conn: conn} do
+      neighbor = Factory.insert(:neighbor)
+
       conn = conn
         |> login_neighbor(neighbor)
         |> post(for_sale_path(conn, :create), post: @create_attrs)
@@ -76,7 +73,8 @@ defmodule LitelistWeb.ForSaleControllerTest do
       assert html_response(conn, 200) =~ "title"
     end
 
-    test "renders errors when data is invalid", %{conn: conn, neighbor: neighbor} do
+    test "renders errors when data is invalid", %{conn: conn} do
+      neighbor = Factory.insert(:neighbor)
       conn = conn
         |> login_neighbor(neighbor)
         |> post(for_sale_path(conn, :create), post: @invalid_attrs)
@@ -89,9 +87,9 @@ defmodule LitelistWeb.ForSaleControllerTest do
       assert response(conn, 401)
     end
 
-    test "renders errors when url is not unique", %{conn: conn, neighbor: neighbor} do
+    test "renders errors when url is not unique", %{conn: conn} do
+      neighbor = Factory.insert(:neighbor)
       Factory.insert(:for_sale, %{url: "my-cool-url"})
-
       conn = conn
         |> login_neighbor(neighbor)
         |> post(for_sale_path(conn, :create), post: @create_attrs)
@@ -100,28 +98,39 @@ defmodule LitelistWeb.ForSaleControllerTest do
   end
 
   describe "edit for_sale" do
-    test "renders form for editing chosen for_sale", %{conn: conn, for_sale: for_sale, neighbor: neighbor} do
+    test "renders form for editing chosen for_sale", %{conn: conn} do
+      neighbor = Factory.insert(:neighbor)
+      for_sale = Factory.insert(:for_sale, %{neighbor_id: neighbor.id})
+
       conn = conn
         |> login_neighbor(neighbor)
         |> get(for_sale_path(conn, :edit, for_sale))
       assert html_response(conn, 200) =~ "TITLE"
     end
 
-    test "renders form for editing chosen for_sale as an admin", %{conn: conn, for_sale: for_sale, admin: admin} do
+    test "renders form for editing chosen for_sale as an admin", %{conn: conn} do
+      admin = Factory.insert(:admin)
+      for_sale = Factory.insert(:for_sale)
+
       conn = conn
         |> login_neighbor(admin)
         |> get(for_sale_path(conn, :edit, for_sale))
       assert html_response(conn, 200) =~ "TITLE"
     end
 
-    test "redirects to index if for_sale was not created by the neighbor", %{conn: conn, neighbor: neighbor, not_my_for_sale: not_my_for_sale} do
+    test "redirects to index if for_sale was not created by the neighbor", %{conn: conn} do
+      neighbor = Factory.insert(:neighbor)
+      not_my_for_sale = Factory.insert(:for_sale)
+
       conn = conn
         |> login_neighbor(neighbor)
         |> get(for_sale_path(conn, :edit, not_my_for_sale))
       assert redirected_to(conn) == for_sale_path(conn, :index)
     end
 
-    test "unautorized 401 redirect if not logged in", %{conn: conn, for_sale: for_sale} do
+    test "unautorized 401 redirect if not logged in", %{conn: conn} do
+      for_sale = Factory.insert(:for_sale)
+
       conn = conn
         |> get(for_sale_path(conn, :edit, for_sale))
       
@@ -132,7 +141,10 @@ defmodule LitelistWeb.ForSaleControllerTest do
 
   describe "update for_sale" do
 
-    test "redirects when data is valid", %{conn: conn, for_sale: for_sale, neighbor: neighbor} do
+    test "redirects when data is valid", %{conn: conn} do
+      neighbor = Factory.insert(:neighbor)
+      for_sale = Factory.insert(:for_sale, %{neighbor_id: neighbor.id})
+
       conn = conn
         |> login_neighbor(neighbor)
         |> put(for_sale_path(conn, :update, for_sale), post: @update_attrs)
@@ -147,7 +159,10 @@ defmodule LitelistWeb.ForSaleControllerTest do
       assert html_response(conn, 200) =~ "some updated contact_info"
     end
 
-    test "redirects when data is valid as an admin", %{conn: conn, for_sale: for_sale, admin: admin} do
+    test "redirects when data is valid as an admin", %{conn: conn} do
+      admin = Factory.insert(:admin)
+      for_sale = Factory.insert(:for_sale)
+
       conn = conn
         |> login_neighbor(admin)
         |> put(for_sale_path(conn, :update, for_sale), post: @update_attrs)
@@ -162,7 +177,10 @@ defmodule LitelistWeb.ForSaleControllerTest do
       assert html_response(conn, 200) =~ "some updated contact_info"
     end
 
-    test "renders errors when data is invalid", %{conn: conn, for_sale: for_sale, neighbor: neighbor} do
+    test "renders errors when data is invalid", %{conn: conn} do
+      neighbor = Factory.insert(:neighbor)
+      for_sale = Factory.insert(:for_sale, %{neighbor_id: neighbor.id})
+
       conn = conn
         |> login_neighbor(neighbor)
         |> put(for_sale_path(conn, :update, for_sale), post: @invalid_attrs)
@@ -170,7 +188,10 @@ defmodule LitelistWeb.ForSaleControllerTest do
       assert html_response(conn, 200) =~ "TITLE"
     end
 
-    test "redirects to index if for_sale was not created by the neighbor", %{conn: conn, neighbor: neighbor, not_my_for_sale: not_my_for_sale} do
+    test "redirects to index if for_sale was not created by the neighbor", %{conn: conn} do
+      neighbor = Factory.insert(:neighbor)
+      not_my_for_sale = Factory.insert(:for_sale)
+
       conn = conn
         |> login_neighbor(neighbor)
         |> put(for_sale_path(conn, :update, not_my_for_sale), post: @invalid_attrs)
@@ -178,7 +199,9 @@ defmodule LitelistWeb.ForSaleControllerTest do
         assert redirected_to(conn) == for_sale_path(conn, :index)
     end
 
-    test "unautorized 401 redirect if not logged in", %{conn: conn, for_sale: for_sale} do
+    test "unautorized 401 redirect if not logged in", %{conn: conn} do
+      for_sale = Factory.insert(:for_sale)
+
       conn = conn
         |> put(for_sale_path(conn, :update, for_sale), for_sale: @invalid_attrs)
 
@@ -188,7 +211,10 @@ defmodule LitelistWeb.ForSaleControllerTest do
 
   describe "delete for_sale" do
 
-    test "deletes chosen for_sale", %{conn: conn, for_sale: for_sale, neighbor: neighbor} do
+    test "deletes chosen for_sale", %{conn: conn} do
+      neighbor = Factory.insert(:neighbor)
+      for_sale = Factory.insert(:for_sale, %{neighbor_id: neighbor.id})
+
       conn = conn
         |> login_neighbor(neighbor)
         |> delete(for_sale_path(conn, :delete, for_sale))
@@ -199,7 +225,10 @@ defmodule LitelistWeb.ForSaleControllerTest do
       end
     end
 
-    test "deletes chosen for_sale as an admin", %{conn: conn, for_sale: for_sale, admin: admin} do
+    test "deletes chosen for_sale as an admin", %{conn: conn} do
+      admin = Factory.insert(:admin)
+      for_sale = Factory.insert(:for_sale)
+
       conn = conn
         |> login_neighbor(admin)
         |> delete(for_sale_path(conn, :delete, for_sale))
@@ -211,7 +240,10 @@ defmodule LitelistWeb.ForSaleControllerTest do
     end
 
 
-    test "redirects to index if for_sale was not created by the neighbor", %{conn: conn, neighbor: neighbor, not_my_for_sale: not_my_for_sale} do
+    test "redirects to index if for_sale was not created by the neighbor", %{conn: conn} do
+      neighbor = Factory.insert(:neighbor)
+      not_my_for_sale = Factory.insert(:for_sale)
+
       conn = conn
         |> login_neighbor(neighbor)
         |> delete(for_sale_path(conn, :delete, not_my_for_sale))
@@ -219,7 +251,9 @@ defmodule LitelistWeb.ForSaleControllerTest do
         assert redirected_to(conn) == for_sale_path(conn, :index)
     end
 
-    test "unautorized 401 redirect if not logged in", %{conn: conn, for_sale: for_sale} do
+    test "unautorized 401 redirect if not logged in", %{conn: conn} do
+      for_sale = Factory.insert(:for_sale)
+
       conn = conn
         |> delete(for_sale_path(conn, :delete, for_sale))
 

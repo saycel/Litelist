@@ -1,5 +1,5 @@
 defmodule LitelistWeb.SearchControllerTest do
-  use LitelistWeb.ConnCase
+  use LitelistWeb.ConnCase, async: true
 
   alias Litelist.Factory
 

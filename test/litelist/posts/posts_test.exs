@@ -1,5 +1,5 @@
 defmodule Litelist.PostsTest do
-  use Litelist.DataCase
+  use Litelist.DataCase, async: true
 
   alias Litelist.Posts
   alias Litelist.Factory

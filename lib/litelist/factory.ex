@@ -26,6 +26,22 @@ defmodule Litelist.Factory do
   end
 
   @doc """
+  Admin factory
+
+  ## How to
+    build(:admin)
+    build(:admin, %{username: 'doe'})
+    insert(:admin)
+  """
+  def admin_factory do
+    %Neighbor{
+      username: Faker.Internet.user_name,
+      password: Comeonin.Bcrypt.hashpwsalt("password"),
+      admin: true
+    }
+  end
+
+  @doc """
   ForSale factory
   ForSales use the Post Schema
   ## How to
@@ -60,7 +76,7 @@ defmodule Litelist.Factory do
     title = FakerElixir.Commerce.product
     slug = SharedUtils.slugify(title)
     %Post{
-      title: Faker.Lorem.words(3),
+      title: title,
       slug: slug,
       location: FakerElixir.Address.street_address,
       position_name: FakerElixir.Name.title,
@@ -88,7 +104,7 @@ defmodule Litelist.Factory do
     title = FakerElixir.Commerce.product
     slug = SharedUtils.slugify(title)
     %Post{
-      title: Faker.Lorem.words(3),
+      title: title,
       slug: slug,
       location: FakerElixir.Address.street_address,
       contact_info: Faker.Internet.email,
@@ -113,7 +129,7 @@ defmodule Litelist.Factory do
     title = FakerElixir.Commerce.product
     slug = SharedUtils.slugify(title)
     %Post{
-      title: Faker.Lorem.words(3),
+      title: title,
       slug: slug,
       location: FakerElixir.Address.street_address,
       contact_info: Faker.Internet.email,
@@ -136,7 +152,7 @@ defmodule Litelist.Factory do
     title = FakerElixir.Commerce.product
     slug = SharedUtils.slugify(title)
     %Post{
-      title: Faker.Lorem.words(3),
+      title: title,
       slug: slug,
       contact_info: Faker.Internet.email,
       description: Faker.Lorem.sentences(1..2),

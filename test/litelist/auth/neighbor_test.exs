@@ -1,5 +1,5 @@
 defmodule Litelist.NeighborTest do
-    use Litelist.DataCase
+    use Litelist.DataCase, async: true
 
     alias Litelist.Auth.Neighbor
     alias Litelist.Repo

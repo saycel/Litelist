@@ -1,5 +1,5 @@
 defmodule Litelist.AuthTest do
-  use Litelist.DataCase
+  use Litelist.DataCase, async: true
 
   alias Litelist.Auth
 
