@@ -60,7 +60,7 @@ defmodule Litelist.Factory do
     title = FakerElixir.Commerce.product
     slug = SharedUtils.slugify(title)
     %Post{
-      title: Faker.Lorem.words(3),
+      title: title,
       slug: slug,
       location: FakerElixir.Address.street_address,
       position_name: FakerElixir.Name.title,
@@ -88,7 +88,7 @@ defmodule Litelist.Factory do
     title = FakerElixir.Commerce.product
     slug = SharedUtils.slugify(title)
     %Post{
-      title: Faker.Lorem.words(3),
+      title: title,
       slug: slug,
       location: FakerElixir.Address.street_address,
       contact_info: Faker.Internet.email,
@@ -113,7 +113,7 @@ defmodule Litelist.Factory do
     title = FakerElixir.Commerce.product
     slug = SharedUtils.slugify(title)
     %Post{
-      title: Faker.Lorem.words(3),
+      title: title,
       slug: slug,
       location: FakerElixir.Address.street_address,
       contact_info: Faker.Internet.email,
@@ -136,7 +136,7 @@ defmodule Litelist.Factory do
     title = FakerElixir.Commerce.product
     slug = SharedUtils.slugify(title)
     %Post{
-      title: Faker.Lorem.words(3),
+      title: title,
       slug: slug,
       contact_info: Faker.Internet.email,
       description: Faker.Lorem.sentences(1..2),
