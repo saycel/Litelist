@@ -62,7 +62,7 @@ Note: Setup should be automatically handled in run.s
 1. `mkdir mnesia`
 1. `MIX_ENV=test mix amnesia.create --database Litelist.Settings.SettingsDatabase --disk`
 
-Some useful commands
+### Some useful commands
 
 * `docker-compose run web mix ecto.rollback`
 * `docker-compose run web mix ecto.migrate`
@@ -78,5 +78,6 @@ Some useful commands
 * `docker-compose run web mix amnesia.create --database Litelist.Settings.SettingsDatabase --disk` Create Mnesia database
 * `docrw mix amnesia.drop -d Litelist.Settings.SettingsDatabase` Drop Mnesia database
 
+### Troublehooting
 
-
+* `docker-compose run web mix deps.update postgrex` If you can't connect to the db
