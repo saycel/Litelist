@@ -1,5 +1,5 @@
 defmodule Litelist.SettingsTest do
-    use Litelist.DataCase
+    use Litelist.DataCase, async: true
     use Amnesia
 
     alias Litelist.Settings.SettingsDatabase
