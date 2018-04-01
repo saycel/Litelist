@@ -34,5 +34,5 @@ config :litelist, Litelist.Auth.Guardian,
 
 config :litelist, Litelist.Scheduler,
   jobs: [
-    {"* * * * *", {RemoveOldPosts, :run, []}}
+    {"@daily", {RemoveOldPosts, :run, []}}
   ]
