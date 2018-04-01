@@ -52,6 +52,8 @@ This database is used for settings because it has a stronger guarantee that it w
 
 #### Setup
 
+Note: Setup should be automatically handled in run.s
+
 1. `docker-compose run web mix amnesia.create --database Litelist.Settings.SettingsDatabase --disk`
 
 #### Test environment setup

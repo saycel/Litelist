@@ -1,9 +1,16 @@
-#!/bin/sh
+#!/bin/bash
 # Adapted from Alex Kleissner's post, Running a Phoenix 1.3 project with docker-compose
 # https://medium.com/@hex337/running-a-phoenix-1-3-project-with-docker-compose-d82ab55e43cf
 
 set -e
 
+if [ ! -e Mnesia.nonode\@nohost/ ]; then
+  echo "Setting up mnesia database"
+  mix amnesia.create --database Litelist.Settings.SettingsDatabase --disk
+  MIX_ENV=test mix amnesia.create --database Litelist.Settings.SettingsDatabase --disk
+else
+  echo "mnesia database already set up"
+fi
 
 # Ensure the app's dependencies are installed
 mix deps.get
@@ -21,7 +28,6 @@ echo "Postgres is available: continuing with database setup..."
 # Potentially Set up the database
 mix ecto.create
 mix ecto.migrate
-
 
 # Start the phoenix web server
 mix phx.server
