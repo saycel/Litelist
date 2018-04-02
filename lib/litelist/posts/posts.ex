@@ -155,20 +155,22 @@ defmodule Litelist.Posts do
   end
 
   def delete_expired_posts() do
+    Repo.delete_all(get_expired_posts_query())
+  end
+
+  def get_expired_posts_query() do
     time_limit = 30
     now = Timex.now
     today = Timex.today
     date_cutoff = Timex.shift(now, days: -time_limit)
 
-    query = from p in Post,
-        where: p.inserted_at < ^date_cutoff and is_nil(p.end_time) and is_nil(p.end_date) or p.end_date < ^today,
-        or_where: p.inserted_at < ^date_cutoff and is_nil(p.end_date) and is_nil(p.end_time) or p.end_time < ^now,
-        or_where: p.inserted_at < ^date_cutoff and p.end_time < ^now and p.end_date < ^today,
-        or_where: p.inserted_at < ^date_cutoff and is_nil(p.end_time) and is_nil(p.end_date),
-        or_where: p.end_time < ^now and is_nil(p.end_time),
-        or_where: p.end_date < ^today and is_nil(p.end_date),
-        or_where: p.end_time < ^now and p.end_date < ^today
-
-    Repo.delete_all(query)
+    from p in Post,
+      where: p.inserted_at < ^date_cutoff and is_nil(p.end_time) and is_nil(p.end_date) or p.end_date < ^today,
+      or_where: p.inserted_at < ^date_cutoff and is_nil(p.end_date) and is_nil(p.end_time) or p.end_time < ^now,
+      or_where: p.inserted_at < ^date_cutoff and p.end_time < ^now and p.end_date < ^today,
+      or_where: p.inserted_at < ^date_cutoff and is_nil(p.end_time) and is_nil(p.end_date),
+      or_where: p.end_time < ^now and is_nil(p.end_time),
+      or_where: p.end_date < ^today and is_nil(p.end_date),
+      or_where: p.end_time < ^now and p.end_date < ^today
   end
 end

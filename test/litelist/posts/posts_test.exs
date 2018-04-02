@@ -125,69 +125,62 @@ defmodule Litelist.PostsTest do
     end
   end
 
-  describe "delete_expired_posts" do
-    test "it should delete and old post,
+  test "delete_expired_posts" do
+    create_old_post
+    Posts.delete_expired_posts()
+    assert_post_deleted()
+  end
+
+  describe "get_expired_posts" do
+    test "it should get an old post,
                       if that post doesn't have an end_date or end_time" do
       create_old_post()
-      assert_post_exists()
-      Posts.delete_expired_posts()
-      assert_post_deleted()
+      assert length(get_expired_posts_count()) == 1
     end
 
-    test "it should delete an old post,
+    test "it should get an old post,
                       if that post has an end_date that is in the past and end_time is nil" do
         create_old_post_old_end_date_nil_end_time()
-        assert_post_exists()
-        Posts.delete_expired_posts()
-        assert_post_deleted()
+        assert length(get_expired_posts_count()) == 1
     end
 
-    test "it should delete an old post,
+    test "it should get an old post,
                       if that post has an end_time that is in the past and end_date is nil " do
         create_old_post_old_end_time_nil_end_date()
-        assert_post_exists()
-        Posts.delete_expired_posts()
-        assert_post_deleted()
+        assert length(get_expired_posts_count()) == 1
+
     end
 
-    test "it should delete an old post,
+    test "it should get an old post,
                       if that post has and end_date and end_time in the past" do
 
       create_old_post_old_end_time_old_end_date()
-      assert_post_exists()
-      Posts.delete_expired_posts()
-      assert_post_deleted()
+      assert length(get_expired_posts_count()) == 1
     end
 
-    test "it should not delete an old post,
+    test "it should not get an old post,
                     if the post is not older than the setting" do
       create_recent_post()
-      assert_post_exists()
-      Posts.delete_expired_posts()
-      assert_post_not_deleted()
+      assert length(get_expired_posts_count()) == 0
+
     end
 
-    test "it should not delete an old post,
+    test "it should not get an old post,
                     if there is an end_date in the future" do
 
       create_old_post_end_date_future()
-      assert_post_exists()
-      Posts.delete_expired_posts()
-      assert_post_not_deleted()
+      assert length(get_expired_posts_count()) == 0
     end
 
     test "it should not delete an old post,
                     if there is an end_time in the future" do
       create_old_post_end_time_future()
-      assert_post_exists()
-      Posts.delete_expired_posts()
-      assert_post_not_deleted()
+      assert length(get_expired_posts_count()) == 0
     end
   end
 
-  defp assert_post_exists do
-    all_posts = Repo.all(Post)
-    assert length(all_posts) == 1
+  defp get_expired_posts_count() do
+    Repo.all(Posts.get_expired_posts_query())
   end
 
   defp assert_post_deleted() do
