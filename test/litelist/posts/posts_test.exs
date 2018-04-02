@@ -2,6 +2,7 @@ defmodule Litelist.PostsTest do
   use Litelist.DataCase, async: true
 
   alias Litelist.Posts
+  alias Litelist.Posts.Post
   alias Litelist.Factory
   
   describe "posts" do
@@ -122,5 +123,128 @@ defmodule Litelist.PostsTest do
       assert length(posts_with_same_neighbor) == 2
       assert length(posts_with_different_neighbor) == 1
     end
+  end
+
+  describe "delete_expired_posts" do
+    test "it should delete and old post,
+                      if that post doesn't have an end_date or end_time" do
+      create_old_post()
+      assert_post_exists()
+      Posts.delete_expired_posts()
+      assert_post_deleted()
+    end
+
+    test "it should delete an old post,
+                      if that post has an end_date that is in the past and end_time is nil" do
+        create_old_post_old_end_date_nil_end_time()
+        assert_post_exists()
+        Posts.delete_expired_posts()
+        assert_post_deleted()
+    end
+
+    test "it should delete an old post,
+                      if that post has an end_time that is in the past and end_date is nil " do
+        create_old_post_old_end_time_nil_end_date()
+        assert_post_exists()
+        Posts.delete_expired_posts()
+        assert_post_deleted()
+    end
+
+    test "it should delete an old post,
+                      if that post has and end_date and end_time in the past" do
+
+      create_old_post_old_end_time_old_end_date()
+      assert_post_exists()
+      Posts.delete_expired_posts()
+      assert_post_deleted()
+    end
+
+    test "it should not delete an old post,
+                    if the post is not older than the setting" do
+      create_recent_post()
+      assert_post_exists()
+      Posts.delete_expired_posts()
+      assert_post_not_deleted()
+    end
+
+    test "it should not delete an old post,
+                    if there is an end_date in the future" do
+
+      create_old_post_end_date_future()
+      assert_post_exists()
+      Posts.delete_expired_posts()
+      assert_post_not_deleted()
+    end
+
+    test "it should not delete an old post,
+                    if there is an end_time in the future" do
+      create_old_post_end_time_future()
+      assert_post_exists()
+      Posts.delete_expired_posts()
+      assert_post_not_deleted()
+    end
+  end
+
+  defp assert_post_exists do
+    all_posts = Repo.all(Post)
+    assert length(all_posts) == 1
+  end
+
+  defp assert_post_deleted() do
+    all_posts = Repo.all(Post)
+    assert length(all_posts) == 0
+  end
+
+  defp assert_post_not_deleted() do
+    all_posts = Repo.all(Post)
+    assert length(all_posts) == 1
+  end
+
+  defp create_old_post() do 
+    days_old = 100
+    inserted_at = Timex.shift(Timex.now, days: -days_old)
+    Factory.insert(:job, %{inserted_at: inserted_at, end_date: nil, end_time: nil})
+  end
+
+  defp create_old_post_old_end_date_nil_end_time() do
+    days_old = 100
+    inserted_at = Timex.shift(Timex.now, days: -days_old)
+    yesterday_date = Timex.shift(Timex.today, days: -1)
+    Factory.insert(:job, %{inserted_at: inserted_at, end_date: yesterday_date, end_time: nil})
+  end
+
+  defp create_old_post_old_end_time_nil_end_date() do
+    days_old = 100
+    inserted_at = Timex.shift(Timex.now, days: -days_old)
+    yesterday_time = Timex.shift(Timex.now, days: -1)
+    Factory.insert(:job, %{inserted_at: inserted_at, end_time: yesterday_time, end_date: nil})
+  end
+
+  defp create_old_post_old_end_time_old_end_date() do
+    days_old = 100
+    inserted_at = Timex.shift(Timex.now, days: -days_old)
+    yesterday_time = Timex.shift(Timex.now, days: -1)
+    yesterday_date = Timex.shift(Timex.today, days: -1)
+    Factory.insert(:job, %{inserted_at: inserted_at, end_time: yesterday_time, end_date: yesterday_date})
+  end
+
+  defp create_recent_post() do
+    days_old = 10
+    inserted_at = Timex.shift(Timex.now, days: -days_old)
+    Factory.insert(:job, %{inserted_at: inserted_at})
+  end
+
+  defp create_old_post_end_date_future() do
+    days_old = 100
+    inserted_at = Timex.shift(Timex.now, days: -days_old)
+    tomorrow_date = Timex.shift(Timex.today, days: 1)
+    Factory.insert(:job, %{inserted_at: inserted_at, end_date: tomorrow_date})
+  end
+
+  defp create_old_post_end_time_future() do
+    days_old = 100
+    inserted_at = Timex.shift(Timex.now, days: -days_old)
+    tomorrow_time = Timex.shift(Timex.now, days: 1)
+    Factory.insert(:job, %{inserted_at: inserted_at, end_time: tomorrow_time})
   end
 end
