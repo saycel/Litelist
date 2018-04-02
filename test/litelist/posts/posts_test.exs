@@ -126,7 +126,7 @@ defmodule Litelist.PostsTest do
   end
 
   test "delete_expired_posts" do
-    create_old_post
+    create_old_post()
     Posts.delete_expired_posts()
     assert_post_deleted()
   end
@@ -188,10 +188,10 @@ defmodule Litelist.PostsTest do
     assert length(all_posts) == 0
   end
 
-  defp assert_post_not_deleted() do
-    all_posts = Repo.all(Post)
-    assert length(all_posts) == 1
-  end
+  # defp assert_post_not_deleted() do
+  #   all_posts = Repo.all(Post)
+  #   assert length(all_posts) == 1
+  # end
 
   defp create_old_post() do 
     days_old = 100
