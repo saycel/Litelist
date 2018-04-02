@@ -4,6 +4,7 @@
 # This configuration file is loaded before any dependency and
 # is restricted to this project.
 use Mix.Config
+alias Litelist.Schedulers.RemoveOldPosts
 
 # General application configuration
 config :litelist,
@@ -31,4 +32,7 @@ config :litelist, Litelist.Auth.Guardian,
   issuer: "listlist", # Name of your app/company/product
   secret_key: "cUb/WWOf1Pe8Q7QQ3fxwSWqnuA7oGohzLUYySEt6UrVREONqudCD3uh83jMviUpz"
 
-# config :mnesia, dir: 'mnesia/#{Mix.env}/#{node()}'
+config :litelist, Litelist.Scheduler,
+  jobs: [
+    {"@daily", {RemoveOldPosts, :run, []}}
+  ]
