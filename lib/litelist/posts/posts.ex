@@ -154,16 +154,23 @@ defmodule Litelist.Posts do
     Post.changeset(post, %{})
   end
 
+  @doc """
+  Deletes all posts returned from Posts.get_expired_posts_query
+  """
   def delete_expired_posts() do
     Repo.delete_all(get_expired_posts_query())
   end
 
+  @doc """
+  Soft delete all posts returned from Posts.get_expired_posts_query
+  """
   def soft_delete_expired_posts() do
     expired_posts = Repo.all(get_expired_posts_query())
-
-    
   end
 
+  @doc """
+  returns the query that will return expired posts
+  """
   def get_expired_posts_query() do
     time_limit = 30
     now = Timex.now
