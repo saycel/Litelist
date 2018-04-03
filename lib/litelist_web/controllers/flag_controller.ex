@@ -6,15 +6,6 @@ defmodule LitelistWeb.FlagController do
   alias Litelist.Posts
   alias LitelistWeb.Utils.SharedUtils
 
-  @permitted_params [
-    "post_id",
-    "neighbor_id",
-    "type",
-    "description",
-    "status",
-    "admin_respons"
-  ]
-
   @types Flag.get_types()
 
   @statuses Flag.get_statuses()
@@ -42,7 +33,6 @@ defmodule LitelistWeb.FlagController do
   def create(conn, %{"flag" => flag_params}) do
     IO.inspect flag_params
     flag_params = flag_params
-      |> SharedUtils.permitted_params(@permitted_params)
       |> SharedUtils.parse_multi_select("type")
       |> SharedUtils.add_neighbor_id(conn)
       |> SharedUtils.add_default_status(@default_status)
