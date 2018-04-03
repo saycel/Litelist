@@ -63,6 +63,10 @@ defmodule Litelist.Posts do
     Repo.all(query)
   end
 
+  def list_flagged_posts_by_neighbor(neighbor) do
+
+  end
+
   @doc """
   Gets a single post.
 
@@ -166,6 +170,7 @@ defmodule Litelist.Posts do
   """
   def soft_delete_expired_posts() do
     expired_posts = Repo.all(get_expired_posts_query())
+    # Run in a transaction
   end
 
   @doc """
