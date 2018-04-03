@@ -18,7 +18,8 @@ defmodule LitelistWeb.FlagController do
   @types [
     "Inappropriate",
     "Incorrect information",
-    "Legal concerns"
+    "Legal concerns",
+    "Abusive"
   ]
 
   @default_status "pending"
