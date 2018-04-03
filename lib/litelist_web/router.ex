@@ -79,6 +79,7 @@ defmodule LitelistWeb.Router do
     resources "/events", EventController, only: [:show, :index]
     resources "/businesses", BusinessController, only: [:show, :index]
     resources "/emergency_info", EmergencyInformationController, only: [:show, :index]
+    resources "/flags", FlagController
   end
 
   # Other scopes may use custom stacks.
