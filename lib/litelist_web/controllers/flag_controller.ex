@@ -22,6 +22,12 @@ defmodule LitelistWeb.FlagController do
     "Abusive"
   ]
 
+  @statuses [
+    "pending",
+    "post_removed",
+    "post_restored"
+  ]
+
   @default_status "pending"
 
   def index(conn, _params) do

@@ -23,5 +23,7 @@ defmodule Litelist.Moderation.Flag do
     |> cast(attrs, [:type, :description, :status, :admin_response, :post_id, :neighbor_id])
     |> validate_required([:type, :description, :status, :post_id])
     |> validate_subset(:type, ["Inappropriate", "Incorrect information", "Legal concerns", "Abusive"])
+    |> validate_subset(:status, ["pending", "post_removed", "post_restored"])
+
   end
 end
