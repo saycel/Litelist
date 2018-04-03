@@ -110,10 +110,41 @@ defmodule LitelistWeb.Utils.SharedUtils do
         params
     end
 
-    defp add_neighbor_id(params, conn) do
+    @doc """
+    add_neighbor_id(params, con)
+    Adds the current_neighbor id to params
+    """
+    def add_neighbor_id(params, conn) do
         Map.merge(
             %{
                 "neighbor_id" => conn.assigns.current_neighbor.id
+            },
+            params
+        )
+    end
+
+    @doc """
+    Parses a multiselect so the field becomes a string (from a List)
+    parse_multi_select(params, field)
+    """
+    def parse_multi_select(params, field) do
+        type = params[field]
+        params = Map.delete(params, field)
+        Map.merge(
+            %{
+                field => Enum.join(type)
+            },
+            params
+        )
+    end
+
+    @doc """
+
+    """
+    def add_default_status(params, default_status) do
+        Map.merge(
+            %{
+                "status" => default_status
             },
             params
         )

@@ -6,28 +6,20 @@
   <% end %>
 
   <div class="form-group">
-    <%= label f, :type, class: "control-label" %>
-    <%= text_input f, :type, class: "form-control" %>
+    <%= label f, "Reason for flagging this post (press shift to click more than one)", class: "control-label" %>
+    <br>
+    <%= multiple_select f, :type, @types, class: "form-control", prompt: "Choose one" %>
     <%= error_tag f, :type %>
   </div>
 
   <div class="form-group">
-    <%= label f, :description, class: "control-label" %>
+    <%= label f, "Please describe why this post should be reviewed", class: "control-label" %>
+    <br>
     <%= textarea f, :description, class: "form-control" %>
     <%= error_tag f, :description %>
   </div>
 
-  <div class="form-group">
-    <%= label f, :status, class: "control-label" %>
-    <%= text_input f, :status, class: "form-control" %>
-    <%= error_tag f, :status %>
-  </div>
-
-  <div class="form-group">
-    <%= label f, :admin_response, class: "control-label" %>
-    <%= textarea f, :admin_response, class: "form-control" %>
-    <%= error_tag f, :admin_response %>
-  </div>
+  <%= hidden_input f, :post_id, value: @post.id%>
 
   <div class="form-group">
     <%= submit "Submit", class: "btn btn-primary" %>

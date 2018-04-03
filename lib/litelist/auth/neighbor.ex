@@ -15,6 +15,7 @@ defmodule Litelist.Auth.Neighbor do
     timestamps()
 
     has_many :posts, Litelist.Posts.Post
+    has_many :flags, Litelist.Moderation.Flag
   end
 
   @doc false

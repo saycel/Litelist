@@ -144,4 +144,18 @@ defmodule LitelistWeb.SharedUtilsTest do
             assert SharedUtils.resource_owner?(wrong_neighbor, resource) == false
         end
     end
+
+    test "add_neighbor_id" do
+        conn = %{
+            assigns: %{
+                current_neighbor: %{
+                    id: 1
+                }
+            }
+        }
+        params = %{}
+        expected = %{"neighbor_id" => 1}
+
+        assert SharedUtils.add_neighbor_id(params, conn) == expected
+    end
 end
