@@ -129,13 +129,17 @@ defmodule LitelistWeb.Utils.SharedUtils do
     """
     def parse_multi_select(params, field) do
         type = params[field]
-        params = Map.delete(params, field)
-        Map.merge(
-            %{
-                field => Enum.join(type)
-            },
+        if is_nil(type) do
             params
-        )
+        else
+            params = Map.delete(params, field)
+            Map.merge(
+                %{
+                    field => Enum.join(type)
+                },
+                params
+            )
+        end
     end
 
     @doc """
