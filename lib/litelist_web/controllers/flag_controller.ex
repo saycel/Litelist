@@ -9,9 +9,21 @@ defmodule LitelistWeb.FlagController do
     render(conn, "index.html", flags: flags)
   end
 
-  def new(conn, _params) do
+  def new(conn, %{"post_id" => post_id}) do
     changeset = Moderation.change_flag(%Flag{})
     render(conn, "new.html", changeset: changeset)
+  end
+
+  def new(conn, _params) do
+    conn
+      |> put_flash(:info, "To add a flag, go to a post and click on a 'flag' button.")
+      |> redirect(to: page_path(conn, :index))
+    # conn
+    #   |> put_flash(:info, "To add a flag, go to a post and click on a 'flag' button.")
+    #   |> redirect(to: flag_path(conn, :show, flag))
+    # conn
+    #   |> put_flash(:info, "To add a flag, go to a post and click on a 'flag' button.")
+    #   |> redirect_to (page_path(conn, :index))
   end
 
   def create(conn, %{"flag" => flag_params}) do

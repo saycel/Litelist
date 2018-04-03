@@ -22,6 +22,9 @@
             <div class="card-footer">
               <button class="btn btn-primary">More</button>
             </div>
+            <div class="card-footer">
+              <a href="<%= flag_path_builder(post) %>" class="btn btn-primary">Flag</a>
+            </div>
           </div>
         <div class="divider-vert" data-content="*"></div>
         </div> 

@@ -21,3 +21,5 @@
 <% end %>
 
 <span><%= link "Back", to: for_sale_path(@conn, :index) %></span>
+<span><%= link "Flag", to: flag_path_builder(@for_sale) %></span>
+

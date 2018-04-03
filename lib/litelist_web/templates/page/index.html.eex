@@ -17,7 +17,10 @@
               <%=post.description |> String.slice(0..100)%>
             </div>
             <div class="card-footer">
-              <button class="btn btn-primary">More</button>
+              <a href="<%= path_builder(post) %>" class="btn btn-primary">More</a href="<%= path_builder(post) %>">
+            </div>
+            <div class="card-footer">
+              <a href="<%= flag_path_builder(post) %>" class="btn btn-primary">Flag</a>
             </div>
           </div>
         <div class="divider-vert" data-content="*"></div>
