@@ -15,20 +15,11 @@ defmodule LitelistWeb.FlagController do
     "admin_respons"
   ]
 
-  @types [
-    "Inappropriate",
-    "Incorrect information",
-    "Legal concerns",
-    "Abusive"
-  ]
+  @types Flag.get_types()
 
-  @statuses [
-    "pending",
-    "post_removed",
-    "post_restored"
-  ]
+  @statuses Flag.get_statuses()
 
-  @default_status "pending"
+  @default_status Flag.get_default_type()
 
   def index(conn, _params) do
     flags = Moderation.list_flags()

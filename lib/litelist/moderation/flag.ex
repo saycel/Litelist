@@ -3,6 +3,24 @@ defmodule Litelist.Moderation.Flag do
   import Ecto.Changeset
   alias Litelist.Moderation.Flag
 
+  @statuses [
+    "pending",
+    "post_removed",
+    "post_restored"
+  ]
+
+  @types [
+    "Inappropriate",
+    "Incorrect information",
+    "Legal concerns",
+    "Abusive"
+  ]
+
+  @default_type "pending"
+
+  def get_statuses(), do: @statuses
+  def get_types(), do: @types
+  def get_default_type(), do: @default_type
 
   schema "flags" do
     field :admin_response, :string
@@ -22,8 +40,8 @@ defmodule Litelist.Moderation.Flag do
     flag
     |> cast(attrs, [:type, :description, :status, :admin_response, :post_id, :neighbor_id])
     |> validate_required([:type, :description, :status, :post_id])
-    |> validate_subset(:type, ["Inappropriate", "Incorrect information", "Legal concerns", "Abusive"])
-    |> validate_subset(:status, ["pending", "post_removed", "post_restored"])
+    |> validate_inclusion(:type, @types)
+    |> validate_inclusion(:status, @statuses)
 
   end
 end
