@@ -31,13 +31,11 @@ defmodule LitelistWeb.FlagController do
   end
 
   def create(conn, %{"flag" => flag_params}) do
-    IO.inspect flag_params
     flag_params = flag_params
       |> SharedUtils.parse_multi_select("type")
       |> SharedUtils.add_neighbor_id(conn)
       |> SharedUtils.add_default_status(@default_status)
 
-    IO.inspect flag_params
     case Moderation.create_flag(flag_params) do
       {:ok, flag} ->
         conn

@@ -63,10 +63,6 @@ defmodule Litelist.Posts do
     Repo.all(query)
   end
 
-  def list_flagged_posts_by_neighbor(neighbor) do
-
-  end
-
   @doc """
   Gets a single post.
 
@@ -190,5 +186,16 @@ defmodule Litelist.Posts do
       or_where: p.end_time < ^now and is_nil(p.end_time),
       or_where: p.end_date < ^today and is_nil(p.end_date),
       or_where: p.end_time < ^now and p.end_date < ^today
+  end
+
+  @doc """
+  Ecto query that returns how many pending flags a post has
+  """
+  def get_pending_flag_count(post) do
+    query = from f in Flag,
+      where: f.post_id == ^post.id,
+      where: f.status == "pending"
+
+    Repo.aggregate(query, :count, :id)
   end
 end
