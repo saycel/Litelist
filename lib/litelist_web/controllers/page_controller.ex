@@ -16,7 +16,21 @@ defmodule LitelistWeb.PageController do
     conn
       |> render("post2list.html")
   end
-
+  def url_handler(conn,_params) do
+    url = Atom.to_string(conn.scheme) <> "://" <> (Enum.into(conn.req_headers, %{}) |> Map.get("host")) <> conn.request_path
+    substring_w_http = String.split(url, ".othernet")
+    http_host = String.split(Enum.at(substring_w_http,0),"http://")
+    host = Enum.at(http_host,1)
+    if host == "posts" do
+      posts = Posts.list_posts
+      conn
+        |> render("index.html", posts: posts)
+    else
+      conn
+        |> render("url.html", url: host)
+    end
+  end
+  
   def login(conn, _params) do
     changeset = Auth.change_neighbor(%Neighbor{})
     if conn.assigns.current_neighbor do
