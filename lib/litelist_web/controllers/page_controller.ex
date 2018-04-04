@@ -16,18 +16,31 @@ defmodule LitelistWeb.PageController do
     conn
       |> render("post2list.html")
   end
+  
   def url_handler(conn,_params) do
     url = Atom.to_string(conn.scheme) <> "://" <> (Enum.into(conn.req_headers, %{}) |> Map.get("host")) <> conn.request_path
     substring_w_http = String.split(url, ".othernet")
     http_host = String.split(Enum.at(substring_w_http,0),"http://")
     host = Enum.at(http_host,1)
-    if host == "posts" do
+    
+
+    if host == "bushwick" do
       posts = Posts.list_posts
       conn
         |> render("index.html", posts: posts)
     else
-      conn
-        |> render("url.html", url: host)
+      post = Posts.get_posts_by_url(host)
+      case length(post) do 
+        0 -> conn 
+              |> put_flash(:info, "webpage does not exist")
+              |> redirect(to: "/posts")
+        1 -> conn 
+              |> render("display.html", post: Enum.at(post,0), layout: {LitelistWeb.LayoutView, "webpage.html"})
+        # ToDO add page for when multiple sites come up
+        _ -> conn 
+              |> render("display.html", post: Enum.at(post,0), layout: {LitelistWeb.LayoutView, "webpage.html"})  
+      end
+    
     end
   end
   
@@ -36,10 +49,10 @@ defmodule LitelistWeb.PageController do
     if conn.assigns.current_neighbor do
       conn
       |> put_flash(:info, "Already logged in #{conn.assigns.current_neighbor.username}")
-      |> redirect(to: "/")
+      |> redirect(to: "bushwick.othernet:4000")
     else
       conn
-      |> render("login.html", changeset: changeset, action: page_path(conn, :index))
+      |> render("login.html", changeset: changeset, action: "/login")
     end
   end
 

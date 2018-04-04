@@ -68,7 +68,7 @@ defmodule LitelistWeb.Router do
     get "/posts", PageController, :index
     get "/post2list", PageController, :information
     get "/login", PageController, :login
-    post "/", PageController, :post_login
+    post "/login", PageController, :post_login
     post "/logout", PageController, :logout
     
     get "/search", SearchController, :index

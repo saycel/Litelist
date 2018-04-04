@@ -17,7 +17,7 @@
               <%=post.description |> String.slice(0..100)%>
             </div>
             <div class="card-footer">
-              <button class="btn btn-primary">More</button>
+              <button class="btn btn-primary"><a href="http://<%=post.url%>.othernet:4000">More</a></button>
             </div>
           </div>
         <div class="divider-vert" data-content="*"></div>
