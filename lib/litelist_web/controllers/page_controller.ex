@@ -49,7 +49,7 @@ defmodule LitelistWeb.PageController do
     if conn.assigns.current_neighbor do
       conn
       |> put_flash(:info, "Already logged in #{conn.assigns.current_neighbor.username}")
-      |> redirect(to: "bushwick.othernet:4000")
+      |> redirect(to: "/posts")
     else
       conn
       |> render("login.html", changeset: changeset, action: "/login")
