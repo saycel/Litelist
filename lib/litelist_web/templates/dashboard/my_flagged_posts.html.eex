@@ -1,5 +1,5 @@
 <h2>My Flagged Posts</h2>
-<span><%= link "Export All", to: dashboard_path(@conn, :export_posts), class: "btn btn-default btn-xs" %></span>
+<span><%= link "Export All", to: dashboard_path(@conn, :export_my_flagged_posts), class: "btn btn-default btn-xs" %></span>
 
 <table class="table">
   <thead>
