@@ -43,6 +43,16 @@ defmodule LitelistWeb.DashboardController do
         |> send_resp(200, csv)
     end
 
+    def my_flagged_posts(conn, _params) do
+        posts = Posts.list_posts_by_neighbor(conn.assigns.current_neighbor)
+        render(conn, "my_flagged_posts.html", flags: [])
+    end
+
+    def posts_i_flagged(conn, _params) do
+        posts = Posts.list_posts_by_neighbor(conn.assigns.current_neighbor)
+        render(conn, "posts_i_flagged.html", flags: [])
+    end
+
     defp unauthorized_redirect(conn) do
         conn
         |> put_flash(:error, "Unauthorized.")
