@@ -55,11 +55,14 @@ defmodule LitelistWeb.FlagController do
 
   def edit(conn, %{"id" => id}) do
     flag = Moderation.get_flag!(id)
+    post = Posts.get_post!(flag.post_id)
+
     changeset = Moderation.change_flag(flag)
-    render(conn, "edit.html", flag: flag, changeset: changeset)
+    render(conn, "edit.html", flag: flag, changeset: changeset, post: post, statuses: @statuses)
   end
 
   def update(conn, %{"id" => id, "flag" => flag_params}) do
+    IO.inspect flag_params
     flag = Moderation.get_flag!(id)
 
     case Moderation.update_flag(flag, flag_params) do
@@ -68,7 +71,8 @@ defmodule LitelistWeb.FlagController do
         |> put_flash(:info, "Flag updated successfully.")
         |> redirect(to: flag_path(conn, :show, flag))
       {:error, %Ecto.Changeset{} = changeset} ->
-        render(conn, "edit.html", flag: flag, changeset: changeset)
+        post = Posts.get_post!(flag.post_id)
+        render(conn, "edit.html", flag: flag, changeset: changeset, post: post, statuses: @statuses)
     end
   end
 

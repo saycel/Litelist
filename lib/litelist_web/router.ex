@@ -63,6 +63,7 @@ defmodule LitelistWeb.Router do
     get "/posts", AdminController, :posts
     get "/settings", AdminController, :settings
     post "/settings", AdminController, :update_settings
+    resources "/moderation", FlagController
   end
 
   scope "/", LitelistWeb do
@@ -81,7 +82,7 @@ defmodule LitelistWeb.Router do
     resources "/events", EventController, only: [:show, :index]
     resources "/businesses", BusinessController, only: [:show, :index]
     resources "/emergency_info", EmergencyInformationController, only: [:show, :index]
-    resources "/flags", FlagController
+    resources "/flags", FlagController, only: [:new, :show, :create, :index]
   end
 
   # Other scopes may use custom stacks.

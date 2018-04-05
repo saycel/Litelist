@@ -1,0 +1,38 @@
+<ul>
+  <li>
+    <strong>Type:</strong>
+    <%= @flag.type %>
+  </li>
+
+  <li>
+    <strong>Description:</strong>
+    <%= @flag.description %>
+  </li>
+</ul>
+<%= form_for @changeset, @action, fn f -> %>
+  <%= if @changeset.action do %>
+    <div class="alert alert-danger">
+      <p>Oops, something went wrong! Please check the errors below.</p>
+    </div>
+  <% end %>
+
+  <div class="form-group">
+    <%= label f, "Reason for flagging this post (press CMD or CTRL to click more than one)", class: "control-label" %>
+    <br>
+    <%= select f, :status, @statuses, class: "form-control", prompt: "Choose one" %>
+    <%= error_tag f, :status %>
+  </div>
+
+  <div class="form-group">
+    <%= label f, "Please describe why you handled this post the way you did", class: "control-label" %>
+    <br>
+    <%= textarea f, :admin_response, class: "form-control" %>
+    <%= error_tag f, :admin_response %>
+  </div>
+
+  <%= hidden_input f, :post_id, value: @post.id%>
+
+  <div class="form-group">
+    <%= submit "Submit", class: "btn btn-primary" %>
+  </div>
+<% end %>

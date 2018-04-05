@@ -1,5 +1,5 @@
 <h2>Edit Flag</h2>
 
-<%= render "form.html", Map.put(assigns, :action, flag_path(@conn, :update, @flag)) %>
+<%= render "edit_form.html", Map.put(assigns, :action, flag_path(@conn, :update, @flag)) %>
 
 <span><%= link "Back", to: flag_path(@conn, :index) %></span>
