@@ -4,6 +4,7 @@ defmodule LitelistWeb.DashboardController do
     alias Litelist.Posts
     alias LitelistWeb.Utils.SharedUtils
     alias LitelistWeb.Utils.ExportUtils
+    alias Litelist.Moderation
 
     def index(conn, _params) do
         render(conn, "index.html")
@@ -44,13 +45,14 @@ defmodule LitelistWeb.DashboardController do
     end
 
     def my_flagged_posts(conn, _params) do
-        posts = Posts.list_posts_by_neighbor(conn.assigns.current_neighbor)
-        render(conn, "my_flagged_posts.html", flags: [])
+        flags = Moderation.list_my_flagged_posts(conn.assigns.current_neighbor)
+        render(conn, "my_flagged_posts.html", flags: flags)
     end
 
     def posts_i_flagged(conn, _params) do
-        posts = Posts.list_posts_by_neighbor(conn.assigns.current_neighbor)
-        render(conn, "posts_i_flagged.html", flags: [])
+        flags = Moderation.list_flags_by_neighbor(conn.assigns.current_neighbor)
+        IO.inspect flags
+        render(conn, "posts_i_flagged.html", flags: flags)
     end
 
     defp unauthorized_redirect(conn) do

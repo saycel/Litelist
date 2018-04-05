@@ -4,14 +4,14 @@
 <table class="table">
   <thead>
     <tr>
-      <th>Url</th>
+      <th>Description</th>
       <th></th>
     </tr>
   </thead>
   <tbody>
 <%= for flag <- @flags do %>
     <tr>
-      <td><%= flag.url %></td>
+      <td><%= flag.description %></td>
       <td class="text-right">
         <span><%= link "Show", to: flag_path(@conn, :show, flag), class: "btn btn-default btn-xs" %></span>
       </td>

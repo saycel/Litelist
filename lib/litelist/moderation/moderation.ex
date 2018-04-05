@@ -3,10 +3,12 @@ defmodule Litelist.Moderation do
   The Moderation context.
   """
 
+
   import Ecto.Query, warn: false
   alias Litelist.Repo
 
   alias Litelist.Moderation.Flag
+  alias Litelist.Posts.Post
 
   @doc """
   Returns the list of flags.
@@ -19,6 +21,34 @@ defmodule Litelist.Moderation do
   """
   def list_flags do
     Repo.all(Flag)
+  end
+
+  @doc """
+  Returns the list of flags created by the neighbor
+
+  ## Examples
+
+      iex> list_flags_by_neighbor(neighbor)
+      [%Flag{}, ...]
+
+  """
+  def list_flags_by_neighbor(neighbor) do
+    Repo.all(from f in Flag, where: f.neighbor_id == ^neighbor.id)
+  end
+
+  @doc """
+  Returns the list of flags for posts created by the neighbor
+
+  ## Examples
+
+      iex> list_my_flagged_posts(neighbor)
+      [%Flag{}, ...]
+
+  """
+  def list_my_flagged_posts(neighbor) do
+    query = from f in Flag,
+      join: p in Post, where: p.neighbor_id == ^neighbor.id
+    Repo.all(query)
   end
 
   @doc """
