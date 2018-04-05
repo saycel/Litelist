@@ -134,7 +134,8 @@ defmodule Litelist.PostsTest do
   test "get_pending_flag_count" do
     post = Factory.insert(:job)
     Factory.insert_list(3, :flag, %{post_id: post.id})
-    assert(Posts.get_pending_flag_count(post)) == 3
+    Factory.insert(:flag)
+    assert Posts.get_pending_flag_count(post) == 3
   end
 
   describe "get_expired_posts" do

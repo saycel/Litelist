@@ -128,14 +128,14 @@ defmodule LitelistWeb.Utils.SharedUtils do
     parse_multi_select(params, field)
     """
     def parse_multi_select(params, field) do
-        type = params[field]
-        if is_nil(type) do
+        value = params[field]
+        if is_nil(value) do
             params
         else
             params = Map.delete(params, field)
             Map.merge(
                 %{
-                    field => Enum.join(type)
+                    field => Enum.join(value)
                 },
                 params
             )
@@ -143,7 +143,7 @@ defmodule LitelistWeb.Utils.SharedUtils do
     end
 
     @doc """
-
+    adds a status attribute to a map with a given (default) value
     """
     def add_default_status(params, default_status) do
         Map.merge(

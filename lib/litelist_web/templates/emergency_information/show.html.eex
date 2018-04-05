@@ -44,4 +44,4 @@
   <span><%= link "Delete", to: emergency_information_path(@conn, :delete, @emergency_information), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" %></span>
 <% end %>
 <span><%= link "Back", to: emergency_information_path(@conn, :index) %></span>
-<span><%= link "Flag", to: flag_path_builder(@emergency_information_path) %></span>
+<span><%= link "Flag", to: flag_path_builder(@emergency_information) %></span>
