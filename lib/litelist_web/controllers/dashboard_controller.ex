@@ -69,7 +69,6 @@ defmodule LitelistWeb.DashboardController do
 
     def posts_i_flagged(conn, _params) do
         flags = Moderation.list_flags_by_neighbor(conn.assigns.current_neighbor)
-        IO.inspect flags
         render(conn, "posts_i_flagged.html", flags: flags)
     end
 

@@ -1,4 +1,7 @@
 defmodule Litelist.Moderation.Flag do
+  @moduledoc """
+  Flag schema
+  """
   use Ecto.Schema
   import Ecto.Changeset
   alias Litelist.Moderation.Flag

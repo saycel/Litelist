@@ -186,7 +186,7 @@ defmodule LitelistWeb.SharedUtilsTest do
         end
 
         test "returns a joined List in replace of the field if the field is not nil" do
-            list = [1,2,3]
+            list = [1, 2, 3]
             params = %{
                 "the_field" => list
             }

@@ -1,8 +1,6 @@
 defmodule LitelistWeb.FlagControllerTest do
   use LitelistWeb.ConnCase
 
-  alias Litelist.Moderation
-
   # @create_attrs %{admin_response: "some admin_response", description: "some description", status: "some status", type: "some type"}
   # @update_attrs %{admin_response: "some updated admin_response", description: "some updated description", status: "some updated status", type: "some updated type"}
   # @invalid_attrs %{admin_response: nil, description: nil, status: nil, type: nil}

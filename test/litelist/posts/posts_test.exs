@@ -168,7 +168,7 @@ defmodule Litelist.PostsTest do
     test "it should not get an old post,
                     if the post is not older than the setting" do
       create_recent_post()
-      assert length(get_expired_posts_count()) == 0
+      assert Enum.empty?(get_expired_posts_count())
 
     end
 
@@ -176,13 +176,13 @@ defmodule Litelist.PostsTest do
                     if there is an end_date in the future" do
 
       create_old_post_end_date_future()
-      assert length(get_expired_posts_count()) == 0
+      assert Enum.empty?(get_expired_posts_count())
     end
 
     test "it should not delete an old post,
                     if there is an end_time in the future" do
       create_old_post_end_time_future()
-      assert length(get_expired_posts_count()) == 0
+      assert Enum.empty?(get_expired_posts_count())
     end
   end
 
@@ -192,7 +192,7 @@ defmodule Litelist.PostsTest do
 
   defp assert_post_deleted() do
     all_posts = Repo.all(Post)
-    assert length(all_posts) == 0
+    assert Enum.empty?(all_posts)
   end
 
   # defp assert_post_not_deleted() do

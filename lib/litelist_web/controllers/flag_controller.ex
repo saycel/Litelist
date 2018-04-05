@@ -62,7 +62,6 @@ defmodule LitelistWeb.FlagController do
   end
 
   def update(conn, %{"id" => id, "flag" => flag_params}) do
-    IO.inspect flag_params
     flag = Moderation.get_flag!(id)
 
     case Moderation.update_flag(flag, flag_params) do

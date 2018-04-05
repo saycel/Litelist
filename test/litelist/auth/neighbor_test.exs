@@ -26,7 +26,7 @@ defmodule Litelist.NeighborTest do
             neighbor_result = Repo.get(Neighbor, neighbor.id) |> Repo.preload([:flags])
 
             assert length(neighbor_result.flags) == 1
-            assert neighbor_result.posts == [my_flag]
+            assert neighbor_result.flags == [my_flag]
         end
     end
 end
