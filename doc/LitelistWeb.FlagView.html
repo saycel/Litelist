@@ -5,7 +5,7 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="ExDoc v0.18.2">
-    <title>LitelistWeb.SharedView – litelist v0.0.1</title>
+    <title>LitelistWeb.FlagView – litelist v0.0.1</title>
     <link rel="stylesheet" href="dist/app-81d381dea4.css" />
     
     <script src="dist/sidebar_items-e2b99c1448.js"></script>
@@ -70,7 +70,7 @@
 
       <h1>
         <small class="visible-xs">litelist v0.0.1</small>
-        LitelistWeb.SharedView
+        LitelistWeb.FlagView
         
       </h1>
 
@@ -116,15 +116,6 @@
   </div>
   
     <div class="summary-synopsis"><p>Returns the template root alongside all templates</p>
-</div>
-  
-</div>
-<div class="summary-row">
-  <div class="summary-signature">
-    <a href="#getVal/2">getVal(resource, attr)</a>
-  </div>
-  
-    <div class="summary-synopsis"><p>getVal is used to map an inputted resource and a corresponding attribute to its saved value.  That sounds like a lot but its basically a utility for the edit form so that form fields prepopulate with the correct information</p>
 </div>
   
 </div>
@@ -219,33 +210,6 @@ to render a particular template</p>
   </div>
   <section class="docstring">
     <p>Returns the template root alongside all templates.</p>
-
-  </section>
-</div>
-<div class="detail" id="getVal/2">
-  
-  
-  <div class="detail-header">
-    <a href="#getVal/2" class="detail-link" title="Link to this function">
-      <span class="icon-link" aria-hidden="true"></span>
-      <span class="sr-only">Link to this function</span>
-    </a>
-    <span class="signature">getVal(resource, attr)</span>
-    
-    
-    
-  </div>
-  <section class="docstring">
-    <p>getVal is used to map an inputted resource and a corresponding attribute to its saved value.  That sounds like a lot but its basically a utility for the edit form so that form fields prepopulate with the correct information.  </p>
-<h2 id="getVal/2-examples" class="section-heading">
-  <a href="#getVal/2-examples" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
-  Examples
-</h2>
-
-<pre><code class="iex elixir">iex&gt; LitelistWeb.SharedView(@EventPost,TITLE)
-My Cool Event
-iex&gt; LitelistWeb.SharedView(@JobPost,PRICE)
-10.88 </code></pre>
 
   </section>
 </div>

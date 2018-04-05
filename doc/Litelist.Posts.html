@@ -8,7 +8,7 @@
     <title>Litelist.Posts – litelist v0.0.1</title>
     <link rel="stylesheet" href="dist/app-81d381dea4.css" />
     
-    <script src="dist/sidebar_items-cf21306aae.js"></script>
+    <script src="dist/sidebar_items-e2b99c1448.js"></script>
     
     
     
@@ -126,10 +126,39 @@
 </div>
 <div class="summary-row">
   <div class="summary-signature">
+    <a href="#delete_expired_posts/0">delete_expired_posts()</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>Deletes all posts returned from Posts.get_expired_posts_query</p>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
     <a href="#delete_post/1">delete_post(post)</a>
   </div>
   
     <div class="summary-synopsis"><p>Deletes a Post</p>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#get_expired_posts_query/0">get_expired_posts_query()</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>returns the query that will return expired posts</p>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#get_pending_flag_count/1">get_pending_flag_count(post)</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>Ecto query that returns how many pending flags a post has
+iex&gt; get_pending_flag_count(post)
+2</p>
 </div>
   
 </div>
@@ -286,6 +315,24 @@ iex&gt; create_post(%{field: bad_value})
 
   </section>
 </div>
+<div class="detail" id="delete_expired_posts/0">
+  
+  
+  <div class="detail-header">
+    <a href="#delete_expired_posts/0" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <span class="signature">delete_expired_posts()</span>
+    
+    
+    
+  </div>
+  <section class="docstring">
+    <p>Deletes all posts returned from Posts.get_expired_posts_query</p>
+
+  </section>
+</div>
 <div class="detail" id="delete_post/1">
   
   
@@ -311,6 +358,44 @@ iex&gt; create_post(%{field: bad_value})
 
 iex&gt; delete_post(post)
 {:error, %Ecto.Changeset{}}</code></pre>
+
+  </section>
+</div>
+<div class="detail" id="get_expired_posts_query/0">
+  
+  
+  <div class="detail-header">
+    <a href="#get_expired_posts_query/0" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <span class="signature">get_expired_posts_query()</span>
+    
+    
+    
+  </div>
+  <section class="docstring">
+    <p>returns the query that will return expired posts</p>
+
+  </section>
+</div>
+<div class="detail" id="get_pending_flag_count/1">
+  
+  
+  <div class="detail-header">
+    <a href="#get_pending_flag_count/1" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <span class="signature">get_pending_flag_count(post)</span>
+    
+    
+    
+  </div>
+  <section class="docstring">
+    <p>Ecto query that returns how many pending flags a post has
+iex&gt; get_pending_flag_count(post)
+2</p>
 
   </section>
 </div>
