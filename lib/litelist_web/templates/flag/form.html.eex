@@ -6,7 +6,7 @@
   <% end %>
 
   <div class="form-group">
-    <%= label f, "Reason for flagging this post (press shift to click more than one)", class: "control-label" %>
+    <%= label f, "Reason for flagging this post (press CMD or CTRL to click more than one)", class: "control-label" %>
     <br>
     <%= multiple_select f, :type, @types, class: "form-control", prompt: "Choose one" %>
     <%= error_tag f, :type %>
