@@ -17,5 +17,16 @@ defmodule Litelist.NeighborTest do
             assert length(neighbor_result.posts) == 1
             assert neighbor_result.posts == [my_post]
         end
+
+        test "Neighbor has_many Flags" do
+            neighbor = Factory.insert(:neighbor)
+            my_flag = Factory.insert(:flag, %{neighbor_id: neighbor.id})
+
+            # credo:disable-for-lines:1
+            neighbor_result = Repo.get(Neighbor, neighbor.id) |> Repo.preload([:flags])
+
+            assert length(neighbor_result.flags) == 1
+            assert neighbor_result.posts == [my_flag]
+        end
     end
 end

@@ -37,9 +37,6 @@ defmodule LitelistWeb.Utils.ExportUtils do
     end
 
     def build_posts_i_flagged(%Neighbor{} = neighbor) do
-        IO.inspect neighbor.id
-        IO.inspect "(*******"
-        id = 1
         columns = "post_title,post_url,flag_type,flag_description,flag_status,admin_response\n"
         
         query = "COPY(SELECT posts.title, posts.url, flags.type, flags.description, flags.status, flags.admin_response

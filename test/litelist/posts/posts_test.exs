@@ -131,6 +131,12 @@ defmodule Litelist.PostsTest do
     assert_post_deleted()
   end
 
+  test "get_pending_flag_count" do
+    post = Factory.insert(:job)
+    Factory.insert_list(3, :flag, %{post_id: post.id})
+    assert(Posts.get_pending_flag_count(post)) == 3
+  end
+
   describe "get_expired_posts" do
     test "it should get an old post,
                       if that post doesn't have an end_date or end_time" do
