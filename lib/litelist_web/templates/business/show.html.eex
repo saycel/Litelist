@@ -40,3 +40,4 @@
 <% end %>
 
 <span><%= link "Back", to: business_path(@conn, :index) %></span>
+<span><%= link "Flag", to: flag_path_builder(@business) %></span>

@@ -1,0 +1,8 @@
+<h2>New Flag</h2>
+<p>Flag for post titled
+    <a href="<%= path_builder(@post) %>"><%= @post.title %></a>
+</p>
+
+<%= render "form.html", assigns |> Map.put(:action, flag_path(@conn, :create)) |> Map.put(:types, @types) %>
+
+<span><%= link "Back", to: flag_path(@conn, :index) %></span>

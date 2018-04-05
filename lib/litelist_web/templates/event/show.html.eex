@@ -54,3 +54,4 @@
   <span><%= link "Delete", to: event_path(@conn, :delete, @event), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" %></span>
 <% end %>
 <span><%= link "Back", to: event_path(@conn, :index) %></span>
+<span><%= link "Flag", to: flag_path_builder(@event) %></span>

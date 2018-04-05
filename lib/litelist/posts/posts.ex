@@ -8,6 +8,7 @@ defmodule Litelist.Posts do
 
   alias Litelist.Posts.Post
   alias Litelist.Posts.Search
+  alias Litelist.Moderation.Flag
 
   @doc """
   Returns the list of posts.
@@ -161,12 +162,13 @@ defmodule Litelist.Posts do
     Repo.delete_all(get_expired_posts_query())
   end
 
-  @doc """
-  Soft delete all posts returned from Posts.get_expired_posts_query
-  """
-  def soft_delete_expired_posts() do
-    expired_posts = Repo.all(get_expired_posts_query())
-  end
+  # @doc """
+  # Soft delete all posts returned from Posts.get_expired_posts_query
+  # """
+  # def soft_delete_expired_posts() do
+  #   expired_posts = Repo.all(get_expired_posts_query())
+  #   # Run in a transaction
+  # end
 
   @doc """
   returns the query that will return expired posts
@@ -185,5 +187,18 @@ defmodule Litelist.Posts do
       or_where: p.end_time < ^now and is_nil(p.end_time),
       or_where: p.end_date < ^today and is_nil(p.end_date),
       or_where: p.end_time < ^now and p.end_date < ^today
+  end
+
+  @doc """
+  Ecto query that returns how many pending flags a post has
+  iex> get_pending_flag_count(post)
+  2
+  """
+  def get_pending_flag_count(post) do
+    query = from f in Flag,
+      where: f.post_id == ^post.id,
+      where: f.status == "pending"
+
+    Repo.aggregate(query, :count, :id)
   end
 end

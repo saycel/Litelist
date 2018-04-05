@@ -50,5 +50,11 @@ defmodule LitelistWeb.UtilsViewTest do
 
         assert html_response(conn, 200)
     end
+
+    test "flag_path_builder/1 returns expected values" do
+        job = Factory.insert(:job)
+        expected = "/flags/new?post_id=#{job.id}"
+        assert UtilsView.flag_path_builder(job) == expected
+    end
 end
   
