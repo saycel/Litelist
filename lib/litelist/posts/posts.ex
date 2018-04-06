@@ -173,6 +173,7 @@ defmodule Litelist.Posts do
   @doc """
   returns the query that will return expired posts
   """
+  # credo:disable-for-lines:15
   def get_expired_posts_query() do
     time_limit = 30
     now = Timex.now

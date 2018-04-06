@@ -1,4 +1,7 @@
 defmodule Litelist.Discussions.Discussion do
+  @moduledoc """
+  Discussion schema
+  """
   use Ecto.Schema
   import Ecto.Changeset
   alias Litelist.Discussions.Discussion
