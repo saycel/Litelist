@@ -124,6 +124,23 @@ defmodule LitelistWeb.Utils.SharedUtils do
     end
 
     @doc """
+    add_neighbor_id_if_exists(params, con)
+    Adds the current_neighbor id to params
+    """
+    def add_neighbor_id_if_exists(params, conn) do
+        if conn.assigns.current_neighbor do
+            Map.merge(
+                %{
+                    "neighbor_id" => conn.assigns.current_neighbor.id
+                },
+                params
+            )
+        else
+            params
+        end
+    end
+
+    @doc """
     Parses a multiselect so the field becomes a string (from a List)
     parse_multi_select(params, field)
     """

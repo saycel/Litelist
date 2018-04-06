@@ -28,5 +28,3 @@
 <% end %>
   </tbody>
 </table>
-
-<span><%= link "New Flag", to: flag_path(@conn, :new) %></span>

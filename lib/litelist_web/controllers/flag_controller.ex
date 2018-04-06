@@ -33,7 +33,7 @@ defmodule LitelistWeb.FlagController do
   def create(conn, %{"flag" => flag_params}) do
     flag_params = flag_params
       |> SharedUtils.parse_multi_select("type")
-      |> SharedUtils.add_neighbor_id(conn)
+      |> SharedUtils.add_neighbor_id_if_exists(conn)
       |> SharedUtils.add_default_status(@default_status)
 
     case Moderation.create_flag(flag_params) do
