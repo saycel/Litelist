@@ -131,7 +131,6 @@ defmodule LitelistWeb.Utils.SharedUtils do
         if is_nil(conn.assigns.current_neighbor) do
             params
         else
-            IO.inspect "HERE"
             Map.merge(
                 %{
                     "neighbor_id" => conn.assigns.current_neighbor.id

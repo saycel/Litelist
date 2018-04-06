@@ -202,58 +202,56 @@ defmodule LitelistWeb.FlagControllerTest do
 
       assert response(conn, 401)
     end
+
+    test "renders errors when data is invalid", %{conn: conn} do
+      admin = Factory.insert(:admin)
+      post = Factory.insert(:job, %{neighbor_id: admin.id})
+      flag = Factory.insert(:flag, %{post_id: post.id})
+      conn = conn
+        |> login_neighbor(admin)
+        |> put(flag_path(conn, :update, flag), flag: @invalid_attrs)
+
+      assert html_response(conn, 200)
+      assert view_template(conn) == "edit.html"
+    end
   end
 
-  # describe "delete flag" do
+  describe "delete flag" do
 
-  #   test "deletes chosen flag", %{conn: conn} do
-  #     neighbor = Factory.insert(:neighbor)
-  #     flag = Factory.insert(:flag, %{neighbor_id: neighbor.id})
+    test "401 on delete if neighbor is not admin", %{conn: conn} do
+      neighbor = Factory.insert(:neighbor)
+      flag = Factory.insert(:flag, %{neighbor_id: neighbor.id})
 
-  #     conn = conn
-  #       |> login_neighbor(neighbor)
-  #       |> delete(flag_path(conn, :delete, flag))
+      conn = conn
+        |> login_neighbor(neighbor)
+        |> delete(flag_path(conn, :delete, flag))
 
-  #     assert redirected_to(conn) == flag_path(conn, :index)
-  #     assert_error_sent 404, fn ->
-  #       get conn, flag_path(conn, :show, flag)
-  #     end
-  #   end
+        assert response(conn, 401)
+    end
 
-  #   test "deletes chosen flag as an admin", %{conn: conn} do
-  #     admin = Factory.insert(:admin)
-  #     flag = Factory.insert(:flag)
+    test "deletes chosen flag as an admin", %{conn: conn} do
+      admin = Factory.insert(:admin)
+      flag = Factory.insert(:flag)
 
-  #     conn = conn
-  #       |> login_neighbor(admin)
-  #       |> delete(flag_path(conn, :delete, flag))
+      conn = conn
+        |> login_neighbor(admin)
+        |> delete(flag_path(conn, :delete, flag))
 
-  #     assert redirected_to(conn) == flag_path(conn, :index)
-  #     assert_error_sent 404, fn ->
-  #       get conn, flag_path(conn, :show, flag)
-  #     end
-  #   end
+      assert redirected_to(conn) == flag_path(conn, :index)
+      assert_error_sent 404, fn ->
+        get conn, flag_path(conn, :show, flag)
+      end
+    end
 
-  #   test "redirects to index if flag was not created by the neighbor", %{conn: conn} do
-  #     neighbor = Factory.insert(:neighbor)
-  #     not_my_flag = Factory.insert(:flag)
+    test "unautorized 401 redirect if not logged in", %{conn: conn} do
+      flag = Factory.insert(:flag)
 
-  #     conn = conn
-  #       |> login_neighbor(neighbor)
-  #       |> delete(flag_path(conn, :delete, not_my_flag))
+      conn = conn
+        |> delete(flag_path(conn, :delete, flag))
 
-  #       assert redirected_to(conn) == flag_path(conn, :index)
-  #   end
-
-  #   test "unautorized 401 redirect if not logged in", %{conn: conn} do
-  #     flag = Factory.insert(:flag)
-
-  #     conn = conn
-  #       |> delete(flag_path(conn, :delete, flag))
-
-  #     assert response(conn, 401)
-  #   end
-  # end
+      assert response(conn, 401)
+    end
+  end
 
   defp login_neighbor(conn, neighbor) do
     {:ok, token, _} = Guardian.encode_and_sign(neighbor, %{}, token_type: :access)

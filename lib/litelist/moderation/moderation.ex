@@ -21,7 +21,7 @@ defmodule Litelist.Moderation do
 
   """
   def list_flags do
-    Repo.all(Flag) |> Repo.preload(:post)
+    Flag |> Repo.all() |> Repo.preload(:post)
   end
 
   @doc """
@@ -35,7 +35,8 @@ defmodule Litelist.Moderation do
 
   """
   def list_flags_by_neighbor(neighbor) do
-    Repo.all(from f in Flag, where: f.neighbor_id == ^neighbor.id) |> Repo.preload(:post)
+    query = from f in Flag, where: f.neighbor_id == ^neighbor.id
+    query |> Repo.all() |> Repo.preload(:post)
   end
 
   @doc """
@@ -51,7 +52,7 @@ defmodule Litelist.Moderation do
   def list_my_flagged_posts(neighbor) do
     query = from f in Flag,
       join: p in Post, where: p.neighbor_id == ^neighbor.id
-    Repo.all(query) |> Repo.preload(:post)
+    query |> Repo.all() |> Repo.preload(:post)
   end
 
   @doc """
@@ -69,7 +70,7 @@ defmodule Litelist.Moderation do
       ** (Ecto.NoResultsError)
 
   """
-  def get_flag!(id), do: Repo.get!(Flag, id) |> Repo.preload(:post)
+  def get_flag!(id), do: Flag |> Repo.get!(id) |> Repo.preload(:post)
 
   @doc """
   Creates a flag.
