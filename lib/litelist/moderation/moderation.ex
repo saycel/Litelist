@@ -12,6 +12,7 @@ defmodule Litelist.Moderation do
 
   @doc """
   Returns the list of flags.
+  Posts are preloaded
 
   ## Examples
 
@@ -25,6 +26,7 @@ defmodule Litelist.Moderation do
 
   @doc """
   Returns the list of flags created by the neighbor
+  Posts are preloaded
 
   ## Examples
 
@@ -33,11 +35,12 @@ defmodule Litelist.Moderation do
 
   """
   def list_flags_by_neighbor(neighbor) do
-    Repo.all(from f in Flag, where: f.neighbor_id == ^neighbor.id)
+    Repo.all(from f in Flag, where: f.neighbor_id == ^neighbor.id) |> Repo.preload(:post)
   end
 
   @doc """
   Returns the list of flags for posts created by the neighbor
+  Posts are preloaded
 
   ## Examples
 
@@ -48,11 +51,12 @@ defmodule Litelist.Moderation do
   def list_my_flagged_posts(neighbor) do
     query = from f in Flag,
       join: p in Post, where: p.neighbor_id == ^neighbor.id
-    Repo.all(query)
+    Repo.all(query) |> Repo.preload(:post)
   end
 
   @doc """
   Gets a single flag.
+  Post is preloaded
 
   Raises `Ecto.NoResultsError` if the Flag does not exist.
 

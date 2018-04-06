@@ -7,7 +7,7 @@ defmodule Litelist.ModerationTest do
   describe "flags" do
     alias Litelist.Moderation.Flag
 
-    @valid_attrs %{admin_response: "some admin_response", description: "some description", type: "Incorrect information"}
+    @valid_attrs %{admin_response: "some admin_response", description: "some description", type: "Incorrect information", status: "pending"}
     @update_attrs %{admin_response: "some updated admin_response", description: "some updated description", status: "post_removed", type: "Abusive"}
     @invalid_attrs %{admin_response: nil, description: nil, status: nil, type: nil}
 
@@ -20,14 +20,20 @@ defmodule Litelist.ModerationTest do
       flag
     end
 
-    test "list_flags/0 returns all flags" do
-      flag = Factory.insert(:flag)
-      assert Moderation.list_flags() == [flag]
+    test "list_flags/0 returns all flags with posts preloaded" do
+      post = Factory.insert(:job)
+      flag = Factory.insert(:flag, %{post_id: post.id})
+      fetched_flags = Moderation.list_flags()
+      [first_flag | _] = fetched_flags
+      assert first_flag.id == flag.id
     end
 
-    test "get_flag!/1 returns the flag with given id" do
-      flag = Factory.insert(:flag)
-      assert Moderation.get_flag!(flag.id) == flag
+    test "get_flag!/1 returns the flag with given id with post preloaded" do
+      post = Factory.insert(:job)
+      flag = Factory.insert(:flag, %{post_id: post.id})
+      fetched_flag = Moderation.get_flag!(flag.id)
+      assert fetched_flag.id == flag.id
+      assert fetched_flag.post == post
     end
 
     test "create_flag/1 with valid data creates a flag" do
@@ -57,7 +63,8 @@ defmodule Litelist.ModerationTest do
     test "update_flag/2 with invalid data returns error changeset" do
       flag = Factory.insert(:flag)
       assert {:error, %Ecto.Changeset{}} = Moderation.update_flag(flag, @invalid_attrs)
-      assert flag == Moderation.get_flag!(flag.id)
+      fetched_flag = Moderation.get_flag!(flag.id)
+      assert flag.id == fetched_flag.id
     end
 
     test "delete_flag/1 deletes the flag" do
