@@ -1,6 +1,7 @@
 defmodule LitelistWeb.EventControllerTest do
   use LitelistWeb.ConnCase, async: true
-  
+  import Phoenix.Controller
+
   alias Litelist.Factory
   alias Litelist.Auth.Guardian
 
@@ -13,7 +14,8 @@ defmodule LitelistWeb.EventControllerTest do
       conn = conn
         |> get(event_path(conn, :index))
 
-      assert html_response(conn, 200) =~ "Listing Events"
+      assert html_response(conn, 200)
+      assert view_template(conn) == "index.html"
     end
   end
 
@@ -24,7 +26,8 @@ defmodule LitelistWeb.EventControllerTest do
       conn = conn
         |> get(event_path(conn, :show, event))
 
-      assert html_response(conn, 200) =~ event.title
+      assert html_response(conn, 200)
+      assert view_template(conn) == "show.html"
     end
 
     test "redirects to index if the type does not match", %{conn: conn} do
@@ -45,7 +48,8 @@ defmodule LitelistWeb.EventControllerTest do
         |> login_neighbor(neighbor)
         |> get(event_path(conn, :new))
       
-      assert html_response(conn, 200) =~ "EVENT POST"
+      assert html_response(conn, 200)
+      assert view_template(conn) == "new.html"
     end
 
     test "unautorized 401 redirect if not logged in", %{conn: conn} do
@@ -72,7 +76,8 @@ defmodule LitelistWeb.EventControllerTest do
         |> login_neighbor(neighbor)
 
       conn = get conn, event_path(conn, :show, id)
-      assert html_response(conn, 200) =~ "Show Event"
+      assert html_response(conn, 200)
+      assert view_template(conn) == "show.html"
     end
 
     test "renders errors when data is invalid", %{conn: conn} do
@@ -81,7 +86,8 @@ defmodule LitelistWeb.EventControllerTest do
       conn = conn
         |> login_neighbor(neighbor)
         |> post(event_path(conn, :create), post: @invalid_attrs)
-      assert html_response(conn, 200) =~ "EVENT POST"
+      assert html_response(conn, 200)
+      assert view_template(conn) == "new.html"
     end
 
     test "unautorized 401 redirect if not logged in", %{conn: conn} do
@@ -98,7 +104,8 @@ defmodule LitelistWeb.EventControllerTest do
       conn = conn
         |> login_neighbor(neighbor)
         |> post(event_path(conn, :create), post: @create_attrs)
-      assert html_response(conn, 200) =~ "EVENT POST"
+      assert html_response(conn, 200)
+      assert view_template(conn) == "new.html"
     end
   end
 
@@ -110,7 +117,8 @@ defmodule LitelistWeb.EventControllerTest do
       conn = conn
         |> login_neighbor(neighbor)
         |> get(event_path(conn, :edit, event))
-      assert html_response(conn, 200) =~ "TITLE"
+      assert html_response(conn, 200)
+      assert view_template(conn) == "edit.html"
     end
 
     test "renders form for editing chosen event as an admin", %{conn: conn} do
@@ -120,7 +128,8 @@ defmodule LitelistWeb.EventControllerTest do
       conn = conn
         |> login_neighbor(admin)
         |> get(event_path(conn, :edit, event))
-      assert html_response(conn, 200) =~ "TITLE"
+      assert html_response(conn, 200)
+      assert view_template(conn) == "edit.html"
     end
 
     test "redirects to index if event was not created by the neighbor", %{conn: conn} do
@@ -160,7 +169,8 @@ defmodule LitelistWeb.EventControllerTest do
         |> login_neighbor(neighbor)
 
       conn = get conn, event_path(conn, :show, event)
-      assert html_response(conn, 200) =~ "some updated contact_info"
+      assert html_response(conn, 200)
+      assert view_template(conn) == "show.html"
     end
 
     test "redirects when data is valid as an admin", %{conn: conn} do
@@ -178,7 +188,8 @@ defmodule LitelistWeb.EventControllerTest do
         |> login_neighbor(admin)
 
       conn = get conn, event_path(conn, :show, event)
-      assert html_response(conn, 200) =~ "some updated contact_info"
+      assert html_response(conn, 200)
+      assert view_template(conn) == "show.html"
     end
 
     test "renders errors when data is invalid", %{conn: conn} do
@@ -189,7 +200,8 @@ defmodule LitelistWeb.EventControllerTest do
         |> login_neighbor(neighbor)
         |> put(event_path(conn, :update, event), post: @invalid_attrs)
 
-      assert html_response(conn, 200) =~ "TITLE"
+      assert html_response(conn, 200)
+      assert view_template(conn) == "edit.html"
     end
 
     test "redirects to index if event was not created by the neighbor", %{conn: conn} do

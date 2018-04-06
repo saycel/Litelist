@@ -1,6 +1,7 @@
 defmodule LitelistWeb.AdminControllerTest do
     use LitelistWeb.ConnCase, async: true
-  
+    import Phoenix.Controller
+
     alias Litelist.Factory
     alias Litelist.Auth.Guardian
   
@@ -12,7 +13,8 @@ defmodule LitelistWeb.AdminControllerTest do
           |> login_neighbor(admin)
           |> get(admin_path(conn, :index))
   
-        assert html_response(conn, 200) =~ "Dashboard"
+        assert html_response(conn, 200)
+        assert view_template(conn) == "index.html"
       end
 
       test "redirects if logged in as non-admin", %{conn: conn} do
@@ -41,7 +43,8 @@ defmodule LitelistWeb.AdminControllerTest do
             |> login_neighbor(admin)
             |> get(admin_path(conn, :posts))
     
-          assert html_response(conn, 200) =~ "Dashboard"
+          assert html_response(conn, 200)
+          assert view_template(conn) == "posts.html"
         end
   
         test "redirects if logged in as a non-admin", %{conn: conn} do
@@ -70,7 +73,8 @@ defmodule LitelistWeb.AdminControllerTest do
             |> login_neighbor(admin)
             |> get(admin_path(conn, :settings))
     
-          assert html_response(conn, 200) =~ "Settings"
+          assert html_response(conn, 200)
+          assert view_template(conn) == "settings.html"
         end
   
         test "redirects if logged in as a non-admin", %{conn: conn} do
