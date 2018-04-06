@@ -67,7 +67,7 @@ defmodule LitelistWeb.Router do
     get "/settings", AdminController, :settings
     post "/settings", AdminController, :update_settings
     resources "/moderation", FlagController
-    resources "/discussions", DiscussionController
+    resources "/discussions", DiscussionController, only: [:edit, :update, :delete]
   end
 
   scope "/", LitelistWeb do

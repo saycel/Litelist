@@ -4,6 +4,8 @@ defmodule LitelistWeb.DiscussionController do
   alias Litelist.Discussions
   alias Litelist.Discussions.Discussion
 
+  alias LitelistWeb.Utils.SharedUtils
+
   def index(conn, _params) do
     discussions = Discussions.list_discussions()
     render(conn, "index.html", discussions: discussions)
@@ -15,6 +17,8 @@ defmodule LitelistWeb.DiscussionController do
   end
 
   def create(conn, %{"discussion" => discussion_params}) do
+    discussion_params = discussion_params
+      |> SharedUtils.add_neighbor_id(conn)
     case Discussions.create_discussion(discussion_params) do
       {:ok, discussion} ->
         conn
