@@ -1,6 +1,7 @@
 defmodule LitelistWeb.ForSaleControllerTest do
   use LitelistWeb.ConnCase, async: true
-  
+  import Phoenix.Controller
+
   alias Litelist.Factory
   alias Litelist.Auth.Guardian
 
@@ -13,7 +14,8 @@ defmodule LitelistWeb.ForSaleControllerTest do
       conn = conn
         |> get(for_sale_path(conn, :index))
 
-      assert html_response(conn, 200) =~ "Listing For sales"
+      assert html_response(conn, 200)
+      assert view_template(conn) == "index.html"
     end
   end
 
@@ -24,7 +26,8 @@ defmodule LitelistWeb.ForSaleControllerTest do
       conn = conn
         |> get(for_sale_path(conn, :show, for_sale))
 
-      assert html_response(conn, 200) =~ for_sale.title
+      assert html_response(conn, 200)
+      assert view_template(conn) == "show.html"
     end
 
     test "redirects to index if the type does not match", %{conn: conn} do
@@ -43,7 +46,8 @@ defmodule LitelistWeb.ForSaleControllerTest do
         |> login_neighbor(neighbor)
         |> get(for_sale_path(conn, :new))
       
-      assert html_response(conn, 200) =~ "SALE POST"
+      assert html_response(conn, 200)
+      assert view_template(conn) == "new.html"
     end
 
     test "unautorized 401 redirect if not logged in", %{conn: conn} do
@@ -70,7 +74,8 @@ defmodule LitelistWeb.ForSaleControllerTest do
         |> login_neighbor(neighbor)
 
       conn = get conn, for_sale_path(conn, :show, id)
-      assert html_response(conn, 200) =~ "title"
+      assert html_response(conn, 200)
+      assert view_template(conn) == "show.html"
     end
 
     test "renders errors when data is invalid", %{conn: conn} do
@@ -78,7 +83,8 @@ defmodule LitelistWeb.ForSaleControllerTest do
       conn = conn
         |> login_neighbor(neighbor)
         |> post(for_sale_path(conn, :create), post: @invalid_attrs)
-      assert html_response(conn, 200) =~ "SALE POST"
+      assert html_response(conn, 200)
+      assert view_template(conn) == "new.html"
     end
 
     test "unautorized 401 redirect if not logged in", %{conn: conn} do
@@ -93,7 +99,8 @@ defmodule LitelistWeb.ForSaleControllerTest do
       conn = conn
         |> login_neighbor(neighbor)
         |> post(for_sale_path(conn, :create), post: @create_attrs)
-      assert html_response(conn, 200) =~ "SALE POST"
+      assert html_response(conn, 200)
+      assert view_template(conn) == "new.html"
     end
   end
 
@@ -105,7 +112,8 @@ defmodule LitelistWeb.ForSaleControllerTest do
       conn = conn
         |> login_neighbor(neighbor)
         |> get(for_sale_path(conn, :edit, for_sale))
-      assert html_response(conn, 200) =~ "TITLE"
+      assert html_response(conn, 200)
+      assert view_template(conn) == "edit.html"
     end
 
     test "renders form for editing chosen for_sale as an admin", %{conn: conn} do
@@ -115,7 +123,8 @@ defmodule LitelistWeb.ForSaleControllerTest do
       conn = conn
         |> login_neighbor(admin)
         |> get(for_sale_path(conn, :edit, for_sale))
-      assert html_response(conn, 200) =~ "TITLE"
+      assert html_response(conn, 200)
+      assert view_template(conn) == "edit.html"
     end
 
     test "redirects to index if for_sale was not created by the neighbor", %{conn: conn} do
@@ -156,7 +165,8 @@ defmodule LitelistWeb.ForSaleControllerTest do
         |> login_neighbor(neighbor)
 
       conn = get conn, for_sale_path(conn, :show, for_sale)
-      assert html_response(conn, 200) =~ "some updated contact_info"
+      assert html_response(conn, 200)
+      assert view_template(conn) == "show.html"
     end
 
     test "redirects when data is valid as an admin", %{conn: conn} do
@@ -174,7 +184,8 @@ defmodule LitelistWeb.ForSaleControllerTest do
         |> login_neighbor(admin)
 
       conn = get conn, for_sale_path(conn, :show, for_sale)
-      assert html_response(conn, 200) =~ "some updated contact_info"
+      assert html_response(conn, 200)
+      assert view_template(conn) == "show.html"
     end
 
     test "renders errors when data is invalid", %{conn: conn} do
@@ -185,7 +196,8 @@ defmodule LitelistWeb.ForSaleControllerTest do
         |> login_neighbor(neighbor)
         |> put(for_sale_path(conn, :update, for_sale), post: @invalid_attrs)
 
-      assert html_response(conn, 200) =~ "TITLE"
+      assert html_response(conn, 200)
+      assert view_template(conn) == "edit.html"
     end
 
     test "redirects to index if for_sale was not created by the neighbor", %{conn: conn} do

@@ -1,5 +1,6 @@
 defmodule LitelistWeb.DiscussionControllerTest do
   use LitelistWeb.ConnCase, async: true
+  import Phoenix.Controller
 
   alias Litelist.Factory
   alias Litelist.Auth.Guardian
@@ -13,7 +14,8 @@ defmodule LitelistWeb.DiscussionControllerTest do
       conn = conn
         |> get(discussion_path(conn, :index))
 
-      assert html_response(conn, 200) =~ "Listing Discussions"
+      assert html_response(conn, 200)
+      assert view_template(conn) == "index.html"
     end
   end
 
@@ -23,7 +25,8 @@ defmodule LitelistWeb.DiscussionControllerTest do
       conn = conn
         |> get(discussion_path(conn, :show, discussion))
 
-      assert html_response(conn, 200) =~ discussion.title
+      assert html_response(conn, 200)
+      assert view_template(conn) == "show.html"
     end
   end
 
@@ -34,7 +37,8 @@ defmodule LitelistWeb.DiscussionControllerTest do
         |> login_neighbor(neighbor)
         |> get(discussion_path(conn, :new))
       
-      assert html_response(conn, 200) =~ "Title"
+      assert html_response(conn, 200)
+      assert view_template(conn) == "new.html"
     end
 
     test "unautorized 401 redirect if not logged in", %{conn: conn} do
@@ -60,7 +64,7 @@ defmodule LitelistWeb.DiscussionControllerTest do
         |> login_neighbor(neighbor)
 
       conn = get conn, discussion_path(conn, :show, id)
-      assert html_response(conn, 200) =~ "Show Discussion"
+      assert view_template(conn) == "show.html"
     end
 
     test "renders errors when data is invalid", %{conn: conn} do
@@ -68,7 +72,8 @@ defmodule LitelistWeb.DiscussionControllerTest do
       conn = conn
         |> login_neighbor(neighbor)
         |> post(discussion_path(conn, :create), discussion: @invalid_attrs)
-      assert html_response(conn, 200) =~ "Title"
+      assert html_response(conn, 200)
+      assert view_template(conn) == "new.html"
     end
 
     test "unautorized 401 redirect if not logged in", %{conn: conn} do
@@ -83,7 +88,8 @@ defmodule LitelistWeb.DiscussionControllerTest do
       conn = conn
         |> login_neighbor(neighbor)
         |> post(discussion_path(conn, :create), discussion: @create_attrs)
-      assert html_response(conn, 200) =~ "Title"
+      assert html_response(conn, 200)
+      assert view_template(conn) == "new.html"
     end
 
     test "renders errors when url is not unique", %{conn: conn} do
@@ -92,7 +98,8 @@ defmodule LitelistWeb.DiscussionControllerTest do
       conn = conn
         |> login_neighbor(neighbor)
         |> post(discussion_path(conn, :create), discussion: @create_attrs)
-      assert html_response(conn, 200) =~ "Title"
+      assert html_response(conn, 200)
+      assert view_template(conn) == "new.html"
     end
   end
 
@@ -114,7 +121,8 @@ defmodule LitelistWeb.DiscussionControllerTest do
       conn = conn
         |> login_neighbor(admin)
         |> get(discussion_path(conn, :edit, discussion))
-      assert html_response(conn, 200) =~ "Title"
+      assert html_response(conn, 200)
+      assert view_template(conn) == "edit.html"
     end
 
     test "401 if discussion was created by the neighbor but neighbor is not an admin", %{conn: conn} do
@@ -164,7 +172,8 @@ defmodule LitelistWeb.DiscussionControllerTest do
         |> login_neighbor(admin)
 
       conn = get conn, discussion_path(conn, :show, discussion)
-      assert html_response(conn, 200) =~ "updated title"
+      assert html_response(conn, 200)
+      assert view_template(conn) == "show.html"
     end
 
     test "renders errors when data is invalid", %{conn: conn} do
@@ -175,7 +184,8 @@ defmodule LitelistWeb.DiscussionControllerTest do
         |> login_neighbor(admin)
         |> put(discussion_path(conn, :update, discussion), discussion: @invalid_attrs)
 
-      assert html_response(conn, 200) =~ "Title"
+      assert html_response(conn, 200)
+      assert view_template(conn) == "edit.html"
     end
 
     test "401 if discussion was not created by the neighbor", %{conn: conn} do

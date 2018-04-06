@@ -1,6 +1,7 @@
 defmodule LitelistWeb.JobControllerTest do
   use LitelistWeb.ConnCase, async: true
-  
+  import Phoenix.Controller
+
   alias Litelist.Factory
   alias Litelist.Auth.Guardian
 
@@ -13,7 +14,8 @@ defmodule LitelistWeb.JobControllerTest do
       conn = conn
         |> get(job_path(conn, :index))
 
-      assert html_response(conn, 200) =~ "Listing Jobs"
+      assert html_response(conn, 200)
+      assert view_template(conn) == "index.html"
     end
   end
 
@@ -23,7 +25,8 @@ defmodule LitelistWeb.JobControllerTest do
       conn = conn
         |> get(job_path(conn, :show, job))
 
-      assert html_response(conn, 200) =~ job.title
+      assert html_response(conn, 200)
+      assert view_template(conn) == "show.html"
     end
 
     test "redirects to index if the type does not match", %{conn: conn} do
@@ -42,7 +45,8 @@ defmodule LitelistWeb.JobControllerTest do
         |> login_neighbor(neighbor)
         |> get(job_path(conn, :new))
       
-      assert html_response(conn, 200) =~ "TITLE"
+      assert html_response(conn, 200)
+      assert view_template(conn) == "new.html"
     end
 
     test "unautorized 401 redirect if not logged in", %{conn: conn} do
@@ -68,7 +72,8 @@ defmodule LitelistWeb.JobControllerTest do
         |> login_neighbor(neighbor)
 
       conn = get conn, job_path(conn, :show, id)
-      assert html_response(conn, 200) =~ "Show Job"
+      assert html_response(conn, 200)
+      assert view_template(conn) == "show.html"
     end
 
     test "renders errors when data is invalid", %{conn: conn} do
@@ -76,7 +81,8 @@ defmodule LitelistWeb.JobControllerTest do
       conn = conn
         |> login_neighbor(neighbor)
         |> post(job_path(conn, :create), post: @invalid_attrs)
-      assert html_response(conn, 200) =~ "TITLE"
+      assert html_response(conn, 200)
+      assert view_template(conn) == "new.html"
     end
 
     test "unautorized 401 redirect if not logged in", %{conn: conn} do
@@ -91,7 +97,8 @@ defmodule LitelistWeb.JobControllerTest do
       conn = conn
         |> login_neighbor(neighbor)
         |> post(job_path(conn, :create), post: @create_attrs)
-      assert html_response(conn, 200) =~ "TITLE"
+      assert html_response(conn, 200)
+      assert view_template(conn) == "new.html"
     end
   end
 
@@ -103,7 +110,8 @@ defmodule LitelistWeb.JobControllerTest do
       conn = conn
         |> login_neighbor(neighbor)
         |> get(job_path(conn, :edit, job))
-      assert html_response(conn, 200) =~ "TITLE"
+      assert html_response(conn, 200)
+      assert view_template(conn) == "edit.html"
     end
 
     test "renders form for editing chosen job if admin", %{conn: conn} do
@@ -113,7 +121,8 @@ defmodule LitelistWeb.JobControllerTest do
       conn = conn
         |> login_neighbor(admin)
         |> get(job_path(conn, :edit, job))
-      assert html_response(conn, 200) =~ "TITLE"
+      assert html_response(conn, 200)
+      assert view_template(conn) == "edit.html"
     end
 
     test "redirects to index if job was not created by the neighbor", %{conn: conn} do
@@ -153,7 +162,8 @@ defmodule LitelistWeb.JobControllerTest do
         |> login_neighbor(neighbor)
 
       conn = get conn, job_path(conn, :show, job)
-      assert html_response(conn, 200) =~ "some updated contact_info"
+      assert html_response(conn, 200)
+      assert view_template(conn) == "show.html"
     end
 
     test "redirects when data is valid as an admin", %{conn: conn} do
@@ -171,7 +181,8 @@ defmodule LitelistWeb.JobControllerTest do
         |> login_neighbor(admin)
 
       conn = get conn, job_path(conn, :show, job)
-      assert html_response(conn, 200) =~ "some updated contact_info"
+      assert html_response(conn, 200)
+      assert view_template(conn) == "show.html"
     end
 
     test "renders errors when data is invalid", %{conn: conn} do
@@ -182,7 +193,8 @@ defmodule LitelistWeb.JobControllerTest do
         |> login_neighbor(neighbor)
         |> put(job_path(conn, :update, job), post: @invalid_attrs)
 
-      assert html_response(conn, 200) =~ "TITLE"
+      assert html_response(conn, 200)
+      assert view_template(conn) == "edit.html"
     end
 
     test "redirects to index if job was not created by the neighbor", %{conn: conn} do

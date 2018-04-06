@@ -1,5 +1,6 @@
 defmodule LitelistWeb.EmergencyInformationControllerTest do
   use LitelistWeb.ConnCase, async: true
+  import Phoenix.Controller
 
   alias Litelist.Factory
   alias Litelist.Auth.Guardian
@@ -13,7 +14,8 @@ defmodule LitelistWeb.EmergencyInformationControllerTest do
       conn = conn
         |> get(emergency_information_path(conn, :index))
 
-      assert html_response(conn, 200) =~ "Listing Emergency information"
+      assert html_response(conn, 200)
+      assert view_template(conn) == "index.html"
     end
   end
 
@@ -24,7 +26,8 @@ defmodule LitelistWeb.EmergencyInformationControllerTest do
       conn = conn
         |> get(emergency_information_path(conn, :show, emergency_information))
 
-      assert html_response(conn, 200) =~ emergency_information.title
+      assert html_response(conn, 200)
+      assert view_template(conn) == "show.html"
     end
 
     test "redirects to index if the type does not match", %{conn: conn} do
@@ -45,7 +48,8 @@ defmodule LitelistWeb.EmergencyInformationControllerTest do
         |> login_neighbor(neighbor)
         |> get(emergency_information_path(conn, :new))
       
-      assert html_response(conn, 200) =~ "Emergency Information Posting"
+      assert html_response(conn, 200)
+      assert view_template(conn) == "new.html"
     end
 
     test "unautorized 401 redirect if not logged in", %{conn: conn} do
@@ -72,7 +76,8 @@ defmodule LitelistWeb.EmergencyInformationControllerTest do
         |> login_neighbor(neighbor)
 
       conn = get conn, emergency_information_path(conn, :show, id)
-      assert html_response(conn, 200) =~ "Show Emergency information"
+      assert html_response(conn, 200)
+      assert view_template(conn) == "show.html"
     end
 
     test "renders errors when data is invalid", %{conn: conn} do
@@ -81,7 +86,8 @@ defmodule LitelistWeb.EmergencyInformationControllerTest do
       conn = conn
         |> login_neighbor(neighbor)
         |> post(emergency_information_path(conn, :create), post: @invalid_attrs)
-      assert html_response(conn, 200) =~ "Emergency Information Posting"
+      assert html_response(conn, 200)
+      assert view_template(conn) == "new.html"
     end
 
     test "unautorized 401 redirect if not logged in", %{conn: conn} do
@@ -97,7 +103,8 @@ defmodule LitelistWeb.EmergencyInformationControllerTest do
       conn = conn
         |> login_neighbor(neighbor)
         |> post(emergency_information_path(conn, :create), post: @create_attrs)
-      assert html_response(conn, 200) =~ "Emergency Information Posting"
+      assert html_response(conn, 200)
+      assert view_template(conn) == "new.html"
     end
   end
 
@@ -109,7 +116,8 @@ defmodule LitelistWeb.EmergencyInformationControllerTest do
       conn = conn
         |> login_neighbor(neighbor)
         |> get(emergency_information_path(conn, :edit, emergency_information))
-      assert html_response(conn, 200) =~ "Emergency Information Rules"
+      assert html_response(conn, 200)
+      assert view_template(conn) == "edit.html"
     end
 
     test "renders form for editing chosen emergency_information as an admin", %{conn: conn} do
@@ -119,7 +127,8 @@ defmodule LitelistWeb.EmergencyInformationControllerTest do
       conn = conn
         |> login_neighbor(admin)
         |> get(emergency_information_path(conn, :edit, emergency_information))
-      assert html_response(conn, 200) =~ "Emergency Information Rules"
+      assert html_response(conn, 200)
+      assert view_template(conn) == "edit.html"
     end
 
     test "redirects to index if emergency_information was not created by the neighbor", %{conn: conn} do
@@ -159,7 +168,8 @@ defmodule LitelistWeb.EmergencyInformationControllerTest do
         |> login_neighbor(neighbor)
 
       conn = get conn, emergency_information_path(conn, :show, emergency_information)
-      assert html_response(conn, 200) =~ "some updated contact_info"
+      assert html_response(conn, 200)
+      assert view_template(conn) == "show.html"
     end
 
     test "redirects when data is valid as an admin", %{conn: conn} do
@@ -177,7 +187,8 @@ defmodule LitelistWeb.EmergencyInformationControllerTest do
         |> login_neighbor(admin)
 
       conn = get conn, emergency_information_path(conn, :show, emergency_information)
-      assert html_response(conn, 200) =~ "some updated contact_info"
+      assert html_response(conn, 200)
+      assert view_template(conn) == "show.html"
     end
 
     test "renders errors when data is invalid", %{conn: conn} do
@@ -188,7 +199,8 @@ defmodule LitelistWeb.EmergencyInformationControllerTest do
         |> login_neighbor(neighbor)
         |> put(emergency_information_path(conn, :update, emergency_information), post: @invalid_attrs)
 
-      assert html_response(conn, 200) =~ "TITLE"
+      assert html_response(conn, 200)
+      assert view_template(conn) == "edit.html"
     end
 
     test "redirects to index if emergency_information was not created by the neighbor", %{conn: conn} do

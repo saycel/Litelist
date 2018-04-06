@@ -1,5 +1,6 @@
 defmodule LitelistWeb.BusinessControllerTest do
   use LitelistWeb.ConnCase, async: true
+  import Phoenix.Controller
 
   alias Litelist.Factory
   alias Litelist.Auth.Guardian
@@ -13,7 +14,8 @@ defmodule LitelistWeb.BusinessControllerTest do
       conn = conn
         |> get(business_path(conn, :index))
 
-      assert html_response(conn, 200) =~ "Listing Business"
+      assert html_response(conn, 200)
+      assert view_template(conn) == "index.html"
     end
   end
 
@@ -24,7 +26,8 @@ defmodule LitelistWeb.BusinessControllerTest do
       conn = conn
         |> get(business_path(conn, :show, business))
 
-      assert html_response(conn, 200) =~ business.title
+      assert html_response(conn, 200)
+      assert view_template(conn) == "show.html"
     end
 
     test "redirects to index if the type does not match", %{conn: conn} do
@@ -45,7 +48,8 @@ defmodule LitelistWeb.BusinessControllerTest do
         |> login_neighbor(neighbor)
         |> get(business_path(conn, :new))
       
-      assert html_response(conn, 200) =~ "Local Business Posting"
+      assert html_response(conn, 200)
+      assert view_template(conn) == "new.html"
     end
 
     test "unautorized 401 redirect if not logged in", %{conn: conn} do
@@ -72,7 +76,8 @@ defmodule LitelistWeb.BusinessControllerTest do
         |> login_neighbor(neighbor)
 
       conn = get conn, business_path(conn, :show, id)
-      assert html_response(conn, 200) =~ "Show Business"
+      assert html_response(conn, 200)
+      assert view_template(conn) == "show.html"
     end
 
     test "renders errors when data is invalid", %{conn: conn} do
@@ -81,7 +86,8 @@ defmodule LitelistWeb.BusinessControllerTest do
       conn = conn
         |> login_neighbor(neighbor)
         |> post(business_path(conn, :create), post: @invalid_attrs)
-      assert html_response(conn, 200) =~ "Local Business Posting"
+      assert html_response(conn, 200)
+      assert view_template(conn) == "new.html"
     end
 
     test "unautorized 401 redirect if not logged in", %{conn: conn} do
@@ -97,7 +103,8 @@ defmodule LitelistWeb.BusinessControllerTest do
       conn = conn
         |> login_neighbor(neighbor)
         |> post(business_path(conn, :create), post: @create_attrs)
-      assert html_response(conn, 200) =~ "Local Business Posting"
+      assert html_response(conn, 200)
+      assert view_template(conn) == "new.html"
     end
   end
 
@@ -109,7 +116,8 @@ defmodule LitelistWeb.BusinessControllerTest do
       conn = conn
         |> login_neighbor(neighbor)
         |> get(business_path(conn, :edit, business))
-      assert html_response(conn, 200) =~ "TITLE"
+      assert html_response(conn, 200)
+      assert view_template(conn) == "edit.html"
     end
 
     test "renders form for editing chosen business as an admin", %{conn: conn} do
@@ -119,7 +127,8 @@ defmodule LitelistWeb.BusinessControllerTest do
       conn = conn
         |> login_neighbor(admin)
         |> get(business_path(conn, :edit, business))
-      assert html_response(conn, 200) =~ "TITLE"
+      assert html_response(conn, 200)
+      assert view_template(conn) == "edit.html"
     end
 
     test "redirects to index if business was not created by the neighbor", %{conn: conn} do
@@ -159,7 +168,8 @@ defmodule LitelistWeb.BusinessControllerTest do
         |> login_neighbor(neighbor)
 
       conn = get conn, business_path(conn, :show, business)
-      assert html_response(conn, 200) =~ "some updated contact_info"
+      assert html_response(conn, 200)
+      assert view_template(conn) == "show.html"
     end
 
     test "redirects when data is valid as an admin", %{conn: conn} do
@@ -177,7 +187,8 @@ defmodule LitelistWeb.BusinessControllerTest do
         |> login_neighbor(admin)
 
       conn = get conn, business_path(conn, :show, business)
-      assert html_response(conn, 200) =~ "some updated contact_info"
+      assert html_response(conn, 200)
+      assert view_template(conn) == "show.html"
     end
 
     test "renders errors when data is invalid", %{conn: conn} do
@@ -188,7 +199,8 @@ defmodule LitelistWeb.BusinessControllerTest do
         |> login_neighbor(neighbor)
         |> put(business_path(conn, :update, business), post: @invalid_attrs)
 
-      assert html_response(conn, 200) =~ "TITLE"
+      assert html_response(conn, 200)
+      assert view_template(conn) == "edit.html"
     end
 
     test "redirects to index if business was not created by the neighbor", %{conn: conn} do
