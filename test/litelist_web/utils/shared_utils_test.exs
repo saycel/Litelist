@@ -197,4 +197,33 @@ defmodule LitelistWeb.SharedUtilsTest do
             assert SharedUtils.parse_multi_select(params, field) == expected
         end
     end
+
+    test "add_slug" do
+        title = "my title"
+        slug = "my-title"
+        params = %{
+            "title" => title
+        }
+        expected = %{
+            "title" => title,
+            "slug" => slug
+        }
+
+        assert SharedUtils.add_slug(params) == expected
+    end
+
+    test "update_slug" do
+        title = "updated title"
+        slug = "updated-title"
+        params = %{
+            "slug" => "old-slug",
+            "title" => title
+        }
+        expected = %{
+            "title" => title,
+            "slug" => slug
+        }
+
+        assert SharedUtils.update_slug(params) == expected
+    end
 end

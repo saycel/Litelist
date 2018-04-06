@@ -154,7 +154,10 @@ defmodule LitelistWeb.Utils.SharedUtils do
         )
     end
     
-    defp add_slug(params) do
+    @doc """
+    adds a slug attribute to a passed in map
+    """
+    def add_slug(params) do
         Map.merge(
             %{
                 "slug" => slugify(params["title"])
@@ -163,7 +166,10 @@ defmodule LitelistWeb.Utils.SharedUtils do
         )
     end
 
-    defp update_slug(params) do
+    @doc """
+    updates a slug attribute to a passed in map
+    """
+    def update_slug(params) do
         params = Map.delete(params, "slug")
         Map.merge(
             %{
