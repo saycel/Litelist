@@ -22,6 +22,11 @@
     <%= @flag.admin_response %>
   </li>
 
+  <li>
+    <strong>Post title:</strong>
+    <span><%= link @flag.post.title, to: path_builder(@flat.post) %></span>
+  </li>
+
 </ul>
 
 <span><%= link "Edit", to: flag_path(@conn, :edit, @flag) %></span>

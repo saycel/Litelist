@@ -20,7 +20,7 @@ defmodule Litelist.Moderation do
 
   """
   def list_flags do
-    Repo.all(Flag)
+    Repo.all(Flag) |> Repo.preload(:post)
   end
 
   @doc """
@@ -65,7 +65,7 @@ defmodule Litelist.Moderation do
       ** (Ecto.NoResultsError)
 
   """
-  def get_flag!(id), do: Repo.get!(Flag, id)
+  def get_flag!(id), do: Repo.get!(Flag, id) |> Repo.preload(:post)
 
   @doc """
   Creates a flag.

@@ -6,7 +6,8 @@
       <th>Type</th>
       <th>Description</th>
       <th>Status</th>
-      <th>Admin response</th>
+      <th>Admin Response</th>
+      <th>Post title</th>
 
       <th></th>
     </tr>
@@ -18,6 +19,7 @@
       <td><%= flag.description %></td>
       <td><%= flag.status %></td>
       <td><%= flag.admin_response %></td>
+      <td><%= link flag.post.title, to: path_builder(flag.post) %></td>
 
       <td class="text-right">
         <span><%= link "Show", to: flag_path(@conn, :show, flag), class: "btn btn-default btn-xs" %></span>

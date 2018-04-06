@@ -7,7 +7,7 @@ defmodule Litelist.ModerationTest do
   describe "flags" do
     alias Litelist.Moderation.Flag
 
-    @valid_attrs %{admin_response: "some admin_response", description: "some description", status: "pending", type: "Incorrect information"}
+    @valid_attrs %{admin_response: "some admin_response", description: "some description", type: "Incorrect information"}
     @update_attrs %{admin_response: "some updated admin_response", description: "some updated description", status: "post_removed", type: "Abusive"}
     @invalid_attrs %{admin_response: nil, description: nil, status: nil, type: nil}
 
