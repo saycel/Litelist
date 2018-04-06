@@ -3,7 +3,9 @@ defmodule LitelistWeb.AdminController do
 
     alias Litelist.Posts
     alias Litelist.Settings.SettingsDatabase
-  
+    plug :put_layout, "admin.html"
+
+
     def index(conn, _params) do
       conn
         |> render("index.html")

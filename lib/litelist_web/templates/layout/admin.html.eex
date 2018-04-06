@@ -11,31 +11,15 @@
     <link rel="stylesheet" href="<%= static_path(@conn, "/css/app.css") %>">
    </head>
 
-  <body>
+  <body class="admin-dashboard">
     <div class="container">
       <header class="navbar">
         <section class="navbar-section">
+          <a href="/admin" class="navbar-brand mr-2">Admin Dashboard</a>
+          <a href="/admin/settings" class="btn btn-link">Site Settings</a>
+          <a href="/admin/moderation-rules" class="btn btn-link">Moderation</a>
+        </section>
 
-          <a href="/" class="navbar-brand mr-2">Othernet</a>
-          <a href="/post2list" class="btn btn-link">Post 2 List</a>
-          <a href="/dashboard" class="btn btn-link">Dashboard</a>
-          <%= if @conn.assigns.current_neighbor do %>
-            <%= if @conn.assigns.current_neighbor.admin do %>
-                <a href="/admin" class="btn btn-link">Administration</a>
-            <% end %>
-            <%= link "Logout", to: page_path(@conn, :logout), method: :post, class: "btn btn-link" %>
-          <% else %>
-            <%= link "Login", to: page_path(@conn, :login), method: :get, class: "btn btn-link"%>
-          <% end %>
-        </section>
-        <section class="navbar-section">
-          <div class="input-group input-inline">
-            <form action="/search" method="get">
-              <input class="form-input" type="text" name="search" placeholder="search">
-              <button class="btn btn-primary input-group-btn">Search</button>
-            </form>
-          </div>
-        </section>
       </header>
 
       <% info = get_flash(@conn, :info)

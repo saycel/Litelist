@@ -1,32 +1,41 @@
-<h2>Listing Flags</h2>
+<div class="columns mt-60">
+  <div class="column col-4 col-md-12 hide-md">
+      <div class="fixed" style="width:35%; height:500px; overflow:scroll"> 
+        <%= render "_rules.html" %>
+      </div>
+  </div>
+  <div class="column col-8 col-md-12">
+    <h2>Listing Flags</h2>
 
-<table class="table">
-  <thead>
-    <tr>
-      <th>Type</th>
-      <th>Description</th>
-      <th>Status</th>
-      <th>Admin response</th>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Type</th>
+          <th>Description</th>
+          <th>Status</th>
+          <th>Admin response</th>
 
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-<%= for flag <- @flags do %>
-    <tr>
-      <td><%= flag.type %></td>
-      <td><%= flag.description %></td>
-      <td><%= flag.status %></td>
-      <td><%= flag.admin_response %></td>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+    <%= for flag <- @flags do %>
+        <tr>
+          <td><%= flag.type %></td>
+          <td><%= flag.description %></td>
+          <td><%= flag.status %></td>
+          <td><%= flag.admin_response %></td>
 
-      <td class="text-right">
-        <span><%= link "Show", to: flag_path(@conn, :show, flag), class: "btn btn-default btn-xs" %></span>
-        <span><%= link "Edit", to: flag_path(@conn, :edit, flag), class: "btn btn-default btn-xs" %></span>
-        <span><%= link "Delete", to: flag_path(@conn, :delete, flag), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" %></span>
-      </td>
-    </tr>
-<% end %>
-  </tbody>
-</table>
+          <td class="text-right">
+            <span><%= link "Show", to: flag_path(@conn, :show, flag), class: "btn btn-default btn-xs" %></span>
+            <span><%= link "Edit", to: flag_path(@conn, :edit, flag), class: "btn btn-default btn-xs" %></span>
+            <span><%= link "Delete", to: flag_path(@conn, :delete, flag), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" %></span>
+          </td>
+        </tr>
+    <% end %>
+      </tbody>
+    </table>
 
-<span><%= link "New Flag", to: flag_path(@conn, :new) %></span>
+    <span><%= link "New Flag", to: flag_path(@conn, :new) %></span>
+  </div>
+</div> 

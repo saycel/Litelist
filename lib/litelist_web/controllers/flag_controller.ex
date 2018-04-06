@@ -5,6 +5,7 @@ defmodule LitelistWeb.FlagController do
   alias Litelist.Moderation.Flag
   alias Litelist.Posts
   alias LitelistWeb.Utils.SharedUtils
+  plug :put_layout, "admin.html"
 
   @types Flag.get_types()
 
@@ -16,7 +17,9 @@ defmodule LitelistWeb.FlagController do
     flags = Moderation.list_flags()
     render(conn, "index.html", flags: flags)
   end
-
+  def rules(conn, _params) do
+    render(conn, "moderation_rules.html")
+  end
   def new(conn, %{"post_id" => post_id}) do
     post = Posts.get_post!(post_id)
 
