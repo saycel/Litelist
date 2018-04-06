@@ -4,8 +4,8 @@ defmodule LitelistWeb.DiscussionControllerTest do
   alias Litelist.Factory
   alias Litelist.Auth.Guardian
 
-  @create_attrs %{description: "some description", title: "some title"}
-  @update_attrs %{description: "some updated description", title: "some updated title"}
+  @create_attrs %{description: "some description", title: "some title", slug: "some-title", url: "myurl"}
+  @update_attrs %{description: "some updated description", title: "some updated title", slug: "some-updated-title", url: "newurl"}
   @invalid_attrs %{description: nil, title: nil}
 
   describe "index" do
@@ -79,6 +79,15 @@ defmodule LitelistWeb.DiscussionControllerTest do
 
     test "renders errors when title is not unique", %{conn: conn} do
       Factory.insert(:discussion, %{title: "some title"})
+      neighbor = Factory.insert(:neighbor)
+      conn = conn
+        |> login_neighbor(neighbor)
+        |> post(discussion_path(conn, :create), discussion: @create_attrs)
+      assert html_response(conn, 200) =~ "Title"
+    end
+
+    test "renders errors when url is not unique", %{conn: conn} do
+      Factory.insert(:discussion, %{url: "myurl"})
       neighbor = Factory.insert(:neighbor)
       conn = conn
         |> login_neighbor(neighbor)

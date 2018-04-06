@@ -5,6 +5,7 @@
     <tr>
       <th>Title</th>
       <th>Description</th>
+      <th>Url</th>
 
       <th></th>
     </tr>
@@ -14,6 +15,7 @@
     <tr>
       <td><%= discussion.title %></td>
       <td><%= discussion.description %></td>
+      <td><%= discussion.url %></td>
 
       <td class="text-right">
         <span><%= link "Show", to: discussion_path(@conn, :show, discussion), class: "btn btn-default btn-xs" %></span>

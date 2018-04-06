@@ -8,6 +8,11 @@
   </li>
 
   <li>
+    <strong>Url:</strong>
+    <%= @discussion.url %>
+  </li>
+
+  <li>
     <strong>Description:</strong>
     <%= @discussion.description %>
   </li>
