@@ -159,7 +159,7 @@ defmodule LitelistWeb.SharedUtilsTest do
         assert SharedUtils.add_neighbor_id(params, conn) == expected
     end
 
-    test "add_neighbor_id_if_exists" do
+    test "add_neighbor_id_if_exists with current neighbor" do
         conn = %{
             assigns: %{
                 current_neighbor: %{
@@ -167,18 +167,24 @@ defmodule LitelistWeb.SharedUtilsTest do
                 }
             }
         }
+
         params = %{}
         expected = %{"neighbor_id" => 1}
 
         assert SharedUtils.add_neighbor_id(params, conn) == expected
+    end
 
+    test "add_neighbor_id_if_exists when current neighbor is nil" do
         conn = %{
-            assigns: %{}
+            assigns: %{
+                current_neighbor: nil
+            }
         }
 
         params = %{}
         expected = %{}
-        assert SharedUtils.add_neighbor_id(params, conn) == expected
+        assert is_nil(conn.assigns.current_neighbor) == true
+        assert SharedUtils.add_neighbor_id_if_exists(params, conn) == expected
     end
 
     test "add_default_status" do

@@ -128,15 +128,16 @@ defmodule LitelistWeb.Utils.SharedUtils do
     Adds the current_neighbor id to params
     """
     def add_neighbor_id_if_exists(params, conn) do
-        if conn.assigns.current_neighbor do
+        if is_nil(conn.assigns.current_neighbor) do
+            params
+        else
+            IO.inspect "HERE"
             Map.merge(
                 %{
                     "neighbor_id" => conn.assigns.current_neighbor.id
                 },
                 params
             )
-        else
-            params
         end
     end
 
