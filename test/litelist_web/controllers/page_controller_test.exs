@@ -1,5 +1,6 @@
 defmodule LitelistWeb.PageControllerTest do
   use LitelistWeb.ConnCase, async: true
+  import Phoenix.Controller
 
   alias Litelist.Factory
   alias Litelist.Auth.Guardian
@@ -15,19 +16,21 @@ defmodule LitelistWeb.PageControllerTest do
 
   test "GET /", %{conn: conn} do
     conn = get conn, page_path(conn, :index)
-    assert html_response(conn, 200) =~ "Othernet"
+    assert html_response(conn, 200)
+    assert view_template(conn) == "index.html"
   end
 
   test "GET /information", %{conn: conn} do
     conn = get conn, page_path(conn, :information)
-    assert html_response(conn, 200) =~ "about othernet list"
+    assert html_response(conn, 200)
+    assert view_template(conn) == "post2list.html"
   end
 
   describe "login" do
 
     test "GET /login", %{conn: conn} do
       conn = get conn, page_path(conn, :login)
-      assert html_response(conn, 200) =~ "Sign in"
+      assert view_template(conn) == "login.html"
     end
 
     test "GET /login when already signed in", %{conn: conn, neighbor: neighbor} do

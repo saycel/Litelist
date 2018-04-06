@@ -1,10 +1,11 @@
 defmodule LitelistWeb.DashboardControllerTest do
     use LitelistWeb.ConnCase, async: true
-  
+    import Phoenix.Controller
+
     alias Litelist.Factory
     alias Litelist.Auth.Guardian
     alias Litelist.Posts
-  
+
     describe "index" do
       test "shows the dashboard if logged in", %{conn: conn} do
         neighbor = Factory.insert(:neighbor)
@@ -12,7 +13,8 @@ defmodule LitelistWeb.DashboardControllerTest do
           |> login_neighbor(neighbor)
           |> get(dashboard_path(conn, :index))
   
-        assert html_response(conn, 200) =~ "Dashboard"
+        assert html_response(conn, 200)
+        assert view_template(conn) == "index.html"
       end
 
       test "redirects if not logged in", %{conn: conn} do
@@ -24,7 +26,7 @@ defmodule LitelistWeb.DashboardControllerTest do
     end
 
     describe "export" do
-      test "exports if logged in", %{conn: conn} do
+      test "exports posts if logged in", %{conn: conn} do
         neighbor = Factory.insert(:neighbor)
 
         conn = conn
@@ -35,25 +37,150 @@ defmodule LitelistWeb.DashboardControllerTest do
         assert response(conn, 200)
       end
 
-      test "redirects if not logged in", %{conn: conn} do
+      test "redirects from export posts if not logged in", %{conn: conn} do
         conn = conn
           |> get(dashboard_path(conn, :export_posts))
+  
+        assert response(conn, 401)
+      end
+
+      test "exports my flagged posts if logged in", %{conn: conn} do
+        neighbor = Factory.insert(:neighbor)
+
+        conn = conn
+          |> login_neighbor(neighbor)
+          |> get(dashboard_path(conn, :export_my_flagged_posts))
+  
+        assert get_resp_header(conn, "content-type") == ["text/csv; charset=utf-8"]
+        assert response(conn, 200)
+      end
+
+      test "redirects from export my flagged posts if not logged in", %{conn: conn} do
+        conn = conn
+          |> get(dashboard_path(conn, :export_my_flagged_posts))
+  
+        assert response(conn, 401)
+      end
+
+      test "exports export posts I flagged if logged in", %{conn: conn} do
+        neighbor = Factory.insert(:neighbor)
+
+        conn = conn
+          |> login_neighbor(neighbor)
+          |> get(dashboard_path(conn, :export_posts_i_flagged))
+  
+        assert get_resp_header(conn, "content-type") == ["text/csv; charset=utf-8"]
+        assert response(conn, 200)
+      end
+
+      test "redirects from export posts I flagged if not logged in", %{conn: conn} do
+        conn = conn
+          |> get(dashboard_path(conn, :export_posts_i_flagged))
+  
+        assert response(conn, 401)
+      end
+
+      test "exports my discussions if logged in", %{conn: conn} do
+        neighbor = Factory.insert(:neighbor)
+
+        conn = conn
+          |> login_neighbor(neighbor)
+          |> get(dashboard_path(conn, :export_my_discussions))
+  
+        assert get_resp_header(conn, "content-type") == ["text/csv; charset=utf-8"]
+        assert response(conn, 200)
+      end
+
+      test "redirects from export my discussions if not logged in", %{conn: conn} do
+        conn = conn
+          |> get(dashboard_path(conn, :export_my_discussions))
   
         assert response(conn, 401)
       end
     end
 
     describe "posts" do
-        test "lists my posts", %{conn: conn} do
-          neighbor = Factory.insert(:neighbor)
+      test "lists my posts", %{conn: conn} do
+        neighbor = Factory.insert(:neighbor)
 
-          conn = conn
-            |> login_neighbor(neighbor)
-            |> get(dashboard_path(conn, :posts))
-    
-          assert html_response(conn, 200) =~ "My Posts"
-        end
+        conn = conn
+          |> login_neighbor(neighbor)
+          |> get(dashboard_path(conn, :posts))
+  
+        assert html_response(conn, 200)
+        assert view_template(conn) == "posts.html"
       end
+
+      test "redirects from posts if not logged in", %{conn: conn} do
+        conn = conn
+          |> get(dashboard_path(conn, :posts))
+
+        assert response(conn, 401)
+      end
+    end
+
+    describe "my flagged posts" do
+      test "lists my flagged posts", %{conn: conn} do
+        neighbor = Factory.insert(:neighbor)
+
+        conn = conn
+          |> login_neighbor(neighbor)
+          |> get(dashboard_path(conn, :my_flagged_posts))
+  
+        assert html_response(conn, 200)
+        assert view_template(conn) == "my_flagged_posts.html"
+
+      end
+
+      test "redirects from my flagged posts if not logged in", %{conn: conn} do
+        conn = conn
+          |> get(dashboard_path(conn, :my_flagged_posts))
+
+        assert response(conn, 401)
+      end
+    end
+
+    describe "posts I flagged" do
+      test "lists posts I flagged", %{conn: conn} do
+        neighbor = Factory.insert(:neighbor)
+
+        conn = conn
+          |> login_neighbor(neighbor)
+          |> get(dashboard_path(conn, :posts_i_flagged))
+  
+        assert html_response(conn, 200)
+        assert view_template(conn) == "posts_i_flagged.html"
+
+      end
+
+      test "redirects from posts I flagged if not logged in", %{conn: conn} do
+        conn = conn
+          |> get(dashboard_path(conn, :posts_i_flagged))
+
+        assert response(conn, 401)
+      end
+    end
+
+    describe "my_discussions" do
+      test "lists my_discussions", %{conn: conn} do
+        neighbor = Factory.insert(:neighbor)
+
+        conn = conn
+          |> login_neighbor(neighbor)
+          |> get(dashboard_path(conn, :my_discussions))
+  
+        assert html_response(conn, 200)
+        assert view_template(conn) == "my_discussions.html"
+
+      end
+
+      test "redirects from my_discussions if not logged in", %{conn: conn} do
+        conn = conn
+          |> get(dashboard_path(conn, :my_discussions))
+
+        assert response(conn, 401)
+      end
+    end
   
 
     describe "delete_all" do
