@@ -190,9 +190,13 @@ defmodule Litelist.Factory do
     insert(:discussion)
   """
   def discussion_factory do
+    title = FakerElixir.Commerce.product
+    slug = SharedUtils.slugify(title)
     %Discussion{
-      title: FakerElixir.Commerce.product,
-      description: Faker.Lorem.sentences(1..2)
+      title: title,
+      slug: slug,
+      description: Faker.Lorem.sentences(1..2),
+      url: FakerElixir.Lorem.characters(11..15)
     }
   end
 end

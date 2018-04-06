@@ -19,6 +19,8 @@ defmodule LitelistWeb.DiscussionController do
   def create(conn, %{"discussion" => discussion_params}) do
     discussion_params = discussion_params
       |> SharedUtils.add_neighbor_id(conn)
+      |> SharedUtils.add_slug()
+
     case Discussions.create_discussion(discussion_params) do
       {:ok, discussion} ->
         conn
@@ -41,6 +43,8 @@ defmodule LitelistWeb.DiscussionController do
   end
 
   def update(conn, %{"id" => id, "discussion" => discussion_params}) do
+    discussion_params = discussion_params
+      |> SharedUtils.update_slug()
     discussion = Discussions.get_discussion!(id)
 
     case Discussions.update_discussion(discussion, discussion_params) do

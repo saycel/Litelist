@@ -6,8 +6,8 @@ defmodule Litelist.DiscussionsTest do
   describe "discussions" do
     alias Litelist.Discussions.Discussion
 
-    @valid_attrs %{description: "some description", title: "some title"}
-    @update_attrs %{description: "some updated description", title: "some updated title"}
+    @valid_attrs %{description: "some description", title: "some title", url: "some url", slug: "some-title"}
+    @update_attrs %{description: "some updated description", title: "some updated title", url: "some updated url", slug: "some-updated-title"}
     @invalid_attrs %{description: nil, title: nil}
 
     def discussion_fixture(attrs \\ %{}) do
