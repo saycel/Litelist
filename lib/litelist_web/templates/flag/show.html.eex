@@ -1,0 +1,28 @@
+<h2>Show Flag</h2>
+
+<ul>
+
+  <li>
+    <strong>Type:</strong>
+    <%= @flag.type %>
+  </li>
+
+  <li>
+    <strong>Description:</strong>
+    <%= @flag.description %>
+  </li>
+
+  <li>
+    <strong>Status:</strong>
+    <%= @flag.status %>
+  </li>
+
+  <li>
+    <strong>Admin response:</strong>
+    <%= @flag.admin_response %>
+  </li>
+
+</ul>
+
+<span><%= link "Edit", to: flag_path(@conn, :edit, @flag) %></span>
+<span><%= link "Back", to: flag_path(@conn, :index) %></span>

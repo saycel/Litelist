@@ -18,6 +18,10 @@
             </div>
             <div class="card-footer">
               <button class="btn btn-primary"><a href="http://<%=post.url%>.othernet:4000">More</a></button>
+              <a href="<%= path_builder(post) %>" class="btn btn-primary">More</a>
+            </div>
+            <div class="card-footer">
+              <a href="<%= flag_path_builder(post) %>" class="btn btn-primary">Flag</a>
             </div>
           </div>
         <div class="divider-vert" data-content="*"></div>

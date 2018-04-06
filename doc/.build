@@ -4,7 +4,7 @@ fonts/icomoon.eot
 fonts/icomoon.svg
 fonts/icomoon.ttf
 fonts/icomoon.woff
-dist/sidebar_items-cf21306aae.js
+dist/sidebar_items-914451259c.js
 api-reference.html
 search.html
 404.html
@@ -16,13 +16,19 @@ Litelist.Auth.Guardian.html
 Litelist.Auth.Guardian.Plug.html
 Litelist.Auth.Neighbor.html
 Litelist.Auth.Pipeline.html
+Litelist.Discussions.html
+Litelist.Discussions.Discussion.html
 Litelist.Factory.html
+Litelist.Moderation.html
+Litelist.Moderation.Flag.html
 Litelist.Plugs.CurrentNeighbor.html
 Litelist.Plugs.EnsureAdmin.html
 Litelist.Posts.html
 Litelist.Posts.Post.html
 Litelist.Posts.Search.html
 Litelist.Repo.html
+Litelist.Scheduler.html
+Litelist.Schedulers.RemoveOldPosts.html
 Litelist.Settings.html
 Litelist.Settings.SettingsDatabase.html
 Litelist.Settings.SettingsDatabase.Settings.html
@@ -33,6 +39,8 @@ LitelistWeb.BusinessController.html
 LitelistWeb.BusinessView.html
 LitelistWeb.DashboardController.html
 LitelistWeb.DashboardView.html
+LitelistWeb.DiscussionController.html
+LitelistWeb.DiscussionView.html
 LitelistWeb.EmergencyInformationController.html
 LitelistWeb.EmergencyInformationView.html
 LitelistWeb.Endpoint.html
@@ -40,6 +48,8 @@ LitelistWeb.ErrorHelpers.html
 LitelistWeb.ErrorView.html
 LitelistWeb.EventController.html
 LitelistWeb.EventView.html
+LitelistWeb.FlagController.html
+LitelistWeb.FlagView.html
 LitelistWeb.ForSaleController.html
 LitelistWeb.ForSaleView.html
 LitelistWeb.FormHelpers.html

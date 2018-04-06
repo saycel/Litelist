@@ -8,7 +8,7 @@
     <title>LitelistWeb.Utils.SharedUtils – litelist v0.0.1</title>
     <link rel="stylesheet" href="dist/app-81d381dea4.css" />
     
-    <script src="dist/sidebar_items-cf21306aae.js"></script>
+    <script src="dist/sidebar_items-914451259c.js"></script>
     
     
     
@@ -99,6 +99,15 @@
     </h2>
     <div class="summary-row">
   <div class="summary-signature">
+    <a href="#add_default_status/2">add_default_status(params, default_status)</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>adds a status attribute to a map with a given (default) value</p>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
     <a href="#add_generated_params/2">add_generated_params(params, atom)</a>
   </div>
   
@@ -119,6 +128,25 @@ adds params like current_neighbor for create</p>
 </div>
 <div class="summary-row">
   <div class="summary-signature">
+    <a href="#add_neighbor_id/2">add_neighbor_id(params, conn)</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>add_neighbor_id(params, con)
+Adds the current_neighbor id to params</p>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#add_slug/1">add_slug(params)</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>adds a slug attribute to a passed in map</p>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
     <a href="#admin?/1">admin?(neighbor)</a>
   </div>
   
@@ -134,6 +162,16 @@ If neighbor.admin, return true. Otherwise return false</p>
   
     <div class="summary-synopsis"><p>match_type?(resource, type)
 tests if a resource was created by the neighbor, and if the given type matches the resource</p>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#parse_multi_select/2">parse_multi_select(params, field)</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>Parses a multiselect so the field becomes a string (from a List)
+parse_multi_select(params, field)</p>
 </div>
   
 </div>
@@ -190,6 +228,15 @@ iex&gt; slugify(“Some String”)
 </div>
   
 </div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#update_slug/1">update_slug(params)</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>updates a slug attribute to a passed in map</p>
+</div>
+  
+</div>
 
   </div>
 
@@ -210,7 +257,25 @@ iex&gt; slugify(“Some String”)
             </a>
             Functions
           </h1>
-          <div class="detail" id="add_generated_params/2">
+          <div class="detail" id="add_default_status/2">
+  
+  
+  <div class="detail-header">
+    <a href="#add_default_status/2" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <span class="signature">add_default_status(params, default_status)</span>
+    
+    
+    
+  </div>
+  <section class="docstring">
+    <p>adds a status attribute to a map with a given (default) value</p>
+
+  </section>
+</div>
+<div class="detail" id="add_generated_params/2">
   
   
   <div class="detail-header">
@@ -245,6 +310,43 @@ adds params like current_neighbor for update</p>
   <section class="docstring">
     <p>add_generated_params()
 adds params like current_neighbor for create</p>
+
+  </section>
+</div>
+<div class="detail" id="add_neighbor_id/2">
+  
+  
+  <div class="detail-header">
+    <a href="#add_neighbor_id/2" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <span class="signature">add_neighbor_id(params, conn)</span>
+    
+    
+    
+  </div>
+  <section class="docstring">
+    <p>add_neighbor_id(params, con)
+Adds the current_neighbor id to params</p>
+
+  </section>
+</div>
+<div class="detail" id="add_slug/1">
+  
+  
+  <div class="detail-header">
+    <a href="#add_slug/1" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <span class="signature">add_slug(params)</span>
+    
+    
+    
+  </div>
+  <section class="docstring">
+    <p>adds a slug attribute to a passed in map</p>
 
   </section>
 </div>
@@ -283,6 +385,25 @@ If neighbor.admin, return true. Otherwise return false</p>
   <section class="docstring">
     <p>match_type?(resource, type)
 tests if a resource was created by the neighbor, and if the given type matches the resource</p>
+
+  </section>
+</div>
+<div class="detail" id="parse_multi_select/2">
+  
+  
+  <div class="detail-header">
+    <a href="#parse_multi_select/2" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <span class="signature">parse_multi_select(params, field)</span>
+    
+    
+    
+  </div>
+  <section class="docstring">
+    <p>Parses a multiselect so the field becomes a string (from a List)
+parse_multi_select(params, field)</p>
 
   </section>
 </div>
@@ -381,6 +502,24 @@ iex&gt; slugify(nil)
 nil
 iex&gt; slugify(“Some String”)
 “some-string”</p>
+
+  </section>
+</div>
+<div class="detail" id="update_slug/1">
+  
+  
+  <div class="detail-header">
+    <a href="#update_slug/1" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <span class="signature">update_slug(params)</span>
+    
+    
+    
+  </div>
+  <section class="docstring">
+    <p>updates a slug attribute to a passed in map</p>
 
   </section>
 </div>

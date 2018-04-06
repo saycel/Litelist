@@ -144,4 +144,86 @@ defmodule LitelistWeb.SharedUtilsTest do
             assert SharedUtils.resource_owner?(wrong_neighbor, resource) == false
         end
     end
+
+    test "add_neighbor_id" do
+        conn = %{
+            assigns: %{
+                current_neighbor: %{
+                    id: 1
+                }
+            }
+        }
+        params = %{}
+        expected = %{"neighbor_id" => 1}
+
+        assert SharedUtils.add_neighbor_id(params, conn) == expected
+    end
+
+    test "add_default_status" do
+        status = "my-status"
+
+        params = %{
+            "thing" => 1
+        }
+
+        expected = %{
+            "thing" => 1,
+            "status" => status
+        }
+
+        assert SharedUtils.add_default_status(params, status) == expected
+    end
+
+    describe "parse_multi_select" do
+        test "returns the same params if the field is nil" do
+            params = %{
+                "some_field" => 1
+            }
+
+            not_a_field = "other_field"
+
+            assert SharedUtils.parse_multi_select(params, not_a_field) == params
+        end
+
+        test "returns a joined List in replace of the field if the field is not nil" do
+            list = [1, 2, 3]
+            params = %{
+                "the_field" => list
+            }
+
+            field = "the_field"
+
+            expected = %{"the_field" => "123"}
+            assert SharedUtils.parse_multi_select(params, field) == expected
+        end
+    end
+
+    test "add_slug" do
+        title = "my title"
+        slug = "my-title"
+        params = %{
+            "title" => title
+        }
+        expected = %{
+            "title" => title,
+            "slug" => slug
+        }
+
+        assert SharedUtils.add_slug(params) == expected
+    end
+
+    test "update_slug" do
+        title = "updated title"
+        slug = "updated-title"
+        params = %{
+            "slug" => "old-slug",
+            "title" => title
+        }
+        expected = %{
+            "title" => title,
+            "slug" => slug
+        }
+
+        assert SharedUtils.update_slug(params) == expected
+    end
 end

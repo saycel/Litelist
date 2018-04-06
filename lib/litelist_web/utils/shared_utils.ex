@@ -110,7 +110,11 @@ defmodule LitelistWeb.Utils.SharedUtils do
         params
     end
 
-    defp add_neighbor_id(params, conn) do
+    @doc """
+    add_neighbor_id(params, con)
+    Adds the current_neighbor id to params
+    """
+    def add_neighbor_id(params, conn) do
         Map.merge(
             %{
                 "neighbor_id" => conn.assigns.current_neighbor.id
@@ -118,8 +122,42 @@ defmodule LitelistWeb.Utils.SharedUtils do
             params
         )
     end
+
+    @doc """
+    Parses a multiselect so the field becomes a string (from a List)
+    parse_multi_select(params, field)
+    """
+    def parse_multi_select(params, field) do
+        value = params[field]
+        if is_nil(value) do
+            params
+        else
+            params = Map.delete(params, field)
+            Map.merge(
+                %{
+                    field => Enum.join(value)
+                },
+                params
+            )
+        end
+    end
+
+    @doc """
+    adds a status attribute to a map with a given (default) value
+    """
+    def add_default_status(params, default_status) do
+        Map.merge(
+            %{
+                "status" => default_status
+            },
+            params
+        )
+    end
     
-    defp add_slug(params) do
+    @doc """
+    adds a slug attribute to a passed in map
+    """
+    def add_slug(params) do
         Map.merge(
             %{
                 "slug" => slugify(params["title"])
@@ -128,7 +166,10 @@ defmodule LitelistWeb.Utils.SharedUtils do
         )
     end
 
-    defp update_slug(params) do
+    @doc """
+    updates a slug attribute to a passed in map
+    """
+    def update_slug(params) do
         params = Map.delete(params, "slug")
         Map.merge(
             %{

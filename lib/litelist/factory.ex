@@ -8,6 +8,8 @@ defmodule Litelist.Factory do
   alias Litelist.Posts.Post
   alias LitelistWeb.Utils.SharedUtils
   alias FakerElixir, as: Faker
+  alias Litelist.Moderation.Flag
+  alias Litelist.Discussions.Discussion
 
   @doc """
   Neighbor factory
@@ -159,6 +161,42 @@ defmodule Litelist.Factory do
       neighbor_id: insert(:neighbor).id,
       type: "emergency_information",
       url: FakerElixir.Lorem.characters(5..10)
+    }
+  end
+
+  @doc """
+  Flag factory
+  ## How to
+    build(:flag)
+    build(:flag, %{description: 'not cool'})
+    insert(:business)
+  """
+  def flag_factory do
+    %Flag{
+      description: Faker.Lorem.sentences(1..2),
+      status: "pending",
+      type: "incorrect_information",      
+      admin_response: Faker.Lorem.sentences(1),
+      neighbor_id: insert(:neighbor).id,
+      post_id: insert(:job).id
+    }
+  end
+
+  @doc """
+  Discussion factory
+  ## How to
+    build(:discussion)
+    build(:discussion, %{description: 'funding for new park'})
+    insert(:discussion)
+  """
+  def discussion_factory do
+    title = FakerElixir.Commerce.product
+    slug = SharedUtils.slugify(title)
+    %Discussion{
+      title: title,
+      slug: slug,
+      description: Faker.Lorem.sentences(1..2),
+      url: FakerElixir.Lorem.characters(11..15)
     }
   end
 end

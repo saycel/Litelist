@@ -4,6 +4,8 @@ defmodule LitelistWeb.DashboardController do
     alias Litelist.Posts
     alias LitelistWeb.Utils.SharedUtils
     alias LitelistWeb.Utils.ExportUtils
+    alias Litelist.Moderation
+    alias Litelist.Discussions
 
     def index(conn, _params) do
         render(conn, "index.html")
@@ -40,6 +42,48 @@ defmodule LitelistWeb.DashboardController do
         conn
         |> put_resp_content_type("text/csv")
         |> put_resp_header("content-disposition", "attachment; filename=\"MyPosts.csv\"")
+        |> send_resp(200, csv)
+    end
+
+    def export_my_flagged_posts(conn, _params) do
+        csv = ExportUtils.build_my_flagged_posts_csv(conn.assigns.current_neighbor)
+     
+        conn
+        |> put_resp_content_type("text/csv")
+        |> put_resp_header("content-disposition", "attachment; filename=\"MyFlaggedPosts.csv\"")
+        |> send_resp(200, csv)
+    end
+
+    def export_posts_i_flagged(conn, _params) do
+        csv = ExportUtils.build_posts_i_flagged(conn.assigns.current_neighbor)
+     
+        conn
+        |> put_resp_content_type("text/csv")
+        |> put_resp_header("content-disposition", "attachment; filename=\"MyFlaggedPosts.csv\"")
+        |> send_resp(200, csv)
+    end
+
+    def my_flagged_posts(conn, _params) do
+        flags = Moderation.list_my_flagged_posts(conn.assigns.current_neighbor)
+        render(conn, "my_flagged_posts.html", flags: flags)
+    end
+
+    def posts_i_flagged(conn, _params) do
+        flags = Moderation.list_flags_by_neighbor(conn.assigns.current_neighbor)
+        render(conn, "posts_i_flagged.html", flags: flags)
+    end
+
+    def my_discussions(conn, _params) do
+        discussions = Discussions.list_discussions_by_neighbor(conn.assigns.current_neighbor)
+        render(conn, "my_discussions.html", discussions: discussions)
+    end
+
+    def export_my_discussions(conn, _params) do
+        csv = ExportUtils.build_discussions_csv(conn.assigns.current_neighbor)
+     
+        conn
+        |> put_resp_content_type("text/csv")
+        |> put_resp_header("content-disposition", "attachment; filename=\"MyDiscussions.csv\"")
         |> send_resp(200, csv)
     end
 
