@@ -3,3 +3,4 @@
 <span><%= link "My Posts", to: dashboard_path(@conn, :posts), class: "btn btn-default btn-xs" %></span>
 <span><%= link "My Flagged Posts", to: dashboard_path(@conn, :my_flagged_posts), class: "btn btn-default btn-xs" %></span>
 <span><%= link "Posts I Flagged", to: dashboard_path(@conn, :posts_i_flagged), class: "btn btn-default btn-xs" %></span>
+<span><%= link "My Discussions", to: dashboard_path(@conn, :my_discussions), class: "btn btn-default btn-xs" %></span>

@@ -22,6 +22,19 @@ defmodule Litelist.Discussions do
   end
 
   @doc """
+  Returns the list of discussions created by the neighbor.
+
+  ## Examples
+
+      iex> list_discussions()
+      [%Discussion{}, ...]
+
+  """
+  def list_discussions_by_neighbor(neighbor) do
+    Repo.all(from d in Discussion, where: d.neighbor_id == ^neighbor.id)
+  end
+
+  @doc """
   Gets a single discussion.
 
   Raises `Ecto.NoResultsError` if the Discussion does not exist.
