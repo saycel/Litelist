@@ -11,5 +11,6 @@ defmodule Litelist.Repo.Migrations.CreateDiscussions do
     end
 
     create index(:discussions, [:neighbor_id])
+    create unique_index(:discussions, [:title])
   end
 end

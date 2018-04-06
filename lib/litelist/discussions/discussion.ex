@@ -17,7 +17,8 @@ defmodule Litelist.Discussions.Discussion do
   def changeset(%Discussion{} = discussion, attrs) do
     discussion
     |> cast(attrs, [:title, :description, :neighbor_id])
+    |> unique_constraint(:title, message: "That title already exists. Try another one.")
     |> foreign_key_constraint(:discussions, name: :discussions_neighbor_id_fkey)
-    |> validate_required([:title, :description, :neighbor_id])
+    |> validate_required([:title, :description])
   end
 end
