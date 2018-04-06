@@ -42,7 +42,7 @@ defmodule LitelistWeb.FlagController do
         |> put_flash(:info, "Flag created successfully.")
         |> redirect(to: flag_path(conn, :show, flag))
       {:error, %Ecto.Changeset{} = changeset} ->
-        post = Posts.get_post!(2)
+        post = Posts.get_post!(changeset.changes.post_id)
 
         render(conn, "new.html", changeset: changeset, post: post, types: @types)
     end

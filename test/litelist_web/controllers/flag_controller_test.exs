@@ -73,7 +73,6 @@ defmodule LitelistWeb.FlagControllerTest do
       neighbor = Factory.insert(:neighbor)
       post = Factory.insert(:job, %{neighbor_id: neighbor.id})
       attrs = Map.merge(@invalid_attrs, %{post_id: post.id})
-
       conn = conn
         |> login_neighbor(neighbor)
         |> post(flag_path(conn, :create), flag: attrs)

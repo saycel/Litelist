@@ -24,7 +24,7 @@
 
   <li>
     <strong>Post title:</strong>
-    <span><%= link @flag.post.title, to: path_builder(@flat.post) %></span>
+    <span><%= link @flag.post.title, to: path_builder(@flag.post) %></span>
   </li>
 
 </ul>
