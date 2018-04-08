@@ -6,7 +6,6 @@ defmodule Litelist.Images.Image do
 
   schema "images" do
     field :image, :string
-    field :post_id, :id
 
     timestamps()
 

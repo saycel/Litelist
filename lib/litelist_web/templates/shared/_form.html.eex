@@ -29,8 +29,16 @@
             <div class="column col-12 "><%= error_tag f, :title%> </div>
           </div>
         </div>
-       
       <% end %>
+
+      <h1>Add images</h1>
+      <%= inputs_for f, :images, fn image_form -> %>
+          <%= label image_form, :image, class: "control-label" %>
+          <%= text_input image_form, :image, class: "form-control" %>
+          <%= error_tag image_form, :image %>
+          <br>
+      <% end %>
+
       <div class="column col-12">
 
         <%= submit "Submit", class: "btn btn-primary" %>

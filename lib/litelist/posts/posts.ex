@@ -78,7 +78,7 @@ defmodule Litelist.Posts do
       ** (Ecto.NoResultsError)
 
   """
-  def get_post!(id), do: Repo.get!(Post, id)
+  def get_post!(id), do: Repo.get!(Post, id) |> Repo.preload(:images)
 
   @doc """
   Creates a post.
