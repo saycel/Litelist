@@ -16,6 +16,7 @@ defmodule Litelist.Auth.Neighbor do
 
     has_many :posts, Litelist.Posts.Post
     has_many :flags, Litelist.Moderation.Flag
+    has_many :images, Litelist.Images.Image
   end
 
   @doc false

@@ -5,17 +5,19 @@ defmodule Litelist.Images.Image do
 
 
   schema "images" do
-    field :type, :string
+    field :image, :string
     field :post_id, :id
-    field :neighbor_id, :id
 
     timestamps()
+
+    belongs_to :neighbor, Litelist.Auth.Neighbor
+
   end
 
   @doc false
   def changeset(%Image{} = image, attrs) do
     image
-    |> cast(attrs, [:type])
-    |> validate_required([:type])
+    |> cast(attrs, [:image])
+    |> validate_required([:image])
   end
 end

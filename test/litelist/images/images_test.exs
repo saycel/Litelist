@@ -6,9 +6,9 @@ defmodule Litelist.ImagesTest do
   describe "images" do
     alias Litelist.Images.Image
 
-    @valid_attrs %{type: "some type"}
-    @update_attrs %{type: "some updated type"}
-    @invalid_attrs %{type: nil}
+    @valid_attrs %{image: "some type"}
+    @update_attrs %{image: "some updated type"}
+    @invalid_attrs %{image: nil}
 
     def image_fixture(attrs \\ %{}) do
       {:ok, image} =
