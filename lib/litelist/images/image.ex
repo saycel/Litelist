@@ -9,7 +9,6 @@ defmodule Litelist.Images.Image do
 
     timestamps()
 
-    belongs_to :neighbor, Litelist.Auth.Neighbor
     belongs_to :post, Litelist.Posts.Post
   end
 
