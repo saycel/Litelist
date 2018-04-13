@@ -53,7 +53,7 @@ defmodule LitelistWeb.Utils.ExportUtils do
     end
 
     def build_discussions_csv(%Neighbor{} = neighbor) do
-        columns = "title,description\n"
+        columns = "title,description,url\n"
 
         stream = Ecto.Adapters.SQL.stream(Repo, "COPY (SELECT #{columns} FROM discussions WHERE neighbor_id=#{neighbor.id}) to STDOUT WITH CSV DELIMITER ',' ESCAPE '\"'")
        
