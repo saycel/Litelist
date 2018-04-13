@@ -75,11 +75,10 @@ defmodule LitelistWeb.Router do
 
   scope "/", LitelistWeb do
     pipe_through [:browser, :auth]
-
-    get "/", PageController, :index
+    get "/posts", PageController, :index
     get "/post2list", PageController, :information
     get "/login", PageController, :login
-    post "/", PageController, :post_login
+    post "/login", PageController, :post_login
     post "/logout", PageController, :logout
     
     get "/search", SearchController, :index
@@ -89,10 +88,13 @@ defmodule LitelistWeb.Router do
     resources "/events", EventController, only: [:show, :index]
     resources "/businesses", BusinessController, only: [:show, :index]
     resources "/emergency_info", EmergencyInformationController, only: [:show, :index]
+    get "/*url",PageController, :url_handler
     resources "/flags", FlagController, only: [:new, :show, :create, :index]
     resources "/discussions", DiscussionController, only: [:index, :show]
 
+
   end
+
 
   # Other scopes may use custom stacks.
   # scope "/api", LitelistWeb do
