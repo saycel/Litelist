@@ -35,10 +35,10 @@ defmodule Litelist.Posts.Post do
 
   @doc false
   def changeset(%Post{} = post, attrs) do
-    IO.inspect "*****"
-    IO.inspect post
-    IO.inspect attrs
-    IO.inspect "*****"
+    # IO.inspect "*****"
+    # IO.inspect post
+    # IO.inspect attrs
+    # IO.inspect "*****"
 
     post
     |> cast(attrs, [:type, :title, :description, :price, :slug, :url, :location, :contact_info, :salary, :position_name, :company_name, :neighbor_id, :start_date, :end_date, :start_time, :end_time, :organization_name])

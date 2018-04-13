@@ -1,11 +1,12 @@
 defmodule Litelist.Images.Image do
-  use Ecto.Schema
+  import Ecto
   import Ecto.Changeset
   alias Litelist.Images.Image
-
+  use Arc.Ecto.Schema
+  use Ecto.Schema
 
   schema "images" do
-    field :image, :string
+    field :image, Litelist.ImageUploader.Type
 
     timestamps()
 
@@ -14,8 +15,11 @@ defmodule Litelist.Images.Image do
 
   @doc false
   def changeset(%Image{} = image, attrs) do
+    IO.inspect "***"
+    IO.inspect attrs
     image
     |> cast(attrs, [:image])
+    |> cast_attachments(attrs, [:image])
     |> validate_required([:image])
   end
 end

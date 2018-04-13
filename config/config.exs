@@ -36,3 +36,6 @@ config :litelist, Litelist.Scheduler,
   jobs: [
     {"@daily", {RemoveOldPosts, :run, []}}
   ]
+
+config :arc,
+  storage: Arc.Storage.Local
