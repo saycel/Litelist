@@ -16,6 +16,7 @@ defmodule Litelist.Discussions.Discussion do
     timestamps()
 
     belongs_to :neighbor, Litelist.Auth.Neighbor
+    has_many :comments, Litelist.Discussions.Comment
   end
 
   @doc false
