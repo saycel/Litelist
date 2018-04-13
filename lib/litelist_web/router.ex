@@ -58,6 +58,7 @@ defmodule LitelistWeb.Router do
     resources "/businesses", BusinessController, only: [:new, :create, :edit, :update, :delete]
     resources "/emergency_info", EmergencyInformationController, only: [:new, :create, :edit, :update, :delete]
     resources "/discussions", DiscussionController, only: [:new, :create]
+    resources "/comments", CommentController, only: [:delete, :create]
   end
 
   # Admin scope

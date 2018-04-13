@@ -3,6 +3,7 @@ defmodule LitelistWeb.DiscussionController do
 
   alias Litelist.Discussions
   alias Litelist.Discussions.Discussion
+  alias Litelist.Discussions.Comment
 
   alias LitelistWeb.Utils.SharedUtils
 
@@ -33,7 +34,9 @@ defmodule LitelistWeb.DiscussionController do
 
   def show(conn, %{"id" => id}) do
     discussion = Discussions.get_discussion!(id)
-    render(conn, "show.html", discussion: discussion)
+    changeset = Discussions.change_comment(%Comment{})
+
+    render(conn, "show.html", discussion: discussion, changeset: changeset)
   end
 
   def edit(conn, %{"id" => id}) do
