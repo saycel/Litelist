@@ -12,9 +12,9 @@ defmodule Litelist.ImageUploader do
     # @versions [:original, :thumb]
   
     # Whitelist file extensions:
-    # def validate({file, _}) do
-    #   ~w(.jpg .jpeg .gif .png) |> Enum.member?(Path.extname(file.file_name))
-    # end
+    def validate({file, _}) do
+      ~w(.jpg .jpeg .gif .png) |> Enum.member?(Path.extname(file.file_name))
+    end
   
     # Define a thumbnail transformation:
     # def transform(:thumb, _) do
@@ -22,14 +22,15 @@ defmodule Litelist.ImageUploader do
     # end
   
     # Override the persisted filenames:
-    # def filename(version, _) do
-    #   version
-    # end
+    def filename(version, file_tuple) do
+      first_obj = elem(file_tuple, 0)
+      UUID.uuid3(:url, first_obj.file_name)
+    end
   
     # Override the storage directory:
-    def storage_dir(_version, {_file, _scope}) do
-      "uploads/#{UUID.uuid4()}"
-    end
+    # def storage_dir(version, {file, scope}) do
+    #   "uploads/#{UUID.uuid4()}"
+    # end
   
     # Provide a default URL if there hasn't been a file uploaded
     # def default_url(version, scope) do

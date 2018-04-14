@@ -59,11 +59,14 @@
 
 </ul>
 
-<img src="<%= Litelist.ImageUploader.url({@image.image, @image})%>">
+<%= for image <- @job.images do %>
+  <img src="<%= Litelist.ImageUploader.url({image.image, image})%>">
+<% end %>
 
 <%= if @current_neighbor && @current_neighbor.id == @job.neighbor_id do %>
   <span><%= link "Edit", to: job_path(@conn, :edit, @job) %></span>
   <span><%= link "Delete", to: job_path(@conn, :delete, @job), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" %></span>
 <% end %>
+
 <span><%= link "Back", to: job_path(@conn, :index) %></span>
 <span><%= link "Flag", to: flag_path_builder(@job) %></span>

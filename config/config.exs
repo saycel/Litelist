@@ -39,3 +39,4 @@ config :litelist, Litelist.Scheduler,
 
 config :arc,
   storage: Arc.Storage.Local
+  
