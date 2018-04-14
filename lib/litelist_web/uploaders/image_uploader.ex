@@ -27,10 +27,8 @@ defmodule Litelist.ImageUploader do
     # end
   
     # Override the storage directory:
-    def storage_dir(version, {file, scope}) do
-      IO.inspect "*"
-      IO.inspect file
-      "uploads/"
+    def storage_dir(_version, {_file, _scope}) do
+      "uploads/#{UUID.uuid4()}"
     end
   
     # Provide a default URL if there hasn't been a file uploaded
