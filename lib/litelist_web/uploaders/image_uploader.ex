@@ -6,7 +6,7 @@ defmodule Litelist.ImageUploader do
   
     def __storage, do: Arc.Storage.Local
     
-    @versions [:original]
+    @versions [:original, :thumb]
   
     # To add a thumbnail version:
     # @versions [:original, :thumb]
@@ -17,9 +17,9 @@ defmodule Litelist.ImageUploader do
     end
   
     # Define a thumbnail transformation:
-    # def transform(:thumb, _) do
-    #   {:convert, "-strip -thumbnail 250x250^ -gravity center -extent 250x250 -format png", :png}
-    # end
+    def transform(:thumb, _) do
+      {:convert, "-strip -thumbnail 100x100^ -gravity center -extent 100x100"}
+    end
   
     # Override the persisted filenames:
     def filename(version, file_tuple) do
