@@ -27,9 +27,11 @@ defmodule Litelist.ImageUploader do
     # end
   
     # Override the storage directory:
-    # def storage_dir(version, {file, scope}) do
-    #   "uploads/user/avatars/#{scope.id}"
-    # end
+    def storage_dir(version, {file, scope}) do
+      IO.inspect "*"
+      IO.inspect file
+      "uploads/"
+    end
   
     # Provide a default URL if there hasn't been a file uploaded
     # def default_url(version, scope) do
