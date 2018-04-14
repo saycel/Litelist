@@ -28,3 +28,6 @@ npm-debug.log
 
 # local mnesia database files
 Mnesia*
+
+# local photo uploads
+/uploads
