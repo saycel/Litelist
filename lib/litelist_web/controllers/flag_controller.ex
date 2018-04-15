@@ -36,7 +36,7 @@ defmodule LitelistWeb.FlagController do
   def create(conn, %{"flag" => flag_params}) do
     flag_params = flag_params
       |> SharedUtils.parse_multi_select("type")
-      |> SharedUtils.add_neighbor_id(conn)
+      |> SharedUtils.add_neighbor_id_if_exists(conn)
       |> SharedUtils.add_default_status(@default_status)
 
     case Moderation.create_flag(flag_params) do
@@ -45,7 +45,7 @@ defmodule LitelistWeb.FlagController do
         |> put_flash(:info, "Flag created successfully.")
         |> redirect(to: flag_path(conn, :show, flag))
       {:error, %Ecto.Changeset{} = changeset} ->
-        post = Posts.get_post!(2)
+        post = Posts.get_post!(changeset.changes.post_id)
 
         render(conn, "new.html", changeset: changeset, post: post, types: @types)
     end

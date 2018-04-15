@@ -8,7 +8,7 @@
     <title>Litelist.Moderation – litelist v0.0.1</title>
     <link rel="stylesheet" href="dist/app-81d381dea4.css" />
     
-    <script src="dist/sidebar_items-914451259c.js"></script>
+    <script src="dist/sidebar_items-b904388670.js"></script>
     
     
     
@@ -129,7 +129,8 @@
     <a href="#get_flag!/1">get_flag!(id)</a>
   </div>
   
-    <div class="summary-synopsis"><p>Gets a single flag</p>
+    <div class="summary-synopsis"><p>Gets a single flag.
+Post is preloaded</p>
 </div>
   
 </div>
@@ -138,7 +139,8 @@
     <a href="#list_flags/0">list_flags()</a>
   </div>
   
-    <div class="summary-synopsis"><p>Returns the list of flags</p>
+    <div class="summary-synopsis"><p>Returns the list of flags.
+Posts are preloaded</p>
 </div>
   
 </div>
@@ -147,7 +149,8 @@
     <a href="#list_flags_by_neighbor/1">list_flags_by_neighbor(neighbor)</a>
   </div>
   
-    <div class="summary-synopsis"><p>Returns the list of flags created by the neighbor</p>
+    <div class="summary-synopsis"><p>Returns the list of flags created by the neighbor
+Posts are preloaded</p>
 </div>
   
 </div>
@@ -156,7 +159,8 @@
     <a href="#list_my_flagged_posts/1">list_my_flagged_posts(neighbor)</a>
   </div>
   
-    <div class="summary-synopsis"><p>Returns the list of flags for posts created by the neighbor</p>
+    <div class="summary-synopsis"><p>Returns the list of flags for posts created by the neighbor
+Posts are preloaded</p>
 </div>
   
 </div>
@@ -286,7 +290,8 @@ iex&gt; delete_flag(flag)
     
   </div>
   <section class="docstring">
-    <p>Gets a single flag.</p>
+    <p>Gets a single flag.
+Post is preloaded</p>
 <p>Raises <a href="https://hexdocs.pm/ecto/2.2.8/Ecto.NoResultsError.html"><code class="inline">Ecto.NoResultsError</code></a> if the Flag does not exist.</p>
 <h2 id="get_flag!/1-examples" class="section-heading">
   <a href="#get_flag!/1-examples" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
@@ -315,7 +320,8 @@ iex&gt; get_flag!(456)
     
   </div>
   <section class="docstring">
-    <p>Returns the list of flags.</p>
+    <p>Returns the list of flags.
+Posts are preloaded</p>
 <h2 id="list_flags/0-examples" class="section-heading">
   <a href="#list_flags/0-examples" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
   Examples
@@ -340,7 +346,8 @@ iex&gt; get_flag!(456)
     
   </div>
   <section class="docstring">
-    <p>Returns the list of flags created by the neighbor</p>
+    <p>Returns the list of flags created by the neighbor
+Posts are preloaded</p>
 <h2 id="list_flags_by_neighbor/1-examples" class="section-heading">
   <a href="#list_flags_by_neighbor/1-examples" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
   Examples
@@ -365,7 +372,8 @@ iex&gt; get_flag!(456)
     
   </div>
   <section class="docstring">
-    <p>Returns the list of flags for posts created by the neighbor</p>
+    <p>Returns the list of flags for posts created by the neighbor
+Posts are preloaded</p>
 <h2 id="list_my_flagged_posts/1-examples" class="section-heading">
   <a href="#list_my_flagged_posts/1-examples" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
   Examples

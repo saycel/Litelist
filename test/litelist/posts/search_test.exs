@@ -52,7 +52,7 @@ defmodule Litelist.SearchTest do
     test "returns no results on word that doesn't exist" do
       p =
         Post
-        |> Search.run("miss")
+        |> Search.run("zzzzzzzzzzzzzzzz")
 
       results = Repo.all(p)
       assert Enum.empty?(results)
