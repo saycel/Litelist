@@ -88,9 +88,10 @@ defmodule LitelistWeb.Router do
     resources "/events", EventController, only: [:show, :index]
     resources "/businesses", BusinessController, only: [:show, :index]
     resources "/emergency_info", EmergencyInformationController, only: [:show, :index]
-    get "/*url",PageController, :url_handler
     resources "/flags", FlagController, only: [:new, :show, :create, :index]
     resources "/discussions", DiscussionController, only: [:index, :show]
+    get "/*url",PageController, :url_handler
+
 
 
   end
