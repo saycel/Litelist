@@ -28,6 +28,13 @@ defmodule LitelistWeb.PageController do
       |> render("login.html", changeset: changeset, action: page_path(conn, :index))
     end
   end
+  
+  def post_login(conn, %{"neighbor" => %{"username" => username, "password" => password, "create_neighbor" => _create_neighbor}}) do
+    Auth.create_neighbor(%{username: username, password: password})
+    # credo:disable-for-lines:2
+    Auth.authenticate_neighbor(username, password)
+    |> login_reply(conn)
+  end
 
   def post_login(conn, %{"neighbor" => %{"username" => username, "password" => password}}) do
     # credo:disable-for-lines:2
