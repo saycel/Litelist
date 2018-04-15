@@ -59,7 +59,13 @@ defmodule LitelistWeb.PageControllerTest do
   end
 
   test "signup", %{conn: conn} do
-    credentials = %{username: "name", password: "pass", create_neighbor: true} 
+    credentials = %{
+      username: "name",
+      password: "pass",
+      create_neighbor: true,
+      first_name: "jane",
+      last_name: "doe"
+    } 
     conn = conn
       |> post(page_path(conn, :post_login), neighbor: credentials)
 
