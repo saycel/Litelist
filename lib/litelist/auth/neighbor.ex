@@ -10,6 +10,8 @@ defmodule Litelist.Auth.Neighbor do
   schema "neighbors" do
     field :password, :string
     field :username, :string
+    field :first_name, :string
+    field :last_name, :string
     field :admin, :boolean
 
     timestamps()
@@ -21,7 +23,7 @@ defmodule Litelist.Auth.Neighbor do
   @doc false
   def changeset(%Neighbor{} = neighbor, attrs) do
     neighbor
-    |> cast(attrs, [:username, :password, :admin])
+    |> cast(attrs, [:username, :password, :admin, :first_name, :last_name])
     |> unique_constraint(:username, message: "That username already exists. Try another one.")
     |> validate_required([:username, :password])
     |> put_pass_hash()  

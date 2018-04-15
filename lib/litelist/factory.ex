@@ -22,6 +22,8 @@ defmodule Litelist.Factory do
   def neighbor_factory do
     %Neighbor{
       username: Faker.Internet.user_name,
+      first_name: FakerElixir.Name.first_name,
+      last_name: FakerElixir.Name.last_name,
       password: Comeonin.Bcrypt.hashpwsalt("password"),
       admin: false
     }
@@ -38,6 +40,8 @@ defmodule Litelist.Factory do
   def admin_factory do
     %Neighbor{
       username: Faker.Internet.user_name,
+      first_name: FakerElixir.Name.first_name,
+      last_name: FakerElixir.Name.last_name,
       password: Comeonin.Bcrypt.hashpwsalt("password"),
       admin: true
     }
