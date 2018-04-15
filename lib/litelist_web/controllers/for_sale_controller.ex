@@ -3,6 +3,7 @@ defmodule LitelistWeb.ForSaleController do
 
   alias Litelist.Posts
   alias Litelist.Posts.Post
+  alias Litelist.Images.Image
 
   alias LitelistWeb.Utils.SharedUtils
   plug :put_layout, false when action in [:show]
@@ -16,7 +17,11 @@ defmodule LitelistWeb.ForSaleController do
   end
 
   def new(conn, _params) do
-    changeset = Posts.change_post(%Post{})
+    changeset = Posts.change_post(%Post{
+      images: [
+        %Image{}
+      ]
+    })
     render(conn, "new.html", changeset: changeset)
   end
 
