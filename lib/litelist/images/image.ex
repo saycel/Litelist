@@ -14,12 +14,9 @@ defmodule Litelist.Images.Image do
 
   @doc false
   def changeset(%Image{} = image, attrs) do
-    image = image
+    image
     |> cast(attrs, [:image])
     |> cast_attachments(attrs, [:image])
     |> validate_required([:image])
-
-    IO.inspect image
-    image
   end
 end
