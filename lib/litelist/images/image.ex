@@ -1,4 +1,7 @@
 defmodule Litelist.Images.Image do
+  @moduledoc """
+  Image schema.
+  """
   import Ecto.Changeset
   alias Litelist.Images.Image
   use Arc.Ecto.Schema

@@ -1,4 +1,7 @@
 defmodule Litelist.ImageUploader do
+    @moduledoc """
+    Arc image uploader
+    """
     use Arc.Definition
   
     # Include ecto support (requires package arc_ecto installed):
