@@ -5,7 +5,7 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="ExDoc v0.18.2">
-    <title>Litelist.Settings.SettingsDatabase – litelist v0.0.1</title>
+    <title>Litelist.ImageUploader – litelist v0.0.1</title>
     <link rel="stylesheet" href="dist/app-81d381dea4.css" />
     
     <script src="dist/sidebar_items-f707e47970.js"></script>
@@ -70,10 +70,15 @@
 
       <h1>
         <small class="visible-xs">litelist v0.0.1</small>
-        Litelist.Settings.SettingsDatabase
+        Litelist.ImageUploader
         
       </h1>
 
+      
+        <section id="moduledoc">
+          <p>Arc image uploader</p>
+
+        </section>
       
 
       
@@ -94,95 +99,92 @@
     </h2>
     <div class="summary-row">
   <div class="summary-signature">
-    <a href="#__using__/1">__using__(opts)</a>
-  </div>
-  
-    <div class="summary-synopsis"><p>Alias all the table names in the current scope and require what’s
-needed</p>
-</div>
-  
-</div>
-<div class="summary-row">
-  <div class="summary-signature">
-    <a href="#create/1">create(copying \\ [])</a>
-  </div>
-  
-    <div class="summary-synopsis"><p>Create the database, it calls <code class="inline">.create</code> on every defined table</p>
-</div>
-  
-</div>
-<div class="summary-row">
-  <div class="summary-signature">
-    <a href="#create!/1">create!(copying \\ [])</a>
-  </div>
-  
-    <div class="summary-synopsis"><p>Create the database, it calls <code class="inline">.create</code> on every defined table, raises
-in case of error</p>
-</div>
-  
-</div>
-<div class="summary-row">
-  <div class="summary-signature">
-    <a href="#destroy/0">destroy()</a>
-  </div>
-  
-    <div class="summary-synopsis"><p>Destroy the database, it calls <code class="inline">.destroy</code> on every defined table</p>
-</div>
-  
-</div>
-<div class="summary-row">
-  <div class="summary-signature">
-    <a href="#destroy!/0">destroy!()</a>
-  </div>
-  
-    <div class="summary-synopsis"><p>Destroy the database, it calls <code class="inline">.destroy</code> on every defined table,
-raises in case of error</p>
-</div>
-  
-</div>
-<div class="summary-row">
-  <div class="summary-signature">
-    <a href="#get_settings/0">get_settings()</a>
-  </div>
-  
-    <div class="summary-synopsis"><p>Gets the current settings. Creates default settings if current settings don’t exist.
-Returns %Settings{}</p>
-<h2>Examples</h2>
-</div>
-  
-</div>
-<div class="summary-row">
-  <div class="summary-signature">
-    <a href="#metadata/0">metadata()</a>
+    <a href="#acl/2">acl(_, _)</a>
   </div>
   
 </div>
 <div class="summary-row">
   <div class="summary-signature">
-    <a href="#tables/0">tables()</a>
+    <a href="#async/0">async()</a>
   </div>
-  
-    <div class="summary-synopsis"><p>List of atoms of the defined tables in the database</p>
-</div>
   
 </div>
 <div class="summary-row">
   <div class="summary-signature">
-    <a href="#update_settings/1">update_settings(attrs)</a>
+    <a href="#default_url/1">default_url(_)</a>
   </div>
-  
-    <div class="summary-synopsis"><p>Updates settings.</p>
-<h2>Examples</h2>
-</div>
   
 </div>
 <div class="summary-row">
   <div class="summary-signature">
-    <a href="#wait/1">wait(timeout \\ :infinity)</a>
+    <a href="#default_url/2">default_url(version, _)</a>
   </div>
   
-    <div class="summary-synopsis"><p>Wait for the database to be loaded</p>
 </div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#delete/1">delete(args)</a>
+  </div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#filename/2">filename(_, arg)</a>
+  </div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#s3_object_headers/2">s3_object_headers(_, _)</a>
+  </div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#storage_dir/2">storage_dir(_, _)</a>
+  </div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#store/1">store(args)</a>
+  </div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#transform/2">transform(arg1, _)</a>
+  </div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#url/1">url(file)</a>
+  </div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#url/2">url(file, options)</a>
+  </div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#url/3">url(file, version, options)</a>
+  </div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#urls/2">urls(file, options \\ [])</a>
+  </div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#validate/1">validate(arg1)</a>
+  </div>
   
 </div>
 
@@ -205,251 +207,261 @@ Returns %Settings{}</p>
             </a>
             Functions
           </h1>
-          <div class="detail" id="__using__/1">
+          <div class="detail" id="acl/2">
   
   
   <div class="detail-header">
-    <a href="#__using__/1" class="detail-link" title="Link to this macro">
-      <span class="icon-link" aria-hidden="true"></span>
-      <span class="sr-only">Link to this macro</span>
-    </a>
-    <span class="signature">__using__(opts)</span>
-    
-    
-      <span class="note">(macro)</span>
-    
-    
-  </div>
-  <section class="docstring">
-    <p>Alias all the table names in the current scope and require what’s
-needed.</p>
-
-  </section>
-</div>
-<div class="detail" id="create/1">
-  
-  
-    <span id="create/0"></span>
-  
-  <div class="detail-header">
-    <a href="#create/1" class="detail-link" title="Link to this function">
+    <a href="#acl/2" class="detail-link" title="Link to this function">
       <span class="icon-link" aria-hidden="true"></span>
       <span class="sr-only">Link to this function</span>
     </a>
-    <span class="signature">create(copying \\ [])</span>
+    <span class="signature">acl(_, _)</span>
     
     
-    
-      <div class="specs">
-        
-          <pre>create(<a href="https://hexdocs.pm/amnesia/0.2.7/Amnesia.Table.html#t:c/0">Amnesia.Table.c</a>()) :: [<a href="https://hexdocs.pm/amnesia/0.2.7/Amnesia.Table.html#t:o/0">Amnesia.Table.o</a>()]</pre>
-        
-      </div>
-    
-  </div>
-  <section class="docstring">
-    <p>Create the database, it calls <code class="inline">.create</code> on every defined table.</p>
-
-  </section>
-</div>
-<div class="detail" id="create!/1">
-  
-  
-    <span id="create!/0"></span>
-  
-  <div class="detail-header">
-    <a href="#create!/1" class="detail-link" title="Link to this function">
-      <span class="icon-link" aria-hidden="true"></span>
-      <span class="sr-only">Link to this function</span>
-    </a>
-    <span class="signature">create!(copying \\ [])</span>
-    
-    
-    
-      <div class="specs">
-        
-          <pre>create!(<a href="https://hexdocs.pm/amnesia/0.2.7/Amnesia.Table.html#t:c/0">Amnesia.Table.c</a>()) :: [<a href="https://hexdocs.pm/amnesia/0.2.7/Amnesia.Table.html#t:o/0">Amnesia.Table.o</a>()]</pre>
-        
-      </div>
-    
-  </div>
-  <section class="docstring">
-    <p>Create the database, it calls <code class="inline">.create</code> on every defined table, raises
-in case of error.</p>
-
-  </section>
-</div>
-<div class="detail" id="destroy/0">
-  
-  
-  <div class="detail-header">
-    <a href="#destroy/0" class="detail-link" title="Link to this function">
-      <span class="icon-link" aria-hidden="true"></span>
-      <span class="sr-only">Link to this function</span>
-    </a>
-    <span class="signature">destroy()</span>
-    
-    
-    
-      <div class="specs">
-        
-          <pre>destroy() :: [<a href="https://hexdocs.pm/amnesia/0.2.7/Amnesia.Table.html#t:o/0">Amnesia.Table.o</a>()]</pre>
-        
-      </div>
-    
-  </div>
-  <section class="docstring">
-    <p>Destroy the database, it calls <code class="inline">.destroy</code> on every defined table.</p>
-
-  </section>
-</div>
-<div class="detail" id="destroy!/0">
-  
-  
-  <div class="detail-header">
-    <a href="#destroy!/0" class="detail-link" title="Link to this function">
-      <span class="icon-link" aria-hidden="true"></span>
-      <span class="sr-only">Link to this function</span>
-    </a>
-    <span class="signature">destroy!()</span>
-    
-    
-    
-      <div class="specs">
-        
-          <pre>destroy!() :: [<a href="https://hexdocs.pm/amnesia/0.2.7/Amnesia.Table.html#t:o/0">Amnesia.Table.o</a>()]</pre>
-        
-      </div>
-    
-  </div>
-  <section class="docstring">
-    <p>Destroy the database, it calls <code class="inline">.destroy</code> on every defined table,
-raises in case of error.</p>
-
-  </section>
-</div>
-<div class="detail" id="get_settings/0">
-  
-  
-  <div class="detail-header">
-    <a href="#get_settings/0" class="detail-link" title="Link to this function">
-      <span class="icon-link" aria-hidden="true"></span>
-      <span class="sr-only">Link to this function</span>
-    </a>
-    <span class="signature">get_settings()</span>
-    
-    
-    
-  </div>
-  <section class="docstring">
-    <p>Gets the current settings. Creates default settings if current settings don’t exist.
-Returns %Settings{}</p>
-<h2 id="get_settings/0-examples" class="section-heading">
-  <a href="#get_settings/0-examples" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
-  Examples
-</h2>
-
-<p>  iex&gt; get_settings()
-  %Settings{…}</p>
-
-  </section>
-</div>
-<div class="detail" id="metadata/0">
-  
-  
-  <div class="detail-header">
-    <a href="#metadata/0" class="detail-link" title="Link to this function">
-      <span class="icon-link" aria-hidden="true"></span>
-      <span class="sr-only">Link to this function</span>
-    </a>
-    <span class="signature">metadata()</span>
-    
-    
-    
-      <div class="specs">
-        
-          <pre>metadata() :: <a href="https://hexdocs.pm/amnesia/0.2.7/Amnesia.Metadata.html#t:t/0">Amnesia.Metadata.t</a>()</pre>
-        
-      </div>
     
   </div>
   <section class="docstring">
     
   </section>
 </div>
-<div class="detail" id="tables/0">
+<div class="detail" id="async/0">
   
   
   <div class="detail-header">
-    <a href="#tables/0" class="detail-link" title="Link to this function">
+    <a href="#async/0" class="detail-link" title="Link to this function">
       <span class="icon-link" aria-hidden="true"></span>
       <span class="sr-only">Link to this function</span>
     </a>
-    <span class="signature">tables()</span>
+    <span class="signature">async()</span>
     
     
-    
-      <div class="specs">
-        
-          <pre>tables() :: [<a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">atom</a>()]</pre>
-        
-      </div>
     
   </div>
   <section class="docstring">
-    <p>List of atoms of the defined tables in the database.</p>
-
+    
   </section>
 </div>
-<div class="detail" id="update_settings/1">
+<div class="detail" id="default_url/1">
   
   
   <div class="detail-header">
-    <a href="#update_settings/1" class="detail-link" title="Link to this function">
+    <a href="#default_url/1" class="detail-link" title="Link to this function">
       <span class="icon-link" aria-hidden="true"></span>
       <span class="sr-only">Link to this function</span>
     </a>
-    <span class="signature">update_settings(attrs)</span>
+    <span class="signature">default_url(_)</span>
     
     
     
   </div>
   <section class="docstring">
-    <p>Updates settings.</p>
-<h2 id="update_settings/1-examples" class="section-heading">
-  <a href="#update_settings/1-examples" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
-  Examples
-</h2>
-
-<p>  iex&gt; update_settings(attrs)
-  %Settings{attrs}</p>
-
+    
   </section>
 </div>
-<div class="detail" id="wait/1">
+<div class="detail" id="default_url/2">
   
-  
-    <span id="wait/0"></span>
   
   <div class="detail-header">
-    <a href="#wait/1" class="detail-link" title="Link to this function">
+    <a href="#default_url/2" class="detail-link" title="Link to this function">
       <span class="icon-link" aria-hidden="true"></span>
       <span class="sr-only">Link to this function</span>
     </a>
-    <span class="signature">wait(timeout \\ :infinity)</span>
+    <span class="signature">default_url(version, _)</span>
     
     
-    
-      <div class="specs">
-        
-          <pre>wait(<a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">integer</a>() | :infinity) :: :ok | {:timeout, [<a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">atom</a>()]} | {:error, <a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">atom</a>()}</pre>
-        
-      </div>
     
   </div>
   <section class="docstring">
-    <p>Wait for the database to be loaded.</p>
-
+    
+  </section>
+</div>
+<div class="detail" id="delete/1">
+  
+  
+  <div class="detail-header">
+    <a href="#delete/1" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <span class="signature">delete(args)</span>
+    
+    
+    
+  </div>
+  <section class="docstring">
+    
+  </section>
+</div>
+<div class="detail" id="filename/2">
+  
+  
+  <div class="detail-header">
+    <a href="#filename/2" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <span class="signature">filename(_, arg)</span>
+    
+    
+    
+  </div>
+  <section class="docstring">
+    
+  </section>
+</div>
+<div class="detail" id="s3_object_headers/2">
+  
+  
+  <div class="detail-header">
+    <a href="#s3_object_headers/2" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <span class="signature">s3_object_headers(_, _)</span>
+    
+    
+    
+  </div>
+  <section class="docstring">
+    
+  </section>
+</div>
+<div class="detail" id="storage_dir/2">
+  
+  
+  <div class="detail-header">
+    <a href="#storage_dir/2" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <span class="signature">storage_dir(_, _)</span>
+    
+    
+    
+  </div>
+  <section class="docstring">
+    
+  </section>
+</div>
+<div class="detail" id="store/1">
+  
+  
+  <div class="detail-header">
+    <a href="#store/1" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <span class="signature">store(args)</span>
+    
+    
+    
+  </div>
+  <section class="docstring">
+    
+  </section>
+</div>
+<div class="detail" id="transform/2">
+  
+  
+  <div class="detail-header">
+    <a href="#transform/2" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <span class="signature">transform(arg1, _)</span>
+    
+    
+    
+  </div>
+  <section class="docstring">
+    
+  </section>
+</div>
+<div class="detail" id="url/1">
+  
+  
+  <div class="detail-header">
+    <a href="#url/1" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <span class="signature">url(file)</span>
+    
+    
+    
+  </div>
+  <section class="docstring">
+    
+  </section>
+</div>
+<div class="detail" id="url/2">
+  
+  
+  <div class="detail-header">
+    <a href="#url/2" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <span class="signature">url(file, options)</span>
+    
+    
+    
+  </div>
+  <section class="docstring">
+    
+  </section>
+</div>
+<div class="detail" id="url/3">
+  
+  
+  <div class="detail-header">
+    <a href="#url/3" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <span class="signature">url(file, version, options)</span>
+    
+    
+    
+  </div>
+  <section class="docstring">
+    
+  </section>
+</div>
+<div class="detail" id="urls/2">
+  
+  
+    <span id="urls/1"></span>
+  
+  <div class="detail-header">
+    <a href="#urls/2" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <span class="signature">urls(file, options \\ [])</span>
+    
+    
+    
+  </div>
+  <section class="docstring">
+    
+  </section>
+</div>
+<div class="detail" id="validate/1">
+  
+  
+  <div class="detail-header">
+    <a href="#validate/1" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <span class="signature">validate(arg1)</span>
+    
+    
+    
+  </div>
+  <section class="docstring">
+    
   </section>
 </div>
 
