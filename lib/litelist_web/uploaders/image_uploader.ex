@@ -18,14 +18,14 @@ defmodule Litelist.ImageUploader do
   
     # Define a thumbnail transformation:
     def transform(:thumb, _) do
-      {:convert, "-strip -thumbnail 100x100^ -gravity center -extent 100x100"}
+      {:convert, "-strip -thumbnail 400x400^ -gravity center -extent 400x400 -format png", :png}
     end
   
     # Override the persisted filenames:
-    def filename(version, file_tuple) do
-      first_obj = elem(file_tuple, 0)
-      UUID.uuid3(:url, first_obj.file_name)
-    end
+    # def filename(version, file_tuple) do
+    #   first_obj = elem(file_tuple, 0)
+    #   UUID.uuid3(:url, first_obj.file_name)
+    # end
   
     # Override the storage directory:
     # def storage_dir(version, {file, scope}) do

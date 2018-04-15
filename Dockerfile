@@ -14,14 +14,7 @@ RUN curl -sL https://deb.nodesource.com/setup_8.x | bash -
 RUN apt-get install -y -q nodejs
 
 # Install ImageMagick
-RUN \
-curl -sfLO http://www.imagemagick.org/download/ImageMagick-6.9.9-40.tar.gz && \
-tar -xzf ImageMagick-6.9.9-40.tar.gz && \
-cd ImageMagick-6.9.9-40 && \
-./configure --prefix /usr/local && \
-make install && \
-cd .. && \
-rm -rf ImageMagick*
+RUN apt-get install imagemagick
 
 WORKDIR /app
 EXPOSE 4000
