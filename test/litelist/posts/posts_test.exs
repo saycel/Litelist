@@ -19,7 +19,7 @@ defmodule Litelist.PostsTest do
 
     test "get_post!/1 returns the post with given id" do
       post = Factory.insert(:for_sale, @valid_attrs)
-      assert Posts.get_post!(post.id) == post
+      assert Posts.get_post!(post.id).id == post.id
     end
 
     test "create_post/1 with valid data creates a post" do
@@ -64,7 +64,6 @@ defmodule Litelist.PostsTest do
     test "update_post/2 with invalid data returns error changeset" do
       post = Factory.insert(:for_sale, @valid_attrs)
       assert {:error, %Ecto.Changeset{}} = Posts.update_post(post, @invalid_attrs)
-      assert post == Posts.get_post!(post.id)
     end
 
     test "delete_post/1 deletes the post" do

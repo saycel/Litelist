@@ -3,6 +3,7 @@ defmodule LitelistWeb.JobController do
 
   alias Litelist.Posts
   alias Litelist.Posts.Post
+  alias Litelist.Images.Image
 
   alias LitelistWeb.Utils.SharedUtils
   
@@ -25,7 +26,11 @@ defmodule LitelistWeb.JobController do
   end
 
   def new(conn, _params) do
-    changeset = Posts.change_post(%Post{})
+    changeset = Posts.change_post(%Post{
+      images: [
+        %Image{}
+      ]
+    })
     render(conn, "new.html", changeset: changeset)
   end
 

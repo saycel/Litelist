@@ -42,7 +42,7 @@ defmodule LitelistWeb.PageControllerTest do
     end
 
     test "POST / :login with correct credentials", %{conn: conn, username: username, correct_password: correct_password} do
-    credentials = %{username: username, password: correct_password} 
+      credentials = %{username: username, password: correct_password} 
       conn = conn
         |> post(page_path(conn, :post_login), neighbor: credentials)
 
@@ -56,6 +56,20 @@ defmodule LitelistWeb.PageControllerTest do
   
         assert redirected_to(conn) == page_path(conn, :login)
       end
+  end
+
+  test "signup", %{conn: conn} do
+    credentials = %{
+      username: "name",
+      password: "pass",
+      create_neighbor: true,
+      first_name: "jane",
+      last_name: "doe"
+    } 
+    conn = conn
+      |> post(page_path(conn, :post_login), neighbor: credentials)
+
+    assert redirected_to(conn) == page_path(conn, :index)
   end
 
   test "logout", %{conn: conn, neighbor: neighbor} do

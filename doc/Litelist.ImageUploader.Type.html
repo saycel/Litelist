@@ -5,7 +5,7 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="ExDoc v0.18.2">
-    <title>LitelistWeb.ForSaleController – litelist v0.0.1</title>
+    <title>Litelist.ImageUploader.Type – litelist v0.0.1</title>
     <link rel="stylesheet" href="dist/app-81d381dea4.css" />
     
     <script src="dist/sidebar_items-f707e47970.js"></script>
@@ -70,7 +70,7 @@
 
       <h1>
         <small class="visible-xs">litelist v0.0.1</small>
-        LitelistWeb.ForSaleController
+        Litelist.ImageUploader.Type
         
       </h1>
 
@@ -94,44 +94,38 @@
     </h2>
     <div class="summary-row">
   <div class="summary-signature">
-    <a href="#create/2">create(conn, map)</a>
+    <a href="#cast/1">cast(value)</a>
   </div>
+  
+    <div class="summary-synopsis"><p>Casts the given input to the custom type</p>
+</div>
   
 </div>
 <div class="summary-row">
   <div class="summary-signature">
-    <a href="#delete/2">delete(conn, map)</a>
+    <a href="#dump/1">dump(value)</a>
   </div>
+  
+    <div class="summary-synopsis"><p>Dumps the given term into an Ecto native type</p>
+</div>
   
 </div>
 <div class="summary-row">
   <div class="summary-signature">
-    <a href="#edit/2">edit(conn, map)</a>
+    <a href="#load/1">load(value)</a>
   </div>
+  
+    <div class="summary-synopsis"><p>Loads the given term into a custom type</p>
+</div>
   
 </div>
 <div class="summary-row">
   <div class="summary-signature">
-    <a href="#index/2">index(conn, params)</a>
+    <a href="#type/0">type()</a>
   </div>
   
+    <div class="summary-synopsis"><p>Returns the underlying schema type for the custom type</p>
 </div>
-<div class="summary-row">
-  <div class="summary-signature">
-    <a href="#new/2">new(conn, params)</a>
-  </div>
-  
-</div>
-<div class="summary-row">
-  <div class="summary-signature">
-    <a href="#show/2">show(conn, map)</a>
-  </div>
-  
-</div>
-<div class="summary-row">
-  <div class="summary-signature">
-    <a href="#update/2">update(conn, map)</a>
-  </div>
   
 </div>
 
@@ -154,123 +148,100 @@
             </a>
             Functions
           </h1>
-          <div class="detail" id="create/2">
+          <div class="detail" id="cast/1">
   
   
   <div class="detail-header">
-    <a href="#create/2" class="detail-link" title="Link to this function">
+    <a href="#cast/1" class="detail-link" title="Link to this function">
       <span class="icon-link" aria-hidden="true"></span>
       <span class="sr-only">Link to this function</span>
     </a>
-    <span class="signature">create(conn, map)</span>
+    <span class="signature">cast(value)</span>
     
     
     
   </div>
   <section class="docstring">
-    
+    <p>Casts the given input to the custom type.</p>
+<p>This callback is called on external input and can return any type,
+as long as the <a href="#dump/1"><code class="inline">dump/1</code></a> function is able to convert the returned
+value into an Ecto native type. There are two situations where
+this callback is called:</p>
+<ol>
+<li>When casting values by <a href="https://hexdocs.pm/ecto/2.2.8/Ecto.Changeset.html"><code class="inline">Ecto.Changeset</code></a>
+</li>
+<li>When passing arguments to <a href="https://hexdocs.pm/ecto/2.2.8/Ecto.Query.html"><code class="inline">Ecto.Query</code></a>
+</li>
+</ol>
+<p>Callback implementation for <a href="https://hexdocs.pm/ecto/2.2.8/Ecto.Type.html#c:cast/1"><code class="inline">Ecto.Type.cast/1</code></a>.</p>
+
   </section>
 </div>
-<div class="detail" id="delete/2">
+<div class="detail" id="dump/1">
   
   
   <div class="detail-header">
-    <a href="#delete/2" class="detail-link" title="Link to this function">
+    <a href="#dump/1" class="detail-link" title="Link to this function">
       <span class="icon-link" aria-hidden="true"></span>
       <span class="sr-only">Link to this function</span>
     </a>
-    <span class="signature">delete(conn, map)</span>
+    <span class="signature">dump(value)</span>
     
     
     
   </div>
   <section class="docstring">
-    
+    <p>Dumps the given term into an Ecto native type.</p>
+<p>This callback is called with any term that was stored in the struct
+and it needs to validate them and convert it to an Ecto native type.</p>
+<p>Callback implementation for <a href="https://hexdocs.pm/ecto/2.2.8/Ecto.Type.html#c:dump/1"><code class="inline">Ecto.Type.dump/1</code></a>.</p>
+
   </section>
 </div>
-<div class="detail" id="edit/2">
+<div class="detail" id="load/1">
   
   
   <div class="detail-header">
-    <a href="#edit/2" class="detail-link" title="Link to this function">
+    <a href="#load/1" class="detail-link" title="Link to this function">
       <span class="icon-link" aria-hidden="true"></span>
       <span class="sr-only">Link to this function</span>
     </a>
-    <span class="signature">edit(conn, map)</span>
+    <span class="signature">load(value)</span>
     
     
     
   </div>
   <section class="docstring">
-    
+    <p>Loads the given term into a custom type.</p>
+<p>This callback is called when loading data from the database and
+receive an Ecto native type. It can return any type, as long as
+the <a href="#dump/1"><code class="inline">dump/1</code></a> function is able to convert the returned value back
+into an Ecto native type.</p>
+<p>Callback implementation for <a href="https://hexdocs.pm/ecto/2.2.8/Ecto.Type.html#c:load/1"><code class="inline">Ecto.Type.load/1</code></a>.</p>
+
   </section>
 </div>
-<div class="detail" id="index/2">
+<div class="detail" id="type/0">
   
   
   <div class="detail-header">
-    <a href="#index/2" class="detail-link" title="Link to this function">
+    <a href="#type/0" class="detail-link" title="Link to this function">
       <span class="icon-link" aria-hidden="true"></span>
       <span class="sr-only">Link to this function</span>
     </a>
-    <span class="signature">index(conn, params)</span>
+    <span class="signature">type()</span>
     
     
     
   </div>
   <section class="docstring">
-    
-  </section>
-</div>
-<div class="detail" id="new/2">
-  
-  
-  <div class="detail-header">
-    <a href="#new/2" class="detail-link" title="Link to this function">
-      <span class="icon-link" aria-hidden="true"></span>
-      <span class="sr-only">Link to this function</span>
-    </a>
-    <span class="signature">new(conn, params)</span>
-    
-    
-    
-  </div>
-  <section class="docstring">
-    
-  </section>
-</div>
-<div class="detail" id="show/2">
-  
-  
-  <div class="detail-header">
-    <a href="#show/2" class="detail-link" title="Link to this function">
-      <span class="icon-link" aria-hidden="true"></span>
-      <span class="sr-only">Link to this function</span>
-    </a>
-    <span class="signature">show(conn, map)</span>
-    
-    
-    
-  </div>
-  <section class="docstring">
-    
-  </section>
-</div>
-<div class="detail" id="update/2">
-  
-  
-  <div class="detail-header">
-    <a href="#update/2" class="detail-link" title="Link to this function">
-      <span class="icon-link" aria-hidden="true"></span>
-      <span class="sr-only">Link to this function</span>
-    </a>
-    <span class="signature">update(conn, map)</span>
-    
-    
-    
-  </div>
-  <section class="docstring">
-    
+    <p>Returns the underlying schema type for the custom type.</p>
+<p>For example, if you want to provide your own date
+structures, the type function should return <code class="inline">:date</code>.</p>
+<p>Note this function is not required to return Ecto primitive
+types, the type is only required to be known by the adapter.</p>
+<p>Callback implementation for <a href="https://hexdocs.pm/ecto/2.2.8/Ecto.Type.html#c:type/0"><code class="inline">Ecto.Type.type/0</code></a>.</p>
+
   </section>
 </div>
 
