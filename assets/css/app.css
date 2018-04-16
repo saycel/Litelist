@@ -16,6 +16,9 @@
 .mt-60{
 	margin-top:60px;
 }
+.mt-5{
+	margin-top:5px;
+}
 .white{
 	color:white;
 }
@@ -24,11 +27,17 @@
 }
 .card-image{
 	width:100%;
-	max-width:500px;
+	max-width:400px;
 	margin:auto;
 	
 }
 .card-image img{
 	height:100%;
 	width:100%;
+}
+.ta-center{
+	text-align: center;
+}
+.on-small{
+	min-width:300px;
 }
