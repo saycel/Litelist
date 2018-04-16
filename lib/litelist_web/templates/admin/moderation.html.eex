@@ -1,11 +1,11 @@
 <div class="columns mt-60">
   <div class="column col-4 col-md-12 hide-md">
-      <div class="fixed" style="width:35%; height:500px; overflow:scroll"> 
+      <div class="fixed" style="width:33%; height:500px; overflow:scroll"> 
         <%= render "_rules.html" %>
       </div>
   </div>
   <div class="column col-8 col-md-12">
-    <h2>Listing Flags</h2>
+
 
 <table class="table">
   <thead>
@@ -13,7 +13,7 @@
       <th>Type</th>
       <th>Description</th>
       <th>Status</th>
-      <th>Admin Response</th>
+      <th>Response</th>
       <th>Post title</th>
 
       <th></th>
@@ -29,9 +29,8 @@
       <td><%= link flag.post.title, to: path_builder(flag.post) %></td>
 
       <td class="text-right">
-        <span><%= link "Show", to: flag_path(@conn, :show, flag), class: "btn btn-default btn-xs" %></span>
-        <span><%= link "Edit", to: flag_path(@conn, :edit, flag), class: "btn btn-default btn-xs" %></span>
-        <span><%= link "Delete", to: flag_path(@conn, :delete, flag), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" %></span>
+        <span><%= link "Moderate", to: flag_path(@conn, :show, flag), class: "btn btn-default btn-xs" %></span>
+        <span><%= link "X", to: flag_path(@conn, :delete, flag), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" %></span>
       </td>
     </tr>
 <% end %>

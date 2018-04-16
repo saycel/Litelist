@@ -70,7 +70,7 @@ defmodule Litelist.Moderation do
       ** (Ecto.NoResultsError)
 
   """
-  def get_flag!(id), do: Flag |> Repo.get!(id) |> Repo.preload(:post)
+  def get_flag!(id), do: Flag |> Repo.get!(id) |> Repo.preload(:post) |> Repo.preload(:neighbor)
 
   @doc """
   Creates a flag.

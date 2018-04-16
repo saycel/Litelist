@@ -30,13 +30,18 @@
           </div>
         </div>
       <% end %>
+      <div class="form-group container">
+        <div class="columns">
+          <div class="column col-12">
+            <%= inputs_for f, :images, fn image_form -> %>
+              <div class="divider text-center" data-content="Add an Image"></div>
+              <%= file_input image_form, :image, class: "form-control" %>
+              <%= error_tag image_form, :image %>
+          <% end %>
+          </div>
+        </div>
 
-      <%= inputs_for f, :images, fn image_form -> %>
-          <%= label image_form, :image, class: "control-label" %>
-          <%= file_input image_form, :image, class: "form-control" %>
-          <%= error_tag image_form, :image %>
-          <br>
-      <% end %>
+      </div>
 
       <div class="column col-12">
 

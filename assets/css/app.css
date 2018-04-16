@@ -22,7 +22,7 @@
 .white{
 	color:white;
 }
-.admin-dashboard{
+.admin-dashboard, .dashboard{
 	background: #f8f9fa;
 }
 .card-image{
@@ -40,4 +40,7 @@
 }
 .on-small{
 	min-width:300px;
+}
+.red{
+	color:red;
 }
