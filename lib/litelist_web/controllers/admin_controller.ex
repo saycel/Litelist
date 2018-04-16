@@ -11,6 +11,13 @@ defmodule LitelistWeb.AdminController do
         |> render("index.html")
     end
 
+    def rules(conn, _params) do
+        render(conn, "moderation_rules.html")
+    end
+    def moderation(conn, _params) do
+        flags = Moderation.list_flags()
+        render(conn, "moderation.html", flags: flags)
+    end
     def posts(conn, _params) do
         posts = Posts.list_posts()
         conn

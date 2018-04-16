@@ -22,3 +22,13 @@
 .admin-dashboard{
 	background: #f8f9fa;
 }
+.card-image{
+	width:100%;
+	max-width:500px;
+	margin:auto;
+	
+}
+.card-image img{
+	height:100%;
+	width:100%;
+}

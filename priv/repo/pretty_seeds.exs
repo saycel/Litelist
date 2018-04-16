@@ -3,8 +3,6 @@
 
 alias Litelist.Factory
 
-neighbor = Factory.insert(:neighbor, %{username: "neighbor"})
-admin = Factory.insert(:neighbor, %{username: "admin", admin: true})
 
 next_week = Timex.shift(Timex.today, days: 7)
 next_month = Timex.shift(Timex.today, days: 30)

@@ -6,8 +6,9 @@ defmodule LitelistWeb.PageController do
   alias Litelist.Auth.Guardian
   alias Litelist.Posts
 
+
   def index(conn, _params) do
-    posts = Posts.list_posts
+    posts = Posts.fetch_ordered(asc: :title)
     conn
       |> render("index.html", posts: posts)
   end
@@ -25,7 +26,7 @@ defmodule LitelistWeb.PageController do
     
 
     if host == "bushwick" do
-      posts = Posts.list_posts
+      posts = Posts.fetch_ordered(desc: :updated_at)
       conn
         |> render("index.html", posts: posts)
     else

@@ -68,8 +68,8 @@ defmodule LitelistWeb.Router do
     get "/posts", AdminController, :posts
     get "/settings", AdminController, :settings
     post "/settings", AdminController, :update_settings
-    get "/moderation-rules", FlagController, :rules
-    resources "/moderation", FlagController, only: [:delete, :edit, :update]
+    get "/moderation-rules", AdminController, :rules
+    get "/moderation", AdminController, :moderation
     resources "/discussions", DiscussionController, only: [:edit, :update, :delete]
   end
 
