@@ -1,33 +1,48 @@
-<h2>Show Flag</h2>
 
-<ul>
+ <div class="columns mt-60">
 
-  <li>
-    <strong>Type:</strong>
-    <%= @flag.type %>
-  </li>
+  <div class="column col-4 col-sm-6">
+        
+    <div class="divider text-center" data-content="Flag Meta Data"></div>     
 
-  <li>
-    <strong>Description:</strong>
-    <%= @flag.description %>
-  </li>
+      <span class="chip">flagged by <%=@flag.neighbor.username%></span> <span class="chip"><%=@flag.type%></span><span class="chip"> <%= @flag.status %> </span>
 
-  <li>
-    <strong>Status:</strong>
-    <%= @flag.status %>
-  </li>
+      <div class="divider text-center" data-content="Reason Flagged"></div>
+      <span class="red"><%= @flag.description %> </span><br>    
+      <div class="divider text-center" data-content="Admin Response"></div>
 
-  <li>
-    <strong>Admin response:</strong>
-    <%= @flag.admin_response %>
-  </li>
+        <%= @flag.admin_response %>
+       
+        
+    
 
-  <li>
-    <strong>Post title:</strong>
-    <span><%= link @flag.post.title, to: path_builder(@flag.post) %></span>
-  </li>
 
-</ul>
+  </div>
+  <div class="column col-8 col-sm-6" >
+   
+    <div class="divider text-center" data-content="Post: <%=@post.title%>"></div>
+ 
+    <div class="card">
+      <div class="card-image">
+        <%= for img <- @post.images do %>
+          <img src="/uploads/<%=img.image.file_name%>" class="img-responsive">
+        <% end %>
+      </div>
+      <div class="card-header">
+        <div class="card-title h5"><%=@post.title%></div>
+        <div class="card-subtitle text-gray"><%=@post.type%></div>
+      </div>
+      <div class="card-body">
+        <%=@post.description %>
+      </div>
+      <div class="card-footer">
+        <%=@post.contact_info %>
+      </div>
+    </div>
+  
+   </div>
 
-<span><%= link "Edit", to: flag_path(@conn, :edit, @flag) %></span>
-<span><%= link "Back", to: flag_path(@conn, :index) %></span>
+</div>
+
+
+

@@ -1,8 +1,44 @@
-<h2>New Flag</h2>
-<p>Flag for post titled
-    <a href="<%= path_builder(@post) %>"><%= @post.title %></a>
-</p>
+<div class="columns mt-60">
+  <div class="column col-4 col-md-6">
+      <div class="on-small fixed" style="width:33%; overflow:scroll"> 
+      	
+		<div class="divider text-center" data-content="Flag Form"></div>
 
-<%= render "form.html", assigns |> Map.put(:action, flag_path(@conn, :create)) |> Map.put(:types, @types) %>
+      	<%= render "form.html", assigns |> Map.put(:action, flag_path(@conn, :create)) |> Map.put(:types, @types) %>
+		<span><%= link "Back", to: flag_path(@conn, :index) %></span>
 
-<span><%= link "Back", to: flag_path(@conn, :index) %></span>
+      </div>
+  </div>
+  <div class="column col-4 col-md-6 hide-sm " >
+	 
+	<div class="divider text-center" data-content="Post: <%=@post.title%>"></div>
+ 
+	  <div class="card">
+	    <div class="card-image">
+	      <%= for img <- @post.images do %>
+	        <img src="/uploads/<%=img.image.file_name%>" class="img-responsive">
+	      <% end %>
+	    </div>
+	    <div class="card-header">
+	      <div class="card-title h5"><%=@post.title%></div>
+	      <div class="card-subtitle text-gray"><%=@post.type%></div>
+	    </div>
+	    <div class="card-body">
+	      <%=@post.description %>
+	    </div>
+	    <div class="card-footer">
+	    	<%=@post.contact_info %>
+	    </div>
+	  </div>
+	
+   </div>
+   <div class="column col-4 col-md-6 col-sm-12 hide-md" >
+   			<div class="divider text-center" data-content="Rules"></div>
+
+	<%= render "_rules.html" %>
+	</div>
+</div>
+
+
+
+</div>

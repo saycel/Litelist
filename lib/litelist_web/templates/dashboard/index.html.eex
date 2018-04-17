@@ -1,6 +1,48 @@
-<h2>Dashboard</h2>
 
-<span><%= link "My Posts", to: dashboard_path(@conn, :posts), class: "btn btn-default btn-xs" %></span>
-<span><%= link "My Flagged Posts", to: dashboard_path(@conn, :my_flagged_posts), class: "btn btn-default btn-xs" %></span>
-<span><%= link "Posts I Flagged", to: dashboard_path(@conn, :posts_i_flagged), class: "btn btn-default btn-xs" %></span>
+<div class="columns dashboard">
+
+  <div class="column col-6 col-sm-12">
+    <div class="empty">
+      <div class="empty-icon">
+        <i class="icon icon-3x icon-message"></i>
+      </div>
+      <p class="empty-title h5">My Posts</p>
+      <p class="empty-subtitle">Click the button to start a conversation</p>
+      <div class="empty-action">
+        <%= link "My Posts", to: dashboard_path(@conn, :posts), class: "btn btn-default btn-xs" %>
+      </div>
+    </div>
+  </div>
+  <div class="column col-6 col-sm-12">
+    <div class="empty">
+      <div class="empty-icon">
+        <i class="icon icon-3x icon-flag"></i>
+      </div>
+      <p class="empty-title h5">Flagged Posts</p>
+      <p class="empty-subtitle">All of the posts that I have flagged as violtating the terms of service.</p>
+      <div class="empty-action">
+        
+<span><%= link "See all", to: dashboard_path(@conn, :posts_i_flagged), class: "btn btn-default btn-xs" %></span>
+      </div>
+
+    </div>
+  </div>
+</div>
+<div class="columns">
+  <div class="column col-sm-12">
+    <div class="empty">
+      <div class="empty-icon">
+        <i class="icon icon-3x icon-apps"></i>
+      </div>
+      <p class="empty-title h5">Discussions</p>
+      <p class="empty-subtitle"></p>
+      <div class="empty-action input-group input-inline">
 <span><%= link "My Discussions", to: dashboard_path(@conn, :my_discussions), class: "btn btn-default btn-xs" %></span>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+

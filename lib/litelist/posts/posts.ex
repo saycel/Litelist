@@ -20,7 +20,14 @@ defmodule Litelist.Posts do
 
   """
   def list_posts do
-    Repo.all(Post)
+
+    posts = Repo.all(Post)
+    Repo.preload posts, [:images]
+  end
+
+  def fetch_ordered(constraint) do
+    posts = Post |> order_by(^constraint) |> Repo.all()
+    Repo.preload posts, [:images]
   end
 
   @doc """
@@ -32,6 +39,10 @@ defmodule Litelist.Posts do
       [%Post{}, ...]
 
   """
+  def get_posts_by_url(url) do
+    Repo.all( from p in Post, where: p.url == ^url )
+  end
+  
   def list_posts_by_type(type) do
     Repo.all(from p in Post, where: p.type == ^type)
   end

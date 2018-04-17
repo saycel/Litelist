@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Litelist</title>
+    <link rel="stylesheet" href="<%= static_path(@conn, "/css/app.css") %>">
+   </head>
+
+  <body class="admin-dashboard">
+    <div class="container">
+      <header class="navbar">
+        <section class="navbar-section">
+          <a href="/admin" class="navbar-brand mr-2">Admin Dashboard</a>
+          <a href="/admin/settings" class="btn btn-link">Site Settings</a>
+          <a href="/admin/moderation-rules" class="btn btn-link">Moderation</a>
+        </section>
+
+      </header>
+
+      <% info = get_flash(@conn, :info)
+      error = get_flash(@conn, :error)%>
+      <%= if info do %>
+        <div class="toast toast-success">
+          <%= get_flash(@conn, :info) %>
+        </div>
+
+      <% end %>
+      <%= if error do %>
+      <div class="toast toast-error">
+        <%= get_flash(@conn, :error) %>
+      </div>
+      <% end %>
+
+      <main role="main">
+        <%= render @view_module, @view_template, assigns %>
+      </main>
+
+    </div> <!-- /container -->
+    <script src="<%= static_path(@conn, "/js/app.js") %>"></script>
+  </body>
+
+</html>
