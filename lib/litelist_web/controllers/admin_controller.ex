@@ -5,19 +5,11 @@ defmodule LitelistWeb.AdminController do
     alias Litelist.Settings.SettingsDatabase
     plug :put_layout, "admin.html"
 
-
     def index(conn, _params) do
       conn
         |> render("index.html")
     end
 
-    def rules(conn, _params) do
-        render(conn, "moderation_rules.html")
-    end
-    def moderation(conn, _params) do
-        flags = Moderation.list_flags()
-        render(conn, "moderation.html", flags: flags)
-    end
     def posts(conn, _params) do
         posts = Posts.list_posts()
         conn

@@ -85,4 +85,9 @@ defmodule LitelistWeb.FlagController do
     |> put_flash(:info, "Flag deleted successfully.")
     |> redirect(to: flag_path(conn, :index))
   end
+
+  def guidelines(conn, _) do
+    conn
+      |> render("guidelines.html")
+  end
 end
