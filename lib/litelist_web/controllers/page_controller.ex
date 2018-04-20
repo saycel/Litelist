@@ -8,7 +8,7 @@ defmodule LitelistWeb.PageController do
 
 
   def index(conn, _params) do
-    posts = Posts.fetch_ordered(asc: :title)
+    posts = Posts.list_ordered_by_title()
     conn
       |> render("index.html", posts: posts)
   end
@@ -26,7 +26,7 @@ defmodule LitelistWeb.PageController do
     
 
     if host == "bushwick" do
-      posts = Posts.fetch_ordered(desc: :updated_at)
+      posts = Posts.list_ordered_by_updated_at()
       conn
         |> render("index.html", posts: posts)
     else

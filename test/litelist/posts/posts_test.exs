@@ -14,7 +14,12 @@ defmodule Litelist.PostsTest do
 
     test "list_posts/0 returns all posts" do
       post = Factory.insert(:for_sale, @valid_attrs)
-      assert Posts.list_posts() == [post]
+      post |> Repo.preload(:images)
+      all_posts = Posts.list_posts()
+      [ first_post | _ ] = all_posts
+
+      assert length(all_posts) == 1
+      assert first_post.id == post.id
     end
 
     test "get_post!/1 returns the post with given id" do
@@ -182,6 +187,24 @@ defmodule Litelist.PostsTest do
                     if there is an end_time in the future" do
       create_old_post_end_time_future()
       assert Enum.empty?(get_expired_posts_count())
+    end
+
+    test "list_ordered_by_updated_at" do
+      Factory.insert(:job)
+      Factory.insert(:for_sale)
+      ordered_posts = Posts.list_ordered_by_updated_at()
+      [ h | _ ] = ordered_posts
+      assert h.type == "for_sale"
+    end
+
+    test "list_ordered_by_title" do
+      first_title = "A title"
+      second_title = "B title"
+      Factory.insert(:job, %{title: second_title})
+      Factory.insert(:job, %{title: first_title})
+      ordered_posts = Posts.list_ordered_by_title()
+      [ h | _ ] = ordered_posts
+      assert h.title == first_title
     end
   end
 
