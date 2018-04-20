@@ -10,8 +10,26 @@ defmodule LitelistWeb.FlagControllerTest do
   @invalid_attrs %{admin_response: nil, description: nil, status: nil, type: nil}
 
   describe "index" do
-    test "lists all flags", %{conn: conn} do
+    test "Renders 401 if not logged in", %{conn: conn} do
       conn = conn
+        |> get(flag_path(conn, :index))
+
+      assert response(conn, 401)
+    end
+
+    test "Renders 401 if logged in but not admin", %{conn: conn} do
+      neighbor = Factory.insert(:neighbor)
+      conn = conn
+        |> login_neighbor(neighbor)
+        |> get(flag_path(conn, :index))
+
+      assert response(conn, 401)
+    end
+
+    test "lists all flags", %{conn: conn} do
+      admin = Factory.insert(:admin)
+      conn = conn
+        |> login_neighbor(admin)
         |> get(flag_path(conn, :index))
 
       assert html_response(conn, 200)
