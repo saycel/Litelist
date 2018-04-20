@@ -52,7 +52,7 @@ defmodule LitelistWeb.PageControllerTest do
     test "POST / :login with incorrect credentials", %{conn: conn, username: username, incorrect_password: incorrect_password} do
       credentials = %{username: username, password: incorrect_password} 
         conn = conn
-          |> post(page_path(conn, :index), neighbor: credentials)
+          |> post(page_path(conn, :post_login), neighbor: credentials)
   
         assert redirected_to(conn) == page_path(conn, :login)
       end

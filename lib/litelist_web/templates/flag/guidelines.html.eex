@@ -4,9 +4,9 @@
     <h4>about our moderation</h4>
     <p> <%= render "_content_moderation.html" %></p>
     
-    When you feel comfortable with our content moderation rules click here:
+    When you feel comfortable with our content moderation guidelines click here:
 
-    <button class="btn btn-primary btn-sm"><a class='white' href="/admin/moderation">Moderate Offensive Content</a></button>
+    <button class="btn btn-primary btn-sm"><a class='white' href="/moderation">Moderate Offensive Content</a></button>
           
 </div>
   

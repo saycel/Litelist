@@ -13,6 +13,10 @@ defmodule LitelistWeb.FlagController do
 
   @default_status Flag.get_default_type()
 
+  def index(conn, _params) do
+    flags = Moderation.list_flags()
+    render(conn, "index.html", flags: flags)
+  end
 
   def new(conn, %{"post_id" => post_id}) do
     post = Posts.get_post!(post_id)
@@ -47,8 +51,7 @@ defmodule LitelistWeb.FlagController do
 
   def show(conn, %{"id" => id}) do
     flag = Moderation.get_flag!(id)
-    post = Posts.get_post!(flag.post.id)
-    render(conn, "show.html", post: post, flag: flag)
+    render(conn, "show.html", flag: flag)
   end
 
   def edit(conn, %{"id" => id}) do
@@ -80,5 +83,10 @@ defmodule LitelistWeb.FlagController do
     conn
     |> put_flash(:info, "Flag deleted successfully.")
     |> redirect(to: flag_path(conn, :index))
+  end
+
+  def guidelines(conn, _) do
+    conn
+      |> render("guidelines.html")
   end
 end

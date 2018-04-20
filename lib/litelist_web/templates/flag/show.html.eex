@@ -1,42 +1,40 @@
-
- <div class="columns mt-60">
+<div class="columns mt-60">
 
   <div class="column col-4 col-sm-6">
         
     <div class="divider text-center" data-content="Flag Meta Data"></div>     
 
-      <span class="chip">flagged by <%=@flag.neighbor.username%></span> <span class="chip"><%=@flag.type%></span><span class="chip"> <%= @flag.status %> </span>
+      <%= if @flag.neighbor do %>
+        <span class="chip">flagged by <%=@flag.neighbor.username%></span>
+      <% end %>
+      <span class="chip"><%=@flag.type%></span>
+      <span class="chip"> <%= @flag.status %> </span>
 
       <div class="divider text-center" data-content="Reason Flagged"></div>
       <span class="red"><%= @flag.description %> </span><br>    
       <div class="divider text-center" data-content="Admin Response"></div>
 
-        <%= @flag.admin_response %>
-       
-        
-    
-
-
+      <%= @flag.admin_response %>
   </div>
   <div class="column col-8 col-sm-6" >
    
-    <div class="divider text-center" data-content="Post: <%=@post.title%>"></div>
+    <div class="divider text-center" data-content="Post: <%=@flag.post.title%>"></div>
  
     <div class="card">
       <div class="card-image">
-        <%= for img <- @post.images do %>
+        <%= for img <- @flag.post.images do %>
           <img src="/uploads/<%=img.image.file_name%>" class="img-responsive">
         <% end %>
       </div>
       <div class="card-header">
-        <div class="card-title h5"><%=@post.title%></div>
-        <div class="card-subtitle text-gray"><%=@post.type%></div>
+        <div class="card-title h5"><%=@flag.post.title%></div>
+        <div class="card-subtitle text-gray"><%=@flag.post.type%></div>
       </div>
       <div class="card-body">
-        <%=@post.description %>
+        <%=@flag.post.description %>
       </div>
       <div class="card-footer">
-        <%=@post.contact_info %>
+        <%=@flag.post.contact_info %>
       </div>
     </div>
   

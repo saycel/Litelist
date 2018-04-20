@@ -25,8 +25,19 @@ defmodule Litelist.Posts do
     Repo.preload posts, [:images]
   end
 
-  def fetch_ordered(constraint) do
-    posts = Post |> order_by(^constraint) |> Repo.all()
+  @doc """
+  Returns a list of posts, ordered by title
+  """
+  def list_ordered_by_title() do
+    posts = Post |> order_by(asc: :title) |> Repo.all()
+    Repo.preload posts, [:images]
+  end
+
+  @doc """
+  Returns a list of posts, ordered by updated_at, desc
+  """
+  def list_ordered_by_updated_at() do
+    posts = Post |> order_by(desc: :updated_at) |> Repo.all()
     Repo.preload posts, [:images]
   end
 

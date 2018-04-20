@@ -8,7 +8,7 @@ defmodule LitelistWeb.PageController do
 
 
   def index(conn, _params) do
-    posts = Posts.fetch_ordered(asc: :title)
+    posts = Posts.list_ordered_by_title()
     conn
       |> render("index.html", posts: posts)
   end
@@ -26,7 +26,7 @@ defmodule LitelistWeb.PageController do
     
 
     if host == "bushwick" do
-      posts = Posts.fetch_ordered(desc: :updated_at)
+      posts = Posts.list_ordered_by_updated_at()
       conn
         |> render("index.html", posts: posts)
     else
@@ -34,7 +34,7 @@ defmodule LitelistWeb.PageController do
       case length(post) do 
         0 -> conn 
               |> put_flash(:info, "webpage does not exist")
-              |> redirect(to: "/posts")
+              |> redirect(to: page_path(conn, :index))
         1 -> conn 
               |> render("display.html", post: Enum.at(post,0), layout: {LitelistWeb.LayoutView, "webpage.html"})
         # ToDO add page for when multiple sites come up
@@ -50,10 +50,10 @@ defmodule LitelistWeb.PageController do
     if conn.assigns.current_neighbor do
       conn
       |> put_flash(:info, "Already logged in #{conn.assigns.current_neighbor.username}")
-      |> redirect(to: "/posts")
+      |> redirect(to: page_path(conn, :index))
     else
       conn
-      |> render("login.html", changeset: changeset, action: "/login")
+      |> render("login.html", changeset: changeset, action: page_path(conn, :post_login))
     end
   end
   
