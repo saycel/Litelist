@@ -1,6 +1,5 @@
 defmodule LitelistWeb.AdminController do
     use LitelistWeb, :controller
-    alias Litelist.Moderation
     alias Litelist.Posts
     alias Litelist.Settings.SettingsDatabase
     plug :put_layout, "admin.html"
