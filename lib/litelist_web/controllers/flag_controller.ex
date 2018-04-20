@@ -51,8 +51,7 @@ defmodule LitelistWeb.FlagController do
 
   def show(conn, %{"id" => id}) do
     flag = Moderation.get_flag!(id)
-    post = Posts.get_post!(flag.post.id)
-    render(conn, "show.html", post: post, flag: flag)
+    render(conn, "show.html", flag: flag)
   end
 
   def edit(conn, %{"id" => id}) do

@@ -28,12 +28,13 @@ defmodule Litelist.ModerationTest do
       assert first_flag.id == flag.id
     end
 
-    test "get_flag!/1 returns the flag with given id with post preloaded" do
+    test "get_flag!/1 returns the flag with given id with post preloaded, post has images preloaded" do
       post = Factory.insert(:job)
       flag = Factory.insert(:flag, %{post_id: post.id})
       fetched_flag = Moderation.get_flag!(flag.id)
       assert fetched_flag.id == flag.id
-      assert fetched_flag.post == post
+      assert fetched_flag.post.id == post.id
+      assert fetched_flag.post.images == []
     end
 
     test "create_flag/1 with valid data creates a flag" do
