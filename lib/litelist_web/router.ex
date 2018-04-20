@@ -69,8 +69,8 @@ defmodule LitelistWeb.Router do
     get "/settings", AdminController, :settings
     post "/settings", AdminController, :update_settings
     get "/moderation-rules", AdminController, :rules
-    get "/moderation", AdminController, :moderation
     resources "/discussions", DiscussionController, only: [:edit, :update, :delete]
+    resources "/moderation", FlagController, only: [:delete, :edit, :update]
   end
 
   scope "/", LitelistWeb do
@@ -88,7 +88,7 @@ defmodule LitelistWeb.Router do
     resources "/events", EventController, only: [:show, :index]
     resources "/businesses", BusinessController, only: [:show, :index]
     resources "/emergency_info", EmergencyInformationController, only: [:show, :index]
-    resources "/flags", FlagController, only: [:new, :show, :create, :index, :edit, :delete]
+    resources "/flags", FlagController, only: [:new, :show, :create, :index]
     resources "/discussions", DiscussionController, only: [:index, :show]
     get "/*url",PageController, :url_handler
   end

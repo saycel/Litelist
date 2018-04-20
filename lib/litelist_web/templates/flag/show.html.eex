@@ -5,18 +5,17 @@
         
     <div class="divider text-center" data-content="Flag Meta Data"></div>     
 
-      <span class="chip">flagged by <%=@flag.neighbor.username%></span> <span class="chip"><%=@flag.type%></span><span class="chip"> <%= @flag.status %> </span>
+      <%= if @flag.neighbor do %>
+        <span class="chip">flagged by <%=@flag.neighbor.username%></span>
+      <% end %>
+      <span class="chip"><%=@flag.type%></span>
+      <span class="chip"> <%= @flag.status %> </span>
 
       <div class="divider text-center" data-content="Reason Flagged"></div>
       <span class="red"><%= @flag.description %> </span><br>    
       <div class="divider text-center" data-content="Admin Response"></div>
 
-        <%= @flag.admin_response %>
-       
-        
-    
-
-
+      <%= @flag.admin_response %>
   </div>
   <div class="column col-8 col-sm-6" >
    
