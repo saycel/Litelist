@@ -53,7 +53,7 @@ defmodule LitelistWeb.PageController do
       |> redirect(to: "/posts")
     else
       conn
-      |> render("login.html", changeset: changeset, action: "/login")
+      |> render("login.html", changeset: changeset, action: page_path(conn, :post_login)))
     end
   end
   

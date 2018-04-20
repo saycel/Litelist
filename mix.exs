@@ -71,6 +71,7 @@ defmodule Litelist.Mixfile do
       "ecto.setup": ["ecto.create", "ecto.migrate"],
       "ecto.reset": ["ecto.drop", "ecto.setup"],
       "ecto.seed": ["run priv/repo/seeds.exs"],
+      "ecto.user_seeds": ["run priv/repo.user_seeds.exs"],
       "ecto.pretty_seed": ["run priv/repo/pretty_seeds.exs"],
       "test": ["ecto.create --quiet", "ecto.migrate", "test"]
     ]
