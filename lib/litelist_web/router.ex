@@ -75,7 +75,7 @@ defmodule LitelistWeb.Router do
 
   scope "/", LitelistWeb do
     pipe_through [:browser, :auth]
-    get "/posts", PageController, :index
+    get "/", PageController, :index
     get "/post2list", PageController, :information
     get "/login", PageController, :login
     post "/login", PageController, :post_login

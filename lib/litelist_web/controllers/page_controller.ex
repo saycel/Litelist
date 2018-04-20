@@ -34,7 +34,7 @@ defmodule LitelistWeb.PageController do
       case length(post) do 
         0 -> conn 
               |> put_flash(:info, "webpage does not exist")
-              |> redirect(to: "/posts")
+              |> redirect(to: page_path(conn, :index))
         1 -> conn 
               |> render("display.html", post: Enum.at(post,0), layout: {LitelistWeb.LayoutView, "webpage.html"})
         # ToDO add page for when multiple sites come up
@@ -50,10 +50,10 @@ defmodule LitelistWeb.PageController do
     if conn.assigns.current_neighbor do
       conn
       |> put_flash(:info, "Already logged in #{conn.assigns.current_neighbor.username}")
-      |> redirect(to: "/posts")
+      |> redirect(to: page_path(conn, :index))
     else
       conn
-      |> render("login.html", changeset: changeset, action: page_path(conn, :post_login)))
+      |> render("login.html", changeset: changeset, action: page_path(conn, :post_login))
     end
   end
   
