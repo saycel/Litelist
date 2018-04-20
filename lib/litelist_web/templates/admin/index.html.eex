@@ -7,7 +7,7 @@
       <p class="empty-title h5"> Recent Flagged Posts</p>
       <p class="empty-subtitle">Click the button to start a conversation</p>
       <div class="empty-action">
-        <%= link "Moderation", to: "/admin/moderation-guidelines", class: "btn btn-default btn-xs" %>
+        <%= link "Moderation", to: flag_path(@conn, :guidelines), class: "btn btn-default btn-xs" %>
       </div>
     </div>
   </div>
