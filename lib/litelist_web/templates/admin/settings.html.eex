@@ -1,40 +1,17 @@
-<div class="columns mt-60">
-    <div class="column col-3 col-sm-12">
-  </div>
-    <div class="column col-3 col-sm-12">
-      <h5 class='center'><em><%=get_value(@settings, :name)%>.othernet settings</em></>
-      <em>These are some of global settings for this application. Changes made here will be reflected site-wide.</em>
-    </div>
-  <div class="divider-vert" data-content=""></div>
+<h1>Settings</h1>
 
-    <div class="column col-5 col-sm-12">
-    <%= form_for @conn, admin_path(@conn, :update_settings), fn f -> %>
-      <div class="form-group">
-        <label class="control-label" for="setting_site_name">Site name</label>
-        <input class="form-control" id="setting_site_name" name="name" type="text" value="<%=get_value(@settings, :name)%>">
-      </div>
-
-      <div class="form-group">
-        <label class="control-label" for="setting_flag_count">Flag count</label>
-        <input class="form-control" type="numeric"id="setting_flag_count" value="<%=get_value(@settings, :flag_count)%>" name="max_flagged_posts">
-      </div>
-
-      <div class="form-group">
-        <label class="form-switch">
-                    <input type="checkbox" id="setting_default_replyable" value="<%=get_value(@settings, :allow_replies)%>" name="allow_replies" type="text">
-                    <i class="form-icon"></i> Do you want to make all posts replyable by default.
-        </label>
-
-      </div>
-
-
-
-      <div class="form-group">
-        <%= submit "Submit" %>
-      </div>
-    <%end%>
-    </div>
-  </div>
-</div>
-
-
+<%= form_for @conn, admin_path(@conn, :update_settings), fn f -> %>
+  <label>
+    Site name: <%= text_input f, :name, value: get_value(@settings, :name) %>
+  </label>
+  <br><br>
+  <label>
+    How many times can a post be flagged before it is removed from view?: <%= select f, :max_flagged_posts, 0..100, value: get_value(@settings, :max_flagged_posts) %>
+  </label>
+  <br><br>
+  <label>
+    Do you want to allow replies to all posts?: <%= checkbox f, :allow_replies, checked: get_value(@settings, :allow_replies) == true %>
+  </label>
+  <br><br>
+  <%= submit "Submit" %>
+<% end %>
