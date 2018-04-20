@@ -20,9 +20,8 @@ defmodule Litelist.Posts do
 
   """
   def list_posts do
-
     posts = Repo.all(Post)
-    Repo.preload posts, [:images]
+    Repo.preload(posts, [:images])
   end
 
   @doc """
@@ -30,7 +29,7 @@ defmodule Litelist.Posts do
   """
   def list_ordered_by_title() do
     posts = Post |> order_by(asc: :title) |> Repo.all()
-    Repo.preload posts, [:images]
+    Repo.preload(posts, [:images])
   end
 
   @doc """
@@ -38,7 +37,7 @@ defmodule Litelist.Posts do
   """
   def list_ordered_by_updated_at() do
     posts = Post |> order_by(desc: :updated_at) |> Repo.all()
-    Repo.preload posts, [:images]
+    Repo.preload(posts, [:images])
   end
 
   @doc """
@@ -51,11 +50,11 @@ defmodule Litelist.Posts do
 
   """
   def get_posts_by_url(url) do
-    Repo.all( from p in Post, where: p.url == ^url )
+    Repo.all(from(p in Post, where: p.url == ^url))
   end
-  
+
   def list_posts_by_type(type) do
-    Repo.all(from p in Post, where: p.type == ^type)
+    Repo.all(from(p in Post, where: p.type == ^type))
   end
 
   @doc """
@@ -68,7 +67,7 @@ defmodule Litelist.Posts do
 
   """
   def list_posts_by_neighbor(neighbor) do
-    Repo.all(from p in Post, where: p.neighbor_id == ^neighbor.id)
+    Repo.all(from(p in Post, where: p.neighbor_id == ^neighbor.id))
   end
 
   @doc """
@@ -81,8 +80,10 @@ defmodule Litelist.Posts do
 
   """
   def list_posts_by_search_term(search_term) do
-    query = Post
+    query =
+      Post
       |> Search.run(search_term)
+
     Repo.all(query)
   end
 
@@ -161,7 +162,7 @@ defmodule Litelist.Posts do
       iex> delete_post_by_neighbor(neighbor)
   """
   def delete_all_by_neighbor(neighbor) do
-    Repo.delete_all(from p in Post, where: p.neighbor_id == ^neighbor.id)
+    Repo.delete_all(from(p in Post, where: p.neighbor_id == ^neighbor.id))
   end
 
   @doc """
@@ -198,18 +199,24 @@ defmodule Litelist.Posts do
   # credo:disable-for-lines:15
   def get_expired_posts_query() do
     time_limit = 30
-    now = Timex.now
-    today = Timex.today
+    now = Timex.now()
+    today = Timex.today()
     date_cutoff = Timex.shift(now, days: -time_limit)
 
-    from p in Post,
-      where: p.inserted_at < ^date_cutoff and is_nil(p.end_time) and is_nil(p.end_date) or p.end_date < ^today,
-      or_where: p.inserted_at < ^date_cutoff and is_nil(p.end_date) and is_nil(p.end_time) or p.end_time < ^now,
+    from(
+      p in Post,
+      where:
+        (p.inserted_at < ^date_cutoff and is_nil(p.end_time) and is_nil(p.end_date)) or
+          p.end_date < ^today,
+      or_where:
+        (p.inserted_at < ^date_cutoff and is_nil(p.end_date) and is_nil(p.end_time)) or
+          p.end_time < ^now,
       or_where: p.inserted_at < ^date_cutoff and p.end_time < ^now and p.end_date < ^today,
       or_where: p.inserted_at < ^date_cutoff and is_nil(p.end_time) and is_nil(p.end_date),
       or_where: p.end_time < ^now and is_nil(p.end_time),
       or_where: p.end_date < ^today and is_nil(p.end_date),
       or_where: p.end_time < ^now and p.end_date < ^today
+    )
   end
 
   @doc """
@@ -218,9 +225,12 @@ defmodule Litelist.Posts do
   2
   """
   def get_pending_flag_count(post) do
-    query = from f in Flag,
-      where: f.post_id == ^post.id,
-      where: f.status == "pending"
+    query =
+      from(
+        f in Flag,
+        where: f.post_id == ^post.id,
+        where: f.status == "pending"
+      )
 
     Repo.aggregate(query, :count, :id)
   end
