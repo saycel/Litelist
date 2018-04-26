@@ -17,6 +17,8 @@ defmodule Litelist.Images.Image do
 
   @doc false
   def changeset(%Image{} = image, attrs) do
+    IO.inspect "******** attrs"
+    IO.inspect attrs
     image
     |> cast(attrs, [:image])
     |> cast_attachments(attrs, [:image])

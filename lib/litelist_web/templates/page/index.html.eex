@@ -7,8 +7,9 @@
         <div class="column grid-item col-3 col-md-6 col-sm-12" >
           <div class="card">
             <div class="card-image">
-              <%= for img <- post.images do %>
-                <img src="uploads/<%=img.image.file_name%>" class="img-responsive">
+              <%= for image <- post.images do %>
+              <h1><%= post.id %></h1>
+                <img src="<%= Litelist.ImageUploader.url({image.image, image})%>" class="img-responsive">
               <% end %>
             </div>
             <div class="card-header">

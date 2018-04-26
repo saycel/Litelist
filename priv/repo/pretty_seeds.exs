@@ -77,22 +77,22 @@ Factory.insert(
 )
 
 Factory.insert(
-    :for_sale,
+    :job,
     %{
-        title: "1998 Mazda",
+        title: "blah 1998 Mazda",
         description: "Still runs. 300,000 miles. $3500/BO",
         location: "12 Washington Ave",
         contact_info: "917-477-2332, ask for Nicki",
-        url: "1998-mazda",
-        images: %{
-            "0" => %{
+        url: "job-blah2",
+        images: [
+            %{"0" => %{
                 "image" => %Plug.Upload{
                     content_type: "image/jpeg",
                     filename: "mazda.jpeg",
                     path: "priv/seed_photos/mazda.jpeg"
                 }
-            }
-        }
+            }}
+        ]
     }
 )
 
