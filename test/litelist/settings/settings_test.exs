@@ -45,41 +45,6 @@ defmodule Litelist.SettingsTest do
         #     assert setting_2_value == setting_2_return_value
         #     assert setting_3_value == setting_3_return_value
         # end
-
-        # test "there will only be one settings row in the db regardless of how many reads and writes are made" do
-        #     setting_1_value = "one"
-        #     setting_2_value = false
-        #     attr = %{
-        #         setting_1: setting_1_value,
-        #         setting_2: setting_2_value
-        #     }
-
-        #     SettingsDatabase.get_settings()
-        #     SettingsDatabase.get_settings()
-        #     SettingsDatabase.get_settings()
-        #     SettingsDatabase.get_settings()
-        #     SettingsDatabase.get_settings()
-
-        #     SettingsDatabase.update_settings(attr)
-        #     SettingsDatabase.update_settings(attr)
-        #     SettingsDatabase.update_settings(attr)
-        #     SettingsDatabase.update_settings(attr)
-        #     SettingsDatabase.update_settings(attr)
-
-        #     SettingsDatabase.get_settings()
-        #     SettingsDatabase.get_settings()
-        #     SettingsDatabase.get_settings()
-        #     SettingsDatabase.get_settings()
-        #     SettingsDatabase.get_settings()
-
-        #     SettingsDatabase.update_settings(attr)
-        #     SettingsDatabase.update_settings(attr)
-        #     SettingsDatabase.update_settings(attr)
-        #     SettingsDatabase.update_settings(attr)
-        #     SettingsDatabase.update_settings(attr)
-
-        #     assert get_settings_count() == 1
-        # end
     end
 
     defp delete_settings() do

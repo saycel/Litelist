@@ -25,7 +25,8 @@ defmodule LitelistWeb.AdminController do
         SettingsDatabase.update_settings(%{
             name: name,
             max_flagged_posts: max_flagged_posts,
-            allow_replies: String.to_existing_atom(allow_replies)
+            allow_replies: String.to_existing_atom(allow_replies),
+            neighbor_id: conn.assigns.current_neighbor.id
         })
         conn
             |> put_flash(:info, "Settings updated.")
