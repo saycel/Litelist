@@ -72,7 +72,8 @@ defmodule Litelist.Settings do
     defp default_settings() do
         %{
             max_flagged_posts: 5,
-            allow_replies: false
+            allow_replies: false,
+            photos_per_post: 1
         }
     end
   end
