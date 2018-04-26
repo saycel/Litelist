@@ -2,13 +2,35 @@
 # Most useful for demos
 
 alias Litelist.Factory
-
+alias Litelist.Posts
 
 next_week = Timex.shift(Timex.today, days: 7)
 next_month = Timex.shift(Timex.today, days: 30)
 
 next_week_plus_one = Timex.shift(Timex.today, days: 8)
 next_month_plus_one = Timex.shift(Timex.today, days: 31)
+
+Posts.create_post(
+    %{
+        title: "1998 Mazda",
+        type: "for_sale",
+        description: "Still runs. 300,000 miles. $3500/BO",
+        location: "12 Washington Ave",
+        contact_info: "917-477-2332, ask for Nicki",
+        url: "1998-mazda",
+        images: [
+            %{
+                "image" => %Plug.Upload{
+                    content_type: "image/jpeg",
+                    filename: "mazda.jpeg",
+                    path: "priv/seed_photos/mazda.jpeg"
+                }
+            }
+        ],
+        slug: "12345",
+        neighbor_id: 1
+    }
+)
 
 Factory.insert(
     :event,
@@ -73,26 +95,6 @@ Factory.insert(
         company_name: "Cafe Bushwick",
         salary: "Competitive wages",
         start_date: next_week
-    }
-)
-
-Factory.insert(
-    :job,
-    %{
-        title: "blah 1998 Mazda",
-        description: "Still runs. 300,000 miles. $3500/BO",
-        location: "12 Washington Ave",
-        contact_info: "917-477-2332, ask for Nicki",
-        url: "job-blah2",
-        images: [
-            %{"0" => %{
-                "image" => %Plug.Upload{
-                    content_type: "image/jpeg",
-                    filename: "mazda.jpeg",
-                    path: "priv/seed_photos/mazda.jpeg"
-                }
-            }}
-        ]
     }
 )
 
