@@ -37,7 +37,7 @@ defmodule Litelist.PostTest do
 
     def create_post_with_image() do
         neighbor = Factory.insert(:neighbor)
-        {:ok, post} = Posts.create_post(
+        Posts.create_post(
             %{
                 title: "Community Center post-march",
                 type: "emergency_information",
