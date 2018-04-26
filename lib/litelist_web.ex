@@ -36,6 +36,7 @@ defmodule LitelistWeb do
 
       # Use all HTML functionality (forms, tags, etc)
       use Phoenix.HTML
+      use Phoenix.HTML.SimplifiedHelpers  # <- this line.
 
       import LitelistWeb.Router.Helpers
       import LitelistWeb.ErrorHelpers
