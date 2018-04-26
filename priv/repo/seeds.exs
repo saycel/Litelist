@@ -30,7 +30,7 @@ Posts.create_post(
             }
         ],
         slug: "12345",
-        neighbor_id: 1
+        neighbor_id: neighbor.id
     }
 )
 
@@ -54,7 +54,7 @@ Posts.create_post(
             }
         ],
         slug: "12346",
-        neighbor_id: 1
+        neighbor_id: neighbor.id
     }
 )
 
@@ -76,7 +76,7 @@ Posts.create_post(
             }
         ],
         slug: "12347",
-        neighbor_id: 1
+        neighbor_id: neighbor.id
 
     }
 )
@@ -103,7 +103,7 @@ Posts.create_post(
             }
         ],
         slug: "12348",
-        neighbor_id: 1
+        neighbor_id: neighbor.id
     }
 )
 
@@ -126,7 +126,7 @@ Posts.create_post(
             }
         ],
         slug: "12349",
-        neighbor_id: 1
+        neighbor_id: neighbor.id
     }
 )
 
@@ -152,7 +152,7 @@ Posts.create_post(
             }
         ],
         slug: "12350",
-        neighbor_id: 1
+        neighbor_id: neighbor.id
            
     }
 )
@@ -176,7 +176,7 @@ Posts.create_post(
             }
         ],
         slug: "12351",
-        neighbor_id: 1
+        neighbor_id: neighbor.id
     }
 )
 
@@ -199,7 +199,7 @@ Posts.create_post(
             }
         ],
         slug: "12355",
-        neighbor_id: 1
+        neighbor_id: neighbor.id
     }
 )
 
@@ -223,7 +223,7 @@ Posts.create_post(
             }
         ],
         slug: "12366",
-        neighbor_id: 1
+        neighbor_id: neighbor.id
     }
 )
 
@@ -245,7 +245,7 @@ Posts.create_post(
             }
         ],
         slug: "12397",
-        neighbor_id: 1
+        neighbor_id: neighbor.id
 
     }
 )
@@ -301,7 +301,7 @@ Please submit your resume in PDF, JPEG, or online form, a link to your portfolio
             }
         ],
         slug: "11348",
-        neighbor_id: 1
+        neighbor_id: neighbor.id
     }
 )
 
@@ -328,7 +328,7 @@ juried by the most prominent museum curators and art historians.",
             }
         ],
         slug: "12149",
-        neighbor_id: 1
+        neighbor_id: neighbor.id
     }
 )
 
