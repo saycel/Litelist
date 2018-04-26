@@ -25,9 +25,9 @@ defmodule Litelist.Settings do
         Amnesia.transaction do
             if Settings.count() == 0 do
                 create_default_settings()
-                Settings.first
+                Settings.last
             else
-                Settings.first
+                Settings.last
             end
         end
     end
@@ -41,9 +41,9 @@ defmodule Litelist.Settings do
     """
     def update_settings(attrs) do
         Amnesia.transaction do
-            settings = Settings.read(Settings.first.id)
-            new_settings = Map.merge(%{map: attrs}, Map.delete(settings, :map))
-            new_settings |> Settings.write
+            # settings = Settings.read(Settings.first.id)
+            # new_settings = Map.merge(%{map: attrs}, Map.delete(settings, :map))
+            %Settings{map: attrs} |> Settings.write
             {:ok}
         end
     end
@@ -71,8 +71,8 @@ defmodule Litelist.Settings do
 
     defp default_settings() do
         %{
-            max_flagged_posts: 5,
-            allow_replies: false
+            max_flagged_posts: Application.get_env(:litelist, :max_flagged_posts),
+            allow_replies: Application.get_env(:litelist, :allow_replies)
         }
     end
   end

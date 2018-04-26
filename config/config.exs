@@ -40,3 +40,6 @@ config :litelist, Litelist.Scheduler,
 config :arc,
   storage: Arc.Storage.Local
   
+config :litelist,
+  max_flagged_posts: 5,
+  allow_replies: false
