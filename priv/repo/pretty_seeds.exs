@@ -87,9 +87,9 @@ Factory.insert(
         images: %{
             "0" => %{
                 "image" => %Plug.Upload{
-                content_type: "image/jpeg",
-                filename: "mazda.jpeg",
-                path: "seed_photos/mazda.jpeg"
+                    content_type: "image/jpeg",
+                    filename: "mazda.jpeg",
+                    path: "priv/seed_photos/mazda.jpeg"
                 }
             }
         }
