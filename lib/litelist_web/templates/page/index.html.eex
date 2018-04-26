@@ -16,7 +16,7 @@
               <div class="card-subtitle text-gray"><%=post.type%></div>
             </div>
             <div class="card-body">
-              <%=post.description %>
+              <%= truncate(post.description, length: 150, omission: "...") %>
             </div>
             <div class="card-footer">
               <button class="btn btn-primary"><a href="http://<%=post.url%>.othernet:4000">More</a></button>

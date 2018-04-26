@@ -56,7 +56,8 @@ defmodule Litelist.Mixfile do
       {:timex, "~> 3.0"},
       {:arc, "~> 0.8.0"},
       {:arc_ecto, "~> 0.7.0"},
-      {:uuid, "~> 1.1"}
+      {:uuid, "~> 1.1"},
+      {:phoenix_html_simplified_helpers, "~> 1.3"}
     ]
   end
 
