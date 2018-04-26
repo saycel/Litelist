@@ -83,7 +83,16 @@ Factory.insert(
         description: "Still runs. 300,000 miles. $3500/BO",
         location: "12 Washington Ave",
         contact_info: "917-477-2332, ask for Nicki",
-        url: "1998-mazda"
+        url: "1998-mazda",
+        images: %{
+            "0" => %{
+                "image" => %Plug.Upload{
+                content_type: "image/jpeg",
+                filename: "mazda.jpeg",
+                path: "seed_photos/mazda.jpeg"
+                }
+            }
+        }
     }
 )
 

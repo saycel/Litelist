@@ -35,6 +35,8 @@ defmodule LitelistWeb.JobController do
   end
 
   def create(conn, %{"post" => job_params}) do
+    IO.inspect "*****"
+    IO.inspect job_params
     job_params = job_params
       |> SharedUtils.permitted_params(@permitted_params)
       |> SharedUtils.add_generated_params(conn, @post_type, :create)
