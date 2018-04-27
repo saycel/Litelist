@@ -25,6 +25,7 @@ defmodule Litelist.Posts.Post do
     field :title, :string
     field :type, :string
     field :url, :string
+    field :soft_delete, :boolean
 
     timestamps()
 
@@ -36,7 +37,7 @@ defmodule Litelist.Posts.Post do
   @doc false
   def changeset(%Post{} = post, attrs) do
     post
-    |> cast(attrs, [:type, :title, :description, :price, :slug, :url, :location, :contact_info, :salary, :position_name, :company_name, :neighbor_id, :start_date, :end_date, :start_time, :end_time, :organization_name])
+    |> cast(attrs, [:type, :title, :description, :price, :slug, :url, :location, :contact_info, :salary, :position_name, :company_name, :neighbor_id, :start_date, :end_date, :start_time, :end_time, :organization_name, :soft_delete])
     |> cast_assoc(:images, required: false, with: &Image.changeset/2)
     |> unique_constraint(:url, message: "That URL already exists. Try another one.")
     |> foreign_key_constraint(:posts, name: :posts_neighbor_id_fkey)

@@ -66,7 +66,8 @@ defmodule Litelist.Factory do
       price: Faker.Number.decimal(2, 2),
       neighbor_id: insert(:neighbor).id,
       type: "for_sale",
-      url: FakerElixir.Lorem.characters(5..10)
+      url: FakerElixir.Lorem.characters(5..10),
+      soft_delete: false
     }
   end
 
@@ -94,7 +95,8 @@ defmodule Litelist.Factory do
       salary: "$10/hr",
       neighbor_id: insert(:neighbor).id,
       type: "job",
-      url: FakerElixir.Lorem.characters(5..10)
+      url: FakerElixir.Lorem.characters(5..10),
+      soft_delete: false
     }
   end
 
@@ -119,7 +121,8 @@ defmodule Litelist.Factory do
       description: Faker.Lorem.sentences(1..2),
       neighbor_id: insert(:neighbor).id,
       type: "event",
-      url: FakerElixir.Lorem.characters(5..10)
+      url: FakerElixir.Lorem.characters(5..10),
+      soft_delete: false
     }
   end
 
@@ -142,7 +145,8 @@ defmodule Litelist.Factory do
       description: Faker.Lorem.sentences(1..2),
       neighbor_id: insert(:neighbor).id,
       type: "business",
-      url: FakerElixir.Lorem.characters(5..10)
+      url: FakerElixir.Lorem.characters(5..10),
+      soft_delete: false
     }
   end
 
@@ -164,7 +168,8 @@ defmodule Litelist.Factory do
       description: Faker.Lorem.sentences(1..2),
       neighbor_id: insert(:neighbor).id,
       type: "emergency_information",
-      url: FakerElixir.Lorem.characters(5..10)
+      url: FakerElixir.Lorem.characters(5..10),
+      soft_delete: false
     }
   end
 

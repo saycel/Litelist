@@ -3,7 +3,7 @@ defmodule Litelist.Repo.Migrations.AddSoftDeleteToPosts do
 
   def change do
     alter table(:posts) do
-      add :soft_delete, :boolean, default: false
+      add :soft_delete, :boolean, default: false, required: true
     end
   end
 end
