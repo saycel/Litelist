@@ -20,7 +20,7 @@ defmodule Litelist.Posts do
 
   """
   def list_posts do
-    posts = Repo.all(Post)
+    posts = Repo.all(from(p in Post, where: p.soft_delete == false))
     Repo.preload(posts, [:images])
   end
 
@@ -28,7 +28,7 @@ defmodule Litelist.Posts do
   Returns a list of posts, ordered by title
   """
   def list_ordered_by_title() do
-    posts = Post |> order_by(asc: :title) |> Repo.all()
+    posts = Post |> order_by(asc: :title) |> where(soft_delete: false) |> Repo.all()
     Repo.preload(posts, [:images])
   end
 
@@ -36,9 +36,10 @@ defmodule Litelist.Posts do
   Returns a list of posts, ordered by updated_at, desc
   """
   def list_ordered_by_updated_at() do
-    posts = Post |> order_by(desc: :updated_at) |> Repo.all()
+    posts = Post |> order_by(desc: :updated_at) |> where(soft_delete: false) |> Repo.all()
     Repo.preload(posts, [:images])
   end
+
 
   @doc """
   Returns the list of posts based on the type of post (eg. for_sale, job).
@@ -49,12 +50,15 @@ defmodule Litelist.Posts do
       [%Post{}, ...]
 
   """
-  def get_posts_by_url(url) do
-    Repo.all(from(p in Post, where: p.url == ^url))
+  def list_posts_by_type(type) do
+    Repo.all(from(p in Post, where: p.type == ^type, where: p.soft_delete == false))
   end
 
-  def list_posts_by_type(type) do
-    Repo.all(from(p in Post, where: p.type == ^type))
+  @doc """
+  Returns a list of all posts with a given url
+  """
+  def get_post_by_url(url) do
+    Repo.one(from(p in Post, where: p.url == ^url, where: p.soft_delete == false))
   end
 
   @doc """
@@ -80,9 +84,8 @@ defmodule Litelist.Posts do
 
   """
   def list_posts_by_search_term(search_term) do
-    query =
-      Post
-      |> Search.run(search_term)
+    clause = from(p in Post, where: p.soft_delete == false)
+    query = Search.run(clause, search_term)
 
     Repo.all(query)
   end
@@ -234,4 +237,26 @@ defmodule Litelist.Posts do
 
     Repo.aggregate(query, :count, :id)
   end
+
+  @doc """
+  hide_post_if_over_flag_limit(post)
+  If the posts has more flags than is allowed (a value that can be changed in /admin/settings), then the post will have soft_delete set to true.
+  """
+  def hide_post_if_over_flag_limit(post, flag_limit) do
+    flag_count = get_pending_flag_count(post)
+    if flag_count >= flag_limit and post.soft_delete != true do
+      update_post(post, %{soft_delete: true})
+    end
+  end
+
+  @doc """
+  restore_post_if_flags_cleared(post)
+  If the post has 0 flags, set to soft_delete to false
+  """
+  def restore_post_if_flags_cleared(post) do
+    flag_count = get_pending_flag_count(post)
+    if flag_count == 0 and post.soft_delete != false do
+      update_post(post, %{soft_delete: false})
+    end
+  end    
 end

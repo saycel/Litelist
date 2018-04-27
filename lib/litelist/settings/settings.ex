@@ -72,7 +72,8 @@ defmodule Litelist.Settings do
     defp default_settings() do
         %{
             max_flagged_posts: Application.get_env(:litelist, :max_flagged_posts),
-            allow_replies: Application.get_env(:litelist, :allow_replies)
+            allow_replies: Application.get_env(:litelist, :allow_replies),
+            name: "bushwick"
         }
     end
   end

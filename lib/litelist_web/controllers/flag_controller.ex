@@ -5,7 +5,7 @@ defmodule LitelistWeb.FlagController do
   alias Litelist.Moderation.Flag
   alias Litelist.Posts
   alias LitelistWeb.Utils.SharedUtils
-  
+  alias Litelist.Settings.SettingsDatabase
 
   @types Flag.get_types()
 
@@ -39,6 +39,7 @@ defmodule LitelistWeb.FlagController do
 
     case Moderation.create_flag(flag_params) do
       {:ok, flag} ->
+        hide_post_if_over_flag_limit(flag)
         conn
         |> put_flash(:info, "Flag created successfully.")
         |> redirect(to: flag_path(conn, :show, flag))
@@ -67,6 +68,7 @@ defmodule LitelistWeb.FlagController do
 
     case Moderation.update_flag(flag, flag_params) do
       {:ok, flag} ->
+        restore_post_if_flags_cleared(flag)
         conn
         |> put_flash(:info, "Flag updated successfully.")
         |> redirect(to: flag_path(conn, :show, flag))
@@ -79,7 +81,7 @@ defmodule LitelistWeb.FlagController do
   def delete(conn, %{"id" => id}) do
     flag = Moderation.get_flag!(id)
     {:ok, _flag} = Moderation.delete_flag(flag)
-
+    restore_post_if_flags_cleared(flag)
     conn
     |> put_flash(:info, "Flag deleted successfully.")
     |> redirect(to: flag_path(conn, :index))
@@ -88,5 +90,16 @@ defmodule LitelistWeb.FlagController do
   def guidelines(conn, _) do
     conn
       |> render("guidelines.html")
+  end
+
+  defp hide_post_if_over_flag_limit(flag) do
+    post = Posts.get_post!(flag.post_id)
+    settings = SettingsDatabase.get_settings().map
+    Posts.hide_post_if_over_flag_limit(post, settings.max_flagged_posts)
+  end
+
+  defp restore_post_if_flags_cleared(flag) do
+    post = Posts.get_post!(flag.post_id)
+    Posts.restore_post_if_flags_cleared(post)
   end
 end

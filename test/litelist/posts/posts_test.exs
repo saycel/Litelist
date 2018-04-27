@@ -58,6 +58,14 @@ defmodule Litelist.PostsTest do
       assert first_post.id == post.id
     end
 
+    test "list_posts/0 does not return posts where soft_delete = true" do
+      attrs = Map.merge(@valid_attrs, %{soft_delete: true})
+      Factory.insert(:for_sale, attrs)
+      all_posts = Posts.list_posts()
+
+      assert Enum.empty?(all_posts)
+    end
+
     test "get_post!/1 returns the post with given id" do
       post = Factory.insert(:for_sale, @valid_attrs)
       assert Posts.get_post!(post.id).id == post.id
@@ -149,6 +157,30 @@ defmodule Litelist.PostsTest do
       assert length(posts_with_different_type) == 1
     end
 
+    test "list_posts_by_type/1 will not return posts with soft_delete = true" do
+      same_type = "same_type"
+      Factory.insert(:for_sale, %{type: same_type, soft_delete: true})
+      posts_with_same_type = Posts.list_posts_by_type(same_type)
+
+      assert Enum.empty?(posts_with_same_type)
+    end
+
+    test "list_posts_by_search_term/1 " do
+      description = "My description"
+      Factory.insert(:for_sale, %{description: description})
+      results = Posts.list_posts_by_search_term(description)
+
+      assert length(results) == 1
+    end
+
+    test "list_posts_by_search_term/1 will not return posts with soft_delete = true" do
+      description = "My description"
+      Factory.insert(:for_sale, %{description: description, soft_delete: true})
+      results = Posts.list_posts_by_search_term(description)
+
+      assert Enum.empty?(results)
+    end
+
     test "list_posts_by_neighbor/1 will only return posts created by a given neighbor" do
       neighbor = Factory.insert(:neighbor)
       different_neighbor = Factory.insert(:neighbor)
@@ -229,6 +261,12 @@ defmodule Litelist.PostsTest do
       assert h.type == "for_sale"
     end
 
+    test "list_ordered_by_updated_at does not return a post with soft_delete = true" do
+      Factory.insert(:job, %{soft_delete: true})
+      ordered_posts = Posts.list_ordered_by_updated_at()
+      assert Enum.empty?(ordered_posts)
+    end
+
     test "list_ordered_by_title" do
       first_title = "A title"
       second_title = "B title"
@@ -237,6 +275,52 @@ defmodule Litelist.PostsTest do
       ordered_posts = Posts.list_ordered_by_title()
       [h | _] = ordered_posts
       assert h.title == first_title
+    end
+
+    test "list_ordered_by_title does not return soft deleted posts" do
+      Factory.insert(:job, %{soft_delete: true})
+      ordered_posts = Posts.list_ordered_by_title()
+      assert Enum.empty?(ordered_posts)
+    end
+
+    test "hide_post_if_over_flag_limit" do
+      post = Factory.insert(:job)
+
+      assert post.soft_delete == false
+
+      flag_limit = 5
+      Factory.insert_list(flag_limit + 1, :flag, %{post_id: post.id})
+      Posts.hide_post_if_over_flag_limit(post, flag_limit)
+      updated_post = post.id |> Posts.get_post!() |> Litelist.Repo.preload(:flags)
+
+      assert post.id == updated_post.id
+      assert updated_post.soft_delete == true
+    end
+
+    test "restore_post_if_flags_cleared" do
+      post = Factory.insert(:job, soft_delete: true)
+
+      Posts.restore_post_if_flags_cleared(post)
+      updated_post = Posts.get_post!(post.id)
+
+      assert post.id == updated_post.id
+      assert updated_post.soft_delete == false
+    end
+
+    test "get_repo_by_url" do
+      url = "my-url"
+      post = Factory.insert(:job, %{url: url})
+      result_id = Posts.get_post_by_url(url).id
+      
+      assert result_id == post.id
+    end
+
+    test "get_repo_by_url does not return soft deleted posts" do
+      url = "my-url"
+      Factory.insert(:job, %{url: url, soft_delete: true})
+      result_id = Posts.get_post_by_url(url)
+      
+      assert result_id == nil
     end
   end
 
