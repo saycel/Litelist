@@ -306,6 +306,14 @@ defmodule Litelist.PostsTest do
       assert post.id == updated_post.id
       assert updated_post.soft_delete == false
     end
+
+    test "get_repo_by_url" do
+      url = "my-url"
+      post = Factory.insert(:job, url: url)
+      result_id = Posts.get_post_by_url(url).id
+      
+      assert result_id == post.id
+    end
   end
 
   defp get_expired_posts_count() do

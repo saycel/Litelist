@@ -5,6 +5,7 @@ defmodule LitelistWeb.PageController do
   alias Litelist.Auth.Neighbor
   alias Litelist.Auth.Guardian
   alias Litelist.Posts
+  alias Litelist.Settings.SettingsDatabase
 
   def index(conn, _params) do
     posts = Posts.list_ordered_by_title()
@@ -19,35 +20,26 @@ defmodule LitelistWeb.PageController do
   end
 
   def url_handler(conn, _params) do
-    url =
-      Atom.to_string(conn.scheme) <>
-        "://" <> (conn.req_headers |> Enum.into(%{}) |> Map.get("host")) <> conn.request_path
+    host = get_host(conn)
+    name =  SettingsDatabase.get_settings().map.name
 
-    substring_w_http = String.split(url, ".othernet")
-    http_host = String.split(Enum.at(substring_w_http, 0), "http://")
-    host = Enum.at(http_host, 1)
-
-    if host == "bushwick" do
+    if host == name do
       posts = Posts.list_ordered_by_updated_at()
-
       conn
       |> render("index.html", posts: posts)
     else
-      post = Posts.get_posts_by_url(host)
-
-      case length(post) do
-        0 ->
-          conn
-          |> put_flash(:info, "webpage does not exist")
-          |> redirect(to: page_path(conn, :index))
-
-        1 ->
-          conn
-          |> render(
-            "display.html",
-            post: Enum.at(post, 0),
-            layout: {LitelistWeb.LayoutView, "webpage.html"}
-          )
+      post = Posts.get_post_by_url(host)
+      if post do
+        conn
+        |> render(
+          "display.html",
+          post: Enum.at(post, 0),
+          layout: {LitelistWeb.LayoutView, "webpage.html"}
+        )
+      else
+        conn
+        |> put_flash(:info, "webpage does not exist")
+        |> redirect(to: page_path(conn, :index))
       end
     end
   end
@@ -109,5 +101,16 @@ defmodule LitelistWeb.PageController do
     |> Guardian.Plug.sign_out()
     |> put_flash(:info, "Logged out")
     |> redirect(to: page_path(conn, :index))
+  end
+
+  defp get_host(conn) do
+    url =
+      Atom.to_string(conn.scheme) <>
+        "://" <> (conn.req_headers |> Enum.into(%{}) |> Map.get("host")) <> conn.request_path
+
+    substring_w_http = String.split(url, ".othernet")
+    http_host = String.split(Enum.at(substring_w_http, 0), "http://")
+    host = Enum.at(http_host, 1)
+    host
   end
 end

@@ -57,8 +57,8 @@ defmodule Litelist.Posts do
   @doc """
   Returns a list of all posts with a given url
   """
-  def get_posts_by_url(url) do
-    Repo.all(from(p in Post, where: p.url == ^url, where: p.soft_delete == false))
+  def get_post_by_url(url) do
+    Repo.one(from(p in Post, where: p.url == ^url, where: p.soft_delete == false))
   end
 
   @doc """
