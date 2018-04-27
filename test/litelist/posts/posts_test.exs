@@ -291,7 +291,7 @@ defmodule Litelist.PostsTest do
       flag_limit = 5
       Factory.insert_list(flag_limit + 1, :flag, %{post_id: post.id})
       Posts.hide_post_if_over_flag_limit(post, flag_limit)
-      updated_post = Posts.get_post!(post.id) |> Litelist.Repo.preload(:flags)
+      updated_post = post.id |> Posts.get_post!() |> Litelist.Repo.preload(:flags)
 
       assert post.id == updated_post.id
       assert updated_post.soft_delete == true
@@ -309,10 +309,18 @@ defmodule Litelist.PostsTest do
 
     test "get_repo_by_url" do
       url = "my-url"
-      post = Factory.insert(:job, url: url)
+      post = Factory.insert(:job, %{url: url})
       result_id = Posts.get_post_by_url(url).id
       
       assert result_id == post.id
+    end
+
+    test "get_repo_by_url does not return soft deleted posts" do
+      url = "my-url"
+      Factory.insert(:job, %{url: url, soft_delete: true})
+      result_id = Posts.get_post_by_url(url)
+      
+      assert result_id == nil
     end
   end
 
