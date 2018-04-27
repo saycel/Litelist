@@ -282,6 +282,30 @@ defmodule Litelist.PostsTest do
       ordered_posts = Posts.list_ordered_by_title()
       assert Enum.empty?(ordered_posts)
     end
+
+    test "hide_post_if_over_flag_limit" do
+      post = Factory.insert(:job)
+
+      assert post.soft_delete == false
+
+      flag_limit = 5
+      Factory.insert_list(flag_limit + 1, :flag, %{post_id: post.id})
+      Posts.hide_post_if_over_flag_limit(post, flag_limit)
+      updated_post = Posts.get_post!(post.id) |> Litelist.Repo.preload(:flags)
+
+      assert post.id == updated_post.id
+      assert updated_post.soft_delete == true
+    end
+
+    test "restore_post_if_flags_cleared" do
+      post = Factory.insert(:job, soft_delete: true)
+
+      Posts.restore_post_if_flags_cleared(post)
+      updated_post = Posts.get_post!(post.id)
+
+      assert post.id == updated_post.id
+      assert updated_post.soft_delete == false
+    end
   end
 
   defp get_expired_posts_count() do

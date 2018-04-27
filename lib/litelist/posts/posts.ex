@@ -242,9 +242,9 @@ defmodule Litelist.Posts do
   hide_post_if_over_flag_limit(post)
   If the posts has more flags than is allowed (a value that can be changed in /admin/settings), then the post will have soft_delete set to true.
   """
-  def hide_post_if_over_flag_limit(post) do
+  def hide_post_if_over_flag_limit(post, flag_limit) do
     flag_count = get_pending_flag_count(post)
-    if flag_count >= Application.get_env(:litelist, :max_flagged_posts) and post.soft_delete != true do
+    if flag_count >= flag_limit and post.soft_delete != true do
       update_post(post, %{soft_delete: true})
     end
   end
@@ -255,7 +255,7 @@ defmodule Litelist.Posts do
   """
   def restore_post_if_flags_cleared(post) do
     flag_count = get_pending_flag_count(post)
-    if flag_count >= Application.get_env(:litelist, :max_flagged_posts) and post.soft_delete != false do
+    if flag_count == 0 and post.soft_delete != false do
       update_post(post, %{soft_delete: false})
     end
   end    
