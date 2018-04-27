@@ -84,9 +84,8 @@ defmodule Litelist.Posts do
 
   """
   def list_posts_by_search_term(search_term) do
-    query =
-      from(p in Post, where: p.soft_delete == false)
-      |> Search.run(search_term)
+    clause = from(p in Post, where: p.soft_delete == false)
+    query = Search.run(clause, search_term)
 
     Repo.all(query)
   end
