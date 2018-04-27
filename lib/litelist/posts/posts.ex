@@ -234,4 +234,26 @@ defmodule Litelist.Posts do
 
     Repo.aggregate(query, :count, :id)
   end
+
+  @doc """
+  hide_post_if_over_flag_limit(post)
+  If the posts has more flags than is allowed (a value that can be changed in /admin/settings), then the post will have soft_delete set to true.
+  """
+  def hide_post_if_over_flag_limit(post) do
+    flag_count = get_pending_flag_count(post)
+    if flag_count >= Application.get_env(:litelist, :max_flagged_posts) and post.soft_delete != true do
+      update_post(post, %{soft_delete: true})
+    end
+  end
+
+  @doc """
+  restore_post_if_flags_cleared(post)
+  If the post has 0 flags, set to soft_delete to false
+  """
+  def restore_post_if_flags_cleared(post) do
+    flag_count = get_pending_flag_count(post)
+    if flag_count >= Application.get_env(:litelist, :max_flagged_posts) and post.soft_delete != false do
+      update_post(post, %{soft_delete: false})
+    end
+  end    
 end
