@@ -12,6 +12,7 @@ defmodule Litelist.SearchTest do
       Factory.insert(:job, %{title: "my title"})
       Factory.insert(:job, %{title: "my second title"})
       Factory.insert(:job, %{description: "my description"})
+      Factory.insert(:job, %{description: "soft delete", soft_delete: true})
 
       # elixir won't allow to return simply :ok, so I added a nothing variable
       {:ok, nothing_variable: %{attr: nil}}

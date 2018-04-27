@@ -20,7 +20,7 @@ defmodule Litelist.Posts do
 
   """
   def list_posts do
-    posts = Repo.all(Post)
+    posts = Repo.all(from(p in Post, where: p.soft_delete == false))
     Repo.preload(posts, [:images])
   end
 
@@ -28,7 +28,7 @@ defmodule Litelist.Posts do
   Returns a list of posts, ordered by title
   """
   def list_ordered_by_title() do
-    posts = Post |> order_by(asc: :title) |> Repo.all()
+    posts = Post |> order_by(asc: :title) |> where(soft_delete: false) |> Repo.all()
     Repo.preload(posts, [:images])
   end
 
@@ -36,9 +36,10 @@ defmodule Litelist.Posts do
   Returns a list of posts, ordered by updated_at, desc
   """
   def list_ordered_by_updated_at() do
-    posts = Post |> order_by(desc: :updated_at) |> Repo.all()
+    posts = Post |> order_by(desc: :updated_at) |> where(soft_delete: false) |> Repo.all()
     Repo.preload(posts, [:images])
   end
+
 
   @doc """
   Returns the list of posts based on the type of post (eg. for_sale, job).
@@ -49,12 +50,15 @@ defmodule Litelist.Posts do
       [%Post{}, ...]
 
   """
-  def get_posts_by_url(url) do
-    Repo.all(from(p in Post, where: p.url == ^url))
+  def list_posts_by_type(type) do
+    Repo.all(from(p in Post, where: p.type == ^type, where: p.soft_delete == false))
   end
 
-  def list_posts_by_type(type) do
-    Repo.all(from(p in Post, where: p.type == ^type))
+  @doc """
+  Returns a list of all posts with a given url
+  """
+  def get_posts_by_url(url) do
+    Repo.all(from(p in Post, where: p.url == ^url, where: p.soft_delete == false))
   end
 
   @doc """
@@ -81,7 +85,7 @@ defmodule Litelist.Posts do
   """
   def list_posts_by_search_term(search_term) do
     query =
-      Post
+      from(p in Post, where: p.soft_delete == false)
       |> Search.run(search_term)
 
     Repo.all(query)
