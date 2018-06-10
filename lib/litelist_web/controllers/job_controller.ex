@@ -38,6 +38,7 @@ defmodule LitelistWeb.JobController do
     job_params = job_params
       |> SharedUtils.permitted_params(@permitted_params)
       |> SharedUtils.add_generated_params(conn, @post_type, :create)
+      |> SharedUtils.add_uuid_to_photo_if_exists()
 
     case Posts.create_post(job_params) do
       {:ok, job} ->

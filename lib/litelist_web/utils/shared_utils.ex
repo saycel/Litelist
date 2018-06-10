@@ -196,6 +196,26 @@ defmodule LitelistWeb.Utils.SharedUtils do
         )
     end
 
+    @doc """
+    adds a uuid to photos
+    """
+    def add_uuid_to_photo_if_exists(params) do
+        if params["images"]["0"]["image"] != nil do
+            content_type = params["images"]["0"]["image"].content_type
+            extension = get_content_type_extension(content_type)
+            Map.delete(params["images"]["0"]["image"], :filename) 
+            t = Map.put(params["images"]["0"]["image"], :filename, "#{UUID.uuid4()}.#{extension}")
+            new_params = put_in(params, ["images", "0", "image"], t)
+            new_params
+        else 
+            params
+        end
+    end
+
+    defp get_content_type_extension(string) do
+        String.slice(string, 6, 50)
+    end
+
     defp add_type(params, type) do
         Map.merge(
             %{
