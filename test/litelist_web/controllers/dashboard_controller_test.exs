@@ -79,6 +79,23 @@ defmodule LitelistWeb.DashboardControllerTest do
   
         assert response(conn, 401)
       end
+
+
+      test "exports my discussions if logged in", %{conn: conn} do
+        neighbor = Factory.insert(:neighbor)
+        conn = conn
+          |> login_neighbor(neighbor)
+          |> get(dashboard_path(conn, :export_my_discussions))
+  
+        assert get_resp_header(conn, "content-type") == ["text/csv; charset=utf-8"]
+        assert response(conn, 200)
+      end
+      test "redirects from export my discussions if not logged in", %{conn: conn} do
+        conn = conn
+          |> get(dashboard_path(conn, :export_my_discussions))
+  
+        assert response(conn, 401)
+      end
     end
 
     describe "posts" do
@@ -139,6 +156,23 @@ defmodule LitelistWeb.DashboardControllerTest do
         conn = conn
           |> get(dashboard_path(conn, :posts_i_flagged))
 
+        assert response(conn, 401)
+      end
+    end
+
+    describe "my_discussions" do
+      test "lists my_discussions", %{conn: conn} do
+        neighbor = Factory.insert(:neighbor)
+        conn = conn
+          |> login_neighbor(neighbor)
+          |> get(dashboard_path(conn, :my_discussions))
+  
+        assert html_response(conn, 200)
+        assert view_template(conn) == "my_discussions.html"
+      end
+      test "redirects from my_discussions if not logged in", %{conn: conn} do
+        conn = conn
+          |> get(dashboard_path(conn, :my_discussions))
         assert response(conn, 401)
       end
     end

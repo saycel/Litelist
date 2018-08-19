@@ -22,10 +22,10 @@ defmodule LitelistWeb.DiscussionController do
       |> SharedUtils.add_slug()
 
     case Discussions.create_discussion(discussion_params) do
-      {:ok, _discussion} ->
+      {:ok, discussion} ->
         conn
         |> put_flash(:info, "Discussion created successfully.")
-        # |> redirect(to: discussion_path(conn, :show, discussion))
+        |> redirect(to: discussion_path(conn, :show, discussion))
       {:error, %Ecto.Changeset{} = changeset} ->
         render(conn, "new.html", changeset: changeset)
     end
@@ -48,10 +48,10 @@ defmodule LitelistWeb.DiscussionController do
     discussion = Discussions.get_discussion!(id)
 
     case Discussions.update_discussion(discussion, discussion_params) do
-      {:ok, _discussion} ->
+      {:ok, discussion} ->
         conn
         |> put_flash(:info, "Discussion updated successfully.")
-        # |> redirect(to: discussion_path(conn, :show, discussion))
+        |> redirect(to: discussion_path(conn, :show, discussion))
       {:error, %Ecto.Changeset{} = changeset} ->
         render(conn, "edit.html", discussion: discussion, changeset: changeset)
     end
@@ -62,7 +62,7 @@ defmodule LitelistWeb.DiscussionController do
     {:ok, _discussion} = Discussions.delete_discussion(discussion)
 
     conn
-    |> put_flash(:info, "Discussion deleted successfully.")
-    # |> redirect(to: discussion_path(conn, :index))
+      |> put_flash(:info, "Discussion deleted successfully.")
+      |> redirect(to: discussion_path(conn, :index))
   end
 end

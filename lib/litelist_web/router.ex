@@ -49,15 +49,15 @@ defmodule LitelistWeb.Router do
     get "/dashboard/my_flagged_posts/export", DashboardController, :export_my_flagged_posts
     get "/dashboard/posts_i_flagged", DashboardController, :posts_i_flagged
     get "/dashboard/posts_i_flagged/export", DashboardController, :export_posts_i_flagged
-    # get "/dashboard/my_discussions", DashboardController, :my_discussions
-    # get "/dashboard/my_discussions/export", DashboardController, :export_my_discussions
+    get "/dashboard/my_discussions", DashboardController, :my_discussions
+    get "/dashboard/my_discussions/export", DashboardController, :export_my_discussions
 
     resources "/sales", ForSaleController, only: [:new, :create, :edit, :update, :delete]
     resources "/jobs", JobController, only: [:new, :create, :edit, :update, :delete]
     resources "/events", EventController, only: [:new, :create, :edit, :update, :delete]
     resources "/businesses", BusinessController, only: [:new, :create, :edit, :update, :delete]
     resources "/emergency_info", EmergencyInformationController, only: [:new, :create, :edit, :update, :delete]
-    # resources "/discussions", DiscussionController, only: [:new, :create]
+    resources "/discussions", DiscussionController, only: [:new, :create]
   end
 
   # Admin scope
@@ -69,7 +69,7 @@ defmodule LitelistWeb.Router do
     get "/posts", AdminController, :posts
     get "/settings", AdminController, :settings
     post "/settings", AdminController, :update_settings
-    # resources "/discussions", DiscussionController, only: [:edit, :update, :delete]
+    resources "/discussions", DiscussionController, only: [:edit, :update, :delete]
     resources "/moderation", FlagController, only: [:index, :delete, :edit, :update]
   end
 
@@ -90,7 +90,7 @@ defmodule LitelistWeb.Router do
     resources "/businesses", BusinessController, only: [:show, :index]
     resources "/emergency_info", EmergencyInformationController, only: [:show, :index]
     resources "/flags", FlagController, only: [:new, :show, :create]
-    # resources "/discussions", DiscussionController, only: [:index, :show]
+    resources "/discussions", DiscussionController, only: [:index, :show]
     get "/*url", PageController, :url_handler
   end
 

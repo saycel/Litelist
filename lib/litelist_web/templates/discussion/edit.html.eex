@@ -1,3 +1,4 @@
 <h2>Edit Discussion</h2>
 
-
+<%= render "form.html", Map.put(assigns, :action, discussion_path(@conn, :update, @discussion)) %>
+<span><%= link "Back", to: discussion_path(@conn, :index) %></span>

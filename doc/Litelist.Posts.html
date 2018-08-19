@@ -8,7 +8,7 @@
     <title>Litelist.Posts – litelist v0.0.1</title>
     <link rel="stylesheet" href="dist/app-81d381dea4.css" />
     
-    <script src="dist/sidebar_items-f707e47970.js"></script>
+    <script src="dist/sidebar_items-689d3fa3aa.js"></script>
     
     
     
@@ -173,6 +173,43 @@ iex&gt; get_pending_flag_count(post)
 </div>
 <div class="summary-row">
   <div class="summary-signature">
+    <a href="#get_post_by_url/1">get_post_by_url(url)</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>Returns a list of all posts with a given url</p>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#hide_post_if_over_flag_limit/2">hide_post_if_over_flag_limit(post, flag_limit)</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>hide_post_if_over_flag_limit(post)
+If the posts has more flags than is allowed (a value that can be changed in /admin/settings), then the post will have soft_delete set to true</p>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#list_ordered_by_title/0">list_ordered_by_title()</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>Returns a list of posts, ordered by title</p>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#list_ordered_by_updated_at/0">list_ordered_by_updated_at()</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>Returns a list of posts, ordered by updated_at, desc</p>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
     <a href="#list_posts/0">list_posts()</a>
   </div>
   
@@ -204,6 +241,16 @@ iex&gt; get_pending_flag_count(post)
   </div>
   
     <div class="summary-synopsis"><p>Returns the list of posts based on the type of post (eg. for_sale, job)</p>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#restore_post_if_flags_cleared/1">restore_post_if_flags_cleared(post)</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>restore_post_if_flags_cleared(post)
+If the post has 0 flags, set to soft_delete to false</p>
 </div>
   
 </div>
@@ -428,6 +475,79 @@ iex&gt; get_post!(456)
 
   </section>
 </div>
+<div class="detail" id="get_post_by_url/1">
+  
+  
+  <div class="detail-header">
+    <a href="#get_post_by_url/1" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <span class="signature">get_post_by_url(url)</span>
+    
+    
+    
+  </div>
+  <section class="docstring">
+    <p>Returns a list of all posts with a given url</p>
+
+  </section>
+</div>
+<div class="detail" id="hide_post_if_over_flag_limit/2">
+  
+  
+  <div class="detail-header">
+    <a href="#hide_post_if_over_flag_limit/2" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <span class="signature">hide_post_if_over_flag_limit(post, flag_limit)</span>
+    
+    
+    
+  </div>
+  <section class="docstring">
+    <p>hide_post_if_over_flag_limit(post)
+If the posts has more flags than is allowed (a value that can be changed in /admin/settings), then the post will have soft_delete set to true.</p>
+
+  </section>
+</div>
+<div class="detail" id="list_ordered_by_title/0">
+  
+  
+  <div class="detail-header">
+    <a href="#list_ordered_by_title/0" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <span class="signature">list_ordered_by_title()</span>
+    
+    
+    
+  </div>
+  <section class="docstring">
+    <p>Returns a list of posts, ordered by title</p>
+
+  </section>
+</div>
+<div class="detail" id="list_ordered_by_updated_at/0">
+  
+  
+  <div class="detail-header">
+    <a href="#list_ordered_by_updated_at/0" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <span class="signature">list_ordered_by_updated_at()</span>
+    
+    
+    
+  </div>
+  <section class="docstring">
+    <p>Returns a list of posts, ordered by updated_at, desc</p>
+
+  </section>
+</div>
 <div class="detail" id="list_posts/0">
   
   
@@ -525,6 +645,25 @@ iex&gt; get_post!(456)
 
 <pre><code class="iex elixir">iex&gt; list_posts_by_type(type)
 [%Post{}, ...]</code></pre>
+
+  </section>
+</div>
+<div class="detail" id="restore_post_if_flags_cleared/1">
+  
+  
+  <div class="detail-header">
+    <a href="#restore_post_if_flags_cleared/1" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <span class="signature">restore_post_if_flags_cleared(post)</span>
+    
+    
+    
+  </div>
+  <section class="docstring">
+    <p>restore_post_if_flags_cleared(post)
+If the post has 0 flags, set to soft_delete to false</p>
 
   </section>
 </div>
