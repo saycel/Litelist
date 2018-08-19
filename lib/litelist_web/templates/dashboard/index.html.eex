@@ -28,7 +28,19 @@
     </div>
   </div>
 </div>
-
-
+<div class="columns">
+  <div class="column col-sm-12">
+    <div class="empty">
+      <div class="empty-icon">
+        <i class="icon icon-3x icon-apps"></i>
+      </div>
+      <p class="empty-title h5">Discussions</p>
+      <p class="empty-subtitle"></p>
+      <div class="empty-action input-group input-inline">
+        <span><%= link "My Discussions", to: dashboard_path(@conn, :my_discussions), class: "btn btn-default btn-xs" %></span>
+      </div>
+    </div>
+  </div>
+</div>
 
 

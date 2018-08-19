@@ -18,3 +18,8 @@
   </li>
 </ul>
 
+<%= if @current_neighbor && @current_neighbor.admin == true do %>
+  <span><%= link "Edit", to: discussion_path(@conn, :edit, @discussion) %></span>
+  <span><%= link "Delete", to: discussion_path(@conn, :delete, @discussion), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" %></span>
+<% end %>
+<span><%= link "Back", to: discussion_path(@conn, :index) %></span>

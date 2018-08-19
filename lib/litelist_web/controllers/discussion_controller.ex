@@ -51,7 +51,7 @@ defmodule LitelistWeb.DiscussionController do
       {:ok, discussion} ->
         conn
         |> put_flash(:info, "Discussion updated successfully.")
-        # |> redirect(to: discussion_path(conn, :show, discussion))
+        |> redirect(to: discussion_path(conn, :show, discussion))
       {:error, %Ecto.Changeset{} = changeset} ->
         render(conn, "edit.html", discussion: discussion, changeset: changeset)
     end
@@ -62,7 +62,7 @@ defmodule LitelistWeb.DiscussionController do
     {:ok, _discussion} = Discussions.delete_discussion(discussion)
 
     conn
-    |> put_flash(:info, "Discussion deleted successfully.")
-    # |> redirect(to: discussion_path(conn, :index))
+      |> put_flash(:info, "Discussion deleted successfully.")
+      |> redirect(to: discussion_path(conn, :index))
   end
 end
