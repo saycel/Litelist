@@ -22,6 +22,34 @@ defmodule Litelist.Comments do
   end
 
   @doc """
+  Returns the list of comments belonging to a given post.
+
+  ## Examples
+
+      iex> list_comments_by_post()
+      [%Comment{}, ...]
+
+  """
+  def list_comments_by_post(post) do
+    query = from c in Comment, where: c.post_id == ^post.id
+    query |> Repo.all()
+  end
+
+  @doc """
+  Returns the list of comments belonging to a given discussion.
+
+  ## Examples
+
+      iex> list_comments_by_discussion()
+      [%Comment{}, ...]
+
+  """
+  def list_comments_by_discussion(discussion) do
+    query = from c in Comment, where: c.discussion_id == ^discussion.id
+    query |> Repo.all()
+  end
+
+  @doc """
   Gets a single comment.
 
   Raises `Ecto.NoResultsError` if the Comment does not exist.
@@ -53,24 +81,6 @@ defmodule Litelist.Comments do
     %Comment{}
     |> Comment.changeset(attrs)
     |> Repo.insert()
-  end
-
-  @doc """
-  Updates a comment.
-
-  ## Examples
-
-      iex> update_comment(comment, %{field: new_value})
-      {:ok, %Comment{}}
-
-      iex> update_comment(comment, %{field: bad_value})
-      {:error, %Ecto.Changeset{}}
-
-  """
-  def update_comment(%Comment{} = comment, attrs) do
-    comment
-    |> Comment.changeset(attrs)
-    |> Repo.update()
   end
 
   @doc """

@@ -6,10 +6,11 @@ defmodule Litelist.Comments.Comment do
 
   schema "comments" do
     field :text, :string
-    field :post_id, :id
-    field :discussion_id, :id
 
     timestamps()
+
+    belongs_to :post, Litelist.Posts.Post
+    belongs_to :discussion, Litelist.Discussions.Discussion
   end
 
   @doc false

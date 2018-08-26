@@ -2,6 +2,7 @@ defmodule Litelist.CommentsTest do
   use Litelist.DataCase
 
   alias Litelist.Comments
+  alias Litelist.Factory
 
   describe "comments" do
     alias Litelist.Comments.Comment
@@ -10,22 +11,13 @@ defmodule Litelist.CommentsTest do
     @update_attrs %{text: "some updated text"}
     @invalid_attrs %{text: nil}
 
-    def comment_fixture(attrs \\ %{}) do
-      {:ok, comment} =
-        attrs
-        |> Enum.into(@valid_attrs)
-        |> Comments.create_comment()
-
-      comment
-    end
-
     test "list_comments/0 returns all comments" do
-      comment = comment_fixture()
+      comment = Factory.insert(:comment)
       assert Comments.list_comments() == [comment]
     end
 
     test "get_comment!/1 returns the comment with given id" do
-      comment = comment_fixture()
+      comment = Factory.insert(:comment)
       assert Comments.get_comment!(comment.id) == comment
     end
 
@@ -38,28 +30,33 @@ defmodule Litelist.CommentsTest do
       assert {:error, %Ecto.Changeset{}} = Comments.create_comment(@invalid_attrs)
     end
 
-    test "update_comment/2 with valid data updates the comment" do
-      comment = comment_fixture()
-      assert {:ok, comment} = Comments.update_comment(comment, @update_attrs)
-      assert %Comment{} = comment
-      assert comment.text == "some updated text"
-    end
-
-    test "update_comment/2 with invalid data returns error changeset" do
-      comment = comment_fixture()
-      assert {:error, %Ecto.Changeset{}} = Comments.update_comment(comment, @invalid_attrs)
-      assert comment == Comments.get_comment!(comment.id)
-    end
-
     test "delete_comment/1 deletes the comment" do
-      comment = comment_fixture()
+      comment = Factory.insert(:comment)
       assert {:ok, %Comment{}} = Comments.delete_comment(comment)
       assert_raise Ecto.NoResultsError, fn -> Comments.get_comment!(comment.id) end
     end
 
     test "change_comment/1 returns a comment changeset" do
-      comment = comment_fixture()
+      comment = Factory.insert(:comment)
       assert %Ecto.Changeset{} = Comments.change_comment(comment)
+    end
+
+    test "list_comments_by_post/1 returns all comments for a given post" do
+      post = Factory.insert(:job)
+      Factory.insert(:comment, %{post_id: post.id})
+      Factory.insert(:comment, %{post_id: post.id})
+      Factory.insert(:comment, %{post_id: post.id})
+      Factory.insert(:comment)
+      assert length(Comments.list_comments_by_post(post)) == 3
+    end
+
+    test "list_comments_by_discussion/1 returns all comments for a given discussion" do
+      discussion = Factory.insert(:discussion)
+      Factory.insert(:comment, %{discussion_id: discussion.id})
+      Factory.insert(:comment, %{discussion_id: discussion.id})
+      Factory.insert(:comment, %{discussion_id: discussion.id})
+      Factory.insert(:comment)
+      assert length(Comments.list_comments_by_discussion(discussion)) == 3
     end
   end
 end
