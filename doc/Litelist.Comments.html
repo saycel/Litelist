@@ -5,7 +5,7 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="ExDoc v0.18.2">
-    <title>LitelistWeb.BusinessController – litelist v0.0.1</title>
+    <title>Litelist.Comments – litelist v0.0.1</title>
     <link rel="stylesheet" href="dist/app-81d381dea4.css" />
     
     <script src="dist/sidebar_items-6788daad41.js"></script>
@@ -70,10 +70,15 @@
 
       <h1>
         <small class="visible-xs">litelist v0.0.1</small>
-        LitelistWeb.BusinessController
+        Litelist.Comments
         
       </h1>
 
+      
+        <section id="moduledoc">
+          <p>The Comments context.</p>
+
+        </section>
       
 
       
@@ -94,44 +99,65 @@
     </h2>
     <div class="summary-row">
   <div class="summary-signature">
-    <a href="#create/2">create(conn, map)</a>
+    <a href="#change_comment/1">change_comment(comment)</a>
   </div>
+  
+    <div class="summary-synopsis"><p>Returns an <code class="inline">%Ecto.Changeset{}</code> for tracking comment changes</p>
+</div>
   
 </div>
 <div class="summary-row">
   <div class="summary-signature">
-    <a href="#delete/2">delete(conn, map)</a>
+    <a href="#create_comment/1">create_comment(attrs \\ %{})</a>
   </div>
+  
+    <div class="summary-synopsis"><p>Creates a comment</p>
+</div>
   
 </div>
 <div class="summary-row">
   <div class="summary-signature">
-    <a href="#edit/2">edit(conn, map)</a>
+    <a href="#delete_comment/1">delete_comment(comment)</a>
   </div>
+  
+    <div class="summary-synopsis"><p>Deletes a Comment</p>
+</div>
   
 </div>
 <div class="summary-row">
   <div class="summary-signature">
-    <a href="#index/2">index(conn, params)</a>
+    <a href="#get_comment!/1">get_comment!(id)</a>
   </div>
+  
+    <div class="summary-synopsis"><p>Gets a single comment</p>
+</div>
   
 </div>
 <div class="summary-row">
   <div class="summary-signature">
-    <a href="#new/2">new(conn, params)</a>
+    <a href="#list_comments/0">list_comments()</a>
   </div>
+  
+    <div class="summary-synopsis"><p>Returns the list of comments</p>
+</div>
   
 </div>
 <div class="summary-row">
   <div class="summary-signature">
-    <a href="#show/2">show(conn, map)</a>
+    <a href="#list_comments_by_discussion/1">list_comments_by_discussion(discussion)</a>
   </div>
+  
+    <div class="summary-synopsis"><p>Returns the list of comments belonging to a given discussion</p>
+</div>
   
 </div>
 <div class="summary-row">
   <div class="summary-signature">
-    <a href="#update/2">update(conn, map)</a>
+    <a href="#list_comments_by_post/1">list_comments_by_post(post)</a>
   </div>
+  
+    <div class="summary-synopsis"><p>Returns the list of comments belonging to a given post</p>
+</div>
   
 </div>
 
@@ -154,123 +180,191 @@
             </a>
             Functions
           </h1>
-          <div class="detail" id="create/2">
+          <div class="detail" id="change_comment/1">
   
   
   <div class="detail-header">
-    <a href="#create/2" class="detail-link" title="Link to this function">
+    <a href="#change_comment/1" class="detail-link" title="Link to this function">
       <span class="icon-link" aria-hidden="true"></span>
       <span class="sr-only">Link to this function</span>
     </a>
-    <span class="signature">create(conn, map)</span>
+    <span class="signature">change_comment(comment)</span>
     
     
     
   </div>
   <section class="docstring">
-    
+    <p>Returns an <code class="inline">%Ecto.Changeset{}</code> for tracking comment changes.</p>
+<h2 id="change_comment/1-examples" class="section-heading">
+  <a href="#change_comment/1-examples" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Examples
+</h2>
+
+<pre><code class="iex elixir">iex&gt; change_comment(comment)
+%Ecto.Changeset{source: %Comment{}}</code></pre>
+
   </section>
 </div>
-<div class="detail" id="delete/2">
+<div class="detail" id="create_comment/1">
   
+  
+    <span id="create_comment/0"></span>
   
   <div class="detail-header">
-    <a href="#delete/2" class="detail-link" title="Link to this function">
+    <a href="#create_comment/1" class="detail-link" title="Link to this function">
       <span class="icon-link" aria-hidden="true"></span>
       <span class="sr-only">Link to this function</span>
     </a>
-    <span class="signature">delete(conn, map)</span>
+    <span class="signature">create_comment(attrs \\ %{})</span>
     
     
     
   </div>
   <section class="docstring">
-    
+    <p>Creates a comment.</p>
+<h2 id="create_comment/1-examples" class="section-heading">
+  <a href="#create_comment/1-examples" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Examples
+</h2>
+
+<pre><code class="iex elixir">iex&gt; create_comment(%{field: value})
+{:ok, %Comment{}}
+
+iex&gt; create_comment(%{field: bad_value})
+{:error, %Ecto.Changeset{}}</code></pre>
+
   </section>
 </div>
-<div class="detail" id="edit/2">
+<div class="detail" id="delete_comment/1">
   
   
   <div class="detail-header">
-    <a href="#edit/2" class="detail-link" title="Link to this function">
+    <a href="#delete_comment/1" class="detail-link" title="Link to this function">
       <span class="icon-link" aria-hidden="true"></span>
       <span class="sr-only">Link to this function</span>
     </a>
-    <span class="signature">edit(conn, map)</span>
+    <span class="signature">delete_comment(comment)</span>
     
     
     
   </div>
   <section class="docstring">
-    
+    <p>Deletes a Comment.</p>
+<h2 id="delete_comment/1-examples" class="section-heading">
+  <a href="#delete_comment/1-examples" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Examples
+</h2>
+
+<pre><code class="iex elixir">iex&gt; delete_comment(comment)
+{:ok, %Comment{}}
+
+iex&gt; delete_comment(comment)
+{:error, %Ecto.Changeset{}}</code></pre>
+
   </section>
 </div>
-<div class="detail" id="index/2">
+<div class="detail" id="get_comment!/1">
   
   
   <div class="detail-header">
-    <a href="#index/2" class="detail-link" title="Link to this function">
+    <a href="#get_comment!/1" class="detail-link" title="Link to this function">
       <span class="icon-link" aria-hidden="true"></span>
       <span class="sr-only">Link to this function</span>
     </a>
-    <span class="signature">index(conn, params)</span>
+    <span class="signature">get_comment!(id)</span>
     
     
     
   </div>
   <section class="docstring">
-    
+    <p>Gets a single comment.</p>
+<p>Raises <a href="https://hexdocs.pm/ecto/2.2.8/Ecto.NoResultsError.html"><code class="inline">Ecto.NoResultsError</code></a> if the Comment does not exist.</p>
+<h2 id="get_comment!/1-examples" class="section-heading">
+  <a href="#get_comment!/1-examples" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Examples
+</h2>
+
+<pre><code class="iex elixir">iex&gt; get_comment!(123)
+%Comment{}
+
+iex&gt; get_comment!(456)
+** (Ecto.NoResultsError)</code></pre>
+
   </section>
 </div>
-<div class="detail" id="new/2">
+<div class="detail" id="list_comments/0">
   
   
   <div class="detail-header">
-    <a href="#new/2" class="detail-link" title="Link to this function">
+    <a href="#list_comments/0" class="detail-link" title="Link to this function">
       <span class="icon-link" aria-hidden="true"></span>
       <span class="sr-only">Link to this function</span>
     </a>
-    <span class="signature">new(conn, params)</span>
+    <span class="signature">list_comments()</span>
     
     
     
   </div>
   <section class="docstring">
-    
+    <p>Returns the list of comments.</p>
+<h2 id="list_comments/0-examples" class="section-heading">
+  <a href="#list_comments/0-examples" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Examples
+</h2>
+
+<pre><code class="iex elixir">iex&gt; list_comments()
+[%Comment{}, ...]</code></pre>
+
   </section>
 </div>
-<div class="detail" id="show/2">
+<div class="detail" id="list_comments_by_discussion/1">
   
   
   <div class="detail-header">
-    <a href="#show/2" class="detail-link" title="Link to this function">
+    <a href="#list_comments_by_discussion/1" class="detail-link" title="Link to this function">
       <span class="icon-link" aria-hidden="true"></span>
       <span class="sr-only">Link to this function</span>
     </a>
-    <span class="signature">show(conn, map)</span>
+    <span class="signature">list_comments_by_discussion(discussion)</span>
     
     
     
   </div>
   <section class="docstring">
-    
+    <p>Returns the list of comments belonging to a given discussion.</p>
+<h2 id="list_comments_by_discussion/1-examples" class="section-heading">
+  <a href="#list_comments_by_discussion/1-examples" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Examples
+</h2>
+
+<pre><code class="iex elixir">iex&gt; list_comments_by_discussion()
+[%Comment{}, ...]</code></pre>
+
   </section>
 </div>
-<div class="detail" id="update/2">
+<div class="detail" id="list_comments_by_post/1">
   
   
   <div class="detail-header">
-    <a href="#update/2" class="detail-link" title="Link to this function">
+    <a href="#list_comments_by_post/1" class="detail-link" title="Link to this function">
       <span class="icon-link" aria-hidden="true"></span>
       <span class="sr-only">Link to this function</span>
     </a>
-    <span class="signature">update(conn, map)</span>
+    <span class="signature">list_comments_by_post(post)</span>
     
     
     
   </div>
   <section class="docstring">
-    
+    <p>Returns the list of comments belonging to a given post.</p>
+<h2 id="list_comments_by_post/1-examples" class="section-heading">
+  <a href="#list_comments_by_post/1-examples" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Examples
+</h2>
+
+<pre><code class="iex elixir">iex&gt; list_comments_by_post()
+[%Comment{}, ...]</code></pre>
+
   </section>
 </div>
 

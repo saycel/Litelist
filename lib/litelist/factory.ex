@@ -10,6 +10,7 @@ defmodule Litelist.Factory do
   alias FakerElixir, as: Faker
   alias Litelist.Moderation.Flag
   alias Litelist.Discussions.Discussion
+  alias Litelist.Comments.Comment
 
   @doc """
   Neighbor factory
@@ -206,6 +207,23 @@ defmodule Litelist.Factory do
       slug: slug,
       description: Faker.Lorem.sentences(1..2),
       url: FakerElixir.Lorem.characters(11..15)
+    }
+  end
+
+  @doc """
+  Comments factory
+  ## How to
+    build(:comments)
+    build(:comments, %{post_id: post.id})
+    insert(:comments)
+  """
+  def comment_factory do
+    text = FakerElixir.Lorem.sentences(2)
+    discussion_id = insert(:discussion).id
+    %Comment{
+      text: text,
+      discussion_id: discussion_id,
+      post_id: nil
     }
   end
 end

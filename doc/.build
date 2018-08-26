@@ -4,7 +4,7 @@ fonts/icomoon.eot
 fonts/icomoon.svg
 fonts/icomoon.ttf
 fonts/icomoon.woff
-dist/sidebar_items-689d3fa3aa.js
+dist/sidebar_items-6788daad41.js
 api-reference.html
 search.html
 404.html
@@ -16,6 +16,8 @@ Litelist.Auth.Guardian.html
 Litelist.Auth.Guardian.Plug.html
 Litelist.Auth.Neighbor.html
 Litelist.Auth.Pipeline.html
+Litelist.Comments.html
+Litelist.Comments.Comment.html
 Litelist.Discussions.html
 Litelist.Discussions.Discussion.html
 Litelist.Factory.html
