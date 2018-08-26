@@ -8,7 +8,6 @@ defmodule Litelist.CommentsTest do
     alias Litelist.Comments.Comment
 
     @valid_attrs %{text: "some text"}
-    @update_attrs %{text: "some updated text"}
     @invalid_attrs %{text: nil}
 
     test "list_comments/0 returns all comments" do

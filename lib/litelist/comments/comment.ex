@@ -1,8 +1,10 @@
 defmodule Litelist.Comments.Comment do
+  @moduledoc """
+  The Comment schema.
+  """
   use Ecto.Schema
   import Ecto.Changeset
   alias Litelist.Comments.Comment
-
 
   schema "comments" do
     field :text, :string
