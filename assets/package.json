@@ -8,7 +8,8 @@
   "dependencies": {
     "phoenix": "file:../deps/phoenix",
     "phoenix_html": "file:../deps/phoenix_html",
-    "masonry-layout": "4.2.1"
+    "masonry-layout": "4.2.1",
+    "sass-brunch": "^1.8.10"
   },
   "devDependencies": {
     "babel-brunch": "6.1.1",

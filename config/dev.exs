@@ -34,7 +34,7 @@ config :litelist, LitelistWeb.Endpoint,
 config :litelist, LitelistWeb.Endpoint,
   live_reload: [
     patterns: [
-      ~r{priv/static/.*(js|css|png|jpeg|jpg|gif|svg)$},
+      ~r{priv/static/.*(js|css|png|scss|jpeg|jpg|gif|svg)$},
       ~r{priv/gettext/.*(po)$},
       ~r{lib/litelist_web/views/.*(ex)$},
       ~r{lib/litelist_web/templates/.*(eex)$}

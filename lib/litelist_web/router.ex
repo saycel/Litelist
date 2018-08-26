@@ -91,7 +91,7 @@ defmodule LitelistWeb.Router do
     resources "/emergency_info", EmergencyInformationController, only: [:show, :index]
     resources "/flags", FlagController, only: [:new, :show, :create]
     resources "/discussions", DiscussionController, only: [:index, :show]
-    get "/*url", PageController, :url_handler
+    # get "/*url", PageController, :url_handler
   end
 
   # Other scopes may use custom stacks.
