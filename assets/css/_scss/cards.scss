@@ -1,0 +1,48 @@
+.card {
+    background: $pumpkin;
+    border: none;
+    border-radius: .1rem;
+    display: flex;
+    border-radius:0px;
+    display: -ms-flexbox;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    .card-body, .card-footer, .card-header {
+        padding: .3rem;
+        padding-bottom: 0;
+    }
+    .card-body:last-child, .card-footer:last-child, .card-header:last-child {
+        padding-bottom: 0.3rem;
+    }
+    .card-header{
+    	color:black;
+    }
+    .card-subtitle{
+    	color:black;
+    }
+	.card-image{
+		width:100%;
+		max-width:400px;
+		max-height: 300px;
+		overflow:hidden;
+		margin:auto;
+		
+	}
+	.card-image img{
+		height:100%;
+
+		width:100%;
+	}
+    .card-footer{
+        text-align:center;
+        margin-top:20px;
+        border-top: 1px solid $dark-pumpkin
+    }
+    .card-footer a{
+        color:$unhealthy-poop;
+    }
+    .flag{
+        border-left: 1px solid $dark-pumpkin;
+    }
+
+}

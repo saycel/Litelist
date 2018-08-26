@@ -1,10 +1,22 @@
 <div class="divider text-center"></div>
 
-<div class="cc">   
+<div class="cc"> 
+<div class="filter">
+  <span class="bold">Filter By: </span>
+  <span class="category">Events</span>
+  <span>&#183;</span>
+  <span class="category">For Sale</span>
+  <span>&#183;</span>
+  <span class="category">Jobs</span>
+  <span>&#183;</span>
+  <span class="category">Emergency</span>
+  <span>&#183;</span>
+  <span class="category">Business</span>
+</div>
   <div class="grid" data-content="POSTINGS" data-masonry='{ "itemSelector": ".grid-item" }'>
     <div class="columns">
       <%= for post <- @posts do %>
-        <div class="column grid-item col-3 col-md-6 col-sm-12" >
+        <div class="column grid-item col-3 col-xl-4 col-md-6 col-sm-12" >
           <div class="card">
             <div class="card-image">
               <%= for image <- post.images do %>
@@ -13,15 +25,18 @@
             </div>
             <div class="card-header">
               <div class="card-title h5"><%=post.title%></div>
-              <div class="card-subtitle text-gray"><%=post.type%></div>
+              <div class="card-subtitle">#<%=post.type%></div>
             </div>
             <div class="card-body">
-              <%= truncate(post.description, length: 150, omission: "...") %>
+              <%= truncate(post.description, length: 100, omission: "...") %>
             </div>
             <div class="card-footer">
-              <button class="btn btn-primary"><a href="http://<%=post.url%>.othernet:4000">More</a></button>
-              <a href="<%= flag_path_builder(post) %>" class="btn btn-primary">Flag</a>
-      
+              <div class="columns">
+                <div class="column col-10">
+                  <a href="http://<%=post.url%>.othernet:4000">See More</a>
+                </div>
+                <div class="column col-2 flag"> <a href="<%= flag_path_builder(post) %>"><i class="icon icon-flag"></i></a></div>
+              </div>      
             </div>
        
           </div>
