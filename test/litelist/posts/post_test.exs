@@ -33,6 +33,17 @@ defmodule Litelist.PostTest do
             {:ok, post} = create_post_with_image()
             assert length(post.images) == 1
         end
+
+        test "Post has_many Comments" do
+          post = Factory.insert(:job)
+          comment = Factory.insert(:comment, %{post_id: post.id})
+
+          # credo:disable-for-lines:1
+          post_result = Repo.get(Post, post.id) |> Repo.preload([:comments])
+
+          assert length(post_result.comments) == 1
+          assert post_result.comments == [comment]
+        end
     end
 
     def create_post_with_image() do
