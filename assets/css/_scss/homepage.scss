@@ -17,3 +17,44 @@
 .red{
 	color:red;
 }
+
+.category.orange:hover{
+    
+        background:$orange;
+        opacity:.5;
+        text-decoration: underline;
+    
+}
+.category.ocean:hover{
+    
+    background:$ocean;
+    opacity:.5;
+    text-decoration: underline;
+    
+
+}
+.category.brush:hover{
+    
+    background:$brush;
+    opacity:.5;
+    text-decoration: underline;
+    
+
+}
+.category.lake:hover{
+    
+    background:$lake;
+    opacity:.5;
+    text-decoration: underline;
+    
+
+}
+
+.category.dark-pumpkin:hover{
+    
+    background:$dark-pumpkin;
+    opacity:.5;
+    text-decoration: underline;
+
+
+}

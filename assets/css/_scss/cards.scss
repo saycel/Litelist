@@ -26,11 +26,20 @@
 		max-height: 300px;
 		overflow:hidden;
 		margin:auto;
-		
+		position:relative;
 	}
+    .card-image:after {
+         content:"";
+         position:absolute;
+         top:0;
+         left:0;
+         right:0;
+         bottom:0;
+    }
 	.card-image img{
 		height:100%;
-
+        -webkit-filter: grayscale(100%); /* Safari 6.0 - 9.0 */
+        filter: grayscale(100%);
 		width:100%;
 	}
     .card-footer{
@@ -46,3 +55,40 @@
     }
 
 }
+.card.orange{
+    .card-image:after {
+         background:$orange;
+         opacity:.6;
+    }
+}
+.card.ocean{
+    .card-image:after {
+        background:$ocean;
+        opacity:.5;
+        contrast:1;
+    }
+}
+.card.brush{
+    .card-image:after {
+        background:$brush;
+        opacity:.5;
+        
+    }
+}
+.card.lake{
+    .card-image:after {
+        background:$lake;
+        opacity:.5;
+        
+    }
+}
+
+.card.dark-pumpkin{
+    .card-image:after {
+        background:$dark-pumpkin;
+        opacity:.5;
+
+    }
+}
+
+

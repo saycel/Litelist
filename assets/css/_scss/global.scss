@@ -9,11 +9,20 @@ body{
 	background:$offwhite;
 	color:black;
 }
-.mt-60{
-	margin-top:60px;
+.mt-20{
+	margin-top:20px;
 }
 .mt-5{
 	margin-top:5px;
+}
+.mt-10{
+	margin-top:15px;
+}
+.mt-40{
+	margin-top:40px;
+}
+.mb-60{
+	margin-bottom:60px;
 }
 .ta-center{
 	text-align: center;
@@ -28,4 +37,24 @@ body{
     border-top: .05rem solid $dark-pumpkin;
     height: .05rem;
     margin: .4rem 0;
+}
+.underline.orange{
+	
+	box-shadow: 0px 3px 0px 0px $orange;
+}
+.underline.dark-pumpkin{
+	
+	box-shadow: 0px 3px 0px 0px $dark-pumpkin;
+}
+.underline.lake{
+	
+	box-shadow: 0px 3px 0px 0px $lake;
+}
+.underline.ocean{
+	
+	box-shadow: 0px 3px 0px 0px $ocean;
+}
+.underline.brush{
+	
+	box-shadow: 0px 3px 0px 0px $brush;
 }

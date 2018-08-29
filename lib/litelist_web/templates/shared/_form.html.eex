@@ -1,53 +1,67 @@
-
-  <div class="column col-8 col-md-12">
-    <%= form_for @changeset, @data.action, [multipart: true], fn f -> %>
-      <%= if @changeset.action do %>
-        <div class="alert alert-danger">
-          <p>Oops, something went wrong! Please check the errors below.</p>
-        </div>
-      <% end %>
-      <%= for d <- @data.fields do %>
-        
-        <div class="form-group container">
-          <div class="columns">
-            <div class="column col-2 popover popover-right">
-              <label class="col-2" for="input-example-4"><%=d.title%></label>
-              <%= render LitelistWeb.SharedView,"_popover.html", title: "TITLE", body: d.po_body %>
-            </div>
-            <div class="column col-12">
-              <%= if d.title == "START_DATE" || d.title == "END_DATE" do %>
-                  <%= if d.title == "START_DATE" do %>
-                    <%= date_select f, :start_date, class: "form-control" %>
-                  <% else %>
-                    <%= date_select f, :end_date, class: "form-control" %>
-                  <% end %>
-              <% else %>
-                <input class="full-width form-control" step="any" id="<%=d.id%>" name="post[<%=String.downcase(d.title)%>]" value= "<%= getVal(@data.resource, d.title) %>" type="<%=d.type%>">
-              <%end%>
-            </div>
-
-            <div class="column col-12 "><%= error_tag f, :title%> </div>
-          </div>
-        </div>
-      <% end %>
-      <div class="form-group container">
-        <div class="columns">
-          <div class="column col-12">
-            <%= inputs_for f, :images, fn image_form -> %>
-              <div class="divider text-center" data-content="Add an Image"></div>
-              <%= file_input image_form, :image, class: "form-control" %>
-              <%= error_tag image_form, :image %>
-          <% end %>
-          </div>
-        </div>
-
+<%= form_for @changeset, @data.action, [multipart: true], fn f -> %>
+    <%= if @changeset.action do %>
+      <div class="alert alert-danger">
+        <p>Oops, something went wrong! Please check the errors below.</p>
       </div>
-
-      <div class="column col-12">
-
-        <%= submit "Submit", class: "btn btn-primary" %>
-      </div>
-
     <% end %>
-  <div>
+    <div class="form-group container">
+      <div class="columns">
+         <div class="column col-12">  
+          <%= inputs_for f, :images, fn image_form -> %>
+            <label>IMAGE</label>
+            <img id="preview" src="#" alt="your image" />
+
+            <input class="form-control" id="image" name="post[images][0][image]" type="file" onchange="readURL(this)">
+
+            <%= error_tag image_form, :image %>
+          <% end %>
+        </div>
+      </div>
+    <%= for d <- @data.fields do %>    
+    <div class="form-group container mt-10">
+      <div class="columns">
+        <div class="col-4 col-md-12 popover popover-right">
+          <label class="col-4 col-md-12" for="input-example-4"><%=d.title%></label>
+          <%= render LitelistWeb.SharedView,"_popover.html", title: "TITLE", body: d.po_body %>
+        </div>
+        <div class="col-8 col-md-12">
+          <%= if d.title == "START_DATE" || d.title == "END_DATE" do %>
+              <%= if d.title == "START_DATE" do %>
+                <%= date_select f, :start_date, class: "form-control" %>
+              <% else %>
+                <%= date_select f, :end_date, class: "form-control" %>
+              <% end %>
+          <% else %>
+            <input class="full-width form-control" step="any" id="<%=d.id%>" name="post[<%=String.downcase(d.title)%>]" value= "<%= getVal(@data.resource, d.title) %>" type="<%=d.type%>">
+          <%end%>
+        </div>
+
+        <div class="col-12 "><%= error_tag f, :title%> </div>
+      </div>
+    </div>
+    <% end %>
+    </div>
+    <div class="column col-12 col-md-12 mt-20 mb-60">
+
+      <%= submit "Submit", class: "submit btn btn-primary" %>
+    </div>
+<% end %>
+
+
+<script>
+let uploader = document.getElementById('image')
+let image = document.getElementById('preview')
+image.style.display = "none"
+function readURL(input) {
+  if (input.files && input.files[0]) {
+    var reader = new FileReader();
+    image.style.display = "block"
+    reader.onload = function (e) {
+      image.src = e.target.result
+    };
+    reader.readAsDataURL(input.files[0]);
+  }
+}
+</script>
+
 

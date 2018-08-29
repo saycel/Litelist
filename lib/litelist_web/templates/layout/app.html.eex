@@ -44,6 +44,7 @@
           </div>
         </section>
       </header>
+<div class="divider text-center"></div>
 
       <% info = get_flash(@conn, :info)
       error = get_flash(@conn, :error)%>
@@ -64,6 +65,7 @@
       </main>
 
     </div> <!-- /container -->
+    
     <script src="<%= static_path(@conn, "/js/app.js") %>"></script>
   </body>
 
