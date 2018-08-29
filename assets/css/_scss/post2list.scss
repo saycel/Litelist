@@ -2,6 +2,10 @@
 	text-align:center;
 	position:relative;
 	padding:60px 0px;
+		-webkit-transition: all 500ms; /* Safari */
+    transition: all 500ms;
+    color:$unhealthy-poop;
+    
 }
 .box h1{
 
@@ -20,4 +24,8 @@
 }
 .box.dark-pumpkin{
 	background:$dark-pumpkin;
+}
+.box:hover{
+	color:black;
+	
 }

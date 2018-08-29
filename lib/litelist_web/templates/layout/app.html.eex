@@ -18,13 +18,12 @@
 
           <a href="/" class="navbar-brand mr">Nairobi.Othernet</a>
           <a href="/post2list" class="btn btn-link">Post</a><span>&#183;</span>
-          <a href="/dashboard" class="btn btn-link">Administration</a><span>&#183;</span>
           <%= if @conn.assigns.current_neighbor do %>
             <%= if @conn.assigns.current_neighbor.admin do %>
                 <a href="/admin" class="btn btn-link">Administration</a><span>&#183;</span>
-            <% else %>
-                <a href="/dashboard" class="btn btn-link">Dashboard</a><span>&#183;</span>
-            <% end %>
+            <% end %>            
+            <a href="/dashboard" class="btn btn-link">Dashboard</a><span>&#183;</span>
+
             <%= link "Logout", to: page_path(@conn, :logout), method: :post, class: "btn btn-link" %>
           <% else %>
             <%= link "Login/Sign up", to: page_path(@conn, :login), method: :get, class: "btn btn-link"%>
