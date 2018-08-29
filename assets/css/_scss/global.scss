@@ -58,3 +58,42 @@ body{
 	
 	box-shadow: 0px 3px 0px 0px $brush;
 }
+.navbar-brand{
+	-webkit-transition: all 500ms; /* Safari */
+    transition: all 500ms;
+}
+.navbar-brand:hover{
+	color:$unhealthy-poop;
+}
+.sign-in{
+	border:1px solid $pumpkin;
+	padding:20px;
+	label{
+		font-size:9px
+	}
+	input{
+		border:1px solid $dark-pumpkin;
+	}
+}
+.sign-up{
+	border:1px solid $lake;
+	padding:20px;
+	label{
+		font-size:9px
+	}
+	input{
+		border:1px solid $lake;
+	}
+
+
+
+}
+.sep{
+	text-align:center;
+	margin-top:60px;
+	font-size:30px;
+}
+.signup_in{
+	width:75%;
+	margin:auto;	
+}

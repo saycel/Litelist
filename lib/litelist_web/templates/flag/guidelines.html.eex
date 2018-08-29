@@ -1,3 +1,22 @@
+
+<div class="columns mt-20 how-to">
+  <div class="column col-md-12 col-sm-12">
+    <h3>Post.</h3>
+    <div class="columns">
+      <%= for color <- get_color_array() do %>
+        <div class="column col-4 col-md-6 col-sm-12 mt-10">
+          <a href="<%=elem(color,2)%>">
+            <div class="box <%=elem(color,1)%>">
+              <h1><%=elem(color,0)%></h1>
+            </div>
+          </a>
+        </div>
+      <%end%>
+    </div>
+  </div>
+
+
+</div>
 <div class="columns mt-60">
   <div class="column col-5 col-sm-12 hide-sm ">
     <div class="fixed" style="width:35%">

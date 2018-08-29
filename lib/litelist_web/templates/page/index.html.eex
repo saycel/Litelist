@@ -17,11 +17,13 @@
       <%= for post <- @posts do %>
         <div class="column grid-item col-3 col-xl-4 col-md-6 col-sm-12" >
           <div class="card <%=get_color(post.type)%>">
+            <a href="<%=path_builder(post)%>">
             <div class="card-image">
               <%= for image <- post.images do %>
                 <img src="<%= Litelist.ImageUploader.url({image.image, image})%>" class="img-responsive">
               <% end %>
             </div>
+          </a>
             <div class="card-header">
               <div class="card-title h5"><%=post.title%></div>
               <div class="card-subtitle">#<%=post.type%></div>
@@ -32,7 +34,7 @@
             <div class="card-footer">
               <div class="columns">
                 <div class="column col-10">
-                  <a href="http://<%=post.url%>.othernet:4000">See More</a>
+                  <a href="<%=path_builder(post)%>">See More</a>
                 </div>
                 <div class="column col-2 flag"> <a href="<%= flag_path_builder(post) %>"><i class="icon icon-flag"></i></a></div>
               </div>      

@@ -1,5 +1,7 @@
+
 .card {
     background: $pumpkin;
+
     border: none;
     border-radius: .1rem;
     display: flex;
@@ -34,6 +36,8 @@
          top:0;
          left:0;
          right:0;
+         -webkit-transition: all 500ms; /* Safari */
+        transition: all 500ms;
          bottom:0;
     }
 	.card-image img{
@@ -41,7 +45,15 @@
         -webkit-filter: grayscale(100%); /* Safari 6.0 - 9.0 */
         filter: grayscale(100%);
 		width:100%;
+
+        -webkit-transition: all 500ms; /* Safari */
+        transition: all 500ms;
 	}
+    .card-image:hover img{
+         -webkit-filter: grayscale(0%); /* Safari 6.0 - 9.0 */
+        filter: grayscale(0%);
+    }
+
     .card-footer{
         text-align:center;
         margin-top:20px;
@@ -55,10 +67,11 @@
     }
 
 }
+
 .card.orange{
     .card-image:after {
          background:$orange;
-         opacity:.6;
+         opacity:.5;
     }
 }
 .card.ocean{
@@ -91,4 +104,9 @@
     }
 }
 
-
+.card .card-image:hover:after{
+    opacity:.1;
+}
+.card-footer a:hover{
+    color:black;
+}

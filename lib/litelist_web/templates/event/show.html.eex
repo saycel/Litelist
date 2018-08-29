@@ -1,3 +1,28 @@
+
+<div class="columns mt-20 how-to">
+  <div class="column col-md-12 col-sm-12">
+    <h3>Post.</h3>
+    <div class="columns">
+        <div class="column col-4 col-md-6 col-sm-12 mt-10">
+          <a href="">
+            <div class="box ">
+                 <%= for image <- @event.images do %>
+          <img src="<%= Litelist.ImageUploader.url({image.image, image})%>" class="img-responsive cover">
+        <% end %> 
+            </div>
+          </a>
+        </div>
+    </div>
+  </div>
+
+
+
+
+</div>
+     <%= for image <- @event.images do %>
+          <img src="<%= Litelist.ImageUploader.url({image.image, image})%>" class="img-responsive cover">
+        <% end %> 
+
 <h2>Show Event</h2>
 
 <ul>
