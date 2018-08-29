@@ -32,6 +32,7 @@ defmodule Litelist.Posts.Post do
     belongs_to :neighbor, Litelist.Auth.Neighbor
     has_many :flags, Litelist.Moderation.Flag
     has_many :images, Litelist.Images.Image
+    has_many :comments, Litelist.Comments.Comment
   end
 
   @doc false

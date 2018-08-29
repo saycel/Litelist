@@ -8,7 +8,7 @@
     <title>Litelist.Factory – litelist v0.0.1</title>
     <link rel="stylesheet" href="dist/app-81d381dea4.css" />
     
-    <script src="dist/sidebar_items-689d3fa3aa.js"></script>
+    <script src="dist/sidebar_items-6788daad41.js"></script>
     
     
     
@@ -135,6 +135,19 @@ Businesses use the Post Schema</p>
 <p>  build(:business)
   build(:business, %{title: ‘block party’})
   insert(:business)</p>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#comment_factory/0">comment_factory()</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>Comments factory</p>
+<h2>How to</h2>
+<p>  build(:comments)
+  build(:comments, %{post_id: post.id})
+  insert(:comments)</p>
 </div>
   
 </div>
@@ -443,6 +456,32 @@ Businesses use the Post Schema</p>
 <p>  build(:business)
   build(:business, %{title: ‘block party’})
   insert(:business)</p>
+
+  </section>
+</div>
+<div class="detail" id="comment_factory/0">
+  
+  
+  <div class="detail-header">
+    <a href="#comment_factory/0" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <span class="signature">comment_factory()</span>
+    
+    
+    
+  </div>
+  <section class="docstring">
+    <p>Comments factory</p>
+<h2 id="comment_factory/0-how-to" class="section-heading">
+  <a href="#comment_factory/0-how-to" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  How to
+</h2>
+
+<p>  build(:comments)
+  build(:comments, %{post_id: post.id})
+  insert(:comments)</p>
 
   </section>
 </div>
