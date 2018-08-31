@@ -6,7 +6,7 @@ defmodule LitelistWeb.ForSaleController do
   alias Litelist.Images.Image
 
   alias LitelistWeb.Utils.SharedUtils
-  plug :put_layout, false when action in [:show]
+  # plug :put_layout, false when action in [:show]
 
   @post_type "for_sale"
   @permitted_params ["contact_info", "description", "price", "slug", "title", "url"]
@@ -41,9 +41,9 @@ defmodule LitelistWeb.ForSaleController do
   end
 
   def show(conn, %{"id" => id}) do
-    for_sale = Posts.get_post!(id)
-    if SharedUtils.match_type?(for_sale, @post_type) do
-      render(conn, "show.html", for_sale: for_sale)
+    post = Posts.get_post!(id)
+    if SharedUtils.match_type?(post, @post_type) do
+      render(conn, "show.html", post: post)
     else
       unauthorized_redirect(conn)
     end

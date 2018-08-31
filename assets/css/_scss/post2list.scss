@@ -1,0 +1,32 @@
+.box{
+	text-align:center;
+	position:relative;
+	padding:60px 0px;
+		-webkit-transition: all 500ms; /* Safari */
+    transition: all 500ms;
+    color:black;
+    
+}
+.box h1{
+
+}
+.box.brush{
+	background:$brush;
+}
+.box.orange{
+	background:$orange;
+}
+.box.ocean{
+	background:$ocean;
+}
+.box.lake{
+	background:$lake;
+}
+.box.dark-pumpkin{
+	background:$dark-pumpkin;
+}
+.box:hover{
+	opacity:.7;
+	color:$offwhite;
+	
+}

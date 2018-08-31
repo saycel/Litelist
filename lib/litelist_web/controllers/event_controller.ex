@@ -47,13 +47,14 @@ defmodule LitelistWeb.EventController do
   end
 
   def show(conn, %{"id" => id}) do
-    event = Posts.get_post!(id)
-    if SharedUtils.match_type?(event, @post_type) do
-      render(conn, "show.html", event: event)
+    post = Posts.get_post!(id)
+    if SharedUtils.match_type?(post, @post_type) do
+      render(conn, "show.html", post: post)
     else
       unauthorized_redirect(conn)
     end
   end
+
 
   def edit(conn, %{"id" => id}) do
     event = Posts.get_post!(id)

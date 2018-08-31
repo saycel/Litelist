@@ -1,0 +1,99 @@
+a{
+	color:black;
+}
+.h5{
+	font-size: 1rem;
+    font-weight: bold;
+}
+body{
+	background:$offwhite;
+	color:black;
+}
+.mt-20{
+	margin-top:20px;
+}
+.mt-5{
+	margin-top:5px;
+}
+.mt-10{
+	margin-top:15px;
+}
+.mt-40{
+	margin-top:40px;
+}
+.mb-60{
+	margin-bottom:60px;
+}
+.ta-center{
+	text-align: center;
+}
+.full-width{
+	width:100%;
+}
+.mr{
+	margin-right: 1.4rem;
+}
+.divider {
+    border-top: .05rem solid $dark-pumpkin;
+    height: .05rem;
+    margin: .4rem 0;
+}
+.underline.orange{
+	
+	box-shadow: 0px 3px 0px 0px $orange;
+}
+.underline.dark-pumpkin{
+	
+	box-shadow: 0px 3px 0px 0px $dark-pumpkin;
+}
+.underline.lake{
+	
+	box-shadow: 0px 3px 0px 0px $lake;
+}
+.underline.ocean{
+	
+	box-shadow: 0px 3px 0px 0px $ocean;
+}
+.underline.brush{
+	
+	box-shadow: 0px 3px 0px 0px $brush;
+}
+.navbar-brand{
+	-webkit-transition: all 500ms; /* Safari */
+    transition: all 500ms;
+}
+.navbar-brand:hover{
+	color:$unhealthy-poop;
+}
+.sign-in{
+	border:1px solid $pumpkin;
+	padding:20px;
+	label{
+		font-size:9px
+	}
+	input{
+		border:1px solid $dark-pumpkin;
+	}
+}
+.sign-up{
+	border:1px solid $lake;
+	padding:20px;
+	label{
+		font-size:9px
+	}
+	input{
+		border:1px solid $lake;
+	}
+
+
+
+}
+.sep{
+	text-align:center;
+	margin-top:60px;
+	font-size:30px;
+}
+.signup_in{
+	width:75%;
+	margin:auto;	
+}

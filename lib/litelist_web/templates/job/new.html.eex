@@ -1,5 +1,23 @@
-<div class="divider text-center" data-content="JOB"></div>
-<%= render "_rules.html" %>
-<%= render LitelistWeb.SharedView,"_form.html",Map.put(assigns, :data, get_form_data("Job")) %>
+<div class="columns mt-20">
+	<div class="column col-11">
+		<div class="column col-12">
+			<h3>New <span class="underline <%=get_color(~s(job))%>">Job</span> Post </h3>
+		</div>
+	</div>
+	<div class="column col-1">
+		<div class="column col-12">
+			<span class="underline <%=get_color(~s(job))%>"><%= link "Back", to: for_sale_path(@conn, :index) %></span>
+		</div>
+	</div>
+</div>
+<div class="columns mt-20">
+	<div class="column col-8 col-md-12">
+		<%= render LitelistWeb.SharedView,"_form.html",Map.put(assigns, :data, get_form_data("Job")) %>
+	</div>
+	<div class="column col-4 hide-md">
+		<%= render "_rules.html" %>
+	</div>
+</div>
 
-<span><%= link "Back", to: for_sale_path(@conn, :index) %></span>
+
+

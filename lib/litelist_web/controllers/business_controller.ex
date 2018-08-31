@@ -7,8 +7,6 @@ defmodule LitelistWeb.BusinessController do
 
   alias LitelistWeb.Utils.SharedUtils
 
-  alias LitelistWeb.Utils.SharedUtils
-
   @post_type "business"
   @permitted_params ["contact_info",
     "description",
@@ -47,9 +45,9 @@ defmodule LitelistWeb.BusinessController do
   end
 
   def show(conn, %{"id" => id}) do
-    business = Posts.get_post!(id)
-    if SharedUtils.match_type?(business, @post_type) do
-      render(conn, "show.html", business: business)
+    post = Posts.get_post!(id)
+    if SharedUtils.match_type?(post, @post_type) do
+      render(conn, "show.html", post: post)
     else
       unauthorized_redirect(conn)
     end

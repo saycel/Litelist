@@ -1,34 +1,55 @@
-<div class="divider text-center"></div>
-<h1>Search</h1>
 <%= if Enum.empty?(@posts) do %>
   <p>Add a search term using the search bar on the top right.</p>
 <% end %>
-<div class="cc">
-  <div class="grid" data-content="POSTINGS" data-masonry='{ "itemSelector": ".grid-item", "columnWidth": 200 }'>
+<div class="filter">
+  <span class="bold">Filter By: </span>
+  <span class="underline <%=get_color(~s(event))%>">Events</span>
+  <span>&#183;</span>
+  <span class="underline <%=get_color(~s(for_sale))%>">For Sale</span>
+  <span>&#183;</span>
+  <span class="underline <%=get_color(~s(job))%>">Jobs</span>
+  <span>&#183;</span>
+  <span class="underline <%=get_color(~s(emergency_information))%>">Emergency</span>
+  <span>&#183;</span>
+  <span class="underline <%=get_color(~s(business))%>">Business</span>
+</div>
+<div class="cc"> 
+
+  <div class="grid" data-content="POSTINGS" data-masonry='{ "itemSelector": ".grid-item" }'>
     <div class="columns">
       <%= for post <- @posts do %>
-        <div class="column grid-item col-2 col-lg-12" >
-          <div class="card">
+        <div class="column grid-item col-3 col-xl-4 col-md-6 col-sm-12" >
+          <div class="card <%=get_color(post.type)%>">
+            <a href="<%=path_builder(post)%>">
             <div class="card-image">
-              <img src="" class="img-responsive">
+              <%= for image <- post.images do %>
+                <img src="<%= Litelist.ImageUploader.url({image.image, image})%>" class="img-responsive">
+              <% end %>
             </div>
+          </a>
             <div class="card-header">
               <div class="card-title h5"><%=post.title%></div>
-              <div class="card-subtitle text-gray"><%=post.type%></div>
+              <div class="card-subtitle">#<%=post.type%></div>
             </div>
             <div class="card-body">
-              <%=post.description |> String.slice(0..100)%>
+              <%= truncate(post.description, length: 100, omission: "...") %>
             </div>
             <div class="card-footer">
-              <button class="btn btn-primary">More</button>
+              <div class="columns">
+                <div class="column col-10">
+                  <a href="<%=path_builder(post)%>">See More</a>
+                </div>
+                <div class="column col-2 flag"> <a href="<%= flag_path_builder(post) %>"><i class="icon icon-flag"></i></a></div>
+              </div>      
             </div>
-            <div class="card-footer">
-              <a href="<%= flag_path_builder(post) %>" class="btn btn-primary">Flag</a>
-            </div>
+       
           </div>
-        <div class="divider-vert" data-content="*"></div>
+          <div class="divider-vert" data-content=""></div>
         </div> 
+
       <%end%>
+
     </div>
+
   </div>
 </div>

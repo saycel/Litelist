@@ -22,8 +22,8 @@
       <td><%= link flag.post.title, to: path_builder(flag.post) %></td>
 
       <td class="text-right">
-        <span><%= link "Show", to: flag_path(@conn, :show, flag), class: "btn btn-default btn-xs" %></span>
-        <span><%= link "Edit", to: flag_path(@conn, :edit, flag), class: "btn btn-default btn-xs" %></span>
+
+        <span><%= link "Check", to: flag_path(@conn, :edit, flag), class: "btn btn-default btn-xs" %></span>
         <span><%= link "Delete", to: flag_path(@conn, :delete, flag), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" %></span>
       </td>
     </tr>

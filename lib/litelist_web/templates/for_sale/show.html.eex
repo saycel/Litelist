@@ -1,25 +1,2 @@
-<div class="card">
-  <div class="card-image">
-    <%# <img src="img/osx-el-capitan.jpg" class="img-responsive"> %>
-  </div>
-  <div class="card-header">
-    <div class="card-title h5"><%= @for_sale.title %></div>
-    <div class="card-subtitle text-gray"><%= @for_sale.price %></div>
-  </div>
-  <div class="card-body">
-     <%= @for_sale.description %>
-  </div>
-  <div class="card-footer">
-    <%= @for_sale.contact_info %>
-  </div>
-</div>
-<ul>
-
-<%= if @current_neighbor && @current_neighbor.id == @for_sale.neighbor_id do %>
-  <span><%= link "Edit", to: for_sale_path(@conn, :edit, @for_sale) %></span>
-  <span><%= link "Delete", to: for_sale_path(@conn, :delete, @for_sale), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" %></span>
-<% end %>
-
-<span><%= link "Back", to: for_sale_path(@conn, :index) %></span>
-<span><%= link "Flag", to: flag_path_builder(@for_sale) %></span>
+<%= render LitelistWeb.SharedView,"_show.html",Map.put(assigns, :post,@post) %>
 

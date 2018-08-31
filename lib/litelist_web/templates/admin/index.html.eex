@@ -1,44 +1,47 @@
 <div class="columns">
-  <div class="column col-6 col-sm-12">
-    <div class="empty">
-      <div class="empty-icon">
-        <i class="icon icon-3x icon-flag"></i>
+  <div class="column col-4 col-md-12">
+    <a class='white' href="<%= flag_path(@conn, :index) %>">  
+      <div class="empty settings">
+        <div class="empty-icon">
+          <i class="icon icon-3x icon-flag"></i>
+        </div>
+        <p class="empty-title h5"> Recently Flagged Posts</p>
+        <div class="empty-action">
+        </div>
       </div>
-      <p class="empty-title h5"> Recent Flagged Posts</p>
-      <p class="empty-subtitle">Click the button to start a conversation</p>
-      <div class="empty-action">
-        <%= link "Moderation", to: flag_path(@conn, :guidelines), class: "btn btn-default btn-xs" %>
-      </div>
-    </div>
+    </a>
   </div>
-  <div class="column col-6 col-sm-12">
-    <div class="empty">
+  <div class="column col-4 col-md-12">
+    <div class="empty settings darker">
       <div class="empty-icon">
         <i class="icon icon-3x icon-message"></i>
       </div>
       <p class="empty-title h5">New Internal Discussions</p>
-      <p class="empty-subtitle">Click the button to invite your friends</p>
+      <p class="empty-subtitle">..coming soon..</p>
       <div class="empty-action">
-        <button class="btn btn-primary">See all</button>
+
       </div>
 
     </div>
   </div>
-</div>
-<div class="columns">
-  <div class="column col-sm-12">
-    <div class="empty">
+
+  <div class="column col-4 col-md-12">
+    <a href="/admin/settings">
+    <div class="empty settings">
       <div class="empty-icon">
         <i class="icon icon-3x icon-apps"></i>
       </div>
-      <p class="empty-title h5">Current Settings</p>
-      <p class="empty-subtitle"></p>
-      <div class="empty-action input-group input-inline">
-      	<%= link "Site Settings", to: admin_path(@conn, :settings), class: "btn btn-default btn-xs" %>
+      <p class="empty-title h5">Settings</p>
+      <div class="empty-action">   
       </div>
     </div>
+    </a>
   </div>
+
 </div>
+
+
+
 
 
 

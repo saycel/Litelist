@@ -1,94 +1,21 @@
-<div class="columns mt-60">
-  <div class="column col-4 col-sm-12 hide-sm ">
-    <div class="fixed" style="width:30%">
-    <h4>about othernet list</h4>
-    <p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like)</p>
-</div>
-  
-  </div>
-  <div class="column col-8 col-sm-12">
-    <div class="column col-12 col-sm-12">
-      <div class="tile">
-        <div class="tile-icon">
-          <figure class="avatar avatar-lg">
-            <!-- <img src="img/avatar-2.png" alt="Avatar"> -->
-          </figure>
-        </div>
-        <div class="tile-content">
-          <p class="tile-title">For Sale</p>
-          <p class="tile-subtitle text-gray">Are you selling something?  Tell the neighborhood!</p>
-          <p>
-            <button class="btn btn-primary btn-sm"><a class='white' href="/sales/new">Post an Item</a></button>
-          </p>
-        </div>
-      </div>
-    </div>
 
-    <div class="column col-12 col-sm-12">
-      <div class="tile">
-        <div class="tile-icon">
-          <figure class="avatar avatar-lg">
-            <!-- <img src="img/avatar-2.png" alt="Avatar"> -->
-          </figure>
+<div class="columns mt-20 how-to">
+  <div class="column col-md-12 col-sm-12">
+    <h3>Post Something For Nairobi.</h3>
+    <div class="columns">
+      <%= for color <- get_color_array() do %>
+        <div class="column col-4 col-md-6 col-sm-12 mt-10">
+          <a href="<%=elem(color,2)%>">
+            <div class="box <%=elem(color,1)%>">
+              <h1><%=elem(color,0)%></h1>
+            </div>
+          </a>
         </div>
-        <div class="tile-content">
-          <p class="tile-title">Events</p>
-          <p class="tile-subtitle text-gray">Post here to tell the community about an upcoming event that you are hosting. </p>
-          <p>
-            <button class="btn btn-primary btn-sm"><a class='white' href="/events/new">Post an Event</a></button>
-          </p>
-        </div>
-      </div>
-    </div>
-    
-    <div class="column col-12 col-sm-12">
-      <div class="tile">
-        <div class="tile-icon">
-          <figure class="avatar avatar-lg">
-            <!-- <img src="img/avatar-2.png" alt="Avatar"> -->
-          </figure>
-        </div>
-        <div class="tile-content">
-          <p class="tile-title">Business</p>
-          <p class="tile-subtitle text-gray">Are you a small business? Post here to tell the community about yourself.  Create a page, offer deals, share your menu!</p>
-          <p>
-            <button class="btn btn-primary btn-sm"><a class='white' href="/businesses/new">Create a Business</a></button>
-          </p>
-        </div>
-      </div>
-    </div>
-    
-    <div class="column col-12 col-sm-12">
-      <div class="tile">
-        <div class="tile-icon">
-          <figure class="avatar avatar-lg">
-            <!-- <img src="img/avatar-2.png" alt="Avatar"> -->
-          </figure>
-        </div>
-        <div class="tile-content">
-          <p class="tile-title">Job</p>
-          <p class="tile-subtitle text-gray">Are you offering a job? Tell the community about it! Hire your neighbors, and help the community</p>
-          <p>
-            <button class="btn btn-primary btn-sm"><a class='white' href="/jobs/new">Post a Job</a></button>
-          </p>
-        </div>
-      </div>
-    </div>
-    <div class="column col-12 col-sm-12">
-      <div class="tile">
-        <div class="tile-icon">
-          <figure class="avatar avatar-lg">
-            <!-- <img src="img/avatar-2.png" alt="Avatar"> -->
-          </figure>
-        </div>
-        <div class="tile-content">
-          <p class="tile-title">Emergency Information</p>
-          <p class="tile-subtitle text-gray">Do you have any information that will help the community in the event of an emergency? Post here</p>
-          <p>
-            <button class="btn btn-primary btn-sm"><a class='white' href="/emergency_info/new">Post Emergency Information</a></button>
-          </p>
-        </div>
-      </div>
+      <%end%>
     </div>
   </div>
+
+
+
+
 </div>

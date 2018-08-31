@@ -1,17 +1,17 @@
 <div class="columns mt-60">
-  <div class="column col-4">
+  <div class="column col-2 hide-sm">
 
   </div>
-  <div class="column col-2 col-md-12">
+  <div class="column col-3 col-md-12 sign-in">
   <%= form_for @changeset, @action, fn f -> %>
       <div class="form-group">
         <h4>Sign in</h4>
-        <%= label f, :name, class: "control-label" %>
+        <%= label f, :username, class: "control-label" %>
         <%= text_input f, :username, class: "form-control" %>
         <%= error_tag f, :username %>
       </div>
       <div class="form-group">
-        <%= label f, :pass, class: "control-label" %>
+        <%= label f, :password, class: "control-label" %>
         <%= password_input f, :password, class: "form-control" %>
         <%= error_tag f, :password %>
 
@@ -23,22 +23,22 @@
         </label>
       </div>
       <div class="form-group">
-         <%= submit "Submit", class: "btn btn-primary" %>
+         <%= submit "Submit", class: "btn submit btn-primary" %>
       </div>
     <% end %>
   </div>
-  <div class="divider-vert" data-content="OR"></div>
-  <div class="column col-2">
-    <h2>Signup</h1>
+  <div class="col-2 hide-sm hide-md sep">or</div>
+  <div class="column col-3 col-md-12 sign-up">
+    <h4>Signup</h4>
     <%= form_for @changeset, @action, fn f -> %>
       <%= hidden_input f, :create_neighbor, value: true %>
       <div class="form-group">
-        <%= label f, :name, class: "control-label" %>
+        <%= label f, :username, class: "control-label" %>
         <%= text_input f, :username, class: "form-control" %>
         <%= error_tag f, :username %>
       </div>
       <div class="form-group">
-        <%= label f, :pass, class: "control-label" %>
+        <%= label f, :password, class: "control-label" %>
         <%= password_input f, :password, class: "form-control" %>
         <%= error_tag f, :password %>
       </div>
@@ -62,10 +62,10 @@
         </label>
       </div>
       <div class="form-group">
-         <%= submit "Submit", class: "btn btn-primary" %>
+         <%= submit "Submit", class: "btn submit btn-primary" %>
       </div>
     <% end %>
   </div>
-  <div class="column col-4">
+  <div class="column col-4 hide-sm">
   </div>
 </div>

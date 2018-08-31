@@ -51,9 +51,9 @@ defmodule LitelistWeb.JobController do
   end
 
   def show(conn, %{"id" => id}) do
-    job = Posts.get_post!(id)
-    if SharedUtils.match_type?(job, @post_type) do
-      render(conn, "show.html", job: job)
+    post = Posts.get_post!(id)
+    if SharedUtils.match_type?(post, @post_type) do
+      render(conn, "show.html", post: post)
     else
       unauthorized_redirect(conn)
     end

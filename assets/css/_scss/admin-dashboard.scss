@@ -1,0 +1,43 @@
+a:hover{
+	text-decoration:none;
+
+}
+.settings{
+	background:$pumpkin;
+	height:100%;
+	text-decoration:none;
+	-webkit-transition: all 500ms; /* Safari */
+    transition: all 500ms;
+    color:$unhealthy-poop;
+}
+.settings:hover{
+	background:$dark-pumpkin;
+	text-decoration:none;
+	color:black;
+}
+.darker{
+	background:$ocean;
+}
+.darker:hover{
+	background:black;
+	opacity:.1;
+}
+.dark{
+	background:$ocean;
+}
+.dark:hover{
+	background:$lake;
+	
+}
+.button{
+	background:white;
+	padding:10px;
+	border:1px solid $dark-pumpkin;
+}
+.dark .button{
+		border:1px solid $lake;
+
+}
+.button:hover{
+	color:black;
+}

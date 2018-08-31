@@ -1,0 +1,60 @@
+.filter{
+	.bold{
+		font-weight:bold;
+	}
+	padding: .4em;
+    margin-bottom: 10px;
+
+}
+
+.col-cent{
+	width: 85%;
+    margin: auto;
+}
+.on-small{
+	min-width:300px;
+}
+.red{
+	color:red;
+}
+
+.category.orange:hover{
+    
+        background:$orange;
+        opacity:.5;
+        text-decoration: underline;
+    
+}
+.category.ocean:hover{
+    
+    background:$ocean;
+    opacity:.5;
+    text-decoration: underline;
+    
+
+}
+.category.brush:hover{
+    
+    background:$brush;
+    opacity:.5;
+    text-decoration: underline;
+    
+
+}
+.category.lake:hover{
+    
+    background:$lake;
+    opacity:.5;
+    text-decoration: underline;
+    
+
+}
+
+.category.dark-pumpkin:hover{
+    
+    background:$dark-pumpkin;
+    opacity:.5;
+    text-decoration: underline;
+
+
+}

@@ -1,22 +1,10 @@
-<div class="columns">
+<div class="rules">
 
-  <div class="column col-3 col-md-12 ">
-
-    <div class="tile">
-      <div class="tile-icon">
-        <div class="example-tile-icon">
-          <i class="icon icon-file centered"></i>
-        </div>
-      </div>
-      <div class="tile-content">
-        <p class="tile-title">Emergency Information Rules</p>
-        <ol class="tile-subtitle text-gray">
-          <li></li>
-          <li></li>
-          <li></li>
-        </ol>
-      </div>
-
-    </div>
-  </div>
-  <div class="divider-vert" data-content="NEW"></div>
+  <label>Emergency Info Rules</label>
+  <ol>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+  </ol>
+</div>

@@ -1,0 +1,113 @@
+
+.card {
+    background: $pumpkin;
+
+    border: none;
+    border-radius: .1rem;
+    display: flex;
+    border-radius:0px;
+    display: -ms-flexbox;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    .card-body, .card-footer, .card-header {
+        padding: .3rem;
+        padding-bottom: 0;
+    }
+    .card-body:last-child, .card-footer:last-child, .card-header:last-child {
+        padding-bottom: 0.3rem;
+    }
+    .card-header{
+    	color:black;
+    }
+    .card-subtitle{
+    	color:black;
+    }
+	.card-image{
+		width:100%;
+		max-width:400px;
+		max-height: 300px;
+		overflow:hidden;
+		margin:auto;
+		position:relative;
+	}
+    .card-image:after {
+         content:"";
+         position:absolute;
+         top:0;
+         left:0;
+         right:0;
+         -webkit-transition: all 500ms; /* Safari */
+        transition: all 500ms;
+         bottom:0;
+    }
+	.card-image img{
+		height:100%;
+        -webkit-filter: grayscale(100%); /* Safari 6.0 - 9.0 */
+        filter: grayscale(0%);
+
+		width:100%;
+
+        -webkit-transition: all 500ms; /* Safari */
+        transition: all 500ms;
+	}
+    .card-image:hover img{
+         -webkit-filter: grayscale(0%); /* Safari 6.0 - 9.0 */
+         filter: grayscale(100%);
+    }
+
+    .card-footer{
+        text-align:center;
+        margin-top:20px;
+        border-top: 1px solid $dark-pumpkin
+    }
+    .card-footer a{
+        color:$unhealthy-poop;
+    }
+    .flag{
+        border-left: 1px solid $dark-pumpkin;
+    }
+
+}
+
+.card.orange{
+    .card-image:after {
+         background:$orange;
+         opacity:.1;
+    }
+}
+.card.ocean{
+    .card-image:after {
+        background:$ocean;
+        opacity:.1;
+        contrast:1;
+    }
+}
+.card.brush{
+    .card-image:after {
+        background:$brush;
+        opacity:.1;
+        
+    }
+}
+.card.lake{
+    .card-image:after {
+        background:$lake;
+        opacity:.1;
+        
+    }
+}
+
+.card.dark-pumpkin{
+    .card-image:after {
+        background:$dark-pumpkin;
+        opacity:.1;
+
+    }
+}
+
+.card .card-image:hover:after{
+    opacity:.7;
+}
+.card-footer a:hover{
+    color:black;
+}

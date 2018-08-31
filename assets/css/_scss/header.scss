@@ -1,0 +1,35 @@
+header.navbar{
+	color:black;
+	letter-spacing: 1.5px;
+	.navbar-brand{
+		font-size: 1.2rem;		
+	}
+	span{
+		font-size: 39px;
+	}
+
+	.btn.btn-link {
+    	background: 0 0;
+    	border-color: transparent;
+    	color: black;
+    	font-size: .85rem;
+    	padding: 0.5rem .4rem;
+    }
+    .btn.btn-link:hover {
+    	text-decoration:underline;
+    }
+    .search{
+        width:100%;
+        padding: 0.5rem .4rem;
+
+    }
+    .form-input{
+    	height: 2.4rem;
+    	border: .05rem solid $ocean;
+    	background: white;
+    }
+    .form-input:focus {
+    	border-color: $offwhite;
+    	box-shadow: 0 0 0 0.1rem $ocean;
+    }
+}

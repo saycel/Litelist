@@ -20,6 +20,25 @@ defmodule LitelistWeb.UtilsView do
         end
     end
 
+    def get_color(type) do
+        case type do
+          "for_sale" -> "orange"
+          "job" -> "ocean"
+          "emergency_information" -> "brush"
+          "business" -> "lake"
+          "event" -> "dark-pumpkin"
+        end
+    end
+    def get_color_array() do
+      [
+        {:'for sale', "orange", "/sales/new"},
+        {:jobs, "ocean", "/jobs/new"},
+        {:emergency, "brush", "/emergency_info/new"},
+        {:business, "lake", "/businesses/new"},
+        {:event, "dark-pumpkin", "/events/new"}
+      ]
+    end
+
     @doc """
     Given a post, this function creates a path to the flag post form
     ## Examples
