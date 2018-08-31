@@ -1,6 +1,6 @@
 defmodule LitelistWeb.PageController do
   use LitelistWeb, :controller
-
+  require Logger
   alias Litelist.Auth
   alias Litelist.Auth.Neighbor
   alias Litelist.Auth.Guardian
@@ -8,7 +8,7 @@ defmodule LitelistWeb.PageController do
   alias Litelist.Settings.SettingsDatabase
 
   def index(conn, _params) do
-    posts = Posts.list_ordered_by_title()
+    posts = Posts.list_ordered_by_updated_at()
 
     conn
     |> render("index.html", posts: posts)
@@ -18,11 +18,11 @@ defmodule LitelistWeb.PageController do
     conn
     |> render("post2list.html")
   end
-
+  
   def url_handler(conn, _params) do
     host = get_host(conn)
     name =  SettingsDatabase.get_settings().map.name
-
+    Logger.debug "Var value: #{inspect(name)}"
     if host == name do
       posts = Posts.list_ordered_by_updated_at()
       conn

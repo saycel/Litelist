@@ -1,6 +1,5 @@
 header.navbar{
 	color:black;
-	height: 75px;
 	letter-spacing: 1.5px;
 	.navbar-brand{
 		font-size: 1.2rem;		
@@ -19,10 +18,15 @@ header.navbar{
     .btn.btn-link:hover {
     	text-decoration:underline;
     }
+    .search{
+        width:100%;
+        padding: 0.5rem .4rem;
+
+    }
     .form-input{
     	height: 2.4rem;
     	border: .05rem solid $ocean;
-    	background: $offwhite;
+    	background: white;
     }
     .form-input:focus {
     	border-color: $offwhite;

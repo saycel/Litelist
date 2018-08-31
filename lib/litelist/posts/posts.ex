@@ -86,8 +86,9 @@ defmodule Litelist.Posts do
   def list_posts_by_search_term(search_term) do
     clause = from(p in Post, where: p.soft_delete == false)
     query = Search.run(clause, search_term)
+    posts = Repo.all(query)
+    Repo.preload(posts, [:images])
 
-    Repo.all(query)
   end
 
   @doc """

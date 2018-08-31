@@ -4,7 +4,7 @@
 	padding:60px 0px;
 		-webkit-transition: all 500ms; /* Safari */
     transition: all 500ms;
-    color:$unhealthy-poop;
+    color:black;
     
 }
 .box h1{
@@ -26,6 +26,7 @@
 	background:$dark-pumpkin;
 }
 .box:hover{
-	color:black;
+	opacity:.7;
+	color:$offwhite;
 	
 }
