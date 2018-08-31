@@ -1,4 +1,3 @@
-<h2>Edit Flag</h2>
 
 <%= render "edit_form.html", Map.put(assigns, :action, flag_path(@conn, :update, @flag)) %>
 

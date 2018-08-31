@@ -31,11 +31,11 @@ defmodule LitelistWeb.UtilsView do
     end
     def get_color_array() do
       [
-        {:'for sale', "orange","/sales/new"},
-        {:jobs, "ocean","/jobs/new"},
-        {:emergency, "brush","/emergency_info/new"},
-        {:business, "lake","/businesses/new"},
-        {:event, "dark-pumpkin","/events/new"}
+        {:'for sale', "orange", "/sales/new"},
+        {:jobs, "ocean", "/jobs/new"},
+        {:emergency, "brush", "/emergency_info/new"},
+        {:business, "lake", "/businesses/new"},
+        {:event, "dark-pumpkin", "/events/new"}
       ]
     end
 

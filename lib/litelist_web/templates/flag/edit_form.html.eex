@@ -1,14 +1,13 @@
-<ul>
-  <li>
-    <strong>Type:</strong>
-    <%= @flag.type %>
-  </li>
-
-  <li>
-    <strong>Description:</strong>
-    <%= @flag.description %>
-  </li>
-</ul>
+<div class="columns mt-60">
+  <div class="column col-4 col-sm-6">
+      <%= @flag.description %>
+      <%= if @flag.neighbor do %>
+        <span class="chip">flagged by <%=@flag.neighbor.username%></span>
+      <% end %>
+      <span class="chip"><%=@flag.type%></span>
+      <span class="chip"> <%= @flag.status %> </span>
+      <span class="chip"><%= @flag.admin_response %></span>
+      
 <%= form_for @changeset, @action, fn f -> %>
   <%= if @changeset.action do %>
     <div class="alert alert-danger">
@@ -36,3 +35,33 @@
     <%= submit "Submit", class: "btn btn-primary" %>
   </div>
 <% end %>
+  </div>
+
+  <div class="column col-8 col-sm-6" >
+   
+    <div class="card">
+      <div class="card-image">
+        <%= for img <- @flag.post.images do %>
+          <img src="/uploads/<%=img.image.file_name%>" class="img-responsive">
+        <% end %>
+      </div>
+      <div class="card-header">
+        <div class="card-title h5"><%=@flag.post.title%></div>
+        <div class="card-subtitle text-gray"><%=@flag.post.type%></div>
+      </div>
+      <div class="card-body">
+        <%=@flag.post.description %>
+      </div>
+      <div class="card-footer">
+        <%=@flag.post.contact_info %>
+      </div>
+    </div>
+  
+   </div>
+
+</div>
+
+
+
+
+

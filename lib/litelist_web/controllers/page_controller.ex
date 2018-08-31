@@ -1,6 +1,5 @@
 defmodule LitelistWeb.PageController do
   use LitelistWeb, :controller
-  require Logger
   alias Litelist.Auth
   alias Litelist.Auth.Neighbor
   alias Litelist.Auth.Guardian
@@ -22,7 +21,6 @@ defmodule LitelistWeb.PageController do
   def url_handler(conn, _params) do
     host = get_host(conn)
     name =  SettingsDatabase.get_settings().map.name
-    Logger.debug "Var value: #{inspect(name)}"
     if host == name do
       posts = Posts.list_ordered_by_updated_at()
       conn

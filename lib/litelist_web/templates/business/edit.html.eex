@@ -1,5 +1,3 @@
-<div class="divider text-center" data-content="Local Business Posting"></div>
-<%= render "_rules.html" %>
 <%= render LitelistWeb.SharedView,"_form.html",Map.put(assigns, :data, get_form_data("Business", @business)) %>
 
 <span><%= link "Back", to: for_sale_path(@conn, :index) %></span>
