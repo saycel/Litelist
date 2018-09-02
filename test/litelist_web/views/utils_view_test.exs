@@ -19,26 +19,26 @@ defmodule LitelistWeb.UtilsViewTest do
     end
 
     test "path_builder/1 return values correspond with routes" do
-        for_sale = Factory.insert(:for_sale)
+        # for_sale = Factory.insert(:for_sale)
         job = Factory.insert(:job)
-        emergency_information = Factory.insert(:emergency_information)
+        # emergency_information = Factory.insert(:emergency_information)
         business = Factory.insert(:business)
         event = Factory.insert(:event)
 
-        conn = build_conn()
-            |> get(UtilsView.path_builder(for_sale))
+        # conn = build_conn()
+        #     |> get(UtilsView.path_builder(for_sale))
 
-        assert html_response(conn, 200)
+        # assert html_response(conn, 200)
 
         conn = build_conn()
             |> get(UtilsView.path_builder(job))
 
         assert html_response(conn, 200)
 
-        conn = build_conn()
-            |> get(UtilsView.path_builder(emergency_information))
+        # conn = build_conn()
+        #     |> get(UtilsView.path_builder(emergency_information))
 
-        assert html_response(conn, 200)
+        # assert html_response(conn, 200)
 
         conn = build_conn()
             |> get(UtilsView.path_builder(event))
