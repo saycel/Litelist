@@ -2,11 +2,17 @@
 	h1{
 		font-size:40px;
 		text-align:center;
+		letter-spacing:.09em;
+		margin:0px;
+	}
+	h2{
+	font-size: 0.6rem;
 	}
 	.box{
 		text-align:left;
 		padding:10px;
-		font-size:30px;
+		font-size:25px;
+		font-weight:100;
 		
 		overflow:scroll;
 		.img-responsive{
