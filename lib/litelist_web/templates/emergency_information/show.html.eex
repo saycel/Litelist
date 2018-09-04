@@ -1,2 +1,0 @@
-<%= render LitelistWeb.SharedView,"_show.html",Map.put(assigns, :post,@post) %>
-
