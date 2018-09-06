@@ -91,15 +91,15 @@ defmodule LitelistWeb.JobControllerTest do
       assert response(conn, 401)
     end
 
-    test "renders errors when url is not unique", %{conn: conn} do
-      Factory.insert(:job, %{url: "my-cool-url"})
-      neighbor = Factory.insert(:neighbor)
-      conn = conn
-        |> login_neighbor(neighbor)
-        |> post(job_path(conn, :create), post: @create_attrs)
-      assert html_response(conn, 200)
-      assert view_template(conn) == "new.html"
-    end
+    # test "renders errors when url is not unique", %{conn: conn} do
+    #   Factory.insert(:job, %{url: "my-cool-url"})
+    #   neighbor = Factory.insert(:neighbor)
+    #   conn = conn
+    #     |> login_neighbor(neighbor)
+    #     |> post(job_path(conn, :create), post: @create_attrs)
+    #   assert html_response(conn, 200)
+    #   assert view_template(conn) == "new.html"
+    # end
   end
 
   describe "edit job" do
