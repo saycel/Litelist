@@ -96,16 +96,16 @@ defmodule LitelistWeb.BusinessControllerTest do
       assert response(conn, 401)
     end
 
-    test "renders errors when url is not unique", %{conn: conn} do
-      neighbor = Factory.insert(:neighbor)
-      Factory.insert(:business, %{url: "my-cool-url"})
+    # test "renders errors when url is not unique", %{conn: conn} do
+    #   neighbor = Factory.insert(:neighbor)
+    #   Factory.insert(:business, %{url: "my-cool-url"})
 
-      conn = conn
-        |> login_neighbor(neighbor)
-        |> post(business_path(conn, :create), post: @create_attrs)
-      assert html_response(conn, 200)
-      assert view_template(conn) == "new.html"
-    end
+    #   conn = conn
+    #     |> login_neighbor(neighbor)
+    #     |> post(business_path(conn, :create), post: @create_attrs)
+    #   assert html_response(conn, 200)
+    #   assert view_template(conn) == "new.html"
+    # end
   end
 
   describe "edit business" do

@@ -46,7 +46,7 @@ defmodule LitelistWeb.BusinessView do
   		%{select: false, title: "LOCATION", type: "text", po_body: "Where are you located? Where is this business", id: "post_location"},
   		%{select: false, title: "CONTACT_INFO", type: "text", po_body: "How can someone contact your business", id: "post_contact"},
   		%{select: false, title: "COMPANY_NAME", type: "text", po_body: "What is the name of this business or company", id: "post_company_name"},
-  		%{select: false, title: "URL", type: "text", po_body: "What URL do you want this post to be found at.  For instance: Ayashas-FORD-BRONCO.4sale.othernet or great-new-car.4sale.othernet", id: "post_url"}
+  		# %{select: false, title: "URL", type: "text", po_body: "What URL do you want this post to be found at.  For instance: Ayashas-FORD-BRONCO.4sale.othernet or great-new-car.4sale.othernet", id: "post_url"}
   	]
   end
 end

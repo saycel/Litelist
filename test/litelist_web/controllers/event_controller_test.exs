@@ -96,17 +96,17 @@ defmodule LitelistWeb.EventControllerTest do
       assert response(conn, 401)
     end
 
-    test "renders errors when url is not unique", %{conn: conn} do
-      neighbor = Factory.insert(:neighbor)
+    # test "renders errors when url is not unique", %{conn: conn} do
+    #   neighbor = Factory.insert(:neighbor)
 
-      Factory.insert(:event, %{url: "my-cool-url"})
+    #   Factory.insert(:event, %{url: "my-cool-url"})
 
-      conn = conn
-        |> login_neighbor(neighbor)
-        |> post(event_path(conn, :create), post: @create_attrs)
-      assert html_response(conn, 200)
-      assert view_template(conn) == "new.html"
-    end
+    #   conn = conn
+    #     |> login_neighbor(neighbor)
+    #     |> post(event_path(conn, :create), post: @create_attrs)
+    #   assert html_response(conn, 200)
+    #   assert view_template(conn) == "new.html"
+    # end
   end
 
   describe "edit event" do
