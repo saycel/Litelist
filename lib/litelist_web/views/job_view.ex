@@ -20,9 +20,9 @@ defmodule LitelistWeb.JobView do
   """
   def data(resource) do
     if resource do
-      %{action: "/jobs/#{resource.id}", fields: build_fields(), resource: resource}
+      %{image: true, action: "/jobs/#{resource.id}", fields: build_fields(), resource: resource}
     else
-      %{action: "/jobs", fields: build_fields(), resource: resource}
+      %{image: true, action: "/jobs", fields: build_fields(), resource: resource}
     end
   end
   @doc """

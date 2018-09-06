@@ -4,68 +4,86 @@
 	</div>
 	<div class="grid columns" data-content="POSTINGS" data-masonry='{ "itemSelector": ".grid-item" }'>	
 		<div class='columns'>
-			<%= for image <- @post.images do %>
-	         <div class="column grid-item box col-6 col-md-6 col-sm-12 dark-pumpkin">
-	          	<img src="<%= Litelist.ImageUploader.url({image.image, image})%>" class="img-responsive cover"></div>
-			<% end %> 
-			<%= if @post.company_name do %>
-				<div class="column grid-item box col-6 col-md-6 col-sm-12 ocean">
-					<h2>Company Name</h2>
-					<%=@post.company_name%>
-				</div>
+			<%=if Map.has_key?(@post, :images) do %>
+				<%= for image <- @post.images do %>
+		         <div class="column grid-item box col-6 col-md-6 col-sm-12 dark-pumpkin">
+		          	<img src="<%= Litelist.ImageUploader.url({image.image, image})%>" class="img-responsive cover"></div>
+				<% end %>
+			<%end%> 
+			<%=if Map.has_key?(@post, :company_name) do %>
+				<%= if @post.company_name do %>
+					<div class="column grid-item box col-6 col-md-6 col-sm-12 ocean">
+						<h2>Company Name</h2>
+						<%=@post.company_name%>
+					</div>
+				<%end%>
 			<%end%>
 			<div class="column grid-item box col-6 col-md-6 col-sm-12 orange">
 				<h2>Description</h2>
 				<%=@post.description%>
 			</div>
-			<%= if @post.location do %>
-				<div class="column grid-item box col-6 col-md-6 col-sm-12 lake">
-					<h2>Location</h2>
-					<%=@post.location%>
+			<%=if Map.has_key?(@post, :location) do %>
+				<%= if @post.location do %>
+					<div class="column grid-item box col-6 col-md-6 col-sm-12 lake">
+						<h2>Location</h2>
+						<%=@post.location%>
+					</div>
+				<%end%>
+			<%end%>
+			<%=if Map.has_key?(@post, :salary) do %>
+				<%= if @post.salary do %>
+					<div class="column grid-item box col-6 col-md-6 col-sm-12 lake">
+						<h2>Salary</h2>
+						<%=@post.salary%>
+					</div>
+				<%end%>
+			<%end%>
+			<%=if Map.has_key?(@post, :price) do %>
+				<%= if @post.price do %>
+					<div class="column grid-item box col-6 col-md-6 col-sm-12 lake">
+						<h2>Price</h2>
+						<%=@post.price%>
+					</div>
+				<%end%>
+			<%end%>
+			<%=if Map.has_key?(@post, :position_name) do %>
+				<%= if @post.position_name do %>
+					<div class="column grid-item box col-6 col-md-6 col-sm-12 dark-pumpkin">
+						<h2>position_name</h2>
+						<%=@post.position_name%>
+					</div>
+				<%end%>
+			<%end%>
+			<%=if Map.has_key?(@post, :organization_name) do %>
+				<%= if @post.organization_name do %>
+					<div class="column grid-item box col-6 col-md-6 col-sm-12 dark-pumpkin">
+						<h2>Organization</h2>
+						<%=@post.organization_name%>
+					</div>
+				<%end%>
+			<%end%>
+			<%=if Map.has_key?(@post, :start_time) do %>
+				<%= if @post.start_time do %>
+					<div class="column grid-item box col-6 col-md-6 col-sm-12 lake">
+						<h2>Time</h2>
+						From <%=@post.start_time%> until <%=@post.end_time%>
+					</div>
+				<%end%>
+			<%end%>
+			<%=if Map.has_key?(@post, :start_date) do %>
+				<%= if @post.start_date do %>
+					<div class="column grid-item box col-6 col-md-6 col-sm-12 lake">
+						<h2>Dates</h2>
+						From <%=@post.start_date%> until <%=@post.end_date%>
+					</div>
+				<%end%>
+			<%end%>
+			<%=if Map.has_key?(@post, :contact_info) do %>
+				<div class="column grid-item box col-6 col-md-6 col-sm-12 ocean">
+					<h2>Contact Information</h2>
+					<%=@post.contact_info%>
 				</div>
 			<%end%>
-			<%= if @post.salary do %>
-				<div class="column grid-item box col-6 col-md-6 col-sm-12 lake">
-					<h2>Salary</h2>
-					<%=@post.salary%>
-				</div>
-			<%end%>
-			<%= if @post.price do %>
-				<div class="column grid-item box col-6 col-md-6 col-sm-12 lake">
-					<h2>Price</h2>
-					<%=@post.price%>
-				</div>
-			<%end%>
-
-			<%= if @post.position_name do %>
-				<div class="column grid-item box col-6 col-md-6 col-sm-12 dark-pumpkin">
-					<h2>position_name</h2>
-					<%=@post.position_name%>
-				</div>
-			<%end%>
-			<%= if @post.organization_name do %>
-				<div class="column grid-item box col-6 col-md-6 col-sm-12 dark-pumpkin">
-					<h2>Organization</h2>
-					<%=@post.organization_name%>
-				</div>
-			<%end%>
-			<%= if @post.start_time do %>
-				<div class="column grid-item box col-6 col-md-6 col-sm-12 lake">
-					<h2>Time</h2>
-					From <%=@post.start_time%> until <%=@post.end_time%>
-				</div>
-			<%end%>
-			<%= if @post.start_date do %>
-				<div class="column grid-item box col-6 col-md-6 col-sm-12 lake">
-					<h2>Dates</h2>
-					From <%=@post.start_date%> until <%=@post.end_date%>
-				</div>
-			<%end%>
-
-			<div class="column grid-item box col-6 col-md-6 col-sm-12 ocean">
-				<h2>Contact Information</h2>
-				<%=@post.contact_info%>
-			</div>
 		</div>
 	</div>
 </div>

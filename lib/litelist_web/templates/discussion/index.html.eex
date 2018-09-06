@@ -1,33 +1,50 @@
-<h2>Listing Discussions</h2>
+<div class="filter">
+  <span class="bold">Filter By: </span>
+  <span class="underline <%=get_color(~s(event))%>">Events</span>
+  <span>&#183;</span>
+  <span class="underline <%=get_color(~s(for_sale))%>">For Sale</span>
+  <span>&#183;</span>
+  <span class="underline <%=get_color(~s(job))%>">Jobs</span>
+  <span>&#183;</span>
+  <span class="underline <%=get_color(~s(emergency_information))%>">Emergency</span>
+  <span>&#183;</span>
+  <span class="underline <%=get_color(~s(business))%>">Business</span>
+</div>
+<div class="cc"> 
 
-<table class="table">
-  <thead>
-    <tr>
-      <th>Title</th>
-      <th>Description</th>
-      <th>Url</th>
+  <div class="grid" data-content="POSTINGS" data-masonry='{ "itemSelector": ".grid-item" }'>
+    <div class="columns">
+      <%= for discussion <- @discussions do %>
+        <div class="column grid-item col-6 col-xl-6 col-md-12 col-sm-12" >
+          <div class="card <%=get_color(~s(discussion))%>">
+            <a href="/discussions/<%=discussion.id%>">
+            <div class="card-image">
 
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-<%= for discussion <- @discussions do %>
-    <tr>
-      <td><%= discussion.title %></td>
-      <td><%= discussion.description %></td>
-      <td><%= discussion.url %></td>
-      <td class="text-right">
-        <span><%= link "Show", to: discussion_path(@conn, :show, discussion), class: "btn btn-default btn-xs" %></span>
-        <%= if @current_neighbor do %>
-          <span><%= link "Edit", to: discussion_path(@conn, :edit, discussion), class: "btn btn-default btn-xs" %></span>
-          <span><%= link "Delete", to: discussion_path(@conn, :delete, discussion), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" %></span>
-        <% end %>
-      </td>
-    </tr>
-<% end %>
-  </tbody>
-</table>
+            </div>
+          </a>
+            <div class="card-header">
+              <div class="card-title h5"><%=discussion.title%></div>
+              <div class="card-subtitle">#discussion</div>
+            </div>
+            <div class="card-body">
+              <%= truncate(discussion.description, length: 100, omission: "...") %>
+            </div>
+            <div class="card-footer">
+              <div class="columns">
+                <div class="column col-10">
+                  <a href="/discussions/<%=discussion.id%>">See More</a>
+                </div>
+                <div class="column col-2 flag"> <a href="<%= flag_path_builder(discussion) %>"><i class="icon icon-flag"></i></a></div>
+              </div>      
+            </div>
+       
+          </div>
+          <div class="divider-vert" data-content=""></div>
+        </div> 
 
-<%= if @current_neighbor do %>
-  <span><%= link "New Discussion", to: discussion_path(@conn, :new) %></span>
-<% end %> 
+      <%end%>
+
+    </div>
+
+  </div>
+</div>

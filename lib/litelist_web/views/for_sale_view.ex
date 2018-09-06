@@ -20,9 +20,9 @@ defmodule LitelistWeb.ForSaleView do
   """
   def data(resource) do
     if resource do
-      %{action: "/sales/#{resource.id}", fields: build_fields(), resource: resource}
+      %{image: true, action: "/sales/#{resource.id}", fields: build_fields(), resource: resource}
     else
-      %{action: "/sales", fields: build_fields(), resource: resource}      
+      %{image: true, action: "/sales", fields: build_fields(), resource: resource}      
     end
   end
   @doc """

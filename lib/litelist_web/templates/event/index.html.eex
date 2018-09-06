@@ -1,46 +1,52 @@
-<h2>Listing Events</h2>
+<div class="filter">
+  <span class="bold">Filter By: </span>
+  <span class="underline <%=get_color(~s(event))%>"><a href="/events">Events</a></span>
+  <span>&#183;</span>
+  <span class="underline <%=get_color(~s(for_sale))%>"><a href="/sales">For Sale</a></span>
+  <span>&#183;</span>
+  <span class="underline <%=get_color(~s(job))%>"><a href="/jobs">Jobs</a></span>
+  <span>&#183;</span>
+  <span class="underline <%=get_color(~s(traffic))%>"><a href="/traffics">Traffic</a></span>
+  <span>&#183;</span>
+  <span class="underline <%=get_color(~s(business))%>"><a href="/businesses">Business</a></span>
+</div>
+<div class="cc"> 
 
-<table class="table">
-  <thead>
-    <tr>
-      <th>Title</th>
-      <th>Description</th>
-      <th>Location</th>
-      <th>Contact info</th>
-      <th>Url</th>
-      <th>Slug</th>
-      <th>Type</th>
-      <th>Start time</th>
-      <th>End time</th>
+  <div class="grid" data-content="POSTINGS" data-masonry='{"columnWidth": 0, "itemSelector": ".grid-item" }'>
+    <div class="columns">
+      <%= for post <- @posts do %>
+        <div class="column grid-item col-3 col-xl-4 col-md-6 col-sm-12" >
+          <div class="card <%=get_color(post.type)%>">
+            <a href="<%=path_builder(post)%>">
+            <div class="card-image">
+              <%= for image <- post.images do %>
+                <img src="<%= Litelist.ImageUploader.url({image.image, image})%>" class="img-responsive">
+              <% end %>
+            </div>
+          </a>
+            <div class="card-header">
+              <div class="card-title h5"><%=post.title%></div>
+              <div class="card-subtitle">#<%=post.type%></div>
+            </div>
+            <div class="card-body">
+              <%= truncate(post.description, length: 100, omission: "...") %>
+            </div>
+            <div class="card-footer">
+              <div class="columns">
+                <div class="column col-10">
+                  <a href="<%=path_builder(post)%>">See More</a>
+                </div>
+                <div class="column col-2 flag"> <a href="<%= flag_path_builder(post) %>"><i class="icon icon-flag"></i></a></div>
+              </div>      
+            </div>
+       
+          </div>
+          <div class="divider-vert" data-content=""></div>
+        </div> 
 
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-<%= for event <- @events do %>
-    <tr>
-      <td><%= event.title %></td>
-      <td><%= event.description %></td>
-      <td><%= event.location %></td>
-      <td><%= event.contact_info %></td>
-      <td><%= event.url %></td>
-      <td><%= event.slug %></td>
-      <td><%= event.type %></td>
-      <td><%= event.start_time %></td>
-      <td><%= event.end_time %></td>
+      <%end%>
 
-      <td class="text-right">
-        <span><%= link "Show", to: event_path(@conn, :show, event), class: "btn btn-default btn-xs" %></span>
-        <%= if @current_neighbor && @current_neighbor.id == event.neighbor_id do %>
-          <span><%= link "Edit", to: event_path(@conn, :edit, event), class: "btn btn-default btn-xs" %></span>
-          <span><%= link "Delete", to: event_path(@conn, :delete, event), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" %></span>
-        <% end %>
-      </td>
-    </tr>
-<% end %>
-  </tbody>
-</table>
+    </div>
 
-<%= if @current_neighbor do %>
-  <span><%= link "New Event", to: event_path(@conn, :new) %></span>
-<% end %>
+  </div>
+</div>

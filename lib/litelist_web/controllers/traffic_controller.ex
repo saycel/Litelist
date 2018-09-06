@@ -1,4 +1,4 @@
-defmodule LitelistWeb.JobController do
+defmodule LitelistWeb.TrafficController do
   use LitelistWeb, :controller
 
   alias Litelist.Posts
@@ -7,16 +7,10 @@ defmodule LitelistWeb.JobController do
 
   alias LitelistWeb.Utils.SharedUtils
   
-  @post_type "job"
-  @permitted_params ["contact_info",
-    "description",
-    "salary",
+  @post_type "traffic"
+  @permitted_params ["description",
     "title",
-    "url",
     "start_date",
-    "end_date",
-    "company_name",
-    "position_name",
     "location"
   ]
 
@@ -34,17 +28,17 @@ defmodule LitelistWeb.JobController do
     render(conn, "new.html", changeset: changeset)
   end
 
-  def create(conn, %{"post" => job_params}) do
-    job_params = job_params
+  def create(conn, %{"post" => traffic_params}) do
+    traffic_params = traffic_params
       |> SharedUtils.permitted_params(@permitted_params)
       |> SharedUtils.add_generated_params(conn, @post_type, :create)
       |> SharedUtils.add_uuid_to_photo_if_exists()
 
-    case Posts.create_post(job_params) do
-      {:ok, job} ->
+    case Posts.create_post(traffic_params) do
+      {:ok, traffic} ->
         conn
-        |> put_flash(:info, "Job created successfully.")
-        |> redirect(to: job_path(conn, :show, job))
+        |> put_flash(:info, "traffic created successfully.")
+        |> redirect(to: traffic_path(conn, :show, traffic))
       {:error, %Ecto.Changeset{} = changeset} ->
         render(conn, "new.html", changeset: changeset)
     end
@@ -60,29 +54,29 @@ defmodule LitelistWeb.JobController do
   end
 
   def edit(conn, %{"id" => id}) do
-    job = Posts.get_post!(id)
-    if SharedUtils.permission?(conn.assigns.current_neighbor, job, @post_type) do
-      changeset = Posts.change_post(job)
-      render(conn, "edit.html", job: job, changeset: changeset)
+    traffic = Posts.get_post!(id)
+    if SharedUtils.permission?(conn.assigns.current_neighbor, traffic, @post_type) do
+      changeset = Posts.change_post(traffic)
+      render(conn, "edit.html", traffic: traffic, changeset: changeset)
     else
       unauthorized_redirect(conn)
     end
   end
 
-  def update(conn, %{"id" => id, "post" => job_params}) do
-    job = Posts.get_post!(id)
-    if SharedUtils.permission?(conn.assigns.current_neighbor, job, @post_type) do
-      job_params = job_params
+  def update(conn, %{"id" => id, "post" => traffic_params}) do
+    traffic = Posts.get_post!(id)
+    if SharedUtils.permission?(conn.assigns.current_neighbor, traffic, @post_type) do
+      traffic_params = traffic_params
         |> SharedUtils.permitted_params(@permitted_params)
         |> SharedUtils.add_generated_params(:update)
 
-      case Posts.update_post(job, job_params) do
-        {:ok, job} ->
+      case Posts.update_post(traffic, traffic_params) do
+        {:ok, traffic} ->
           conn
           |> put_flash(:info, "Job updated successfully.")
-          |> redirect(to: job_path(conn, :show, job))
+          |> redirect(to: traffic_path(conn, :show, traffic))
         {:error, %Ecto.Changeset{} = changeset} ->
-          render(conn, "edit.html", job: job, changeset: changeset)
+          render(conn, "edit.html", traffic: traffic, changeset: changeset)
       end
     else
       unauthorized_redirect(conn)
@@ -90,13 +84,13 @@ defmodule LitelistWeb.JobController do
   end
 
   def delete(conn, %{"id" => id}) do
-    job = Posts.get_post!(id)
-    if SharedUtils.permission?(conn.assigns.current_neighbor, job, @post_type) do
-      {:ok, _job} = Posts.delete_post(job)
+    traffic = Posts.get_post!(id)
+    if SharedUtils.permission?(conn.assigns.current_neighbor, traffic, @post_type) do
+      {:ok, _traffic} = Posts.delete_post(traffic)
 
       conn
-      |> put_flash(:info, "Job deleted successfully.")
-      |> redirect(to: job_path(conn, :index))
+      |> put_flash(:info, "traffic deleted successfully.")
+      |> redirect(to: traffic_path(conn, :index))
     else
       unauthorized_redirect(conn)
     end
@@ -105,6 +99,6 @@ defmodule LitelistWeb.JobController do
   defp unauthorized_redirect(conn) do
     conn
     |> put_flash(:error, "Unauthorized.")
-    |> redirect(to: job_path(conn, :index))
+    |> redirect(to: traffic_path(conn, :index))
   end
 end

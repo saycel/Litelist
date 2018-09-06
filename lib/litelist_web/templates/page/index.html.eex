@@ -1,18 +1,18 @@
 <div class="filter">
   <span class="bold">Filter By: </span>
-  <span class="underline <%=get_color(~s(event))%>">Events</span>
+  <span class="underline <%=get_color(~s(event))%>"><a href="/events">Events</a></span>
   <span>&#183;</span>
-  <span class="underline <%=get_color(~s(for_sale))%>">For Sale</span>
+  <span class="underline <%=get_color(~s(for_sale))%>"><a href="/sales">For Sale</a></span>
   <span>&#183;</span>
-  <span class="underline <%=get_color(~s(job))%>">Jobs</span>
+  <span class="underline <%=get_color(~s(job))%>"><a href="/jobs">Jobs</a></span>
   <span>&#183;</span>
-  <span class="underline <%=get_color(~s(emergency_information))%>">Emergency</span>
+  <span class="underline <%=get_color(~s(traffic))%>"><a href="/traffics">Traffic</a></span>
   <span>&#183;</span>
-  <span class="underline <%=get_color(~s(business))%>">Business</span>
+  <span class="underline <%=get_color(~s(business))%>"><a href="/businesses">Business</a></span>
 </div>
 <div class="cc"> 
 
-  <div class="grid" data-content="POSTINGS" data-masonry='{ "itemSelector": ".grid-item" }'>
+  <div class="grid" data-content="POSTINGS" data-masonry='{"columnWidth": 0, "itemSelector": ".grid-item" }'>
     <div class="columns">
       <%= for post <- @posts do %>
         <div class="column grid-item col-3 col-xl-4 col-md-6 col-sm-12" >

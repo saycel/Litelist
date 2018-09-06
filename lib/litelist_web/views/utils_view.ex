@@ -17,6 +17,8 @@ defmodule LitelistWeb.UtilsView do
           "emergency_information" -> "/emergency_info/#{resource.id}"
           "business" -> "/businesses/#{resource.id}"
           "event" -> "/events/#{resource.id}"
+          "traffic" -> "/traffics/#{resource.id}"
+          "discussion" -> "/discussions/#{resource.id}"
         end
     end
 
@@ -24,17 +26,21 @@ defmodule LitelistWeb.UtilsView do
         case type do
           "for_sale" -> "orange"
           "job" -> "ocean"
+          "traffic" -> "brush"
           "emergency_information" -> "brush"
           "business" -> "lake"
           "event" -> "dark-pumpkin"
+          "discussion" -> "brush"
+
         end
     end
     def get_color_array() do
       [
         {:'for sale', "orange", "/sales/new"},
         {:jobs, "ocean", "/jobs/new"},
-        {:emergency, "brush", "/emergency_info/new"},
+        {:discussions, "brush", "/discussions/new"},
         {:business, "lake", "/businesses/new"},
+        {:traffic, "brush", "/traffics/new"},
         {:event, "dark-pumpkin", "/events/new"}
       ]
     end

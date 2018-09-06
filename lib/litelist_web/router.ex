@@ -52,7 +52,8 @@ defmodule LitelistWeb.Router do
     get "/dashboard/my_discussions", DashboardController, :my_discussions
     get "/dashboard/my_discussions/export", DashboardController, :export_my_discussions
 
-    # resources "/sales", ForSaleController, only: [:new, :create, :edit, :update, :delete]
+    resources "/sales", ForSaleController, only: [:new, :create, :edit, :update, :delete]
+    resources "/traffics", TrafficController, only: [:new, :create, :edit, :update, :delete]
     resources "/jobs", JobController, only: [:new, :create, :edit, :update, :delete]
     resources "/events", EventController, only: [:new, :create, :edit, :update, :delete]
     resources "/businesses", BusinessController, only: [:new, :create, :edit, :update, :delete]
@@ -83,14 +84,16 @@ defmodule LitelistWeb.Router do
     post "/logout", PageController, :logout
     
     get "/search", SearchController, :index
+    resources "/traffics", TrafficController, only: [:show, :index]
 
-    # resources "/sales", ForSaleController, only: [:show, :index]
+    resources "/sales", ForSaleController, only: [:show, :index]
     resources "/jobs", JobController, only: [:show, :index]
     resources "/events", EventController, only: [:show, :index]
     resources "/businesses", BusinessController, only: [:show, :index]
     # resources "/emergency_info", EmergencyInformationController, only: [:show, :index]
     resources "/flags", FlagController, only: [:new, :show, :create]
     resources "/discussions", DiscussionController, only: [:index, :show]
+    
     # get "/*url", PageController, :url_handler
   end
 

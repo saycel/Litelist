@@ -32,8 +32,8 @@ defmodule LitelistWeb.DiscussionController do
   end
 
   def show(conn, %{"id" => id}) do
-    discussion = Discussions.get_discussion!(id)
-    render(conn, "show.html", discussion: discussion)
+    post = Discussions.get_discussion!(id)
+    render(conn, "show.html", post: post)
   end
 
   def edit(conn, %{"id" => id}) do
