@@ -51,7 +51,9 @@ defmodule Litelist.Posts do
 
   """
   def list_posts_by_type(type) do
-    Repo.all(from(p in Post, where: p.type == ^type, where: p.soft_delete == false))
+   posts = Repo.all(from(p in Post, where: p.type == ^type, where: p.soft_delete == false))
+   Repo.preload(posts, [:images])
+
   end
 
   @doc """

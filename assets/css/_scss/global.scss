@@ -55,8 +55,10 @@ body{
 	box-shadow: 0px 3px 0px 0px $ocean;
 }
 .underline.brush{
-	
 	box-shadow: 0px 3px 0px 0px $brush;
+}
+.underline:hover{
+	box-shadow: 0px 3px 0px 0px $unhealthy-poop;
 }
 .navbar-brand{
 	-webkit-transition: all 500ms; /* Safari */

@@ -1,5 +1,22 @@
-<h2>New Discussion</h2>
 
-<%= render "form.html", Map.put(assigns, :action, discussion_path(@conn, :create)) %>
+<div class="columns mt-20">
+	<div class="column col-11">
+		<div class="column col-12">
+			<h3>New <span class="underline <%=get_color(~s(discussion))%>">Discussion</span> Post </h3>
+		</div>
+	</div>
+	<div class="column col-1">
+		<div class="column col-12">
+			<span class="underline <%=get_color(~s(discussion))%>"><%= link "Back", to: discussion_path(@conn, :index) %></span>
+		</div>
+	</div>
+</div>
+<div class="columns mt-20">
+	<div class="column col-12 col-md-12">
+		<%= render LitelistWeb.SharedView,"_form.html",Map.put(assigns, :data, get_form_data("Discussion")) %>
+	</div>
 
-<span><%= link "Back", to: discussion_path(@conn, :index) %></span>
+</div>
+
+
+

@@ -8,7 +8,6 @@ defmodule LitelistWeb.PageController do
 
   def index(conn, _params) do
     posts = Posts.list_ordered_by_updated_at()
-
     conn
     |> render("index.html", posts: posts)
   end

@@ -18,19 +18,20 @@
           <section class="navbar-section">
             <a href="/" class="navbar-brand mr">Nairobi.Othernet</a>
             <a href="/post2list" class="btn btn-link">Post</a><span>&#183;</span>
+            <a href="/discussions" class="btn btn-link">Discuss</a><span>&#183;</span>
             <%= if @conn.assigns.current_neighbor do %>
               <%= if @conn.assigns.current_neighbor.admin do %>
-                  <a href="/admin" class="btn btn-link">Administration</a><span>&#183;</span>
+                  <a href="/admin" class="btn btn-link hide-sm hide-md">Administration</a><span class="hide-sm hide-md ">&#183;</span>
               <% end %>            
-              <a href="/dashboard" class="btn hide-sm btn-link">Dashboard</a><span class='hide-sm'>&#183;</span>
+              <a href="/dashboard" class="btn hide-sm hide-md btn-link">Dashboard</a><span class='hide-sm hide-md '>&#183;</span>
 
-              <%= link "Logout", to: page_path(@conn, :logout), method: :post, class: "btn btn-link" %>
+              <%= link "Logout", to: page_path(@conn, :logout), method: :post, class: "btn btn-link hide-sm" %>
             <% else %>
               <%= link "Login/Sign up", to: page_path(@conn, :login), method: :get, class: "btn btn-link"%>
             <% end %>
           </section>
         </div> 
-        <div class="column col-md-12 col-5">
+        <div class="column col-lg-12 col-xl-4 col-sm-12 col-md-12 col-5">
           <section class="navbar-section">
               <form action="/search" class='search'method="get">
                             

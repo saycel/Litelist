@@ -32,6 +32,12 @@ defmodule LitelistWeb.FormHelpers do
 
       type == "Event" ->
         LitelistWeb.EventView.data(resource)
+
+      type == "Traffic" ->
+        LitelistWeb.TrafficView.data(resource)
+
+      type == "Discussion" ->
+        LitelistWeb.DiscussionView.data(resource)
     end
   end
 end

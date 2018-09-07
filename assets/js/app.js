@@ -20,3 +20,8 @@ import "phoenix_html"
 
 // import socket from "./socket"
 import "masonry-layout"
+setTimeout(function() {
+	var event = document.createEvent('HTMLEvents');
+	event.initEvent('resize', true, false);
+	window.dispatchEvent(event);
+}, 2000)

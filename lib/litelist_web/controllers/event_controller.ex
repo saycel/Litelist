@@ -18,8 +18,8 @@ defmodule LitelistWeb.EventController do
   ]
 
   def index(conn, _params) do
-    events = Posts.list_posts_by_type(@post_type)
-    render(conn, "index.html", events: events)
+    posts = Posts.list_posts_by_type(@post_type)
+    render(conn, "index.html", posts: posts)
   end
 
   def new(conn, _params) do
