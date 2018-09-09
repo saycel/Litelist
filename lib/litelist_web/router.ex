@@ -93,7 +93,7 @@ defmodule LitelistWeb.Router do
     # resources "/emergency_info", EmergencyInformationController, only: [:show, :index]
     resources "/flags", FlagController, only: [:new, :show, :create]
     resources "/discussions", DiscussionController, only: [:index, :show]
-    
+    post "/discussion/create_comment", DiscussionController, :create_comment
     # get "/*url", PageController, :url_handler
   end
 
