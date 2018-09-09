@@ -18,7 +18,7 @@ defmodule Litelist.Comments.Comment do
   @doc false
   def changeset(%Comment{} = comment, attrs) do
     comment
-    |> cast(attrs, [:text])
+    |> cast(attrs, [:text, :post_id, :discussion_id])
     |> validate_required([:text])
   end
 end

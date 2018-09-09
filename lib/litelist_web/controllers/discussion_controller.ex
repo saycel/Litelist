@@ -35,7 +35,7 @@ defmodule LitelistWeb.DiscussionController do
   def show(conn, %{"id" => id}) do
     post = Discussions.get_discussion!(id)
     changeset = Comments.change_comment(%Comment{})
-    comments = Comments.list_comments
+    comments = Comments.list_comments_by_discussion(post)
     render(conn, "show.html", post: post, changeset: changeset, comments: comments)
   end
 
