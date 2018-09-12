@@ -75,12 +75,12 @@ defmodule LitelistWeb.DiscussionController do
 
     IO.inspect comment_params["discussion_id"]
     case Comments.create_comment(comment_params) do
-      {:ok, comment} ->
+      {:ok, _comment} ->
         conn
         |> put_flash(:info, "Comment added successfully")
         |> redirect(to: discussion_path(conn, :show, comment_params["discussion_id"]))
 
-      {:error, %Ecto.Changeset{} = changeset} ->
+      {:error, %Ecto.Changeset{} = _changeset} ->
         conn
         |> put_flash(:info, "Comment not added")
         |> redirect(to: discussion_path(conn, :show, comment_params["discussion_id"]))

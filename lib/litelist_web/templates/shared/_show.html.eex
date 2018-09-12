@@ -1,5 +1,5 @@
 <div class="show_page">
-  <%= if @changeset do %>
+  <%= if assigns[:changeset] do %>
     <%= form_for @changeset, discussion_path(@conn, :create_comment), fn f -> %>
         Leave a comment: <%= text_input f, :text %>
         <input type="hidden" name="comment[discussion_id]" value="<%= @post.id %>">
