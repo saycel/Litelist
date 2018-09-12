@@ -8,7 +8,7 @@
 
   <h2>Comments</h2>
   <%= for comment <- @comments do %>
-    <%=comment.text%><br>
+    <%=comment.neighbor.first_name %>: <%=comment.text%><br>
   <% end %>
 
   <%end%>
