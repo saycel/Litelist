@@ -220,10 +220,12 @@ defmodule Litelist.Factory do
   def comment_factory do
     text = FakerElixir.Lorem.sentences(2)
     discussion_id = insert(:discussion).id
+    neighbor_id = insert(:neighbor).id
     %Comment{
       text: text,
       discussion_id: discussion_id,
-      post_id: nil
+      post_id: nil,
+      neighbor_id: neighbor_id 
     }
   end
 end
