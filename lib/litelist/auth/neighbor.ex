@@ -18,6 +18,8 @@ defmodule Litelist.Auth.Neighbor do
 
     has_many :posts, Litelist.Posts.Post
     has_many :flags, Litelist.Moderation.Flag
+    has_many :comments, Litelist.Comments.Comment
+
   end
 
   @doc false

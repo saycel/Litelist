@@ -1,7 +1,7 @@
 defmodule LitelistWeb.EmergencyInformationView do
   use LitelistWeb, :view
-  import LitelistWeb.FormHelpers
-  import LitelistWeb.UtilsView
+  # import LitelistWeb.FormHelpers
+  # import LitelistWeb.UtilsView
 
   @doc """
   This will return a struct with a route for where a form should submit to, the fields necessary for a form, and what the pop-over text should be for each field.  

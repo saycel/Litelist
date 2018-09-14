@@ -21,7 +21,8 @@ defmodule Litelist.CommentsTest do
     end
 
     test "create_comment/1 with valid data creates a comment" do
-      assert {:ok, %Comment{} = comment} = Comments.create_comment(@valid_attrs)
+      neighbor = Factory.insert(:neighbor)
+      assert {:ok, %Comment{} = comment} = Comments.create_comment(Map.merge(@valid_attrs, %{neighbor_id: neighbor.id}))
       assert comment.text == "some text"
     end
 

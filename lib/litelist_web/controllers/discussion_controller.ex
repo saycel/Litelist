@@ -3,7 +3,8 @@ defmodule LitelistWeb.DiscussionController do
 
   alias Litelist.Discussions
   alias Litelist.Discussions.Discussion
-
+  alias Litelist.Comments
+  alias Litelist.Comments.Comment
   alias LitelistWeb.Utils.SharedUtils
 
   def index(conn, _params) do
@@ -33,7 +34,9 @@ defmodule LitelistWeb.DiscussionController do
 
   def show(conn, %{"id" => id}) do
     post = Discussions.get_discussion!(id)
-    render(conn, "show.html", post: post)
+    changeset = Comments.change_comment(%Comment{})
+    comments = Comments.list_comments_by_discussion(post)
+    render(conn, "show.html", post: post, changeset: changeset, comments: comments)
   end
 
   def edit(conn, %{"id" => id}) do
@@ -64,5 +67,23 @@ defmodule LitelistWeb.DiscussionController do
     conn
       |> put_flash(:info, "Discussion deleted successfully.")
       |> redirect(to: discussion_path(conn, :index))
+  end
+
+  def create_comment(conn, %{"comment" => comment_params}) do
+    comment_params = comment_params
+      |> SharedUtils.add_neighbor_id(conn)
+
+    IO.inspect comment_params["discussion_id"]
+    case Comments.create_comment(comment_params) do
+      {:ok, _comment} ->
+        conn
+        |> put_flash(:info, "Comment added successfully")
+        |> redirect(to: discussion_path(conn, :show, comment_params["discussion_id"]))
+
+      {:error, %Ecto.Changeset{} = _changeset} ->
+        conn
+        |> put_flash(:info, "Comment not added")
+        |> redirect(to: discussion_path(conn, :show, comment_params["discussion_id"]))
+    end
   end
 end

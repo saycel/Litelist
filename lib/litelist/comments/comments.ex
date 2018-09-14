@@ -32,7 +32,7 @@ defmodule Litelist.Comments do
   """
   def list_comments_by_post(post) do
     query = from c in Comment, where: c.post_id == ^post.id
-    query |> Repo.all()
+    query |> Repo.all() |> Repo.preload([:neighbor])
   end
 
   @doc """
@@ -46,7 +46,7 @@ defmodule Litelist.Comments do
   """
   def list_comments_by_discussion(discussion) do
     query = from c in Comment, where: c.discussion_id == ^discussion.id
-    query |> Repo.all()
+    query |> Repo.all() |> Repo.preload([:neighbor])
   end
 
   @doc """
