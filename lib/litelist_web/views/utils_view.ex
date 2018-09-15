@@ -40,7 +40,6 @@ defmodule LitelistWeb.UtilsView do
         {:jobs, "ocean", "/jobs/new"},
         {:discussions, "brush", "/discussions/new"},
         {:business, "lake", "/businesses/new"},
-        {:traffic, "brush", "/traffics/new"},
         {:event, "dark-pumpkin", "/events/new"}
       ]
     end

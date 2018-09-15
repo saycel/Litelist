@@ -6,8 +6,7 @@
   <span>&#183;</span>
   <span class="underline <%=get_color(~s(job))%>"><a href="/jobs">Jobs</a></span>
   <span>&#183;</span>
-  <span class="underline <%=get_color(~s(traffic))%>"><a href="/traffics">Traffic</a></span>
-  <span>&#183;</span>
+
   <span class="underline <%=get_color(~s(business))%>"><a href="/businesses">Business</a></span>
 </div>
 <div class="cc"> 
