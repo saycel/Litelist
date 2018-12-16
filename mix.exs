@@ -35,18 +35,20 @@ defmodule Litelist.Mixfile do
   # Type `mix help deps` for examples and options.
   defp deps do
     [
-      {:phoenix, "~> 1.3.0"},
+      {:phoenix, "~> 1.4.0"},
       {:phoenix_pubsub, "~> 1.0"},
-      {:phoenix_ecto, "~> 3.2"},
+      {:phoenix_ecto, "~> 4.0.0"},
+      {:ecto_sql, "~> 3.0"},
       {:postgrex, ">= 0.0.0"},
       {:phoenix_html, "~> 2.10"},
       {:phoenix_live_reload, "~> 1.0", only: :dev},
       {:gettext, "~> 0.11"},
-      {:cowboy, "~> 1.0"},
+      {:plug_cowboy, "~> 2.0"},
+      {:plug, "~> 1.7"},
       {:guardian, "~> 1.0"},
       {:comeonin, "~> 4.1.0"},
       {:bcrypt_elixir, "~> 0.12"},
-      {:ex_machina, "~> 2.1"},
+      {:ex_machina, "~> 2.2.2"},
       {:faker_elixir_octopus, "~> 1.0.0"},
       {:excoveralls, "~> 0.8", only: :test},
       {:credo, "~> 0.9.0-rc1", only: [:dev, :test], runtime: false},
@@ -54,10 +56,11 @@ defmodule Litelist.Mixfile do
       {:amnesia, "~> 0.2.7"},
       {:quantum, "~> 2.2"},
       {:timex, "~> 3.0"},
-      {:arc, "~> 0.8.0"},
-      {:arc_ecto, "~> 0.7.0"},
+      {:arc, "~> 0.11.0"},
+      {:arc_ecto, "~> 0.11.1"},
       {:uuid, "~> 1.1"},
-      {:phoenix_html_simplified_helpers, "~> 1.3"}
+      {:phoenix_html_simplified_helpers, "~> 2.1"},
+      {:jason, "~> 1.0"}
     ]
   end
 

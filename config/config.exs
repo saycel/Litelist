@@ -43,3 +43,5 @@ config :arc,
 config :litelist,
   max_flagged_posts: 5,
   allow_replies: false
+
+config :phoenix, :json_library, Jason
