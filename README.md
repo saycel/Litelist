@@ -13,7 +13,6 @@
 1. `docker-compose build` Note: You only need to run this command the first time
 1. `docker-compose run web mix deps.get`
 1. `docker-compose run web mix amnesia.create --database Litelist.Settings.SettingsDatabase --disk` For more, see the Amnesia section below
-1. Make sure DNSMasq is installed and routing all requests to *.othernet to local host.  For OSX follow these steps (https://github.com/othernet-local/dns_masq_osx)
 1. `docker-compose up`
 1. Go to localhost:4000
 1. `docker-compose run web mix test` to run tests.

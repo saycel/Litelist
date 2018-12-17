@@ -1,7 +1,9 @@
 defmodule LitelistWeb.Endpoint do
   use Phoenix.Endpoint, otp_app: :litelist
 
-  socket "/socket", LitelistWeb.UserSocket
+  socket "/socket", LitelistWeb.UserSocket,
+    websocket: true,
+    longpoll: false
 
   # Serve at "/" the static files from "priv/static" directory.
   #
@@ -28,7 +30,7 @@ defmodule LitelistWeb.Endpoint do
   plug Plug.Parsers,
     parsers: [:urlencoded, :multipart, :json],
     pass: ["*/*"],
-    json_decoder: Poison
+    json_decoder: Phoenix.json_library()
 
   plug Plug.MethodOverride
   plug Plug.Head
