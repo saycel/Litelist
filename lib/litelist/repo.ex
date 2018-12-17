@@ -1,5 +1,7 @@
 defmodule Litelist.Repo do
-  use Ecto.Repo, otp_app: :litelist
+  use Ecto.Repo,
+  otp_app: :litelist,
+  adapter: Ecto.Adapters.Postgres
 
   @doc """
   Dynamically loads the repository url from the
