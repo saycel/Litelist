@@ -36,7 +36,7 @@ defmodule LitelistWeb.PageController do
       else
         conn
         |> put_flash(:info, "webpage does not exist")
-        |> redirect(to: page_path(conn, :index))
+        |> redirect(to: Routes.page_path(conn, :index))
       end
     end
   end
@@ -47,10 +47,10 @@ defmodule LitelistWeb.PageController do
     if conn.assigns.current_neighbor do
       conn
       |> put_flash(:info, "Already logged in #{conn.assigns.current_neighbor.username}")
-      |> redirect(to: page_path(conn, :index))
+      |> redirect(to: Routes.page_path(conn, :index))
     else
       conn
-      |> render("login.html", changeset: changeset, action: page_path(conn, :post_login))
+      |> render("login.html", changeset: changeset, action: Routes.page_path(conn, :post_login))
     end
   end
 
@@ -84,20 +84,20 @@ defmodule LitelistWeb.PageController do
   defp login_reply({:error, error}, conn) do
     conn
     |> put_flash(:error, error)
-    |> redirect(to: page_path(conn, :login))
+    |> redirect(to: Routes.page_path(conn, :login))
   end
 
   defp login_reply({:ok, neighbor}, conn) do
     conn
     |> Guardian.Plug.sign_in(neighbor)
-    |> redirect(to: page_path(conn, :index))
+    |> redirect(to: Routes.page_path(conn, :index))
   end
 
   def logout(conn, _) do
     conn
     |> Guardian.Plug.sign_out()
     |> put_flash(:info, "Logged out")
-    |> redirect(to: page_path(conn, :index))
+    |> redirect(to: Routes.page_path(conn, :index))
   end
 
   defp get_host(conn) do

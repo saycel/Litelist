@@ -6,7 +6,7 @@
         </div>
         <p class="empty-title h5"> My Posts </p>
         <div class="empty-action">
-          <%= link "My Posts", to: dashboard_path(@conn, :posts), class: "button" %>
+          <%= link "My Posts", to: Routes.dashboard_path(@conn, :posts), class: "button" %>
         </div>
       </div>
     </div>
@@ -18,7 +18,7 @@
       <p class="empty-title h5">My Flagged Posts</p>
       <p class="empty-subtitle"></p>
       <div class="empty-action">
-<%= link "See all", to: dashboard_path(@conn, :posts_i_flagged), class: "button" %>
+<%= link "See all", to: Routes.dashboard_path(@conn, :posts_i_flagged), class: "button" %>
       </div>
 
     </div>
@@ -31,7 +31,7 @@
       </div>
       <p class="empty-title h5">My Discussions</p>
       <div class="empty-action">
-         <span><%= link "My Discussions", to: dashboard_path(@conn, :my_discussions), class: "button" %></span>
+         <span><%= link "My Discussions", to: Routes.dashboard_path(@conn, :my_discussions), class: "button" %></span>
       </div>
 
     </div>

@@ -4,6 +4,8 @@ defmodule LitelistWeb.SearchControllerTest do
 
   alias Litelist.Factory
 
+  alias LitelistWeb.Router.Helpers, as: Routes
+
   setup do
     title = "unlikelytitle"
     unsearched_title = "unsearchedtitle"
@@ -18,7 +20,7 @@ defmodule LitelistWeb.SearchControllerTest do
     test "shows the search page", %{conn: conn} do
       conn =
         conn
-        |> get(search_path(conn, :index))
+        |> get(Routes.search_path(conn, :index))
 
       assert html_response(conn, 200)
       assert view_template(conn) == "index.html"
@@ -27,7 +29,7 @@ defmodule LitelistWeb.SearchControllerTest do
     test "shows the search page with a query and the correct results", %{conn: conn, attrs: attrs} do
         conn =
           conn
-          |> get(search_path(conn, :index, %{search: attrs.title}))
+          |> get(Routes.search_path(conn, :index, %{search: attrs.title}))
   
         assert html_response(conn, 200) =~ attrs.title
         refute html_response(conn, 200) =~ attrs.unsearched_title
@@ -36,7 +38,7 @@ defmodule LitelistWeb.SearchControllerTest do
       test "shows the search page without a query and no posts", %{conn: conn, attrs: attrs} do
         conn =
           conn
-          |> get(search_path(conn, :index))
+          |> get(Routes.search_path(conn, :index))
   
         refute html_response(conn, 200) =~ attrs.title
         refute html_response(conn, 200) =~ attrs.unsearched_title

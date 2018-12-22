@@ -1,4 +1,4 @@
 
 <%= render LitelistWeb.SharedView,"_form.html",Map.put(assigns, :data, get_form_data("Job", @job)) %>
 
-<span><%= link "Back", to: job_path(@conn, :index) %></span>
+<span><%= link "Back", to: Routes.job_path(@conn, :index) %></span>

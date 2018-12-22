@@ -5,6 +5,8 @@ defmodule LitelistWeb.BusinessControllerTest do
   alias Litelist.Factory
   alias Litelist.Auth.Guardian
 
+  alias LitelistWeb.Router.Helpers, as: Routes
+
   @create_attrs %{company_name: "some company_name", contact_info: "some contact_info", description: "some description", location: "some location", slug: "some slug", title: "some title", type: "business", url: "my-cool-url"}
   @update_attrs %{company_name: "some updated company_name", contact_info: "some updated contact_info", description: "some updated description", location: "some updated location", slug: "some updated slug", title: "some updated title", url: "some updated url"}
   @invalid_attrs %{company_name: nil, contact_info: nil, description: nil, location: nil, slug: nil, title: nil, type: nil, url: nil}
@@ -12,7 +14,7 @@ defmodule LitelistWeb.BusinessControllerTest do
   describe "index" do
     test "lists all businesss", %{conn: conn} do
       conn = conn
-        |> get(business_path(conn, :index))
+        |> get(Routes.business_path(conn, :index))
 
       assert html_response(conn, 200)
       assert view_template(conn) == "index.html"
@@ -24,7 +26,7 @@ defmodule LitelistWeb.BusinessControllerTest do
       business = Factory.insert(:business)
 
       conn = conn
-        |> get(business_path(conn, :show, business))
+        |> get(Routes.business_path(conn, :show, business))
 
       assert html_response(conn, 200)
       assert view_template(conn) == "show.html"
@@ -34,9 +36,9 @@ defmodule LitelistWeb.BusinessControllerTest do
       not_a_business = Factory.insert(:job)
 
       conn = conn
-        |> get(business_path(conn, :show, not_a_business))
+        |> get(Routes.business_path(conn, :show, not_a_business))
 
-        assert redirected_to(conn) == business_path(conn, :index)
+        assert redirected_to(conn) == Routes.business_path(conn, :index)
     end
   end
 
@@ -46,7 +48,7 @@ defmodule LitelistWeb.BusinessControllerTest do
 
       conn = conn
         |> login_neighbor(neighbor)
-        |> get(business_path(conn, :new))
+        |> get(Routes.business_path(conn, :new))
       
       assert html_response(conn, 200)
       assert view_template(conn) == "new.html"
@@ -54,7 +56,7 @@ defmodule LitelistWeb.BusinessControllerTest do
 
     test "unautorized 401 redirect if not logged in", %{conn: conn} do
       conn = conn
-        |> get(business_path(conn, :new))
+        |> get(Routes.business_path(conn, :new))
       
       assert response(conn, 401)
     end
@@ -66,16 +68,16 @@ defmodule LitelistWeb.BusinessControllerTest do
 
       conn = conn
         |> login_neighbor(neighbor)
-        |> post(business_path(conn, :create), post: @create_attrs)
+        |> post(Routes.business_path(conn, :create), post: @create_attrs)
 
       assert %{id: id} = redirected_params(conn)
-      assert redirected_to(conn) == business_path(conn, :show, id)
+      assert redirected_to(conn) == Routes.business_path(conn, :show, id)
 
       conn = conn
         |> recycle()
         |> login_neighbor(neighbor)
 
-      conn = get conn, business_path(conn, :show, id)
+      conn = get conn, Routes.business_path(conn, :show, id)
       assert html_response(conn, 200)
       assert view_template(conn) == "show.html"
     end
@@ -85,14 +87,14 @@ defmodule LitelistWeb.BusinessControllerTest do
 
       conn = conn
         |> login_neighbor(neighbor)
-        |> post(business_path(conn, :create), post: @invalid_attrs)
+        |> post(Routes.business_path(conn, :create), post: @invalid_attrs)
       assert html_response(conn, 200)
       assert view_template(conn) == "new.html"
     end
 
     test "unautorized 401 redirect if not logged in", %{conn: conn} do
       conn = conn
-        |> post(business_path(conn, :create), post: @create_attrs)
+        |> post(Routes.business_path(conn, :create), post: @create_attrs)
       assert response(conn, 401)
     end
 
@@ -102,7 +104,7 @@ defmodule LitelistWeb.BusinessControllerTest do
 
     #   conn = conn
     #     |> login_neighbor(neighbor)
-    #     |> post(business_path(conn, :create), post: @create_attrs)
+    #     |> post(Routes.business_path(conn, :create), post: @create_attrs)
     #   assert html_response(conn, 200)
     #   assert view_template(conn) == "new.html"
     # end
@@ -115,7 +117,7 @@ defmodule LitelistWeb.BusinessControllerTest do
 
       conn = conn
         |> login_neighbor(neighbor)
-        |> get(business_path(conn, :edit, business))
+        |> get(Routes.business_path(conn, :edit, business))
       assert html_response(conn, 200)
       assert view_template(conn) == "edit.html"
     end
@@ -126,7 +128,7 @@ defmodule LitelistWeb.BusinessControllerTest do
 
       conn = conn
         |> login_neighbor(admin)
-        |> get(business_path(conn, :edit, business))
+        |> get(Routes.business_path(conn, :edit, business))
       assert html_response(conn, 200)
       assert view_template(conn) == "edit.html"
     end
@@ -137,15 +139,15 @@ defmodule LitelistWeb.BusinessControllerTest do
 
       conn = conn
         |> login_neighbor(neighbor)
-        |> get(business_path(conn, :edit, not_my_business))
-      assert redirected_to(conn) == business_path(conn, :index)
+        |> get(Routes.business_path(conn, :edit, not_my_business))
+      assert redirected_to(conn) == Routes.business_path(conn, :index)
     end
 
     test "unautorized 401 redirect if not logged in", %{conn: conn} do
       business = Factory.insert(:business)
 
       conn = conn
-        |> get(business_path(conn, :edit, business))
+        |> get(Routes.business_path(conn, :edit, business))
       
       assert response(conn, 401)
     end
@@ -159,15 +161,15 @@ defmodule LitelistWeb.BusinessControllerTest do
 
       conn = conn
         |> login_neighbor(neighbor)
-        |> put(business_path(conn, :update, business), post: @update_attrs)
+        |> put(Routes.business_path(conn, :update, business), post: @update_attrs)
 
-      assert redirected_to(conn) == business_path(conn, :show, business)
+      assert redirected_to(conn) == Routes.business_path(conn, :show, business)
 
       conn = conn
         |> recycle()
         |> login_neighbor(neighbor)
 
-      conn = get conn, business_path(conn, :show, business)
+      conn = get conn, Routes.business_path(conn, :show, business)
       assert html_response(conn, 200)
       assert view_template(conn) == "show.html"
     end
@@ -178,15 +180,15 @@ defmodule LitelistWeb.BusinessControllerTest do
 
       conn = conn
         |> login_neighbor(admin)
-        |> put(business_path(conn, :update, business), post: @update_attrs)
+        |> put(Routes.business_path(conn, :update, business), post: @update_attrs)
 
-      assert redirected_to(conn) == business_path(conn, :show, business)
+      assert redirected_to(conn) == Routes.business_path(conn, :show, business)
 
       conn = conn
         |> recycle()
         |> login_neighbor(admin)
 
-      conn = get conn, business_path(conn, :show, business)
+      conn = get conn, Routes.business_path(conn, :show, business)
       assert html_response(conn, 200)
       assert view_template(conn) == "show.html"
     end
@@ -197,7 +199,7 @@ defmodule LitelistWeb.BusinessControllerTest do
 
       conn = conn
         |> login_neighbor(neighbor)
-        |> put(business_path(conn, :update, business), post: @invalid_attrs)
+        |> put(Routes.business_path(conn, :update, business), post: @invalid_attrs)
 
       assert html_response(conn, 200)
       assert view_template(conn) == "edit.html"
@@ -209,16 +211,16 @@ defmodule LitelistWeb.BusinessControllerTest do
 
       conn = conn
         |> login_neighbor(neighbor)
-        |> put(business_path(conn, :update, not_my_business), post: @invalid_attrs)
+        |> put(Routes.business_path(conn, :update, not_my_business), post: @invalid_attrs)
 
-        assert redirected_to(conn) == business_path(conn, :index)
+        assert redirected_to(conn) == Routes.business_path(conn, :index)
     end
 
     test "unautorized 401 redirect if not logged in", %{conn: conn} do
       business = Factory.insert(:business)
 
       conn = conn
-        |> put(business_path(conn, :update, business), business: @invalid_attrs)
+        |> put(Routes.business_path(conn, :update, business), business: @invalid_attrs)
 
       assert response(conn, 401)
     end
@@ -232,11 +234,11 @@ defmodule LitelistWeb.BusinessControllerTest do
 
       conn = conn
         |> login_neighbor(neighbor)
-        |> delete(business_path(conn, :delete, business))
+        |> delete(Routes.business_path(conn, :delete, business))
 
-      assert redirected_to(conn) == business_path(conn, :index)
+      assert redirected_to(conn) == Routes.business_path(conn, :index)
       assert_error_sent 404, fn ->
-        get conn, business_path(conn, :show, business)
+        get conn, Routes.business_path(conn, :show, business)
       end
     end
 
@@ -246,11 +248,11 @@ defmodule LitelistWeb.BusinessControllerTest do
 
       conn = conn
         |> login_neighbor(admin)
-        |> delete(business_path(conn, :delete, business))
+        |> delete(Routes.business_path(conn, :delete, business))
 
-      assert redirected_to(conn) == business_path(conn, :index)
+      assert redirected_to(conn) == Routes.business_path(conn, :index)
       assert_error_sent 404, fn ->
-        get conn, business_path(conn, :show, business)
+        get conn, Routes.business_path(conn, :show, business)
       end
     end
 
@@ -260,16 +262,16 @@ defmodule LitelistWeb.BusinessControllerTest do
 
       conn = conn
         |> login_neighbor(neighbor)
-        |> delete(business_path(conn, :delete, not_my_business))
+        |> delete(Routes.business_path(conn, :delete, not_my_business))
 
-        assert redirected_to(conn) == business_path(conn, :index)
+        assert redirected_to(conn) == Routes.business_path(conn, :index)
     end
 
     test "unautorized 401 redirect if not logged in", %{conn: conn} do
       business = Factory.insert(:business)
 
       conn = conn
-        |> delete(business_path(conn, :delete, business))
+        |> delete(Routes.business_path(conn, :delete, business))
 
       assert response(conn, 401)
     end

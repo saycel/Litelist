@@ -4,6 +4,8 @@ defmodule LitelistWeb.AdminControllerTest do
 
     alias Litelist.Factory
     alias Litelist.Auth.Guardian
+
+    alias LitelistWeb.Router.Helpers, as: Routes
   
     describe "index" do
       test "shows the dashboard if logged in as an admin", %{conn: conn} do
@@ -11,7 +13,7 @@ defmodule LitelistWeb.AdminControllerTest do
 
         conn = conn
           |> login_neighbor(admin)
-          |> get(admin_path(conn, :index))
+          |> get(Routes.admin_path(conn, :index))
   
         assert html_response(conn, 200)
         assert view_template(conn) == "index.html"
@@ -22,14 +24,14 @@ defmodule LitelistWeb.AdminControllerTest do
 
         conn = conn
           |> login_neighbor(neighbor)
-          |> get(admin_path(conn, :index))
+          |> get(Routes.admin_path(conn, :index))
   
         assert response(conn, 401)
       end
 
       test "redirects if not logged in", %{conn: conn} do
         conn = conn
-          |> get(admin_path(conn, :index))
+          |> get(Routes.admin_path(conn, :index))
   
         assert response(conn, 401)
       end
@@ -41,7 +43,7 @@ defmodule LitelistWeb.AdminControllerTest do
 
           conn = conn
             |> login_neighbor(admin)
-            |> get(admin_path(conn, :posts))
+            |> get(Routes.admin_path(conn, :posts))
     
           assert html_response(conn, 200)
           assert view_template(conn) == "posts.html"
@@ -52,14 +54,14 @@ defmodule LitelistWeb.AdminControllerTest do
 
           conn = conn
             |> login_neighbor(neighbor)
-            |> get(admin_path(conn, :posts))
+            |> get(Routes.admin_path(conn, :posts))
     
           assert response(conn, 401)
         end
   
         test "redirects if not logged in", %{conn: conn} do
           conn = conn
-            |> get(admin_path(conn, :posts))
+            |> get(Routes.admin_path(conn, :posts))
     
           assert response(conn, 401)
         end
@@ -71,7 +73,7 @@ defmodule LitelistWeb.AdminControllerTest do
 
           conn = conn
             |> login_neighbor(admin)
-            |> get(admin_path(conn, :settings))
+            |> get(Routes.admin_path(conn, :settings))
     
           assert html_response(conn, 200)
           assert view_template(conn) == "settings.html"
@@ -82,14 +84,14 @@ defmodule LitelistWeb.AdminControllerTest do
 
           conn = conn
             |> login_neighbor(neighbor)
-            |> get(admin_path(conn, :settings))
+            |> get(Routes.admin_path(conn, :settings))
     
           assert response(conn, 401)
         end
   
         test "redirects if not logged in", %{conn: conn} do
           conn = conn
-            |> get(admin_path(conn, :settings))
+            |> get(Routes.admin_path(conn, :settings))
     
           assert response(conn, 401)
         end

@@ -5,6 +5,8 @@ defmodule LitelistWeb.JobControllerTest do
   alias Litelist.Factory
   alias Litelist.Auth.Guardian
 
+  alias LitelistWeb.Router.Helpers, as: Routes
+
   @create_attrs %{"contact_info" => "some contact_info", "description" => "some description", "salary" => "$10/hr", "title" => "some title", "url" => "my-cool-url", "company_name" => "some company", "position_name" => "boss", "location" => "1234 5th st queens"}
   @update_attrs %{"contact_info" => "some updated contact_info", "description" => "some updated description", "salary" => "$11/hr", "title" => "some updated title", "company_name" => "new company name", "position_name" => "new position name", "location" => "5432 1st st bronx"}
   @invalid_attrs %{"contact_info" => nil, "description" => nil, "salary" => nil, "title" => nil}
@@ -12,7 +14,7 @@ defmodule LitelistWeb.JobControllerTest do
   describe "index" do
     test "lists all jobs", %{conn: conn} do
       conn = conn
-        |> get(job_path(conn, :index))
+        |> get(Routes.job_path(conn, :index))
 
       assert html_response(conn, 200)
       assert view_template(conn) == "index.html"
@@ -23,7 +25,7 @@ defmodule LitelistWeb.JobControllerTest do
     test "shows a job if the type matches", %{conn: conn} do
       job = Factory.insert(:job)
       conn = conn
-        |> get(job_path(conn, :show, job))
+        |> get(Routes.job_path(conn, :show, job))
 
       assert html_response(conn, 200)
       assert view_template(conn) == "show.html"
@@ -32,9 +34,9 @@ defmodule LitelistWeb.JobControllerTest do
     test "redirects to index if the type does not match", %{conn: conn} do
       not_a_job = Factory.insert(:for_sale)
       conn = conn
-        |> get(job_path(conn, :show, not_a_job))
+        |> get(Routes.job_path(conn, :show, not_a_job))
 
-        assert redirected_to(conn) == job_path(conn, :index)
+        assert redirected_to(conn) == Routes.job_path(conn, :index)
     end
   end
 
@@ -43,7 +45,7 @@ defmodule LitelistWeb.JobControllerTest do
       neighbor = Factory.insert(:neighbor)
       conn = conn
         |> login_neighbor(neighbor)
-        |> get(job_path(conn, :new))
+        |> get(Routes.job_path(conn, :new))
       
       assert html_response(conn, 200)
       assert view_template(conn) == "new.html"
@@ -51,7 +53,7 @@ defmodule LitelistWeb.JobControllerTest do
 
     test "unautorized 401 redirect if not logged in", %{conn: conn} do
       conn = conn
-        |> get(job_path(conn, :new))
+        |> get(Routes.job_path(conn, :new))
       
       assert response(conn, 401)
     end
@@ -62,16 +64,16 @@ defmodule LitelistWeb.JobControllerTest do
       neighbor = Factory.insert(:neighbor)
       conn = conn
         |> login_neighbor(neighbor)
-        |> post(job_path(conn, :create), post: @create_attrs)
+        |> post(Routes.job_path(conn, :create), post: @create_attrs)
 
       assert %{id: id} = redirected_params(conn)
-      assert redirected_to(conn) == job_path(conn, :show, id)
+      assert redirected_to(conn) == Routes.job_path(conn, :show, id)
 
       conn = conn
         |> recycle()
         |> login_neighbor(neighbor)
 
-      conn = get conn, job_path(conn, :show, id)
+      conn = get conn, Routes.job_path(conn, :show, id)
       assert html_response(conn, 200)
       assert view_template(conn) == "show.html"
     end
@@ -80,14 +82,14 @@ defmodule LitelistWeb.JobControllerTest do
       neighbor = Factory.insert(:neighbor)
       conn = conn
         |> login_neighbor(neighbor)
-        |> post(job_path(conn, :create), post: @invalid_attrs)
+        |> post(Routes.job_path(conn, :create), post: @invalid_attrs)
       assert html_response(conn, 200)
       assert view_template(conn) == "new.html"
     end
 
     test "unautorized 401 redirect if not logged in", %{conn: conn} do
       conn = conn
-        |> post(job_path(conn, :create), post: @create_attrs)
+        |> post(Routes.job_path(conn, :create), post: @create_attrs)
       assert response(conn, 401)
     end
 
@@ -96,7 +98,7 @@ defmodule LitelistWeb.JobControllerTest do
     #   neighbor = Factory.insert(:neighbor)
     #   conn = conn
     #     |> login_neighbor(neighbor)
-    #     |> post(job_path(conn, :create), post: @create_attrs)
+    #     |> post(Routes.job_path(conn, :create), post: @create_attrs)
     #   assert html_response(conn, 200)
     #   assert view_template(conn) == "new.html"
     # end
@@ -109,7 +111,7 @@ defmodule LitelistWeb.JobControllerTest do
 
       conn = conn
         |> login_neighbor(neighbor)
-        |> get(job_path(conn, :edit, job))
+        |> get(Routes.job_path(conn, :edit, job))
       assert html_response(conn, 200)
       assert view_template(conn) == "edit.html"
     end
@@ -120,7 +122,7 @@ defmodule LitelistWeb.JobControllerTest do
 
       conn = conn
         |> login_neighbor(admin)
-        |> get(job_path(conn, :edit, job))
+        |> get(Routes.job_path(conn, :edit, job))
       assert html_response(conn, 200)
       assert view_template(conn) == "edit.html"
     end
@@ -131,15 +133,15 @@ defmodule LitelistWeb.JobControllerTest do
 
       conn = conn
         |> login_neighbor(neighbor)
-        |> get(job_path(conn, :edit, not_my_job))
-      assert redirected_to(conn) == job_path(conn, :index)
+        |> get(Routes.job_path(conn, :edit, not_my_job))
+      assert redirected_to(conn) == Routes.job_path(conn, :index)
     end
 
     test "unautorized 401 redirect if not logged in", %{conn: conn} do
       job = Factory.insert(:job)
 
       conn = conn
-        |> get(job_path(conn, :edit, job))
+        |> get(Routes.job_path(conn, :edit, job))
       
       assert response(conn, 401)
     end
@@ -153,15 +155,15 @@ defmodule LitelistWeb.JobControllerTest do
 
       conn = conn
         |> login_neighbor(neighbor)
-        |> put(job_path(conn, :update, job), post: @update_attrs)
+        |> put(Routes.job_path(conn, :update, job), post: @update_attrs)
 
-      assert redirected_to(conn) == job_path(conn, :show, job)
+      assert redirected_to(conn) == Routes.job_path(conn, :show, job)
 
       conn = conn
         |> recycle()
         |> login_neighbor(neighbor)
 
-      conn = get conn, job_path(conn, :show, job)
+      conn = get conn, Routes.job_path(conn, :show, job)
       assert html_response(conn, 200)
       assert view_template(conn) == "show.html"
     end
@@ -172,15 +174,15 @@ defmodule LitelistWeb.JobControllerTest do
 
       conn = conn
         |> login_neighbor(admin)
-        |> put(job_path(conn, :update, job), post: @update_attrs)
+        |> put(Routes.job_path(conn, :update, job), post: @update_attrs)
 
-      assert redirected_to(conn) == job_path(conn, :show, job)
+      assert redirected_to(conn) == Routes.job_path(conn, :show, job)
 
       conn = conn
         |> recycle()
         |> login_neighbor(admin)
 
-      conn = get conn, job_path(conn, :show, job)
+      conn = get conn, Routes.job_path(conn, :show, job)
       assert html_response(conn, 200)
       assert view_template(conn) == "show.html"
     end
@@ -191,7 +193,7 @@ defmodule LitelistWeb.JobControllerTest do
 
       conn = conn
         |> login_neighbor(neighbor)
-        |> put(job_path(conn, :update, job), post: @invalid_attrs)
+        |> put(Routes.job_path(conn, :update, job), post: @invalid_attrs)
 
       assert html_response(conn, 200)
       assert view_template(conn) == "edit.html"
@@ -203,15 +205,15 @@ defmodule LitelistWeb.JobControllerTest do
 
       conn = conn
         |> login_neighbor(neighbor)
-        |> put(job_path(conn, :update, not_my_job), post: @invalid_attrs)
+        |> put(Routes.job_path(conn, :update, not_my_job), post: @invalid_attrs)
 
-        assert redirected_to(conn) == job_path(conn, :index)
+        assert redirected_to(conn) == Routes.job_path(conn, :index)
     end
 
     test "unautorized 401 redirect if not logged in", %{conn: conn} do
       job = Factory.insert(:job)
       conn = conn
-        |> put(job_path(conn, :update, job), job: @invalid_attrs)
+        |> put(Routes.job_path(conn, :update, job), job: @invalid_attrs)
 
       assert response(conn, 401)
     end
@@ -225,11 +227,11 @@ defmodule LitelistWeb.JobControllerTest do
 
       conn = conn
         |> login_neighbor(neighbor)
-        |> delete(job_path(conn, :delete, job))
+        |> delete(Routes.job_path(conn, :delete, job))
 
-      assert redirected_to(conn) == job_path(conn, :index)
+      assert redirected_to(conn) == Routes.job_path(conn, :index)
       assert_error_sent 404, fn ->
-        get conn, job_path(conn, :show, job)
+        get conn, Routes.job_path(conn, :show, job)
       end
     end
 
@@ -239,11 +241,11 @@ defmodule LitelistWeb.JobControllerTest do
 
       conn = conn
         |> login_neighbor(admin)
-        |> delete(job_path(conn, :delete, job))
+        |> delete(Routes.job_path(conn, :delete, job))
 
-      assert redirected_to(conn) == job_path(conn, :index)
+      assert redirected_to(conn) == Routes.job_path(conn, :index)
       assert_error_sent 404, fn ->
-        get conn, job_path(conn, :show, job)
+        get conn, Routes.job_path(conn, :show, job)
       end
     end
 
@@ -253,16 +255,16 @@ defmodule LitelistWeb.JobControllerTest do
 
       conn = conn
         |> login_neighbor(neighbor)
-        |> delete(job_path(conn, :delete, not_my_job))
+        |> delete(Routes.job_path(conn, :delete, not_my_job))
 
-        assert redirected_to(conn) == job_path(conn, :index)
+        assert redirected_to(conn) == Routes.job_path(conn, :index)
     end
 
     test "unautorized 401 redirect if not logged in", %{conn: conn} do
       job = Factory.insert(:job)
 
       conn = conn
-        |> delete(job_path(conn, :delete, job))
+        |> delete(Routes.job_path(conn, :delete, job))
 
       assert response(conn, 401)
     end

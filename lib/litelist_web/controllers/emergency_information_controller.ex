@@ -38,7 +38,7 @@
 #       {:ok, emergency_information} ->
 #         conn
 #         |> put_flash(:info, "Emergency information created successfully.")
-#         |> redirect(to: emergency_information_path(conn, :show, emergency_information))
+#         |> redirect(to: Routes.emergency_information_path(conn, :show, emergency_information))
 #       {:error, %Ecto.Changeset{} = changeset} ->
 #         render(conn, "new.html", changeset: changeset)
 #     end
@@ -74,7 +74,7 @@
 #         {:ok, emergency_information} ->
 #           conn
 #           |> put_flash(:info, "Emergency information updated successfully.")
-#           |> redirect(to: emergency_information_path(conn, :show, emergency_information))
+#           |> redirect(to: Routes.emergency_information_path(conn, :show, emergency_information))
 #         {:error, %Ecto.Changeset{} = changeset} ->
 #           render(conn, "edit.html", emergency_information: emergency_information, changeset: changeset)
 #       end
@@ -90,7 +90,7 @@
 
 #       conn
 #       |> put_flash(:info, "Emergency information deleted successfully.")
-#       |> redirect(to: emergency_information_path(conn, :index))
+#       |> redirect(to: Routes.emergency_information_path(conn, :index))
 #     else
 #       unauthorized_redirect(conn)
 #     end
@@ -99,6 +99,6 @@
 #   defp unauthorized_redirect(conn) do
 #     conn
 #     |> put_flash(:error, "Unauthorized.")
-#     |> redirect(to: emergency_information_path(conn, :index))
+#     |> redirect(to: Routes.emergency_information_path(conn, :index))
 #   end
 # end

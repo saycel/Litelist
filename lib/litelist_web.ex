@@ -21,8 +21,8 @@ defmodule LitelistWeb do
     quote do
       use Phoenix.Controller, namespace: LitelistWeb
       import Plug.Conn
-      import LitelistWeb.Router.Helpers
       import LitelistWeb.Gettext
+      alias LitelistWeb.Router.Helpers, as: Routes
     end
   end
 
@@ -38,9 +38,9 @@ defmodule LitelistWeb do
       use Phoenix.HTML
       use Phoenix.HTML.SimplifiedHelpers  # <- this line.
 
-      import LitelistWeb.Router.Helpers
       import LitelistWeb.ErrorHelpers
       import LitelistWeb.Gettext
+      alias LitelistWeb.Router.Helpers, as: Routes
     end
   end
 
