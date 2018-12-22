@@ -41,7 +41,7 @@ defmodule Litelist.Mixfile do
       {:ecto_sql, "~> 3.0"},
       {:postgrex, "~> 0.14.1"},
       {:phoenix_html, "~> 2.13"},
-      {:phoenix_live_reload, "~> 1.0", only: :dev},
+      {:phoenix_live_reload, "~> 1.2", only: :dev},
       {:gettext, "~> 0.11"},
       {:plug_cowboy, "~> 2.0"},
       {:plug, "~> 1.7"},
