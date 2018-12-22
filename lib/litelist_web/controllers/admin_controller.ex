@@ -29,7 +29,7 @@ defmodule LitelistWeb.AdminController do
         })
         conn
             |> put_flash(:info, "Settings updated.")
-            |> redirect(to: admin_path(conn, :settings))
+            |> redirect(to: Routes.admin_path(conn, :settings))
     end
 end 
   

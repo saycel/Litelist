@@ -4,8 +4,8 @@
       	
 		<div class="divider text-center" data-content="Flag Form"></div>
 
-      	<%= render "form.html", assigns |> Map.put(:action, flag_path(@conn, :create)) |> Map.put(:types, @types) %>
-		<span><%= link "Back", to: flag_path(@conn, :index) %></span>
+      	<%= render "form.html", assigns |> Map.put(:action, Routes.flag_path(@conn, :create)) |> Map.put(:types, @types) %>
+		<span><%= link "Back", to: Routes.flag_path(@conn, :index) %></span>
 
       </div>
   </div>

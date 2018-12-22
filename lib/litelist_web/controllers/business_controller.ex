@@ -38,7 +38,7 @@ defmodule LitelistWeb.BusinessController do
       {:ok, business} ->
         conn
         |> put_flash(:info, "Business created successfully.")
-        |> redirect(to: business_path(conn, :show, business))
+        |> redirect(to: Routes.business_path(conn, :show, business))
       {:error, %Ecto.Changeset{} = changeset} ->
         render(conn, "new.html", changeset: changeset)
     end
@@ -73,7 +73,7 @@ defmodule LitelistWeb.BusinessController do
         {:ok, business} ->
           conn
           |> put_flash(:info, "Business updated successfully.")
-          |> redirect(to: business_path(conn, :show, business))
+          |> redirect(to: Routes.business_path(conn, :show, business))
         {:error, %Ecto.Changeset{} = changeset} ->
           render(conn, "edit.html", business: business, changeset: changeset)
       end
@@ -89,7 +89,7 @@ defmodule LitelistWeb.BusinessController do
 
       conn
       |> put_flash(:info, "Business deleted successfully.")
-      |> redirect(to: business_path(conn, :index))
+      |> redirect(to: Routes.business_path(conn, :index))
     else
       unauthorized_redirect(conn)
     end
@@ -98,6 +98,6 @@ defmodule LitelistWeb.BusinessController do
   defp unauthorized_redirect(conn) do
     conn
     |> put_flash(:error, "Unauthorized.")
-    |> redirect(to: business_path(conn, :index))
+    |> redirect(to: Routes.business_path(conn, :index))
   end
 end

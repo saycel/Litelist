@@ -40,7 +40,7 @@ defmodule LitelistWeb.EventController do
       {:ok, event} ->
         conn
         |> put_flash(:info, "Event created successfully.")
-        |> redirect(to: event_path(conn, :show, event))
+        |> redirect(to: Routes.event_path(conn, :show, event))
       {:error, %Ecto.Changeset{} = changeset} ->
         render(conn, "new.html", changeset: changeset)
     end
@@ -78,7 +78,7 @@ defmodule LitelistWeb.EventController do
         {:ok, event} ->
           conn
           |> put_flash(:info, "Event updated successfully.")
-          |> redirect(to: event_path(conn, :show, event))
+          |> redirect(to: Routes.event_path(conn, :show, event))
         {:error, %Ecto.Changeset{} = changeset} ->
           render(conn, "edit.html", event: event, changeset: changeset)
       end
@@ -94,7 +94,7 @@ defmodule LitelistWeb.EventController do
 
       conn
       |> put_flash(:info, "Event deleted successfully.")
-      |> redirect(to: event_path(conn, :index))
+      |> redirect(to: Routes.event_path(conn, :index))
     else
       unauthorized_redirect(conn)
     end
@@ -103,6 +103,6 @@ defmodule LitelistWeb.EventController do
   defp unauthorized_redirect(conn) do
     conn
     |> put_flash(:error, "Unauthorized.")
-    |> redirect(to: event_path(conn, :index))
+    |> redirect(to: Routes.event_path(conn, :index))
   end
 end

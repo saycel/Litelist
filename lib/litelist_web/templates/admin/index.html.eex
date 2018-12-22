@@ -1,6 +1,6 @@
 <div class="columns">
   <div class="column col-4 col-md-12">
-    <a class='white' href="<%= flag_path(@conn, :index) %>">  
+    <a class='white' href="<%= Routes.flag_path(@conn, :index) %>">  
       <div class="empty settings">
         <div class="empty-icon">
           <i class="icon icon-3x icon-flag"></i>

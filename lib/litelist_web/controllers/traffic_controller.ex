@@ -38,7 +38,7 @@ defmodule LitelistWeb.TrafficController do
       {:ok, traffic} ->
         conn
         |> put_flash(:info, "traffic created successfully.")
-        |> redirect(to: traffic_path(conn, :show, traffic))
+        |> redirect(to: Routes.traffic_path(conn, :show, traffic))
       {:error, %Ecto.Changeset{} = changeset} ->
         render(conn, "new.html", changeset: changeset)
     end
@@ -74,7 +74,7 @@ defmodule LitelistWeb.TrafficController do
         {:ok, traffic} ->
           conn
           |> put_flash(:info, "Job updated successfully.")
-          |> redirect(to: traffic_path(conn, :show, traffic))
+          |> redirect(to: Routes.traffic_path(conn, :show, traffic))
         {:error, %Ecto.Changeset{} = changeset} ->
           render(conn, "edit.html", traffic: traffic, changeset: changeset)
       end
@@ -90,7 +90,7 @@ defmodule LitelistWeb.TrafficController do
 
       conn
       |> put_flash(:info, "traffic deleted successfully.")
-      |> redirect(to: traffic_path(conn, :index))
+      |> redirect(to: Routes.traffic_path(conn, :index))
     else
       unauthorized_redirect(conn)
     end
@@ -99,6 +99,6 @@ defmodule LitelistWeb.TrafficController do
   defp unauthorized_redirect(conn) do
     conn
     |> put_flash(:error, "Unauthorized.")
-    |> redirect(to: traffic_path(conn, :index))
+    |> redirect(to: Routes.traffic_path(conn, :index))
   end
 end

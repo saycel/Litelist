@@ -28,7 +28,7 @@ defmodule LitelistWeb.FlagController do
   def new(conn, _params) do
     conn
       |> put_flash(:info, "To add a flag, go to a post and click on a 'flag' button.")
-      |> redirect(to: page_path(conn, :index))
+      |> redirect(to: Routes.page_path(conn, :index))
   end
 
   def create(conn, %{"flag" => flag_params}) do
@@ -42,7 +42,7 @@ defmodule LitelistWeb.FlagController do
         hide_post_if_over_flag_limit(flag)
         conn
         |> put_flash(:info, "Flag created successfully.")
-        |> redirect(to: flag_path(conn, :show, flag))
+        |> redirect(to: Routes.flag_path(conn, :show, flag))
       {:error, %Ecto.Changeset{} = changeset} ->
         post = Posts.get_post!(changeset.changes.post_id)
 
@@ -71,7 +71,7 @@ defmodule LitelistWeb.FlagController do
         restore_post_if_flags_cleared(flag)
         conn
         |> put_flash(:info, "Flag updated successfully.")
-        |> redirect(to: flag_path(conn, :show, flag))
+        |> redirect(to: Routes.flag_path(conn, :show, flag))
       {:error, %Ecto.Changeset{} = changeset} ->
         post = Posts.get_post!(flag.post_id)
         render(conn, "edit.html", flag: flag, changeset: changeset, post: post, statuses: @statuses)
@@ -84,7 +84,7 @@ defmodule LitelistWeb.FlagController do
     restore_post_if_flags_cleared(flag)
     conn
     |> put_flash(:info, "Flag deleted successfully.")
-    |> redirect(to: flag_path(conn, :index))
+    |> redirect(to: Routes.flag_path(conn, :index))
   end
 
   def guidelines(conn, _) do

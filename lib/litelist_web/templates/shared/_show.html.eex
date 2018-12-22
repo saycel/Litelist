@@ -1,6 +1,6 @@
 <div class="show_page">
   <%= if assigns[:changeset] do %>
-    <%= form_for @changeset, discussion_path(@conn, :create_comment), fn f -> %>
+    <%= form_for @changeset, Routes.discussion_path(@conn, :create_comment), fn f -> %>
         Leave a comment: <%= text_input f, :text %>
         <input type="hidden" name="comment[discussion_id]" value="<%= @post.id %>">
     <%= submit "Submit", class: "submit btn btn-primary" %>

@@ -1,5 +1,5 @@
 <h2>My Discussions</h2>
-<span><%= link "Export All", to: dashboard_path(@conn, :export_my_discussions), class: "btn btn-default btn-xs" %></span>
+<span><%= link "Export All", to: Routes.dashboard_path(@conn, :export_my_discussions), class: "btn btn-default btn-xs" %></span>
 
 <table class="table">
   <thead>
@@ -16,10 +16,10 @@
       <td><%= discussion.title %></td>
       <td><%= discussion.description %></td>
       <td class="text-right">
-        <span><%= link "Show", to: discussion_path(@conn, :show, discussion), class: "btn btn-default btn-xs" %></span>
+        <span><%= link "Show", to: Routes.discussion_path(@conn, :show, discussion), class: "btn btn-default btn-xs" %></span>
         <%= if @current_neighbor do %>
-          <span><%= link "Edit", to: discussion_path(@conn, :edit, discussion), class: "btn btn-default btn-xs" %></span>
-          <span><%= link "Delete", to: discussion_path(@conn, :delete, discussion), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" %></span>
+          <span><%= link "Edit", to: Routes.discussion_path(@conn, :edit, discussion), class: "btn btn-default btn-xs" %></span>
+          <span><%= link "Delete", to: Routes.discussion_path(@conn, :delete, discussion), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" %></span>
         <% end %>
       </td>
     </tr>
@@ -28,5 +28,5 @@
 </table>
 
 <%= if @current_neighbor do %>
-  <span><%= link "New Discussion", to: discussion_path(@conn, :new) %></span>
+  <span><%= link "New Discussion", to: Routes.discussion_path(@conn, :new) %></span>
 <% end %>

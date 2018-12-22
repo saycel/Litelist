@@ -12,7 +12,7 @@
 #   describe "index" do
 #     test "lists all for_sales", %{conn: conn} do
 #       conn = conn
-#         |> get(for_sale_path(conn, :index))
+#         |> get(Routes.for_sale_path(conn, :index))
 
 #       assert html_response(conn, 200)
 #       assert view_template(conn) == "index.html"
@@ -24,7 +24,7 @@
 #       for_sale = Factory.insert(:for_sale)
 
 #       conn = conn
-#         |> get(for_sale_path(conn, :show, for_sale))
+#         |> get(Routes.for_sale_path(conn, :show, for_sale))
 
 #       assert html_response(conn, 200)
 #       assert view_template(conn) == "show.html"
@@ -33,9 +33,9 @@
 #     test "redirects to index if the type does not match", %{conn: conn} do
 #       not_a_for_sale = Factory.insert(:job)
 #       conn = conn
-#         |> get(for_sale_path(conn, :show, not_a_for_sale))
+#         |> get(Routes.for_sale_path(conn, :show, not_a_for_sale))
 
-#         assert redirected_to(conn) == for_sale_path(conn, :index)
+#         assert redirected_to(conn) == Routes.for_sale_path(conn, :index)
 #     end
 #   end
 
@@ -44,7 +44,7 @@
 #       neighbor = Factory.insert(:neighbor)
 #       conn = conn
 #         |> login_neighbor(neighbor)
-#         |> get(for_sale_path(conn, :new))
+#         |> get(Routes.for_sale_path(conn, :new))
       
 #       assert html_response(conn, 200)
 #       assert view_template(conn) == "new.html"
@@ -52,7 +52,7 @@
 
 #     test "unautorized 401 redirect if not logged in", %{conn: conn} do
 #       conn = conn
-#         |> get(for_sale_path(conn, :new))
+#         |> get(Routes.for_sale_path(conn, :new))
       
 #       assert response(conn, 401)
 #     end
@@ -64,16 +64,16 @@
 
 #       conn = conn
 #         |> login_neighbor(neighbor)
-#         |> post(for_sale_path(conn, :create), post: @create_attrs)
+#         |> post(Routes.for_sale_path(conn, :create), post: @create_attrs)
 
 #       assert %{id: id} = redirected_params(conn)
-#       assert redirected_to(conn) == for_sale_path(conn, :show, id)
+#       assert redirected_to(conn) == Routes.for_sale_path(conn, :show, id)
 
 #       conn = conn
 #         |> recycle()
 #         |> login_neighbor(neighbor)
 
-#       conn = get conn, for_sale_path(conn, :show, id)
+#       conn = get conn, Routes.for_sale_path(conn, :show, id)
 #       assert html_response(conn, 200)
 #       assert view_template(conn) == "show.html"
 #     end
@@ -82,14 +82,14 @@
 #       neighbor = Factory.insert(:neighbor)
 #       conn = conn
 #         |> login_neighbor(neighbor)
-#         |> post(for_sale_path(conn, :create), post: @invalid_attrs)
+#         |> post(Routes.for_sale_path(conn, :create), post: @invalid_attrs)
 #       assert html_response(conn, 200)
 #       assert view_template(conn) == "new.html"
 #     end
 
 #     test "unautorized 401 redirect if not logged in", %{conn: conn} do
 #       conn = conn
-#         |> post(for_sale_path(conn, :create), job: @create_attrs)
+#         |> post(Routes.for_sale_path(conn, :create), job: @create_attrs)
 #       assert response(conn, 401)
 #     end
 
@@ -98,7 +98,7 @@
 #       Factory.insert(:for_sale, %{url: "my-cool-url"})
 #       conn = conn
 #         |> login_neighbor(neighbor)
-#         |> post(for_sale_path(conn, :create), post: @create_attrs)
+#         |> post(Routes.for_sale_path(conn, :create), post: @create_attrs)
 #       assert html_response(conn, 200)
 #       assert view_template(conn) == "new.html"
 #     end
@@ -111,7 +111,7 @@
 
 #       conn = conn
 #         |> login_neighbor(neighbor)
-#         |> get(for_sale_path(conn, :edit, for_sale))
+#         |> get(Routes.for_sale_path(conn, :edit, for_sale))
 #       assert html_response(conn, 200)
 #       assert view_template(conn) == "edit.html"
 #     end
@@ -122,7 +122,7 @@
 
 #       conn = conn
 #         |> login_neighbor(admin)
-#         |> get(for_sale_path(conn, :edit, for_sale))
+#         |> get(Routes.for_sale_path(conn, :edit, for_sale))
 #       assert html_response(conn, 200)
 #       assert view_template(conn) == "edit.html"
 #     end
@@ -133,15 +133,15 @@
 
 #       conn = conn
 #         |> login_neighbor(neighbor)
-#         |> get(for_sale_path(conn, :edit, not_my_for_sale))
-#       assert redirected_to(conn) == for_sale_path(conn, :index)
+#         |> get(Routes.for_sale_path(conn, :edit, not_my_for_sale))
+#       assert redirected_to(conn) == Routes.for_sale_path(conn, :index)
 #     end
 
 #     test "unautorized 401 redirect if not logged in", %{conn: conn} do
 #       for_sale = Factory.insert(:for_sale)
 
 #       conn = conn
-#         |> get(for_sale_path(conn, :edit, for_sale))
+#         |> get(Routes.for_sale_path(conn, :edit, for_sale))
       
 #       assert response(conn, 401)
 #     end
@@ -156,15 +156,15 @@
 
 #       conn = conn
 #         |> login_neighbor(neighbor)
-#         |> put(for_sale_path(conn, :update, for_sale), post: @update_attrs)
+#         |> put(Routes.for_sale_path(conn, :update, for_sale), post: @update_attrs)
 
-#       assert redirected_to(conn) == for_sale_path(conn, :show, for_sale)
+#       assert redirected_to(conn) == Routes.for_sale_path(conn, :show, for_sale)
 
 #       conn = conn
 #         |> recycle()
 #         |> login_neighbor(neighbor)
 
-#       conn = get conn, for_sale_path(conn, :show, for_sale)
+#       conn = get conn, Routes.for_sale_path(conn, :show, for_sale)
 #       assert html_response(conn, 200)
 #       assert view_template(conn) == "show.html"
 #     end
@@ -175,15 +175,15 @@
 
 #       conn = conn
 #         |> login_neighbor(admin)
-#         |> put(for_sale_path(conn, :update, for_sale), post: @update_attrs)
+#         |> put(Routes.for_sale_path(conn, :update, for_sale), post: @update_attrs)
 
-#       assert redirected_to(conn) == for_sale_path(conn, :show, for_sale)
+#       assert redirected_to(conn) == Routes.for_sale_path(conn, :show, for_sale)
 
 #       conn = conn
 #         |> recycle()
 #         |> login_neighbor(admin)
 
-#       conn = get conn, for_sale_path(conn, :show, for_sale)
+#       conn = get conn, Routes.for_sale_path(conn, :show, for_sale)
 #       assert html_response(conn, 200)
 #       assert view_template(conn) == "show.html"
 #     end
@@ -194,7 +194,7 @@
 
 #       conn = conn
 #         |> login_neighbor(neighbor)
-#         |> put(for_sale_path(conn, :update, for_sale), post: @invalid_attrs)
+#         |> put(Routes.for_sale_path(conn, :update, for_sale), post: @invalid_attrs)
 
 #       assert html_response(conn, 200)
 #       assert view_template(conn) == "edit.html"
@@ -206,16 +206,16 @@
 
 #       conn = conn
 #         |> login_neighbor(neighbor)
-#         |> put(for_sale_path(conn, :update, not_my_for_sale), post: @invalid_attrs)
+#         |> put(Routes.for_sale_path(conn, :update, not_my_for_sale), post: @invalid_attrs)
 
-#         assert redirected_to(conn) == for_sale_path(conn, :index)
+#         assert redirected_to(conn) == Routes.for_sale_path(conn, :index)
 #     end
 
 #     test "unautorized 401 redirect if not logged in", %{conn: conn} do
 #       for_sale = Factory.insert(:for_sale)
 
 #       conn = conn
-#         |> put(for_sale_path(conn, :update, for_sale), for_sale: @invalid_attrs)
+#         |> put(Routes.for_sale_path(conn, :update, for_sale), for_sale: @invalid_attrs)
 
 #       assert response(conn, 401)
 #     end
@@ -229,11 +229,11 @@
 
 #       conn = conn
 #         |> login_neighbor(neighbor)
-#         |> delete(for_sale_path(conn, :delete, for_sale))
+#         |> delete(Routes.for_sale_path(conn, :delete, for_sale))
 
-#       assert redirected_to(conn) == for_sale_path(conn, :index)
+#       assert redirected_to(conn) == Routes.for_sale_path(conn, :index)
 #       assert_error_sent 404, fn ->
-#         get conn, for_sale_path(conn, :show, for_sale)
+#         get conn, Routes.for_sale_path(conn, :show, for_sale)
 #       end
 #     end
 
@@ -243,11 +243,11 @@
 
 #       conn = conn
 #         |> login_neighbor(admin)
-#         |> delete(for_sale_path(conn, :delete, for_sale))
+#         |> delete(Routes.for_sale_path(conn, :delete, for_sale))
 
-#       assert redirected_to(conn) == for_sale_path(conn, :index)
+#       assert redirected_to(conn) == Routes.for_sale_path(conn, :index)
 #       assert_error_sent 404, fn ->
-#         get conn, for_sale_path(conn, :show, for_sale)
+#         get conn, Routes.for_sale_path(conn, :show, for_sale)
 #       end
 #     end
 
@@ -258,16 +258,16 @@
 
 #       conn = conn
 #         |> login_neighbor(neighbor)
-#         |> delete(for_sale_path(conn, :delete, not_my_for_sale))
+#         |> delete(Routes.for_sale_path(conn, :delete, not_my_for_sale))
 
-#         assert redirected_to(conn) == for_sale_path(conn, :index)
+#         assert redirected_to(conn) == Routes.for_sale_path(conn, :index)
 #     end
 
 #     test "unautorized 401 redirect if not logged in", %{conn: conn} do
 #       for_sale = Factory.insert(:for_sale)
 
 #       conn = conn
-#         |> delete(for_sale_path(conn, :delete, for_sale))
+#         |> delete(Routes.for_sale_path(conn, :delete, for_sale))
 
 #       assert response(conn, 401)
 #     end

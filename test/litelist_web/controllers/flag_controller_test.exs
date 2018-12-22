@@ -5,6 +5,8 @@ defmodule LitelistWeb.FlagControllerTest do
   alias Litelist.Factory
   alias Litelist.Auth.Guardian
 
+  alias LitelistWeb.Router.Helpers, as: Routes
+
   @create_attrs %{admin_response: "some admin_response", description: "some description", type: ["Incorrect information"]}
   @update_attrs %{admin_response: "some updated admin_response", description: "some updated description", status: "post_restored"}
   @invalid_attrs %{admin_response: nil, description: nil, status: nil, type: nil}
@@ -12,7 +14,7 @@ defmodule LitelistWeb.FlagControllerTest do
   describe "index" do
     test "Renders 401 if not logged in", %{conn: conn} do
       conn = conn
-        |> get(flag_path(conn, :index))
+        |> get(Routes.flag_path(conn, :index))
 
       assert response(conn, 401)
     end
@@ -21,7 +23,7 @@ defmodule LitelistWeb.FlagControllerTest do
       neighbor = Factory.insert(:neighbor)
       conn = conn
         |> login_neighbor(neighbor)
-        |> get(flag_path(conn, :index))
+        |> get(Routes.flag_path(conn, :index))
 
       assert response(conn, 401)
     end
@@ -30,7 +32,7 @@ defmodule LitelistWeb.FlagControllerTest do
       admin = Factory.insert(:admin)
       conn = conn
         |> login_neighbor(admin)
-        |> get(flag_path(conn, :index))
+        |> get(Routes.flag_path(conn, :index))
 
       assert html_response(conn, 200)
       assert view_template(conn) == "index.html"
@@ -41,7 +43,7 @@ defmodule LitelistWeb.FlagControllerTest do
     test "shows a flag if the type matches", %{conn: conn} do
       flag = Factory.insert(:flag)
       conn = conn
-        |> get(flag_path(conn, :show, flag))
+        |> get(Routes.flag_path(conn, :show, flag))
 
       assert html_response(conn, 200)
       assert view_template(conn) == "show.html"
@@ -52,7 +54,7 @@ defmodule LitelistWeb.FlagControllerTest do
     test "renders form", %{conn: conn} do
       post = Factory.insert(:job)
       conn = conn
-        |> get(flag_path(conn, :new, %{post_id: post}))
+        |> get(Routes.flag_path(conn, :new, %{post_id: post}))
       
       assert html_response(conn, 200)
       assert view_template(conn) == "new.html"
@@ -60,9 +62,9 @@ defmodule LitelistWeb.FlagControllerTest do
 
     test "redirects without post_id param", %{conn: conn} do
       conn = conn
-        |> get(flag_path(conn, :new))
+        |> get(Routes.flag_path(conn, :new))
       
-      assert redirected_to(conn) == page_path(conn, :index)
+      assert redirected_to(conn) == Routes.page_path(conn, :index)
     end
   end
   
@@ -73,16 +75,16 @@ defmodule LitelistWeb.FlagControllerTest do
       attrs = Map.merge(@create_attrs, %{post_id: post.id})
       conn = conn
         |> login_neighbor(neighbor)
-        |> post(flag_path(conn, :create), flag: attrs)
+        |> post(Routes.flag_path(conn, :create), flag: attrs)
 
       assert %{id: id} = redirected_params(conn)
-      assert redirected_to(conn) == flag_path(conn, :show, id)
+      assert redirected_to(conn) == Routes.flag_path(conn, :show, id)
 
       conn = conn
         |> recycle()
         |> login_neighbor(neighbor)
 
-      conn = get conn, flag_path(conn, :show, id)
+      conn = get conn, Routes.flag_path(conn, :show, id)
       assert html_response(conn, 200)
       assert view_template(conn) == "show.html"
     end
@@ -93,7 +95,7 @@ defmodule LitelistWeb.FlagControllerTest do
       attrs = Map.merge(@invalid_attrs, %{post_id: post.id})
       conn = conn
         |> login_neighbor(neighbor)
-        |> post(flag_path(conn, :create), flag: attrs)
+        |> post(Routes.flag_path(conn, :create), flag: attrs)
       assert html_response(conn, 200)
       assert view_template(conn) == "new.html"
     end
@@ -103,15 +105,15 @@ defmodule LitelistWeb.FlagControllerTest do
       attrs = Map.merge(@create_attrs, %{post_id: post.id})
 
       conn = conn
-        |> post(flag_path(conn, :create), flag: attrs)
+        |> post(Routes.flag_path(conn, :create), flag: attrs)
      
       assert %{id: id} = redirected_params(conn)
-      assert redirected_to(conn) == flag_path(conn, :show, id)
+      assert redirected_to(conn) == Routes.flag_path(conn, :show, id)
 
       conn = conn
         |> recycle()
 
-      conn = get conn, flag_path(conn, :show, id)
+      conn = get conn, Routes.flag_path(conn, :show, id)
       assert html_response(conn, 200)
       assert view_template(conn) == "show.html"
     end
@@ -124,7 +126,7 @@ defmodule LitelistWeb.FlagControllerTest do
 
       conn = conn
         |> login_neighbor(neighbor)
-        |> get(flag_path(conn, :edit, flag))
+        |> get(Routes.flag_path(conn, :edit, flag))
       assert response(conn, 401)
     end
 
@@ -134,7 +136,7 @@ defmodule LitelistWeb.FlagControllerTest do
 
       conn = conn
         |> login_neighbor(admin)
-        |> get(flag_path(conn, :edit, flag))
+        |> get(Routes.flag_path(conn, :edit, flag))
       assert html_response(conn, 200)
       assert view_template(conn) == "edit.html"
     end
@@ -145,7 +147,7 @@ defmodule LitelistWeb.FlagControllerTest do
 
       conn = conn
         |> login_neighbor(neighbor)
-        |> get(flag_path(conn, :edit, not_my_flag))
+        |> get(Routes.flag_path(conn, :edit, not_my_flag))
         assert response(conn, 401)
     end
 
@@ -153,7 +155,7 @@ defmodule LitelistWeb.FlagControllerTest do
       flag = Factory.insert(:flag)
 
       conn = conn
-        |> get(flag_path(conn, :edit, flag))
+        |> get(Routes.flag_path(conn, :edit, flag))
       
       assert response(conn, 401)
     end
@@ -167,7 +169,7 @@ defmodule LitelistWeb.FlagControllerTest do
 
       conn = conn
         |> login_neighbor(neighbor)
-        |> put(flag_path(conn, :update, flag), flag: @update_attrs)
+        |> put(Routes.flag_path(conn, :update, flag), flag: @update_attrs)
 
       assert response(conn, 401)
     end
@@ -178,15 +180,15 @@ defmodule LitelistWeb.FlagControllerTest do
 
       conn = conn
         |> login_neighbor(admin)
-        |> put(flag_path(conn, :update, flag), flag: @update_attrs)
+        |> put(Routes.flag_path(conn, :update, flag), flag: @update_attrs)
 
-      assert redirected_to(conn) == flag_path(conn, :show, flag)
+      assert redirected_to(conn) == Routes.flag_path(conn, :show, flag)
 
       conn = conn
         |> recycle()
         |> login_neighbor(admin)
 
-      conn = get conn, flag_path(conn, :show, flag)
+      conn = get conn, Routes.flag_path(conn, :show, flag)
       assert html_response(conn, 200)
       assert view_template(conn) == "show.html"
     end
@@ -197,7 +199,7 @@ defmodule LitelistWeb.FlagControllerTest do
 
       conn = conn
         |> login_neighbor(neighbor)
-        |> put(flag_path(conn, :update, flag), flag: @invalid_attrs)
+        |> put(Routes.flag_path(conn, :update, flag), flag: @invalid_attrs)
 
       assert response(conn, 401)
     end
@@ -208,7 +210,7 @@ defmodule LitelistWeb.FlagControllerTest do
 
       conn = conn
         |> login_neighbor(neighbor)
-        |> put(flag_path(conn, :update, not_my_flag), flag: @invalid_attrs)
+        |> put(Routes.flag_path(conn, :update, not_my_flag), flag: @invalid_attrs)
 
       assert response(conn, 401)
     end
@@ -216,7 +218,7 @@ defmodule LitelistWeb.FlagControllerTest do
     test "unautorized 401 redirect if not logged in", %{conn: conn} do
       flag = Factory.insert(:flag)
       conn = conn
-        |> put(flag_path(conn, :update, flag), flag: @invalid_attrs)
+        |> put(Routes.flag_path(conn, :update, flag), flag: @invalid_attrs)
 
       assert response(conn, 401)
     end
@@ -227,7 +229,7 @@ defmodule LitelistWeb.FlagControllerTest do
       flag = Factory.insert(:flag, %{post_id: post.id})
       conn = conn
         |> login_neighbor(admin)
-        |> put(flag_path(conn, :update, flag), flag: @invalid_attrs)
+        |> put(Routes.flag_path(conn, :update, flag), flag: @invalid_attrs)
 
       assert html_response(conn, 200)
       assert view_template(conn) == "edit.html"
@@ -242,7 +244,7 @@ defmodule LitelistWeb.FlagControllerTest do
 
       conn = conn
         |> login_neighbor(neighbor)
-        |> delete(flag_path(conn, :delete, flag))
+        |> delete(Routes.flag_path(conn, :delete, flag))
 
         assert response(conn, 401)
     end
@@ -253,11 +255,11 @@ defmodule LitelistWeb.FlagControllerTest do
 
       conn = conn
         |> login_neighbor(admin)
-        |> delete(flag_path(conn, :delete, flag))
+        |> delete(Routes.flag_path(conn, :delete, flag))
 
-      assert redirected_to(conn) == flag_path(conn, :index)
+      assert redirected_to(conn) == Routes.flag_path(conn, :index)
       assert_error_sent 404, fn ->
-        get conn, flag_path(conn, :show, flag)
+        get conn, Routes.flag_path(conn, :show, flag)
       end
     end
 
@@ -265,7 +267,7 @@ defmodule LitelistWeb.FlagControllerTest do
       flag = Factory.insert(:flag)
 
       conn = conn
-        |> delete(flag_path(conn, :delete, flag))
+        |> delete(Routes.flag_path(conn, :delete, flag))
 
       assert response(conn, 401)
     end

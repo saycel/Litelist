@@ -6,12 +6,14 @@ defmodule LitelistWeb.DashboardControllerTest do
     alias Litelist.Auth.Guardian
     alias Litelist.Posts
 
+    alias LitelistWeb.Router.Helpers, as: Routes
+
     describe "index" do
       test "shows the dashboard if logged in", %{conn: conn} do
         neighbor = Factory.insert(:neighbor)
         conn = conn
           |> login_neighbor(neighbor)
-          |> get(dashboard_path(conn, :index))
+          |> get(Routes.dashboard_path(conn, :index))
   
         assert html_response(conn, 200)
         assert view_template(conn) == "index.html"
@@ -19,7 +21,7 @@ defmodule LitelistWeb.DashboardControllerTest do
 
       test "redirects if not logged in", %{conn: conn} do
         conn = conn
-          |> get(dashboard_path(conn, :index))
+          |> get(Routes.dashboard_path(conn, :index))
   
         assert response(conn, 401)
       end
@@ -31,7 +33,7 @@ defmodule LitelistWeb.DashboardControllerTest do
 
         conn = conn
           |> login_neighbor(neighbor)
-          |> get(dashboard_path(conn, :export_posts))
+          |> get(Routes.dashboard_path(conn, :export_posts))
   
         assert get_resp_header(conn, "content-type") == ["text/csv; charset=utf-8"]
         assert response(conn, 200)
@@ -39,7 +41,7 @@ defmodule LitelistWeb.DashboardControllerTest do
 
       test "redirects from export posts if not logged in", %{conn: conn} do
         conn = conn
-          |> get(dashboard_path(conn, :export_posts))
+          |> get(Routes.dashboard_path(conn, :export_posts))
   
         assert response(conn, 401)
       end
@@ -49,7 +51,7 @@ defmodule LitelistWeb.DashboardControllerTest do
 
         conn = conn
           |> login_neighbor(neighbor)
-          |> get(dashboard_path(conn, :export_my_flagged_posts))
+          |> get(Routes.dashboard_path(conn, :export_my_flagged_posts))
   
         assert get_resp_header(conn, "content-type") == ["text/csv; charset=utf-8"]
         assert response(conn, 200)
@@ -57,7 +59,7 @@ defmodule LitelistWeb.DashboardControllerTest do
 
       test "redirects from export my flagged posts if not logged in", %{conn: conn} do
         conn = conn
-          |> get(dashboard_path(conn, :export_my_flagged_posts))
+          |> get(Routes.dashboard_path(conn, :export_my_flagged_posts))
   
         assert response(conn, 401)
       end
@@ -67,7 +69,7 @@ defmodule LitelistWeb.DashboardControllerTest do
 
         conn = conn
           |> login_neighbor(neighbor)
-          |> get(dashboard_path(conn, :export_posts_i_flagged))
+          |> get(Routes.dashboard_path(conn, :export_posts_i_flagged))
   
         assert get_resp_header(conn, "content-type") == ["text/csv; charset=utf-8"]
         assert response(conn, 200)
@@ -75,7 +77,7 @@ defmodule LitelistWeb.DashboardControllerTest do
 
       test "redirects from export posts I flagged if not logged in", %{conn: conn} do
         conn = conn
-          |> get(dashboard_path(conn, :export_posts_i_flagged))
+          |> get(Routes.dashboard_path(conn, :export_posts_i_flagged))
   
         assert response(conn, 401)
       end
@@ -85,14 +87,14 @@ defmodule LitelistWeb.DashboardControllerTest do
         neighbor = Factory.insert(:neighbor)
         conn = conn
           |> login_neighbor(neighbor)
-          |> get(dashboard_path(conn, :export_my_discussions))
+          |> get(Routes.dashboard_path(conn, :export_my_discussions))
   
         assert get_resp_header(conn, "content-type") == ["text/csv; charset=utf-8"]
         assert response(conn, 200)
       end
       test "redirects from export my discussions if not logged in", %{conn: conn} do
         conn = conn
-          |> get(dashboard_path(conn, :export_my_discussions))
+          |> get(Routes.dashboard_path(conn, :export_my_discussions))
   
         assert response(conn, 401)
       end
@@ -104,7 +106,7 @@ defmodule LitelistWeb.DashboardControllerTest do
 
         conn = conn
           |> login_neighbor(neighbor)
-          |> get(dashboard_path(conn, :posts))
+          |> get(Routes.dashboard_path(conn, :posts))
   
         assert html_response(conn, 200)
         assert view_template(conn) == "posts.html"
@@ -112,7 +114,7 @@ defmodule LitelistWeb.DashboardControllerTest do
 
       test "redirects from posts if not logged in", %{conn: conn} do
         conn = conn
-          |> get(dashboard_path(conn, :posts))
+          |> get(Routes.dashboard_path(conn, :posts))
 
         assert response(conn, 401)
       end
@@ -124,7 +126,7 @@ defmodule LitelistWeb.DashboardControllerTest do
 
         conn = conn
           |> login_neighbor(neighbor)
-          |> get(dashboard_path(conn, :my_flagged_posts))
+          |> get(Routes.dashboard_path(conn, :my_flagged_posts))
   
         assert html_response(conn, 200)
         assert view_template(conn) == "my_flagged_posts.html"
@@ -133,7 +135,7 @@ defmodule LitelistWeb.DashboardControllerTest do
 
       test "redirects from my flagged posts if not logged in", %{conn: conn} do
         conn = conn
-          |> get(dashboard_path(conn, :my_flagged_posts))
+          |> get(Routes.dashboard_path(conn, :my_flagged_posts))
 
         assert response(conn, 401)
       end
@@ -145,7 +147,7 @@ defmodule LitelistWeb.DashboardControllerTest do
 
         conn = conn
           |> login_neighbor(neighbor)
-          |> get(dashboard_path(conn, :posts_i_flagged))
+          |> get(Routes.dashboard_path(conn, :posts_i_flagged))
   
         assert html_response(conn, 200)
         assert view_template(conn) == "posts_i_flagged.html"
@@ -154,7 +156,7 @@ defmodule LitelistWeb.DashboardControllerTest do
 
       test "redirects from posts I flagged if not logged in", %{conn: conn} do
         conn = conn
-          |> get(dashboard_path(conn, :posts_i_flagged))
+          |> get(Routes.dashboard_path(conn, :posts_i_flagged))
 
         assert response(conn, 401)
       end
@@ -165,14 +167,14 @@ defmodule LitelistWeb.DashboardControllerTest do
         neighbor = Factory.insert(:neighbor)
         conn = conn
           |> login_neighbor(neighbor)
-          |> get(dashboard_path(conn, :my_discussions))
+          |> get(Routes.dashboard_path(conn, :my_discussions))
   
         assert html_response(conn, 200)
         assert view_template(conn) == "my_discussions.html"
       end
       test "redirects from my_discussions if not logged in", %{conn: conn} do
         conn = conn
-          |> get(dashboard_path(conn, :my_discussions))
+          |> get(Routes.dashboard_path(conn, :my_discussions))
         assert response(conn, 401)
       end
     end
@@ -184,9 +186,9 @@ defmodule LitelistWeb.DashboardControllerTest do
         assert Enum.empty?(Posts.list_posts_by_neighbor(neighbor)) == false
         conn = conn
           |> login_neighbor(neighbor)
-          |> delete(dashboard_path(conn, :delete_all))
+          |> delete(Routes.dashboard_path(conn, :delete_all))
   
-        assert redirected_to(conn) == dashboard_path(conn, :posts)
+        assert redirected_to(conn) == Routes.dashboard_path(conn, :posts)
 
         assert Enum.empty?(Posts.list_posts_by_neighbor(neighbor)) == true
       end
@@ -199,11 +201,11 @@ defmodule LitelistWeb.DashboardControllerTest do
 
         conn = conn
           |> login_neighbor(neighbor)
-          |> delete(dashboard_path(conn, :delete, business))
+          |> delete(Routes.dashboard_path(conn, :delete, business))
 
-        assert redirected_to(conn) == dashboard_path(conn, :posts)
+        assert redirected_to(conn) == Routes.dashboard_path(conn, :posts)
         assert_error_sent 404, fn ->
-          get conn, business_path(conn, :show, business)
+          get conn, Routes.business_path(conn, :show, business)
         end
       end
   
@@ -213,11 +215,11 @@ defmodule LitelistWeb.DashboardControllerTest do
 
         conn = conn
           |> login_neighbor(admin)
-          |> delete(dashboard_path(conn, :delete, business))
+          |> delete(Routes.dashboard_path(conn, :delete, business))
   
-        assert redirected_to(conn) == dashboard_path(conn, :posts)
+        assert redirected_to(conn) == Routes.dashboard_path(conn, :posts)
         assert_error_sent 404, fn ->
-          get conn, business_path(conn, :show, business)
+          get conn, Routes.business_path(conn, :show, business)
         end
       end
   
@@ -227,16 +229,16 @@ defmodule LitelistWeb.DashboardControllerTest do
 
         conn = conn
           |> login_neighbor(neighbor)
-          |> delete(dashboard_path(conn, :delete, not_my_business))
+          |> delete(Routes.dashboard_path(conn, :delete, not_my_business))
   
-          assert redirected_to(conn) == dashboard_path(conn, :posts)
+          assert redirected_to(conn) == Routes.dashboard_path(conn, :posts)
       end
   
       test "unautorized 401 redirect if not logged in", %{conn: conn} do
         business = Factory.insert(:business)
 
         conn = conn
-          |> delete(dashboard_path(conn, :delete, business))
+          |> delete(Routes.dashboard_path(conn, :delete, business))
   
         assert response(conn, 401)
       end

@@ -34,7 +34,7 @@ defmodule LitelistWeb.ForSaleController do
       {:ok, for_sale} ->
         conn
         |> put_flash(:info, "For sale created successfully.")
-        |> redirect(to: for_sale_path(conn, :show, for_sale))
+        |> redirect(to: Routes.for_sale_path(conn, :show, for_sale))
       {:error, %Ecto.Changeset{} = changeset} ->
         render(conn, "new.html", changeset: changeset)
     end
@@ -70,7 +70,7 @@ defmodule LitelistWeb.ForSaleController do
         {:ok, for_sale} ->
           conn
           |> put_flash(:info, "For sale updated successfully.")
-          |> redirect(to: for_sale_path(conn, :show, for_sale))
+          |> redirect(to: Routes.for_sale_path(conn, :show, for_sale))
         {:error, %Ecto.Changeset{} = changeset} ->
           render(conn, "edit.html", for_sale: for_sale, changeset: changeset)
       end
@@ -86,7 +86,7 @@ defmodule LitelistWeb.ForSaleController do
 
       conn
       |> put_flash(:info, "For sale deleted successfully.")
-      |> redirect(to: for_sale_path(conn, :index))
+      |> redirect(to: Routes.for_sale_path(conn, :index))
     else
       unauthorized_redirect(conn)
     end
@@ -95,6 +95,6 @@ defmodule LitelistWeb.ForSaleController do
   defp unauthorized_redirect(conn) do
     conn
     |> put_flash(:error, "Unauthorized.")
-    |> redirect(to: for_sale_path(conn, :index))
+    |> redirect(to: Routes.for_sale_path(conn, :index))
   end
 end

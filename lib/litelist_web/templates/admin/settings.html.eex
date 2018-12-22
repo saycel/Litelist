@@ -1,6 +1,6 @@
 <h1>Settings</h1>
 
-<%= form_for @conn, admin_path(@conn, :update_settings), fn f -> %>
+<%= form_for @conn, Routes.admin_path(@conn, :update_settings), fn f -> %>
   <label>
     Site name: <%= text_input f, :name, value: get_value(@settings, :name) %>
   </label>

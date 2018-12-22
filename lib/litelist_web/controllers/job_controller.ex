@@ -44,7 +44,7 @@ defmodule LitelistWeb.JobController do
       {:ok, job} ->
         conn
         |> put_flash(:info, "Job created successfully.")
-        |> redirect(to: job_path(conn, :show, job))
+        |> redirect(to: Routes.job_path(conn, :show, job))
       {:error, %Ecto.Changeset{} = changeset} ->
         render(conn, "new.html", changeset: changeset)
     end
@@ -80,7 +80,7 @@ defmodule LitelistWeb.JobController do
         {:ok, job} ->
           conn
           |> put_flash(:info, "Job updated successfully.")
-          |> redirect(to: job_path(conn, :show, job))
+          |> redirect(to: Routes.job_path(conn, :show, job))
         {:error, %Ecto.Changeset{} = changeset} ->
           render(conn, "edit.html", job: job, changeset: changeset)
       end
@@ -96,7 +96,7 @@ defmodule LitelistWeb.JobController do
 
       conn
       |> put_flash(:info, "Job deleted successfully.")
-      |> redirect(to: job_path(conn, :index))
+      |> redirect(to: Routes.job_path(conn, :index))
     else
       unauthorized_redirect(conn)
     end
@@ -105,6 +105,6 @@ defmodule LitelistWeb.JobController do
   defp unauthorized_redirect(conn) do
     conn
     |> put_flash(:error, "Unauthorized.")
-    |> redirect(to: job_path(conn, :index))
+    |> redirect(to: Routes.job_path(conn, :index))
   end
 end

@@ -5,6 +5,8 @@ defmodule LitelistWeb.DiscussionControllerTest do
   alias Litelist.Factory
   alias Litelist.Auth.Guardian
 
+  alias LitelistWeb.Router.Helpers, as: Routes
+
   @create_attrs %{description: "some description", title: "some title", slug: "some-title", url: "myurl"}
   @update_attrs %{description: "some updated description", title: "some updated title", slug: "some-updated-title", url: "newurl"}
   @invalid_attrs %{description: nil, title: nil}
@@ -12,7 +14,7 @@ defmodule LitelistWeb.DiscussionControllerTest do
   describe "index" do
     test "lists all discussions", %{conn: conn} do
       conn = conn
-        |> get(discussion_path(conn, :index))
+        |> get(Routes.discussion_path(conn, :index))
 
       assert html_response(conn, 200)
       assert view_template(conn) == "index.html"
@@ -23,7 +25,7 @@ defmodule LitelistWeb.DiscussionControllerTest do
     test "shows a discussion if the type matches", %{conn: conn} do
       discussion = Factory.insert(:discussion)
       conn = conn
-        |> get(discussion_path(conn, :show, discussion))
+        |> get(Routes.discussion_path(conn, :show, discussion))
 
       assert html_response(conn, 200)
       assert view_template(conn) == "show.html"
@@ -35,7 +37,7 @@ defmodule LitelistWeb.DiscussionControllerTest do
       neighbor = Factory.insert(:neighbor)
       conn = conn
         |> login_neighbor(neighbor)
-        |> get(discussion_path(conn, :new))
+        |> get(Routes.discussion_path(conn, :new))
       
       assert html_response(conn, 200)
       assert view_template(conn) == "new.html"
@@ -43,7 +45,7 @@ defmodule LitelistWeb.DiscussionControllerTest do
 
     test "unautorized 401 redirect if not logged in", %{conn: conn} do
       conn = conn
-        |> get(discussion_path(conn, :new))
+        |> get(Routes.discussion_path(conn, :new))
       
       assert response(conn, 401)
     end
@@ -54,16 +56,16 @@ defmodule LitelistWeb.DiscussionControllerTest do
       neighbor = Factory.insert(:neighbor)
       conn = conn
         |> login_neighbor(neighbor)
-        |> post(discussion_path(conn, :create), discussion: @create_attrs)
+        |> post(Routes.discussion_path(conn, :create), discussion: @create_attrs)
 
       assert %{id: id} = redirected_params(conn)
-      assert redirected_to(conn) == discussion_path(conn, :show, id)
+      assert redirected_to(conn) == Routes.discussion_path(conn, :show, id)
 
       conn = conn
         |> recycle()
         |> login_neighbor(neighbor)
 
-      conn = get conn, discussion_path(conn, :show, id)
+      conn = get conn, Routes.discussion_path(conn, :show, id)
       assert view_template(conn) == "show.html"
     end
 
@@ -71,14 +73,14 @@ defmodule LitelistWeb.DiscussionControllerTest do
       neighbor = Factory.insert(:neighbor)
       conn = conn
         |> login_neighbor(neighbor)
-        |> post(discussion_path(conn, :create), discussion: @invalid_attrs)
+        |> post(Routes.discussion_path(conn, :create), discussion: @invalid_attrs)
       assert html_response(conn, 200)
       assert view_template(conn) == "new.html"
     end
 
     test "unautorized 401 redirect if not logged in", %{conn: conn} do
       conn = conn
-        |> post(discussion_path(conn, :create), discussion: @create_attrs)
+        |> post(Routes.discussion_path(conn, :create), discussion: @create_attrs)
       assert response(conn, 401)
     end
 
@@ -87,7 +89,7 @@ defmodule LitelistWeb.DiscussionControllerTest do
       neighbor = Factory.insert(:neighbor)
       conn = conn
         |> login_neighbor(neighbor)
-        |> post(discussion_path(conn, :create), discussion: @create_attrs)
+        |> post(Routes.discussion_path(conn, :create), discussion: @create_attrs)
       assert html_response(conn, 200)
       assert view_template(conn) == "new.html"
     end
@@ -97,7 +99,7 @@ defmodule LitelistWeb.DiscussionControllerTest do
       neighbor = Factory.insert(:neighbor)
       conn = conn
         |> login_neighbor(neighbor)
-        |> post(discussion_path(conn, :create), discussion: @create_attrs)
+        |> post(Routes.discussion_path(conn, :create), discussion: @create_attrs)
       assert html_response(conn, 200)
       assert view_template(conn) == "new.html"
     end
@@ -110,7 +112,7 @@ defmodule LitelistWeb.DiscussionControllerTest do
 
       conn = conn
         |> login_neighbor(neighbor)
-        |> get(discussion_path(conn, :edit, discussion))
+        |> get(Routes.discussion_path(conn, :edit, discussion))
       assert response(conn, 401)
     end
 
@@ -120,7 +122,7 @@ defmodule LitelistWeb.DiscussionControllerTest do
 
       conn = conn
         |> login_neighbor(admin)
-        |> get(discussion_path(conn, :edit, discussion))
+        |> get(Routes.discussion_path(conn, :edit, discussion))
       assert html_response(conn, 200)
       assert view_template(conn) == "edit.html"
     end
@@ -131,7 +133,7 @@ defmodule LitelistWeb.DiscussionControllerTest do
 
       conn = conn
         |> login_neighbor(neighbor)
-        |> get(discussion_path(conn, :edit, not_my_discussion))
+        |> get(Routes.discussion_path(conn, :edit, not_my_discussion))
       assert response(conn, 401)
     end
 
@@ -139,7 +141,7 @@ defmodule LitelistWeb.DiscussionControllerTest do
       discussion = Factory.insert(:discussion)
 
       conn = conn
-        |> get(discussion_path(conn, :edit, discussion))
+        |> get(Routes.discussion_path(conn, :edit, discussion))
       
       assert response(conn, 401)
     end
@@ -153,7 +155,7 @@ defmodule LitelistWeb.DiscussionControllerTest do
 
       conn = conn
         |> login_neighbor(neighbor)
-        |> put(discussion_path(conn, :update, discussion), discussion: @update_attrs)
+        |> put(Routes.discussion_path(conn, :update, discussion), discussion: @update_attrs)
       assert response(conn, 401)
     end
 
@@ -163,15 +165,15 @@ defmodule LitelistWeb.DiscussionControllerTest do
 
       conn = conn
         |> login_neighbor(admin)
-        |> put(discussion_path(conn, :update, discussion), discussion: @update_attrs)
+        |> put(Routes.discussion_path(conn, :update, discussion), discussion: @update_attrs)
 
-      assert redirected_to(conn) == discussion_path(conn, :show, discussion)
+      assert redirected_to(conn) == Routes.discussion_path(conn, :show, discussion)
 
       conn = conn
         |> recycle()
         |> login_neighbor(admin)
 
-      conn = get conn, discussion_path(conn, :show, discussion)
+      conn = get conn, Routes.discussion_path(conn, :show, discussion)
       assert html_response(conn, 200)
       assert view_template(conn) == "show.html"
     end
@@ -182,7 +184,7 @@ defmodule LitelistWeb.DiscussionControllerTest do
 
       conn = conn
         |> login_neighbor(admin)
-        |> put(discussion_path(conn, :update, discussion), discussion: @invalid_attrs)
+        |> put(Routes.discussion_path(conn, :update, discussion), discussion: @invalid_attrs)
 
       assert html_response(conn, 200)
       assert view_template(conn) == "edit.html"
@@ -194,7 +196,7 @@ defmodule LitelistWeb.DiscussionControllerTest do
 
       conn = conn
         |> login_neighbor(neighbor)
-        |> put(discussion_path(conn, :update, not_my_discussion), discussion: @invalid_attrs)
+        |> put(Routes.discussion_path(conn, :update, not_my_discussion), discussion: @invalid_attrs)
 
       assert response(conn, 401)
     end
@@ -202,7 +204,7 @@ defmodule LitelistWeb.DiscussionControllerTest do
     test "unautorized 401 redirect if not logged in", %{conn: conn} do
       discussion = Factory.insert(:discussion)
       conn = conn
-        |> put(discussion_path(conn, :update, discussion), discussion: @invalid_attrs)
+        |> put(Routes.discussion_path(conn, :update, discussion), discussion: @invalid_attrs)
 
       assert response(conn, 401)
     end
@@ -216,7 +218,7 @@ defmodule LitelistWeb.DiscussionControllerTest do
 
       conn = conn
         |> login_neighbor(neighbor)
-        |> delete(discussion_path(conn, :delete, discussion))
+        |> delete(Routes.discussion_path(conn, :delete, discussion))
 
         assert response(conn, 401)
     end
@@ -227,11 +229,11 @@ defmodule LitelistWeb.DiscussionControllerTest do
 
       conn = conn
         |> login_neighbor(admin)
-        |> delete(discussion_path(conn, :delete, discussion))
+        |> delete(Routes.discussion_path(conn, :delete, discussion))
 
-      assert redirected_to(conn) == discussion_path(conn, :index)
+      assert redirected_to(conn) == Routes.discussion_path(conn, :index)
       assert_error_sent 404, fn ->
-        get conn, discussion_path(conn, :show, discussion)
+        get conn, Routes.discussion_path(conn, :show, discussion)
       end
     end
 
@@ -239,7 +241,7 @@ defmodule LitelistWeb.DiscussionControllerTest do
       discussion = Factory.insert(:discussion)
 
       conn = conn
-        |> delete(discussion_path(conn, :delete, discussion))
+        |> delete(Routes.discussion_path(conn, :delete, discussion))
 
       assert response(conn, 401)
     end

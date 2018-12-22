@@ -26,7 +26,7 @@ defmodule LitelistWeb.DiscussionController do
       {:ok, discussion} ->
         conn
         |> put_flash(:info, "Discussion created successfully.")
-        |> redirect(to: discussion_path(conn, :show, discussion))
+        |> redirect(to: Routes.discussion_path(conn, :show, discussion))
       {:error, %Ecto.Changeset{} = changeset} ->
         render(conn, "new.html", changeset: changeset)
     end
@@ -54,7 +54,7 @@ defmodule LitelistWeb.DiscussionController do
       {:ok, discussion} ->
         conn
         |> put_flash(:info, "Discussion updated successfully.")
-        |> redirect(to: discussion_path(conn, :show, discussion))
+        |> redirect(to: Routes.discussion_path(conn, :show, discussion))
       {:error, %Ecto.Changeset{} = changeset} ->
         render(conn, "edit.html", discussion: discussion, changeset: changeset)
     end
@@ -66,7 +66,7 @@ defmodule LitelistWeb.DiscussionController do
 
     conn
       |> put_flash(:info, "Discussion deleted successfully.")
-      |> redirect(to: discussion_path(conn, :index))
+      |> redirect(to: Routes.discussion_path(conn, :index))
   end
 
   def create_comment(conn, %{"comment" => comment_params}) do
@@ -78,12 +78,12 @@ defmodule LitelistWeb.DiscussionController do
       {:ok, _comment} ->
         conn
         |> put_flash(:info, "Comment added successfully")
-        |> redirect(to: discussion_path(conn, :show, comment_params["discussion_id"]))
+        |> redirect(to: Routes.discussion_path(conn, :show, comment_params["discussion_id"]))
 
       {:error, %Ecto.Changeset{} = _changeset} ->
         conn
         |> put_flash(:info, "Comment not added")
-        |> redirect(to: discussion_path(conn, :show, comment_params["discussion_id"]))
+        |> redirect(to: Routes.discussion_path(conn, :show, comment_params["discussion_id"]))
     end
   end
 end

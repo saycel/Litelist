@@ -5,6 +5,8 @@ defmodule LitelistWeb.EventControllerTest do
   alias Litelist.Factory
   alias Litelist.Auth.Guardian
 
+  alias LitelistWeb.Router.Helpers, as: Routes
+
   @create_attrs %{contact_info: "some contact_info", description: "some description", end_time: "2010-04-17 14:00:00.000000Z", location: "some location", slug: "some slug", start_time: "2010-04-17 14:00:00.000000Z", title: "some title", url: "my-cool-url"}
   @update_attrs %{contact_info: "some updated contact_info", description: "some updated description", end_time: "2011-05-18 15:01:01.000000Z", location: "some updated location", slug: "some updated slug", start_time: "2011-05-18 15:01:01.000000Z", title: "some updated title"}
   @invalid_attrs %{contact_info: nil, description: nil, end_time: nil, location: nil, slug: nil, start_time: nil, title: nil, type: nil, url: nil}
@@ -12,7 +14,7 @@ defmodule LitelistWeb.EventControllerTest do
   describe "index" do
     test "lists all events", %{conn: conn} do
       conn = conn
-        |> get(event_path(conn, :index))
+        |> get(Routes.event_path(conn, :index))
 
       assert html_response(conn, 200)
       assert view_template(conn) == "index.html"
@@ -24,7 +26,7 @@ defmodule LitelistWeb.EventControllerTest do
       event = Factory.insert(:event)
 
       conn = conn
-        |> get(event_path(conn, :show, event))
+        |> get(Routes.event_path(conn, :show, event))
 
       assert html_response(conn, 200)
       assert view_template(conn) == "show.html"
@@ -34,9 +36,9 @@ defmodule LitelistWeb.EventControllerTest do
       not_a_event = Factory.insert(:job)
 
       conn = conn
-        |> get(event_path(conn, :show, not_a_event))
+        |> get(Routes.event_path(conn, :show, not_a_event))
 
-        assert redirected_to(conn) == event_path(conn, :index)
+        assert redirected_to(conn) == Routes.event_path(conn, :index)
     end
   end
 
@@ -46,7 +48,7 @@ defmodule LitelistWeb.EventControllerTest do
 
       conn = conn
         |> login_neighbor(neighbor)
-        |> get(event_path(conn, :new))
+        |> get(Routes.event_path(conn, :new))
       
       assert html_response(conn, 200)
       assert view_template(conn) == "new.html"
@@ -54,7 +56,7 @@ defmodule LitelistWeb.EventControllerTest do
 
     test "unautorized 401 redirect if not logged in", %{conn: conn} do
       conn = conn
-        |> get(event_path(conn, :new))
+        |> get(Routes.event_path(conn, :new))
       
       assert response(conn, 401)
     end
@@ -66,16 +68,16 @@ defmodule LitelistWeb.EventControllerTest do
 
       conn = conn
         |> login_neighbor(neighbor)
-        |> post(event_path(conn, :create), post: @create_attrs)
+        |> post(Routes.event_path(conn, :create), post: @create_attrs)
 
       assert %{id: id} = redirected_params(conn)
-      assert redirected_to(conn) == event_path(conn, :show, id)
+      assert redirected_to(conn) == Routes.event_path(conn, :show, id)
 
       conn = conn
         |> recycle()
         |> login_neighbor(neighbor)
 
-      conn = get conn, event_path(conn, :show, id)
+      conn = get conn, Routes.event_path(conn, :show, id)
       assert html_response(conn, 200)
       assert view_template(conn) == "show.html"
     end
@@ -85,14 +87,14 @@ defmodule LitelistWeb.EventControllerTest do
 
       conn = conn
         |> login_neighbor(neighbor)
-        |> post(event_path(conn, :create), post: @invalid_attrs)
+        |> post(Routes.event_path(conn, :create), post: @invalid_attrs)
       assert html_response(conn, 200)
       assert view_template(conn) == "new.html"
     end
 
     test "unautorized 401 redirect if not logged in", %{conn: conn} do
       conn = conn
-        |> post(event_path(conn, :create), post: @create_attrs)
+        |> post(Routes.event_path(conn, :create), post: @create_attrs)
       assert response(conn, 401)
     end
 
@@ -103,7 +105,7 @@ defmodule LitelistWeb.EventControllerTest do
 
     #   conn = conn
     #     |> login_neighbor(neighbor)
-    #     |> post(event_path(conn, :create), post: @create_attrs)
+    #     |> post(Routes.event_path(conn, :create), post: @create_attrs)
     #   assert html_response(conn, 200)
     #   assert view_template(conn) == "new.html"
     # end
@@ -116,7 +118,7 @@ defmodule LitelistWeb.EventControllerTest do
 
       conn = conn
         |> login_neighbor(neighbor)
-        |> get(event_path(conn, :edit, event))
+        |> get(Routes.event_path(conn, :edit, event))
       assert html_response(conn, 200)
       assert view_template(conn) == "edit.html"
     end
@@ -127,7 +129,7 @@ defmodule LitelistWeb.EventControllerTest do
 
       conn = conn
         |> login_neighbor(admin)
-        |> get(event_path(conn, :edit, event))
+        |> get(Routes.event_path(conn, :edit, event))
       assert html_response(conn, 200)
       assert view_template(conn) == "edit.html"
     end
@@ -138,15 +140,15 @@ defmodule LitelistWeb.EventControllerTest do
 
       conn = conn
         |> login_neighbor(neighbor)
-        |> get(event_path(conn, :edit, not_my_event))
-      assert redirected_to(conn) == event_path(conn, :index)
+        |> get(Routes.event_path(conn, :edit, not_my_event))
+      assert redirected_to(conn) == Routes.event_path(conn, :index)
     end
 
     test "unautorized 401 redirect if not logged in", %{conn: conn} do
       event = Factory.insert(:event)
 
       conn = conn
-        |> get(event_path(conn, :edit, event))
+        |> get(Routes.event_path(conn, :edit, event))
       
       assert response(conn, 401)
     end
@@ -160,15 +162,15 @@ defmodule LitelistWeb.EventControllerTest do
 
       conn = conn
         |> login_neighbor(neighbor)
-        |> put(event_path(conn, :update, event), post: @update_attrs)
+        |> put(Routes.event_path(conn, :update, event), post: @update_attrs)
 
-      assert redirected_to(conn) == event_path(conn, :show, event)
+      assert redirected_to(conn) == Routes.event_path(conn, :show, event)
 
       conn = conn
         |> recycle()
         |> login_neighbor(neighbor)
 
-      conn = get conn, event_path(conn, :show, event)
+      conn = get conn, Routes.event_path(conn, :show, event)
       assert html_response(conn, 200)
       assert view_template(conn) == "show.html"
     end
@@ -179,15 +181,15 @@ defmodule LitelistWeb.EventControllerTest do
 
       conn = conn
         |> login_neighbor(admin)
-        |> put(event_path(conn, :update, event), post: @update_attrs)
+        |> put(Routes.event_path(conn, :update, event), post: @update_attrs)
 
-      assert redirected_to(conn) == event_path(conn, :show, event)
+      assert redirected_to(conn) == Routes.event_path(conn, :show, event)
 
       conn = conn
         |> recycle()
         |> login_neighbor(admin)
 
-      conn = get conn, event_path(conn, :show, event)
+      conn = get conn, Routes.event_path(conn, :show, event)
       assert html_response(conn, 200)
       assert view_template(conn) == "show.html"
     end
@@ -198,7 +200,7 @@ defmodule LitelistWeb.EventControllerTest do
 
       conn = conn
         |> login_neighbor(neighbor)
-        |> put(event_path(conn, :update, event), post: @invalid_attrs)
+        |> put(Routes.event_path(conn, :update, event), post: @invalid_attrs)
 
       assert html_response(conn, 200)
       assert view_template(conn) == "edit.html"
@@ -210,16 +212,16 @@ defmodule LitelistWeb.EventControllerTest do
 
       conn = conn
         |> login_neighbor(neighbor)
-        |> put(event_path(conn, :update, not_my_event), post: @invalid_attrs)
+        |> put(Routes.event_path(conn, :update, not_my_event), post: @invalid_attrs)
 
-        assert redirected_to(conn) == event_path(conn, :index)
+        assert redirected_to(conn) == Routes.event_path(conn, :index)
     end
 
     test "unautorized 401 redirect if not logged in", %{conn: conn} do
       event = Factory.insert(:event)
 
       conn = conn
-        |> put(event_path(conn, :update, event), event: @invalid_attrs)
+        |> put(Routes.event_path(conn, :update, event), event: @invalid_attrs)
 
       assert response(conn, 401)
     end
@@ -233,11 +235,11 @@ defmodule LitelistWeb.EventControllerTest do
 
       conn = conn
         |> login_neighbor(neighbor)
-        |> delete(event_path(conn, :delete, event))
+        |> delete(Routes.event_path(conn, :delete, event))
 
-      assert redirected_to(conn) == event_path(conn, :index)
+      assert redirected_to(conn) == Routes.event_path(conn, :index)
       assert_error_sent 404, fn ->
-        get conn, event_path(conn, :show, event)
+        get conn, Routes.event_path(conn, :show, event)
       end
     end
 
@@ -247,11 +249,11 @@ defmodule LitelistWeb.EventControllerTest do
 
       conn = conn
         |> login_neighbor(admin)
-        |> delete(event_path(conn, :delete, event))
+        |> delete(Routes.event_path(conn, :delete, event))
 
-      assert redirected_to(conn) == event_path(conn, :index)
+      assert redirected_to(conn) == Routes.event_path(conn, :index)
       assert_error_sent 404, fn ->
-        get conn, event_path(conn, :show, event)
+        get conn, Routes.event_path(conn, :show, event)
       end
     end
 
@@ -261,16 +263,16 @@ defmodule LitelistWeb.EventControllerTest do
 
       conn = conn
         |> login_neighbor(neighbor)
-        |> delete(event_path(conn, :delete, not_my_event))
+        |> delete(Routes.event_path(conn, :delete, not_my_event))
 
-        assert redirected_to(conn) == event_path(conn, :index)
+        assert redirected_to(conn) == Routes.event_path(conn, :index)
     end
 
     test "unautorized 401 redirect if not logged in", %{conn: conn} do
       event = Factory.insert(:event)
 
       conn = conn
-        |> delete(event_path(conn, :delete, event))
+        |> delete(Routes.event_path(conn, :delete, event))
 
       assert response(conn, 401)
     end

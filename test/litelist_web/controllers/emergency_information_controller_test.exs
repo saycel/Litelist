@@ -12,7 +12,7 @@
 #   describe "index" do
 #     test "lists all emergency_information", %{conn: conn} do
 #       conn = conn
-#         |> get(emergency_information_path(conn, :index))
+#         |> get(Routes.emergency_information_path(conn, :index))
 
 #       assert html_response(conn, 200)
 #       assert view_template(conn) == "index.html"
@@ -24,7 +24,7 @@
 #       emergency_information = Factory.insert(:emergency_information)
 
 #       conn = conn
-#         |> get(emergency_information_path(conn, :show, emergency_information))
+#         |> get(Routes.emergency_information_path(conn, :show, emergency_information))
 
 #       assert html_response(conn, 200)
 #       assert view_template(conn) == "show.html"
@@ -34,9 +34,9 @@
 #       not_a_emergency = Factory.insert(:job)
 
 #       conn = conn
-#         |> get(emergency_information_path(conn, :show, not_a_emergency))
+#         |> get(Routes.emergency_information_path(conn, :show, not_a_emergency))
 
-#         assert redirected_to(conn) == emergency_information_path(conn, :index)
+#         assert redirected_to(conn) == Routes.emergency_information_path(conn, :index)
 #     end
 #   end
 
@@ -46,7 +46,7 @@
 
 #       conn = conn
 #         |> login_neighbor(neighbor)
-#         |> get(emergency_information_path(conn, :new))
+#         |> get(Routes.emergency_information_path(conn, :new))
       
 #       assert html_response(conn, 200)
 #       assert view_template(conn) == "new.html"
@@ -54,7 +54,7 @@
 
 #     test "unautorized 401 redirect if not logged in", %{conn: conn} do
 #       conn = conn
-#         |> get(emergency_information_path(conn, :new))
+#         |> get(Routes.emergency_information_path(conn, :new))
       
 #       assert response(conn, 401)
 #     end
@@ -66,16 +66,16 @@
 
 #       conn = conn
 #         |> login_neighbor(neighbor)
-#         |> post(emergency_information_path(conn, :create), post: @create_attrs)
+#         |> post(Routes.emergency_information_path(conn, :create), post: @create_attrs)
 
 #       assert %{id: id} = redirected_params(conn)
-#       assert redirected_to(conn) == emergency_information_path(conn, :show, id)
+#       assert redirected_to(conn) == Routes.emergency_information_path(conn, :show, id)
 
 #       conn = conn
 #         |> recycle()
 #         |> login_neighbor(neighbor)
 
-#       conn = get conn, emergency_information_path(conn, :show, id)
+#       conn = get conn, Routes.emergency_information_path(conn, :show, id)
 #       assert html_response(conn, 200)
 #       assert view_template(conn) == "show.html"
 #     end
@@ -85,14 +85,14 @@
 
 #       conn = conn
 #         |> login_neighbor(neighbor)
-#         |> post(emergency_information_path(conn, :create), post: @invalid_attrs)
+#         |> post(Routes.emergency_information_path(conn, :create), post: @invalid_attrs)
 #       assert html_response(conn, 200)
 #       assert view_template(conn) == "new.html"
 #     end
 
 #     test "unautorized 401 redirect if not logged in", %{conn: conn} do
 #       conn = conn
-#         |> post(emergency_information_path(conn, :create), post: @create_attrs)
+#         |> post(Routes.emergency_information_path(conn, :create), post: @create_attrs)
 #       assert response(conn, 401)
 #     end
 
@@ -102,7 +102,7 @@
 
 #       conn = conn
 #         |> login_neighbor(neighbor)
-#         |> post(emergency_information_path(conn, :create), post: @create_attrs)
+#         |> post(Routes.emergency_information_path(conn, :create), post: @create_attrs)
 #       assert html_response(conn, 200)
 #       assert view_template(conn) == "new.html"
 #     end
@@ -115,7 +115,7 @@
 
 #       conn = conn
 #         |> login_neighbor(neighbor)
-#         |> get(emergency_information_path(conn, :edit, emergency_information))
+#         |> get(Routes.emergency_information_path(conn, :edit, emergency_information))
 #       assert html_response(conn, 200)
 #       assert view_template(conn) == "edit.html"
 #     end
@@ -126,7 +126,7 @@
 
 #       conn = conn
 #         |> login_neighbor(admin)
-#         |> get(emergency_information_path(conn, :edit, emergency_information))
+#         |> get(Routes.emergency_information_path(conn, :edit, emergency_information))
 #       assert html_response(conn, 200)
 #       assert view_template(conn) == "edit.html"
 #     end
@@ -137,15 +137,15 @@
 
 #       conn = conn
 #         |> login_neighbor(neighbor)
-#         |> get(emergency_information_path(conn, :edit, not_my_emergency_information))
-#       assert redirected_to(conn) == emergency_information_path(conn, :index)
+#         |> get(Routes.emergency_information_path(conn, :edit, not_my_emergency_information))
+#       assert redirected_to(conn) == Routes.emergency_information_path(conn, :index)
 #     end
 
 #     test "unautorized 401 redirect if not logged in", %{conn: conn} do
 #       emergency_information = Factory.insert(:emergency_information)
 
 #       conn = conn
-#         |> get(emergency_information_path(conn, :edit, emergency_information))
+#         |> get(Routes.emergency_information_path(conn, :edit, emergency_information))
       
 #       assert response(conn, 401)
 #     end
@@ -159,15 +159,15 @@
 
 #       conn = conn
 #         |> login_neighbor(neighbor)
-#         |> put(emergency_information_path(conn, :update, emergency_information), post: @update_attrs)
+#         |> put(Routes.emergency_information_path(conn, :update, emergency_information), post: @update_attrs)
 
-#       assert redirected_to(conn) == emergency_information_path(conn, :show, emergency_information)
+#       assert redirected_to(conn) == Routes.emergency_information_path(conn, :show, emergency_information)
 
 #       conn = conn
 #         |> recycle()
 #         |> login_neighbor(neighbor)
 
-#       conn = get conn, emergency_information_path(conn, :show, emergency_information)
+#       conn = get conn, Routes.emergency_information_path(conn, :show, emergency_information)
 #       assert html_response(conn, 200)
 #       assert view_template(conn) == "show.html"
 #     end
@@ -178,15 +178,15 @@
 
 #       conn = conn
 #         |> login_neighbor(admin)
-#         |> put(emergency_information_path(conn, :update, emergency_information), post: @update_attrs)
+#         |> put(Routes.emergency_information_path(conn, :update, emergency_information), post: @update_attrs)
 
-#       assert redirected_to(conn) == emergency_information_path(conn, :show, emergency_information)
+#       assert redirected_to(conn) == Routes.emergency_information_path(conn, :show, emergency_information)
 
 #       conn = conn
 #         |> recycle()
 #         |> login_neighbor(admin)
 
-#       conn = get conn, emergency_information_path(conn, :show, emergency_information)
+#       conn = get conn, Routes.emergency_information_path(conn, :show, emergency_information)
 #       assert html_response(conn, 200)
 #       assert view_template(conn) == "show.html"
 #     end
@@ -197,7 +197,7 @@
 
 #       conn = conn
 #         |> login_neighbor(neighbor)
-#         |> put(emergency_information_path(conn, :update, emergency_information), post: @invalid_attrs)
+#         |> put(Routes.emergency_information_path(conn, :update, emergency_information), post: @invalid_attrs)
 
 #       assert html_response(conn, 200)
 #       assert view_template(conn) == "edit.html"
@@ -209,16 +209,16 @@
 
 #       conn = conn
 #         |> login_neighbor(neighbor)
-#         |> put(emergency_information_path(conn, :update, not_my_emergency_information), post: @invalid_attrs)
+#         |> put(Routes.emergency_information_path(conn, :update, not_my_emergency_information), post: @invalid_attrs)
 
-#         assert redirected_to(conn) == emergency_information_path(conn, :index)
+#         assert redirected_to(conn) == Routes.emergency_information_path(conn, :index)
 #     end
 
 #     test "unautorized 401 redirect if not logged in", %{conn: conn} do
 #       emergency_information = Factory.insert(:emergency_information)
 
 #       conn = conn
-#         |> put(emergency_information_path(conn, :update, emergency_information), emergency_information: @invalid_attrs)
+#         |> put(Routes.emergency_information_path(conn, :update, emergency_information), emergency_information: @invalid_attrs)
 
 #       assert response(conn, 401)
 #     end
@@ -232,11 +232,11 @@
 
 #       conn = conn
 #         |> login_neighbor(neighbor)
-#         |> delete(emergency_information_path(conn, :delete, emergency_information))
+#         |> delete(Routes.emergency_information_path(conn, :delete, emergency_information))
 
-#       assert redirected_to(conn) == emergency_information_path(conn, :index)
+#       assert redirected_to(conn) == Routes.emergency_information_path(conn, :index)
 #       assert_error_sent 404, fn ->
-#         get conn, emergency_information_path(conn, :show, emergency_information)
+#         get conn, Routes.emergency_information_path(conn, :show, emergency_information)
 #       end
 #     end
 
@@ -246,11 +246,11 @@
 
 #       conn = conn
 #         |> login_neighbor(admin)
-#         |> delete(emergency_information_path(conn, :delete, emergency_information))
+#         |> delete(Routes.emergency_information_path(conn, :delete, emergency_information))
 
-#       assert redirected_to(conn) == emergency_information_path(conn, :index)
+#       assert redirected_to(conn) == Routes.emergency_information_path(conn, :index)
 #       assert_error_sent 404, fn ->
-#         get conn, emergency_information_path(conn, :show, emergency_information)
+#         get conn, Routes.emergency_information_path(conn, :show, emergency_information)
 #       end
 #     end
 
@@ -260,16 +260,16 @@
 
 #       conn = conn
 #         |> login_neighbor(neighbor)
-#         |> delete(emergency_information_path(conn, :delete, not_my_emergency_information))
+#         |> delete(Routes.emergency_information_path(conn, :delete, not_my_emergency_information))
 
-#         assert redirected_to(conn) == emergency_information_path(conn, :index)
+#         assert redirected_to(conn) == Routes.emergency_information_path(conn, :index)
 #     end
 
 #     test "unautorized 401 redirect if not logged in", %{conn: conn} do
 #       emergency_information = Factory.insert(:emergency_information)
 
 #       conn = conn
-#         |> delete(emergency_information_path(conn, :delete, emergency_information))
+#         |> delete(Routes.emergency_information_path(conn, :delete, emergency_information))
 
 #       assert response(conn, 401)
 #     end

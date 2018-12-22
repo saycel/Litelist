@@ -20,7 +20,7 @@ defmodule LitelistWeb.DashboardController do
         {_total, _posts} = Posts.delete_all_by_neighbor(conn.assigns.current_neighbor)
         conn
             |> put_flash(:info, "All posts permanently deleted.")
-            |> redirect(to: dashboard_path(conn, :posts))
+            |> redirect(to: Routes.dashboard_path(conn, :posts))
     end
 
     def delete(conn, %{"id" => id}) do
@@ -30,7 +30,7 @@ defmodule LitelistWeb.DashboardController do
     
           conn
           |> put_flash(:info, "Job deleted successfully.")
-          |> redirect(to: dashboard_path(conn, :posts))
+          |> redirect(to: Routes.dashboard_path(conn, :posts))
         else
           unauthorized_redirect(conn)
         end
@@ -90,6 +90,6 @@ defmodule LitelistWeb.DashboardController do
     defp unauthorized_redirect(conn) do
         conn
         |> put_flash(:error, "Unauthorized.")
-        |> redirect(to: dashboard_path(conn, :posts))
+        |> redirect(to: Routes.dashboard_path(conn, :posts))
     end
 end

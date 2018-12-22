@@ -6,7 +6,7 @@
 	</div>
 	<div class="column col-1">
 		<div class="column col-12">
-			<span class="underline <%=get_color(~s(business))%>"><%= link "Back", to: business_path(@conn, :index) %></span>
+			<span class="underline <%=get_color(~s(business))%>"><%= link "Back", to: Routes.business_path(@conn, :index) %></span>
 		</div>
 	</div>
 </div>
