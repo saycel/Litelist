@@ -73,7 +73,6 @@ defmodule LitelistWeb.DiscussionController do
     comment_params = comment_params
       |> SharedUtils.add_neighbor_id(conn)
 
-    IO.inspect comment_params["discussion_id"]
     case Comments.create_comment(comment_params) do
       {:ok, _comment} ->
         conn
