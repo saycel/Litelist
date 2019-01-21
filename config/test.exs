@@ -15,7 +15,7 @@ config :litelist, Litelist.Repo,
   username: "postgres",
   password: "postgres",
   database: "litelist_test",
-  hostname: "db",
+  hostname: "postgres",
   pool: Ecto.Adapters.SQL.Sandbox
 
 # Speed up tests that use bcrypt

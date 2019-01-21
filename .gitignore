@@ -31,3 +31,6 @@ Mnesia*
 
 # local photo uploads
 /uploads
+
+# env variables
+.env

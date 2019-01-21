@@ -1,6 +1,6 @@
 # Litelist
 
-### Update from v0.0.1 to v0.1
+### Update from v0.0.1 to v0.1.0
 
 * Remove assets/node_modules from within your existing container
 * Run `npm install` within the assets folder, also from within the docker container
