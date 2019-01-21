@@ -8,20 +8,10 @@ services:
     ports:
       - "5432:5432"
 
-  webpack:
-    build:
-      context: "."
-      dockerfile: "Dockerfile.webpack"
-    command: yarn run watch
-    volumes:
-      - ".:/app"
-      - "static:/app/priv/static"
-
   web:
     build: "."
     depends_on:
       - "postgres"
-      - "webpack"
     ports:
       - "4000:4000"
     stdin_open: true

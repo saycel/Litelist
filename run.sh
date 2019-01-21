@@ -4,8 +4,8 @@
 
 # add & to make these next 2 run in the background
 
-mix amnesia.create --database Litelist.Settings.SettingsDatabase --disk
-MIX_ENV=test mix amnesia.create --database Litelist.Settings.SettingsDatabase --disk
+# mix amnesia.create --database Litelist.Settings.SettingsDatabase --disk
+# MIX_ENV=test mix amnesia.create --database Litelist.Settings.SettingsDatabase --disk
 
 set -e
 
