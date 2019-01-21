@@ -29,6 +29,7 @@ services:
     volumes:
       - ".:/app"
       - "static:/app/priv/static"
+    command: "./run.sh"
 
 volumes:
   postgres: {}
