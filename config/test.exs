@@ -12,10 +12,10 @@ config :logger, level: :warn
 # Configure your database
 config :litelist, Litelist.Repo,
   adapter: Ecto.Adapters.Postgres,
-  username: "postgres",
-  password: "postgres",
-  database: "litelist_test",
-  hostname: "postgres",
+  username: System.get_env("TEST_POSTGRES_USER"),
+  password: System.get_env("TEST_POSTGRES_PASSWORD"),
+  database: System.get_env("TEST_POSTGRES_DB"),
+  hostname: System.get_env("TEST_POSTGRES_HOST"),
   pool: Ecto.Adapters.SQL.Sandbox
 
 # Speed up tests that use bcrypt

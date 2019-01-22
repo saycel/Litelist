@@ -58,9 +58,9 @@ config :phoenix, :stacktrace_depth, 20
 # Configure your database
 config :litelist, Litelist.Repo,
   adapter: Ecto.Adapters.Postgres,
-  username: "postgres",
-  password: "postgres",
-  database: "litelist_dev",
-  hostname: "postgres",
+  username: System.get_env("POSTGRES_USER"),
+  password: System.get_env("POSTGRES_PASSWORD"),
+  database: System.get_env("POSTGRES_DB"),
+  hostname: System.get_env("POSTGRES_HOST"),
   port: "5432",
   pool_size: 10
