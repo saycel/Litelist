@@ -6,12 +6,12 @@
 
 set -e
 
-# cd assets && npm install
+cd assets && npm install
 
-# cd ..
-# mix deps.get
-# mix ecto.create
-# mix ecto.migrate
+cd ..
+mix deps.get
+mix ecto.create
+mix ecto.migrate
 
 # Start the phoenix web server
-source .env && mix phx.server
+mix phx.server
