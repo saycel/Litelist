@@ -1,7 +1,7 @@
-defmodule Litelist.SettingsContextSpec do
+defmodule Litelist.SettingsSpec do
   use Litelist.DataCase, async: true
 
-  alias Litelist.SettingsContext
+  alias Litelist.Settings
   alias Litelist.Settings.Settings
   alias Litelist.Factory
 
@@ -22,15 +22,15 @@ defmodule Litelist.SettingsContextSpec do
       Factory.insert(:settings)
       Factory.insert(:settings)
       expected_settings = Factory.insert(:settings, @valid_attrs)
-      assert SettingsContext.get_settings() == expected_settings
+      assert Settings.get_settings() == expected_settings
     end
 
     test "get_settings/0 returns default settings if no settings exist" do
-      assert SettingsContext.get_settings() != nil
+      assert Settings.get_settings() != nil
     end
 
     test "new_settings/1 creates a new settings row" do
-      assert {:ok, %Settings{} = settings} = SettingsContext.new_settings(@valid_attrs)
+      assert {:ok, %Settings{} = settings} = Settings.new_settings(@valid_attrs)
     end
   end
 end
