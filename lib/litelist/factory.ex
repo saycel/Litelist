@@ -11,6 +11,7 @@ defmodule Litelist.Factory do
   alias Litelist.Moderation.Flag
   alias Litelist.Discussions.Discussion
   alias Litelist.Comments.Comment
+  alias Litelist.Settings.Settings
 
   @doc """
   Neighbor factory
@@ -226,6 +227,24 @@ defmodule Litelist.Factory do
       discussion_id: discussion_id,
       post_id: nil,
       neighbor_id: neighbor_id 
+    }
+  end
+
+  @doc """
+  Settings factory
+  ## How to
+    build(:settings)
+    build(:settings, %{name: "some name"})
+    insert(:settings)
+  """
+  def settings_factory do
+    name = FakerElixir.Address.city
+    max_flagged_posts = Enum.random(5..10)
+    allow_replies = false
+    %Settings{
+      name: name,
+      max_flagged_posts: max_flagged_posts,
+      allow_replies: allow_replies
     }
   end
 end

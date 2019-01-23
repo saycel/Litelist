@@ -53,7 +53,6 @@ defmodule Litelist.Mixfile do
       {:excoveralls, "~> 0.10", only: :test},
       {:credo, "~> 1.0.0", only: [:dev, :test], runtime: false},
       {:ex_doc, "~> 0.16"},
-      {:amnesia, "~> 0.2.7"},
       {:quantum, "~> 2.3.3"},
       {:timex, "~> 3.4.2"},
       {:arc, "~> 0.11.0"},

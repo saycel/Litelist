@@ -5,6 +5,8 @@ defmodule LitelistWeb.PageController do
   alias Litelist.Auth.Guardian
   alias Litelist.Posts
   alias Litelist.Settings.SettingsDatabase
+  alias Litelist.Settings
+
 
   def index(conn, _params) do
     posts = Posts.list_ordered_by_updated_at()
@@ -19,7 +21,7 @@ defmodule LitelistWeb.PageController do
   
   def url_handler(conn, _params) do
     host = get_host(conn)
-    name =  SettingsDatabase.get_settings().map.name
+    name =  Settings.get_settings().name
     if host == name do
       posts = Posts.list_ordered_by_updated_at()
       conn

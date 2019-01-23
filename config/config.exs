@@ -42,6 +42,7 @@ config :arc,
   
 config :litelist,
   max_flagged_posts: 5,
-  allow_replies: false
+  allow_replies: false,
+  name: "bushwick"
 
 config :phoenix, :json_library, Jason

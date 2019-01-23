@@ -1,9 +1,4 @@
 #!/bin/bash
-# add & to make these next 2 run in the background
-echo "Adding amnesia database (these will soon be removed)..."
-mix amnesia.create --database Litelist.Settings.SettingsDatabase --disk
-MIX_ENV=test mix amnesia.create --database Litelist.Settings.SettingsDatabase --disk
-
 set -e
 
 echo "Running npm install..."

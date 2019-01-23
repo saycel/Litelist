@@ -5,7 +5,7 @@ defmodule LitelistWeb.FlagController do
   alias Litelist.Moderation.Flag
   alias Litelist.Posts
   alias LitelistWeb.Utils.SharedUtils
-  alias Litelist.Settings.SettingsDatabase
+  alias Litelist.Settings
 
   @types Flag.get_types()
 
@@ -94,7 +94,7 @@ defmodule LitelistWeb.FlagController do
 
   defp hide_post_if_over_flag_limit(flag) do
     post = Posts.get_post!(flag.post_id)
-    settings = SettingsDatabase.get_settings().map
+    settings = Settings.get_settings()
     Posts.hide_post_if_over_flag_limit(post, settings.max_flagged_posts)
   end
 
