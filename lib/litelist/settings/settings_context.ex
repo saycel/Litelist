@@ -9,7 +9,7 @@ defmodule Litelist.SettingsContext do
 
 
   def get_settings do
-    Repo.one(from x in Settings, order_by: [desc: x.id], limit: 1)
+    Repo.one(from x in Settings, order_by: [desc: x.id], limit: 1) || default_settings
   end
 
   def new_settings(attrs \\ %{}) do

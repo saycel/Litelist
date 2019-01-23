@@ -25,6 +25,10 @@ defmodule Litelist.SettingsContextSpec do
       assert SettingsContext.get_settings() == expected_settings
     end
 
+    test "get_settings/0 returns default settings if no settings exist" do
+      assert SettingsContext.get_settings() != nil
+    end
+
     test "new_settings/1 creates a new settings row" do
       assert {:ok, %Settings{} = settings} = SettingsContext.new_settings(@valid_attrs)
     end
