@@ -1,18 +1,29 @@
-version: '3.2'
+version: "3.6"
+
 services:
-  db:
-    image: postgres
+  postgres:
+    image: "postgres:11.0-alpine"
+    volumes:
+      - "postgres:/var/lib/postgresql/data"
     ports:
       - "5432:5432"
+
   web:
-    build: .
-    volumes:
-      - type: bind
-        source: .
-        target: /app
+    build: "."
+    depends_on:
+      - "postgres"
     ports:
       - "4000:4000"
-    depends_on:
-      - db
-    command:
-      - ./run.sh
+    stdin_open: true
+    tty: true
+    volumes:
+      - ".:/app"
+      - "static:/app/priv/static"
+    command: "./run.sh"
+
+volumes:
+  postgres: {}
+  static:
+    driver_opts:
+      device: "tmpfs"
+      type: "tmpfs"

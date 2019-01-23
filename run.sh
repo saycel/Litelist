@@ -1,30 +1,19 @@
 #!/bin/bash
-# Adapted from Alex Kleissner's post, Running a Phoenix 1.3 project with docker-compose
-# https://medium.com/@hex337/running-a-phoenix-1-3-project-with-docker-compose-d82ab55e43cf
-
-# add & to make these next 2 run in the backgroun
-
+# add & to make these next 2 run in the background
+echo "Adding amnesia database (these will soon be removed)..."
 mix amnesia.create --database Litelist.Settings.SettingsDatabase --disk
 MIX_ENV=test mix amnesia.create --database Litelist.Settings.SettingsDatabase --disk
 
 set -e
 
-# Ensure the app's dependencies are installed
-mix deps.get
+echo "Running npm install..."
 cd assets && npm install
+
+echo "Running mix setup commands..."
 cd ..
-
-# Wait for Postgres to become available.
-until psql -h db -U "postgres" -c '\q' 2>/dev/null; do
-  >&2 echo "Postgres is unavailable - sleeping"
-  sleep 1
-done
-
-echo "Postgres is available: continuing with database setup..."
-
-# Potentially Set up the database
+mix deps.get
 mix ecto.create
 mix ecto.migrate
 
-# Start the phoenix web server
+echo "Starting server..."
 mix phx.server
