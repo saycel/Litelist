@@ -1,26 +1,30 @@
 <h2>My Posts</h2>
-<span><%= link "Delete All", to: Routes.dashboard_path(@conn, :delete_all), method: :delete, data: [confirm: "This will delete all of your posts and cannot be undone. Are you sure?"], class: "btn btn-danger btn-xs" %></span>
-<span><%= link "Export All", to: Routes.dashboard_path(@conn, :export_posts), class: "btn btn-default btn-xs" %></span>
+<%= unless Enum.empty? @posts do %>
+  <span><%= link "Delete All", to: Routes.dashboard_path(@conn, :delete_all), method: :delete, data: [confirm: "This will delete all of your posts and cannot be undone. Are you sure?"], class: "btn btn-danger btn-xs" %></span>
+  <span><%= link "Export All", to: Routes.dashboard_path(@conn, :export_posts), class: "btn btn-default btn-xs" %></span>
 
-<table class="table">
-  <thead>
-    <tr>
-      <th>Title</th>
-      <th>Url</th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-<%= for post <- @posts do %>
-    <tr>
-      <td><%= post.title %></td>
-      <td><%= post.url %></td>
-      <td class="text-right">
-        <span><%= link "Show", to: path_builder(post), class: "btn btn-default btn-xs" %></span>
-        <span><%= link "Edit", to: path_builder(post) <> "/edit", class: "btn btn-default btn-xs" %></span>
-        <span><%= link "Delete", to: "/dashboard/posts/delete/#{post.id}", method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" %></span>
-      </td>
-    </tr>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Title</th>
+        <th>Url</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+  <%= for post <- @posts do %>
+      <tr>
+        <td><%= post.title %></td>
+        <td><%= post.url %></td>
+        <td class="text-right">
+          <span><%= link "Show", to: path_builder(post), class: "btn btn-default btn-xs" %></span>
+          <span><%= link "Edit", to: path_builder(post) <> "/edit", class: "btn btn-default btn-xs" %></span>
+          <span><%= link "Delete", to: "/dashboard/posts/delete/#{post.id}", method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" %></span>
+        </td>
+      </tr>
+  <% end %>
+    </tbody>
+  </table>
+<% else %>
+  <p>You have not created any posts.</p>
 <% end %>
-  </tbody>
-</table>
