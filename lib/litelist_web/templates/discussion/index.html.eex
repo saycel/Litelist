@@ -10,7 +10,7 @@
 </div>
 <div class="cc"> 
 
-  <div class="grid" data-content="POSTINGS" data-masonry='{ "itemSelector": ".grid-item" }'>
+  <div>
     <div class="columns">
       <%= if Enum.empty?(@discussions) do %>
         <p>Discussions are coming soon</p>

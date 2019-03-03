@@ -15,7 +15,7 @@
 	<div class="columns">
 		<div <div class="column box col-12 ocean"><h1><%=@post.title%>.</h1></div>
 	</div>
-	<div class="grid columns" data-content="POSTINGS" data-masonry='{ "itemSelector": ".grid-item" }'>	
+	<div>	
 		<div class='columns'>
 			<%=if Map.has_key?(@post, :images) do %>
 				<%= for image <- @post.images do %>

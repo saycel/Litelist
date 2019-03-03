@@ -12,7 +12,7 @@
 </div>
 <div class="cc"> 
 
-  <div class="grid" data-content="POSTINGS" data-masonry='{"columnWidth": 0, "itemSelector": ".grid-item" }'>
+  <div>
     <div class="columns">
       <%= for post <- @posts do %>
         <div class="column grid-item col-3 col-xl-4 col-md-6 col-sm-12" >
