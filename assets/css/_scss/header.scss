@@ -18,16 +18,23 @@ header.navbar{
     .btn.btn-link:hover {
     	text-decoration:underline;
     }
-    .search{
+    .search {
         width:100%;
         padding: 0.5rem .4rem;
-
     }
-    .form-input{
+
+    .search-form-input {
+      height: 1.2rem;
+      border: .05rem solid $ocean;
+    	background: white;
+    }
+
+    .form-input {
     	height: 2.4rem;
     	border: .05rem solid $ocean;
     	background: white;
     }
+
     .form-input:focus {
     	border-color: $offwhite;
     	box-shadow: 0 0 0 0.1rem $ocean;

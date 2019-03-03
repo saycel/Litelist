@@ -35,7 +35,8 @@
           <section class="navbar-section">
               <form action="/search" class='search'method="get">
                             
-                <input class="form-input" type="text" name="search" placeholder="what are you looking for?">
+                <input id="search-form" class="search-form-input" type="text" name="search" placeholder="Search">
+                <input type="submit" value="Submit">
          
               </form>
           </section>
