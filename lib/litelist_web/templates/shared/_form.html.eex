@@ -24,7 +24,6 @@
       <div class="columns">
         <div class="col-4 col-md-12 popover popover-right">
           <label class="col-4 col-md-12" for="input-example-4"><%=d.title%></label>
-          <%= render LitelistWeb.SharedView,"_popover.html", title: "TITLE", body: d.po_body %>
         </div>
         <div class="col-8 col-md-12">
           <%= if d.title == "START_DATE" || d.title == "END_DATE" do %>
