@@ -1,17 +1,21 @@
 <h1>Settings</h1>
 
-<%= form_for @conn, Routes.admin_path(@conn, :update_settings), fn f -> %>
-  <label>
-    Site name: <%= text_input f, :name, value: get_value(@settings, :name) %>
-  </label>
-  <br><br>
-  <label>
-    How many times can a post be flagged before it is removed from view?: <%= select f, :max_flagged_posts, 0..100, value: get_value(@settings, :max_flagged_posts) %>
-  </label>
-  <br><br>
-  <label>
-    Do you want to allow replies to all posts?: <%= checkbox f, :allow_replies, checked: get_value(@settings, :allow_replies) == true %>
-  </label>
-  <br><br>
-  <%= submit "Submit" %>
+<%= if false do %>
+  <%= form_for @conn, Routes.admin_path(@conn, :update_settings), fn f -> %>
+    <label>
+      Site name: <%= text_input f, :name, value: get_value(@settings, :name) %>
+    </label>
+    <br><br>
+    <label>
+      How many times can a post be flagged before it is removed from view?: <%= select f, :max_flagged_posts, 0..100, value: get_value(@settings, :max_flagged_posts) %>
+    </label>
+    <br><br>
+    <label>
+      Do you want to allow replies to all posts?: <%= checkbox f, :allow_replies, checked: get_value(@settings, :allow_replies) == true %>
+    </label>
+    <br><br>
+    <%= submit "Submit" %>
+  <% end %>
+<% else %>
+<p>Settings are coming soon.</p>
 <% end %>
