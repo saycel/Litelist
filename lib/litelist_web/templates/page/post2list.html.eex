@@ -1,7 +1,7 @@
 
 <div class="columns mt-20 how-to">
   <div class="column col-md-12 col-sm-12">
-    <h3>Post Something For Nairobi.</h3>
+    <h3>Post Something For Dominica.</h3>
     <div class="columns">
       <%= for color <- get_color_array() do %>
         <div class="column col-4 col-md-6 col-sm-12 mt-10">
