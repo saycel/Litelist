@@ -1,5 +1,5 @@
-<h2>Listing Flags</h2>
-
+<h2>Flags</h2>
+<%= unless Enum.empty? @flags do %>
 <table class="table">
   <thead>
     <tr>
@@ -13,6 +13,9 @@
     </tr>
   </thead>
   <tbody>
+<% else %>
+  <p>There are no flagged posts.</p>
+<% end %>
 <%= for flag <- @flags do %>
     <tr>
       <td><%= flag.type %></td>

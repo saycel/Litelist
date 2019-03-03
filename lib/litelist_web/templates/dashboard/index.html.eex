@@ -1,42 +1,37 @@
 <div class="columns">
   <div class="column col-4 col-md-12">
+    <a class='white' href="<%= Routes.dashboard_path(@conn, :posts) %>">  
       <div class="empty settings">
         <div class="empty-icon">
           <i class="icon icon-3x icon-flag"></i>
         </div>
         <p class="empty-title h5"> My Posts </p>
-        <div class="empty-action">
-          <%= link "My Posts", to: Routes.dashboard_path(@conn, :posts), class: "button" %>
-        </div>
       </div>
-    </div>
+    </a>
+  </div>
   <div class="column col-4 col-md-12">
-    <div class="empty settings dark">
-      <div class="empty-icon">
-        <i class="icon icon-3x icon-message"></i>
-      </div>
-      <p class="empty-title h5">My Flagged Posts</p>
-      <p class="empty-subtitle"></p>
-      <div class="empty-action">
-<%= link "See all", to: Routes.dashboard_path(@conn, :posts_i_flagged), class: "button" %>
-      </div>
-
+    <a class='white' href="<%= Routes.dashboard_path(@conn, :posts_i_flagged) %>">  
+      <div class="empty settings dark">
+        <div class="empty-icon">
+          <i class="icon icon-3x icon-message"></i>
+        </div>
+        <p class="empty-title h5">My Flagged Posts</p>
+        <p class="empty-subtitle"></p>
+      </a>
     </div>
   </div>
 
   <div class="column col-4 col-md-12">
-    <div class="empty settings">
-      <div class="empty-icon">
-        <i class="icon icon-3x icon-apps"></i>
+    <a class='white' href="<%= Routes.dashboard_path(@conn, :my_discussions) %>">  
+      <div class="empty settings">
+        <div class="empty-icon">
+          <i class="icon icon-3x icon-apps"></i>
+        </div>
+        <p class="empty-title h5">My Discussions</p>
       </div>
-      <p class="empty-title h5">My Discussions</p>
-      <div class="empty-action">
-         <span><%= link "My Discussions", to: Routes.dashboard_path(@conn, :my_discussions), class: "button" %></span>
-      </div>
-
-    </div>
+    </a>
   </div> 
-  
+
 </div>
 
 

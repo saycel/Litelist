@@ -15,12 +15,12 @@
 	<div class="columns">
 		<div <div class="column box col-12 ocean"><h1><%=@post.title%>.</h1></div>
 	</div>
-	<div class="grid columns" data-content="POSTINGS" data-masonry='{ "itemSelector": ".grid-item" }'>	
+	<div>	
 		<div class='columns'>
 			<%=if Map.has_key?(@post, :images) do %>
 				<%= for image <- @post.images do %>
 		         <div class="column grid-item box col-6 col-md-6 col-sm-12 dark-pumpkin">
-		          	<img src="<%= Litelist.ImageUploader.url({image.image, image})%>" class="img-responsive cover"></div>
+		          	<img alt="Post image" src="<%= Litelist.ImageUploader.url({image.image, image})%>" class="img-responsive cover"></div>
 				<% end %>
 			<%end%> 
 			<%=if Map.has_key?(@post, :company_name) do %>

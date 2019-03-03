@@ -7,7 +7,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Ole.list</title>
+    <title>Dominica.list</title>
     <link rel="stylesheet" href="<%= Routes.static_path(@conn, "/css/app.css") %>">
    </head>
 
@@ -16,14 +16,14 @@
       <header class="navbar">
         <div class="column col-md-12 col-6">
           <section class="navbar-section">
-            <a href="/" class="navbar-brand mr">Ole.list</a>
-            <a href="/post2list" class="btn btn-link">Post</a><span>&#183;</span>
-            <a href="/discussions" class="btn btn-link">Discuss</a><span>&#183;</span>
+            <a href="/" class="navbar-brand mr">Dominica.list</a>
+            <a href="/post2list" class="btn btn-link">Post</a>
+            <a href="/discussions" class="btn btn-link">Discuss</a>
             <%= if @conn.assigns.current_neighbor do %>
               <%= if @conn.assigns.current_neighbor.admin do %>
-                  <a href="/admin" class="btn btn-link hide-sm hide-md">Administration</a><span class="hide-sm hide-md ">&#183;</span>
+                  <a href="/admin" class="btn btn-link hide-sm hide-md">Administration</a>
               <% end %>            
-              <a href="/dashboard" class="btn hide-sm hide-md btn-link">Dashboard</a><span class='hide-sm hide-md '>&#183;</span>
+              <a href="/dashboard" class="btn hide-sm hide-md btn-link">Dashboard</a>
 
               <%= link "Logout", to: Routes.page_path(@conn, :logout), method: :post, class: "btn btn-link hide-sm" %>
             <% else %>
@@ -35,7 +35,8 @@
           <section class="navbar-section">
               <form action="/search" class='search'method="get">
                             
-                <input class="form-input" type="text" name="search" placeholder="what are you looking for?">
+                <input id="search-form" class="search-form-input" type="text" name="search" placeholder="Search">
+                <input type="submit" value="Submit">
          
               </form>
           </section>

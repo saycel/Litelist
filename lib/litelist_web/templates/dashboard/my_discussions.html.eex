@@ -1,31 +1,35 @@
 <h2>My Discussions</h2>
-<span><%= link "Export All", to: Routes.dashboard_path(@conn, :export_my_discussions), class: "btn btn-default btn-xs" %></span>
+<%= unless Enum.empty? @discussions do %>
+  <span><%= link "Export All", to: Routes.dashboard_path(@conn, :export_my_discussions), class: "btn btn-default btn-xs" %></span>
 
-<table class="table">
-  <thead>
-    <tr>
-      <th>Title</th>
-      <th>Description</th>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Title</th>
+        <th>Description</th>
 
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-<%= for discussion <- @discussions do %>
-    <tr>
-      <td><%= discussion.title %></td>
-      <td><%= discussion.description %></td>
-      <td class="text-right">
-        <span><%= link "Show", to: Routes.discussion_path(@conn, :show, discussion), class: "btn btn-default btn-xs" %></span>
-        <%= if @current_neighbor do %>
-          <span><%= link "Edit", to: Routes.discussion_path(@conn, :edit, discussion), class: "btn btn-default btn-xs" %></span>
-          <span><%= link "Delete", to: Routes.discussion_path(@conn, :delete, discussion), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" %></span>
-        <% end %>
-      </td>
-    </tr>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+  <%= for discussion <- @discussions do %>
+      <tr>
+        <td><%= discussion.title %></td>
+        <td><%= discussion.description %></td>
+        <td class="text-right">
+          <span><%= link "Show", to: Routes.discussion_path(@conn, :show, discussion), class: "btn btn-default btn-xs" %></span>
+          <%= if @current_neighbor do %>
+            <span><%= link "Edit", to: Routes.discussion_path(@conn, :edit, discussion), class: "btn btn-default btn-xs" %></span>
+            <span><%= link "Delete", to: Routes.discussion_path(@conn, :delete, discussion), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" %></span>
+          <% end %>
+        </td>
+      </tr>
+  <% end %>
+    </tbody>
+  </table>
+<% else %>
+<p>There are no current discussions</p>
 <% end %>
-  </tbody>
-</table>
 
 <%= if @current_neighbor do %>
   <span><%= link "New Discussion", to: Routes.discussion_path(@conn, :new) %></span>
