@@ -17,13 +17,13 @@
         <div class="column col-md-12 col-6">
           <section class="navbar-section">
             <a href="/" class="navbar-brand mr">Ole.list</a>
-            <a href="/post2list" class="btn btn-link">Post</a><span>&#183;</span>
-            <a href="/discussions" class="btn btn-link">Discuss</a><span>&#183;</span>
+            <a href="/post2list" class="btn btn-link">Post</a>
+            <a href="/discussions" class="btn btn-link">Discuss</a>
             <%= if @conn.assigns.current_neighbor do %>
               <%= if @conn.assigns.current_neighbor.admin do %>
-                  <a href="/admin" class="btn btn-link hide-sm hide-md">Administration</a><span class="hide-sm hide-md ">&#183;</span>
+                  <a href="/admin" class="btn btn-link hide-sm hide-md">Administration</a>
               <% end %>            
-              <a href="/dashboard" class="btn hide-sm hide-md btn-link">Dashboard</a><span class='hide-sm hide-md '>&#183;</span>
+              <a href="/dashboard" class="btn hide-sm hide-md btn-link">Dashboard</a>
 
               <%= link "Logout", to: Routes.page_path(@conn, :logout), method: :post, class: "btn btn-link hide-sm" %>
             <% else %>
