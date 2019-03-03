@@ -20,7 +20,7 @@
 			<%=if Map.has_key?(@post, :images) do %>
 				<%= for image <- @post.images do %>
 		         <div class="column grid-item box col-6 col-md-6 col-sm-12 dark-pumpkin">
-		          	<img src="<%= Litelist.ImageUploader.url({image.image, image})%>" class="img-responsive cover"></div>
+		          	<img alt="Post image" src="<%= Litelist.ImageUploader.url({image.image, image})%>" class="img-responsive cover"></div>
 				<% end %>
 			<%end%> 
 			<%=if Map.has_key?(@post, :company_name) do %>

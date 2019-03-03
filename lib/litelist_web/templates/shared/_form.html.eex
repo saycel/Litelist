@@ -10,7 +10,7 @@
          <div class="column col-12">  
           <%= inputs_for f, :images, fn image_form -> %>
             <label>IMAGE</label>
-            <img id="preview" src="#" alt="your image" />
+            <img alt="Post image" id="preview" src="#" alt="your image" />
 
             <input class="form-control" id="image" name="post[images][0][image]" type="file" onchange="readURL(this)">
 

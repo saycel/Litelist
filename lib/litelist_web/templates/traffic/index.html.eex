@@ -20,7 +20,7 @@
             <a href="<%=path_builder(post)%>">
             <div class="card-image">
               <%= for image <- post.images do %>
-                <img src="<%= Litelist.ImageUploader.url({image.image, image})%>" class="img-responsive">
+                <img alt="Post image" src="<%= Litelist.ImageUploader.url({image.image, image})%>" class="img-responsive">
               <% end %>
             </div>
           </a>

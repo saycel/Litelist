@@ -42,7 +42,7 @@
     <div class="card">
       <div class="card-image">
         <%= for img <- @flag.post.images do %>
-          <img src="/uploads/<%=img.image.file_name%>" class="img-responsive">
+          <img alt="Post image" src="/uploads/<%=img.image.file_name%>" class="img-responsive">
         <% end %>
       </div>
       <div class="card-header">
