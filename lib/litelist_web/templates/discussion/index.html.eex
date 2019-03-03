@@ -12,6 +12,9 @@
 
   <div class="grid" data-content="POSTINGS" data-masonry='{ "itemSelector": ".grid-item" }'>
     <div class="columns">
+      <%= if Enum.empty?(@discussions) do %>
+        <p>Discussions are coming soon</p>
+      <% end %>
       <%= for discussion <- @discussions do %>
         <div class="column grid-item col-6 col-xl-6 col-md-12 col-sm-12" >
           <div class="card <%=get_color(~s(discussion))%>">
