@@ -25,6 +25,36 @@ defmodule Litelist.Moderation do
   end
 
   @doc """
+  Returns the list of pending flags in reverse order of when they were created (newest first).
+  Posts are preloaded
+
+  ## Examples
+
+      iex> list_pending_flags()
+      [%Flag{}, ...]
+
+  """
+  def list_pending_flags do
+    query = from f in Flag, where: f.status == "pending", order_by: [desc: :inserted_at]
+    query |> Repo.all() |> Repo.preload(:post)
+  end
+
+  @doc """
+  Returns the list of archived flags in reverse order of when they were created (newest first).
+  Posts are preloaded
+
+  ## Examples
+
+      iex> list_archived_flags()
+      [%Flag{}, ...]
+
+  """
+  def list_archived_flags do
+    query = from f in Flag, where: f.status != "pending", order_by: [desc: :inserted_at]
+    query |> Repo.all() |> Repo.preload(:post)
+  end
+
+  @doc """
   Returns the list of flags created by the neighbor
   Posts are preloaded
 

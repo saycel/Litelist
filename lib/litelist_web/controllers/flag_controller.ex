@@ -14,8 +14,9 @@ defmodule LitelistWeb.FlagController do
   @default_status Flag.get_default_type()
 
   def index(conn, _params) do
-    flags = Moderation.list_flags()
-    render(conn, "index.html", flags: flags)
+    pending_flags = Moderation.list_pending_flags()
+    archived_flags = Moderation.list_archived_flags()
+    render(conn, "index.html", pending_flags: pending_flags, archived_flags: archived_flags)
   end
 
   def new(conn, %{"post_id" => post_id}) do
