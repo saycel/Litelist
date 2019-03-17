@@ -3,7 +3,6 @@ defmodule LitelistWeb.AdminController do
     alias Litelist.Posts
     alias Litelist.Settings
 
-
     def index(conn, _params) do
       conn
         |> render("index.html")
