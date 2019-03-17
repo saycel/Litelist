@@ -97,6 +97,7 @@
 					<%=@post.contact_info%>
 				</div>
 			<%end%>
+      <div class="column col-2 flag"> <a href="<%= flag_path_builder(@post) %>">Flag This Post</a></div>
 		</div>
 	</div>
 </div>

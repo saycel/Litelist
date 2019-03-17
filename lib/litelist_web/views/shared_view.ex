@@ -1,5 +1,4 @@
 defmodule LitelistWeb.SharedView do
-  use LitelistWeb, :view
   @doc """
   getVal is used to map an inputted resource and a corresponding attribute to its saved value.  That sounds like a lot but its basically a utility for the edit form so that form fields prepopulate with the correct information.  
 
@@ -11,6 +10,9 @@ defmodule LitelistWeb.SharedView do
       iex> LitelistWeb.SharedView(@JobPost,PRICE)
       10.88 
   """
+  use LitelistWeb, :view
+  import LitelistWeb.UtilsView
+
   @attributes %{
     "TITLE" => :title,
     "DESCRIPTION" => :description,
