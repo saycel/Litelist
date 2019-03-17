@@ -1,17 +1,4 @@
 <div class="show_page">
-  <%= if assigns[:changeset] do %>
-    <%= form_for @changeset, Routes.discussion_path(@conn, :create_comment), fn f -> %>
-        Leave a comment: <%= text_input f, :text %>
-        <input type="hidden" name="comment[discussion_id]" value="<%= @post.id %>">
-    <%= submit "Submit", class: "submit btn btn-primary" %>
-  <% end %>
-
-  <h2>Comments</h2>
-  <%= for comment <- @comments do %>
-    <%=comment.neighbor.first_name %>: <%=comment.text%><br>
-  <% end %>
-
-  <%end%>
 	<div class="columns">
 		<div <div class="column box col-12 ocean"><h1><%=@post.title%>.</h1></div>
 	</div>
@@ -98,6 +85,18 @@
 				</div>
 			<%end%>
       <div class="column col-2 flag"> <a href="<%= flag_path_builder(@post) %>">Flag This Post</a></div>
+      <%= if assigns[:changeset] do %>
+        <%= form_for @changeset, Routes.discussion_path(@conn, :create_comment), fn f -> %>
+          Leave a comment: <%= text_input f, :text %>
+          <input type="hidden" name="comment[discussion_id]" value="<%= @post.id %>">
+          <%= submit "Submit", class: "submit btn btn-primary" %>
+        <% end %>
+
+        <h2>Comments</h2>
+        <%= for comment <- @comments do %>
+          <%=comment.neighbor.first_name %>: <%=comment.text%><br>
+        <% end %>
+      <%end%>
 		</div>
 	</div>
 </div>
