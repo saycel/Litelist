@@ -30,17 +30,12 @@
               <%= link "Login/Sign up", to: Routes.page_path(@conn, :login), method: :get, class: "btn btn-link"%>
             <% end %>
           </section>
-        </div> 
-        <div class="column col-lg-12 col-xl-4 col-sm-12 col-md-12 col-5">
-          <section class="navbar-section">
+          <section class="form-section">
               <form action="/search" class='search'method="get">
-                            
-                <input id="search-form" class="search-form-input" type="text" name="search" placeholder="Search">
-                <input type="submit" value="Submit">
-         
+                <input id="search-form" class="search-form-input" type="text" name="search" placeholder="Search">         
               </form>
           </section>
-        </div>  
+        </div>
       </header>
 <div class="divider text-center"></div>
 

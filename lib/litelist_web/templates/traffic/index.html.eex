@@ -36,7 +36,7 @@
                 <div class="column col-10">
                   <a href="<%=path_builder(post)%>">See More</a>
                 </div>
-                <div class="column col-2 flag"> <a href="<%= flag_path_builder(post) %>">Flag This Post</a></div>
+                <div class="column col-2 flag"> <a href="<%= flag_path_builder(post) %>">Flag</a></div>
               </div>      
             </div>
        
