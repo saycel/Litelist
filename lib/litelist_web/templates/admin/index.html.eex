@@ -19,9 +19,7 @@
       <p class="empty-title h5">New Internal Discussions</p>
       <p class="empty-subtitle">..coming soon..</p>
       <div class="empty-action">
-
       </div>
-
     </div>
   </div>
 
@@ -38,6 +36,19 @@
     </a>
   </div>
 
+  <div class="column col-4 col-md-12">
+    <a href="/admin/manage_posts">
+      <div class="empty settings darker">
+        <div class="empty-icon">
+          <i class="icon icon-3x icon-message"></i>
+        </div>
+        <p class="empty-title h5">Manage Posts</p>
+        <p class="empty-subtitle">Add or update types of Posts that can be added</p>
+        <div class="empty-action">
+        </div>
+      </div>
+    </a>
+  </div>
 </div>
 
 

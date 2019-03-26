@@ -65,6 +65,7 @@ defmodule LitelistWeb.Router do
   scope "/admin", LitelistWeb do
     pipe_through [:browser, :auth, :ensure_admin]
 
+    get "/manage_posts", AdminController, :manage_posts
     get "/moderation-guidelines", FlagController, :guidelines
     get "/", AdminController, :index
     get "/posts", AdminController, :posts

@@ -31,5 +31,10 @@ defmodule LitelistWeb.AdminController do
             |> put_flash(:info, "Settings updated.")
             |> redirect(to: Routes.admin_path(conn, :settings))
     end
+
+    def manage_posts(conn, _params) do
+      conn
+      |> render("manage_posts.html")
+    end
 end 
   
