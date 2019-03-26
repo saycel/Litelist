@@ -262,4 +262,100 @@ defmodule Litelist.Posts do
       update_post(post, %{soft_delete: false})
     end
   end    
+
+  alias Litelist.Posts.PostType
+
+  @doc """
+  Returns the list of post_types.
+
+  ## Examples
+
+      iex> list_post_types()
+      [%PostType{}, ...]
+
+  """
+  def list_post_types do
+    Repo.all(PostType)
+  end
+
+  @doc """
+  Gets a single post_type.
+
+  Raises `Ecto.NoResultsError` if the Post type does not exist.
+
+  ## Examples
+
+      iex> get_post_type!(123)
+      %PostType{}
+
+      iex> get_post_type!(456)
+      ** (Ecto.NoResultsError)
+
+  """
+  def get_post_type!(id), do: Repo.get!(PostType, id)
+
+  @doc """
+  Creates a post_type.
+
+  ## Examples
+
+      iex> create_post_type(%{field: value})
+      {:ok, %PostType{}}
+
+      iex> create_post_type(%{field: bad_value})
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def create_post_type(attrs \\ %{}) do
+    %PostType{}
+    |> PostType.changeset(attrs)
+    |> Repo.insert()
+  end
+
+  @doc """
+  Updates a post_type.
+
+  ## Examples
+
+      iex> update_post_type(post_type, %{field: new_value})
+      {:ok, %PostType{}}
+
+      iex> update_post_type(post_type, %{field: bad_value})
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def update_post_type(%PostType{} = post_type, attrs) do
+    post_type
+    |> PostType.changeset(attrs)
+    |> Repo.update()
+  end
+
+  @doc """
+  Deletes a PostType.
+
+  ## Examples
+
+      iex> delete_post_type(post_type)
+      {:ok, %PostType{}}
+
+      iex> delete_post_type(post_type)
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def delete_post_type(%PostType{} = post_type) do
+    Repo.delete(post_type)
+  end
+
+  @doc """
+  Returns an `%Ecto.Changeset{}` for tracking post_type changes.
+
+  ## Examples
+
+      iex> change_post_type(post_type)
+      %Ecto.Changeset{source: %PostType{}}
+
+  """
+  def change_post_type(%PostType{} = post_type) do
+    PostType.changeset(post_type, %{})
+  end
 end

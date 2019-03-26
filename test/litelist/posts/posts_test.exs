@@ -390,4 +390,63 @@ defmodule Litelist.PostsTest do
     tomorrow_time = Timex.shift(Timex.now(), days: 1)
     Factory.insert(:job, %{inserted_at: inserted_at, end_time: tomorrow_time})
   end
+
+  describe "post_types" do
+    alias Litelist.Posts.PostType
+
+    @valid_attrs %{name: "some name", form_data: %{"key" => "value"}}
+    @update_attrs %{name: "some updated name"}
+    @invalid_attrs %{name: nil, form_data: nil}
+
+    def post_type_fixture(attrs \\ %{}) do
+      {:ok, post_type} =
+        attrs
+        |> Enum.into(@valid_attrs)
+        |> Posts.create_post_type()
+
+      post_type
+    end
+
+    test "list_post_types/0 returns all post_types" do
+      post_type = post_type_fixture()
+      assert Posts.list_post_types() == [post_type]
+    end
+
+    test "get_post_type!/1 returns the post_type with given id" do
+      post_type = post_type_fixture()
+      assert Posts.get_post_type!(post_type.id) == post_type
+    end
+
+    test "create_post_type/1 with valid data creates a post_type" do
+      assert {:ok, %PostType{} = post_type} = Posts.create_post_type(@valid_attrs)
+      assert post_type.name == "some name"
+    end
+
+    test "create_post_type/1 with invalid data returns error changeset" do
+      assert {:error, %Ecto.Changeset{}} = Posts.create_post_type(@invalid_attrs)
+    end
+
+    test "update_post_type/2 with valid data updates the post_type" do
+      post_type = post_type_fixture()
+      assert {:ok, %PostType{} = post_type} = Posts.update_post_type(post_type, @update_attrs)
+      assert post_type.name == "some updated name"
+    end
+
+    test "update_post_type/2 with invalid data returns error changeset" do
+      post_type = post_type_fixture()
+      assert {:error, %Ecto.Changeset{}} = Posts.update_post_type(post_type, @invalid_attrs)
+      assert post_type == Posts.get_post_type!(post_type.id)
+    end
+
+    test "delete_post_type/1 deletes the post_type" do
+      post_type = post_type_fixture()
+      assert {:ok, %PostType{}} = Posts.delete_post_type(post_type)
+      assert_raise Ecto.NoResultsError, fn -> Posts.get_post_type!(post_type.id) end
+    end
+
+    test "change_post_type/1 returns a post_type changeset" do
+      post_type = post_type_fixture()
+      assert %Ecto.Changeset{} = Posts.change_post_type(post_type)
+    end
+  end
 end
