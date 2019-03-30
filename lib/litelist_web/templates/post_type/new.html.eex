@@ -1,13 +1,35 @@
-<h4>new form</h4>
+<h4>Add new post type</h4>
 
-<%= form_for @changeset, Routes.post_type_path(@conn, :create), fn f -> %>
-  <label>
-    Name: <%= text_input f, :name %>
-  </label><br>
+<div class="columns col-gapless">
+  <div class="column col-4">
+    <div class="accordion">
+      <input type="checkbox" id="accordion-1" name="accordion-checkbox" hidden>
+      <label class="accordion-header" for="accordion-1">
+        <i class="icon icon-arrow-right mr-1"></i>
+        Text field
+      </label>
+      <div class="accordion-body">
+        Content
+      </div>
+    </div>
+  </div>
+  <div class="column col-8">
+    <%= form_for @changeset, Routes.post_type_path(@conn, :create), fn f -> %>
+      <div class="form-group">
+        <%= label f, :name, class: "control-label" %>
+        <%= text_input f, :name, class: "form-control" %>
+        <%= error_tag f, :name %>
+      </div>
+      <div class="form-group">
+        <%= label f, :description, class: "control-label" %>
+        <%= textarea f, :description, class: "form-control" %>
+        <%= error_tag f, :description %>
+      </div>
 
-  <label>
-    Description: <%= textarea f, :description %>
-  </label><br>
+      <b>Post preview:</b>
+      <br>
 
-  <%= submit "Submit" %>
-<% end %>
+      <%= submit "Submit" %>
+    <% end %>
+  </div>
+</div>
