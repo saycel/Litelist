@@ -65,7 +65,6 @@ defmodule LitelistWeb.Router do
   scope "/admin", LitelistWeb do
     pipe_through [:browser, :auth, :ensure_admin]
 
-    get "/manage_posts", AdminController, :manage_posts
     get "/moderation-guidelines", FlagController, :guidelines
     get "/", AdminController, :index
     get "/posts", AdminController, :posts
@@ -73,6 +72,7 @@ defmodule LitelistWeb.Router do
     post "/settings", AdminController, :update_settings
     resources "/discussions", DiscussionController, only: [:edit, :update, :delete]
     resources "/moderation", FlagController, only: [:index, :delete, :edit, :update]
+    resources "/manage_posts", PostTypeController, only: [:new, :index, :create]
   end
 
   scope "/", LitelistWeb do
