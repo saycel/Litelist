@@ -3,14 +3,39 @@
 <div class="columns col-gapless">
   <div class="column col-4">
     <div class="accordion">
-      <input type="checkbox" id="accordion-1" name="accordion-checkbox" hidden>
-      <label class="accordion-header" for="accordion-1">
-        <i class="icon icon-arrow-right mr-1"></i>
-        Text field
+      <input type="checkbox" id="text-accordion" name="text-accordion" hidden>
+      <label class="accordion-header" for="text-accordion">
+        <i class="icon icon-plus mr-1"></i>
+        Short text
       </label>
       <div class="accordion-body">
-        Content
+        <form name="text">
+          Required:<br>
+          <input type="checkbox" name="required"><br>
+          Label:<br>
+          <input type="text" name="label">
+          <br><br>
+          <button id="text-button" form="text" value="Add">Add</button>
+        </form>
       </div>
+
+    <div class="accordion">
+      <input type="checkbox" id="textarea-accordion" name="textarea-accordion" hidden>
+      <label class="accordion-header" for="textarea-accordion">
+        <i class="icon icon-plus mr-1"></i>
+        Long text
+      </label>
+      <div class="accordion-body">
+        <form name="text">
+          Required:<br>
+          <input type="checkbox" name="required"><br>
+          Label:<br>
+          <input type="text" name="label">
+          <br><br>
+          <button id="text-button" form="text" value="Add">Add</button>
+        </form>
+      </div>
+    </div>
     </div>
   </div>
   <div class="column col-8">
@@ -22,7 +47,7 @@
       </div>
       <div class="form-group">
         <%= label f, :description, class: "control-label" %>
-        <%= textarea f, :description, class: "form-control" %>
+        <%= text_input f, :description, class: "form-control" %>
         <%= error_tag f, :description %>
       </div>
 
