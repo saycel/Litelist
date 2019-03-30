@@ -394,9 +394,9 @@ defmodule Litelist.PostsTest do
   describe "post_types" do
     alias Litelist.Posts.PostType
 
-    @valid_attrs %{name: "some name", form_data: %{"key" => "value"}}
+    @valid_attrs %{name: "some name", description: "some description" form_data: %{"key" => "value"}}
     @update_attrs %{name: "some updated name"}
-    @invalid_attrs %{name: nil, form_data: nil}
+    @invalid_attrs %{name: nil, form_data: nil, description: nil}
 
     def post_type_fixture(attrs \\ %{}) do
       {:ok, post_type} =

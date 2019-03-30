@@ -5,6 +5,7 @@ defmodule Litelist.Posts.PostType do
 
   schema "post_types" do
     field :name, :string
+    field :description, :string
     field :form_data, :map
 
     timestamps()
@@ -13,7 +14,7 @@ defmodule Litelist.Posts.PostType do
   @doc false
   def changeset(post_type, attrs) do
     post_type
-    |> cast(attrs, [:name, :form_data])
-    |> validate_required([:name, :form_data])
+    |> cast(attrs, [:name, :form_data, :description])
+    |> validate_required([:name, :form_data, :description])
   end
 end
