@@ -22,17 +22,16 @@ $("button").click(function() {
 
   if (label === '') {
     alert("Please add a label")
-  } else {
-    formObject.push(
-      {
-        label: label,
-        type: elementId,
-        required: required
-      }
-    )
-    console.log(formObject)
-    appendFormElement(elementId, label)
+    return
   }
+  formObject.push(
+    {
+      label: label,
+      type: elementId,
+      required: required
+    }
+  )
+  appendFormElement(elementId, label)
 });
 
 function appendFormElement(elementType, label) {
