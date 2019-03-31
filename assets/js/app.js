@@ -31,5 +31,12 @@ $("button").click(function() {
       }
     )
     console.log(formObject)
+    appendFormElement(elementId, label)
   }
 });
+
+function appendFormElement(elementType, label) {
+  var el = `${label} <input type="text">`;
+  $('#form-preview').append(el);
+  $('#form-object').val(JSON.stringify(formObject))
+}
