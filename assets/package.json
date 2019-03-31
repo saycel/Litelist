@@ -6,8 +6,6 @@
     "watch": "webpack --mode development --watch-stdin"
   },
   "dependencies": {
-    "formBuilder": "^3.2.1",
-    "jquery": "^3.3.1",
     "masonry-layout": "4.2.2",
     "phoenix": "~1.4",
     "phoenix_html": "2.12"

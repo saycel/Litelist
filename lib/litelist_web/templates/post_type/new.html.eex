@@ -1,7 +1,6 @@
-<h4>Add new post type</h4>
-
 <div class="columns col-gapless">
   <div class="column col-4">
+    <h4>Add fields to form</h4>
     <div class="accordion">
       <input type="checkbox" id="text-accordion" name="text-accordion" hidden>
       <label class="accordion-header" for="text-accordion">
@@ -9,16 +8,16 @@
         Short text
       </label>
       <div class="accordion-body">
-        <form name="text">
+        <form name="short-text">
           Required:<br>
-          <input type="checkbox" name="required"><br>
+          <input type="checkbox" id="short-text-required"><br>
           Label:<br>
-          <input type="text" name="label">
+          <input type="text" id="short-text-label">
           <br><br>
-          <button id="text-button" form="text" value="Add">Add</button>
+          <button id="short-text" form="text" value="Add">Add</button>
         </form>
       </div>
-
+    </div>
     <div class="accordion">
       <input type="checkbox" id="textarea-accordion" name="textarea-accordion" hidden>
       <label class="accordion-header" for="textarea-accordion">
@@ -26,19 +25,19 @@
         Long text
       </label>
       <div class="accordion-body">
-        <form name="text">
+        <form name="long-text">
           Required:<br>
-          <input type="checkbox" name="required"><br>
+          <input type="checkbox" name="long-text-required"><br>
           Label:<br>
-          <input type="text" name="label">
+          <input type="text" name="long-text-label">
           <br><br>
-          <button id="text-button" form="text" value="Add">Add</button>
+          <button id="long-text" form="text" value="Add">Add</button>
         </form>
       </div>
     </div>
-    </div>
   </div>
   <div class="column col-8">
+    <h4>Add post data</h4>
     <%= form_for @changeset, Routes.post_type_path(@conn, :create), fn f -> %>
       <div class="form-group">
         <%= label f, :name, class: "control-label" %>
@@ -51,7 +50,7 @@
         <%= error_tag f, :description %>
       </div>
 
-      <b>Post preview:</b>
+      <b>Post form preview:</b>
       <br>
 
       <%= submit "Submit" %>
