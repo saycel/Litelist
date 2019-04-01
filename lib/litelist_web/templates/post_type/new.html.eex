@@ -39,6 +39,7 @@
   <div class="column col-8">
     <h4>Add post data</h4>
     <%= form_for @changeset, Routes.post_type_path(@conn, :create), fn f -> %>
+      <%= submit "Save Post Type" %><br><br>
       <div class="form-group">
         <%= label f, :name, class: "control-label" %>
         <%= text_input f, :name, class: "form-control" %>
@@ -49,11 +50,17 @@
         <%= text_input f, :description, class: "form-control" %>
         <%= error_tag f, :description %>
       </div>
-
-      <b>Post form preview:</b>
-      <br>
-
-      <%= submit "Submit" %>
+            <div class="form-group">
+        <%= label f, :other, class: "control-label" %>
+        <%= text_input f, :other, class: "form-control" %>
+        <%= error_tag f, :other %>
+      </div>
+       <input type="hidden" id="form-object" name="post_type[form_object]">
     <% end %>
+        <b>Post form preview:</b>
+      <div>
+        <form id="form-preview"></form>
+      </div>
+      <br>
   </div>
 </div>

@@ -19,7 +19,8 @@ $("button").click(function() {
 
   const required = $(`#${elementId}-required`).is(":checked")
   const label = $(`#${elementId}-label`).val()
-
+  $(`#${elementId}-label`).val("")
+  $(`#${elementId}-required`).prop("checked", false)
   if (label === '') {
     alert("Please add a label")
     return
@@ -35,7 +36,7 @@ $("button").click(function() {
 });
 
 function appendFormElement(elementType, label) {
-  var el = `${label} <input type="text">`;
+  var el = `${label} <input type="text"><br><br>`;
   $('#form-preview').append(el);
   $('#form-object').val(JSON.stringify(formObject))
 }

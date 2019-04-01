@@ -14,6 +14,8 @@ defmodule LitelistWeb.PostTypeController do
   end
 
   def create(conn, %{"post_type" => post_type_params}) do
+    IO.inspect("Post type params")
+    IO.inspect(post_type_params)
   end
 
   # def edit(conn, %{"id" => id}) do
