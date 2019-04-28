@@ -16,7 +16,7 @@
       <header class="navbar">
         <div class="column col-md-12 col-6">
           <section class="navbar-section">
-            <a href="/" class="navbar-brand mr"><%= Litelist.Settings.get_settings().name %>.list</a>
+            <a href="/" class="navbar-brand mr"><%= Litelist.Settings.get_settings().name %></a>
             <a href="/post2list" class="btn btn-link">Post</a>
             <a href="/discussions" class="btn btn-link">Discuss</a>
             <%= if @conn.assigns.current_neighbor do %>
