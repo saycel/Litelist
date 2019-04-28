@@ -34,5 +34,19 @@
 	.box:hover {
 		color:black;
 		opacity:1;
-	}	
+  }
+  
+  #flag_link {
+    height: 100%;
+    width: 100%;
+    background-color: #EFB48D;
+  }
+
+  #flag_link_div {
+    height: 30px;
+    width: 115px;
+    background-color: #EFB48D;
+    margin-left: 10px;
+    margin-bottom: 10px;
+  }
 }
