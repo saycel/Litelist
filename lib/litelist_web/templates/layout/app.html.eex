@@ -34,7 +34,7 @@
         <div class="column col-md-12 col-2">
           <section class="form-section">
               <form action="/search" class='search'method="get">
-                <input id="search-form" class="search-form-input" type="text" name="search" placeholder="Search2">         
+                <input id="search-form" class="search-form-input" type="text" name="search" placeholder="Search">         
               </form>
           </section>
         </div>

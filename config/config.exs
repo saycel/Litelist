@@ -43,6 +43,6 @@ config :arc,
 config :litelist,
   max_flagged_posts: 5,
   allow_replies: false,
-  name: "bushwick"
+  name: "Litelist"
 
 config :phoenix, :json_library, Jason
