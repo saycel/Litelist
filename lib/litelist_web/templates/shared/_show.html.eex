@@ -1,30 +1,30 @@
 <div class="show_page">
 	<div class="columns">
-		<div <div class="column box col-12 ocean"><h1><%=@post.title%>.</h1></div>
+		<div <div class="column box col-12 ocean"><h1><%=@post.title%></h1></div>
 	</div>
 	<div>	
 		<div class='columns'>
 			<%=if Map.has_key?(@post, :images) do %>
 				<%= for image <- @post.images do %>
-		         <div class="column grid-item box col-6 col-md-6 col-sm-12 dark-pumpkin">
+		         <div class="column grid-item box col-6 col-md-6 col-sm-12">
 		          	<img alt="Post image" src="<%= Litelist.ImageUploader.url({image.image, image})%>" class="img-responsive cover"></div>
 				<% end %>
 			<%end%> 
 			<%=if Map.has_key?(@post, :company_name) do %>
 				<%= if @post.company_name do %>
-					<div class="column grid-item box col-6 col-md-6 col-sm-12 ocean">
+					<div class="column grid-item box col-6 col-md-6 col-sm-12">
 						<h2>Company Name</h2>
 						<%=@post.company_name%>
 					</div>
 				<%end%>
 			<%end%>
-			<div class="column grid-item box col-6 col-md-6 col-sm-12 orange">
+			<div class="column grid-item box col-6 col-md-6 col-sm-12">
 				<h2>Description</h2>
 				<%=@post.description%>
 			</div>
 			<%=if Map.has_key?(@post, :location) do %>
 				<%= if @post.location do %>
-					<div class="column grid-item box col-6 col-md-6 col-sm-12 lake">
+					<div class="column grid-item box col-6 col-md-6 col-sm-12">
 						<h2>Location</h2>
 						<%=@post.location%>
 					</div>
@@ -32,7 +32,7 @@
 			<%end%>
 			<%=if Map.has_key?(@post, :salary) do %>
 				<%= if @post.salary do %>
-					<div class="column grid-item box col-6 col-md-6 col-sm-12 lake">
+					<div class="column grid-item box col-6 col-md-6 col-sm-12">
 						<h2>Salary</h2>
 						<%=@post.salary%>
 					</div>
@@ -40,7 +40,7 @@
 			<%end%>
 			<%=if Map.has_key?(@post, :price) do %>
 				<%= if @post.price do %>
-					<div class="column grid-item box col-6 col-md-6 col-sm-12 lake">
+					<div class="column grid-item box col-6 col-md-6 col-sm-12">
 						<h2>Price</h2>
 						<%=@post.price%>
 					</div>
@@ -48,7 +48,7 @@
 			<%end%>
 			<%=if Map.has_key?(@post, :position_name) do %>
 				<%= if @post.position_name do %>
-					<div class="column grid-item box col-6 col-md-6 col-sm-12 dark-pumpkin">
+					<div class="column grid-item box col-6 col-md-6 col-sm-12">
 						<h2>position_name</h2>
 						<%=@post.position_name%>
 					</div>
@@ -56,7 +56,7 @@
 			<%end%>
 			<%=if Map.has_key?(@post, :organization_name) do %>
 				<%= if @post.organization_name do %>
-					<div class="column grid-item box col-6 col-md-6 col-sm-12 dark-pumpkin">
+					<div class="column grid-item box col-6 col-md-6 col-sm-12">
 						<h2>Organization</h2>
 						<%=@post.organization_name%>
 					</div>
@@ -64,7 +64,7 @@
 			<%end%>
 			<%=if Map.has_key?(@post, :start_time) do %>
 				<%= if @post.start_time do %>
-					<div class="column grid-item box col-6 col-md-6 col-sm-12 lake">
+					<div class="column grid-item box col-6 col-md-6 col-sm-12">
 						<h2>Time</h2>
 						From <%=@post.start_time%> until <%=@post.end_time%>
 					</div>
@@ -72,19 +72,19 @@
 			<%end%>
 			<%=if Map.has_key?(@post, :start_date) do %>
 				<%= if @post.start_date do %>
-					<div class="column grid-item box col-6 col-md-6 col-sm-12 lake">
+					<div class="column grid-item box col-6 col-md-6 col-sm-12">
 						<h2>Dates</h2>
 						From <%=@post.start_date%> until <%=@post.end_date%>
 					</div>
 				<%end%>
 			<%end%>
 			<%=if Map.has_key?(@post, :contact_info) do %>
-				<div class="column grid-item box col-6 col-md-6 col-sm-12 ocean">
+				<div class="column grid-item box col-6 col-md-6 col-sm-12">
 					<h2>Contact Information</h2>
 					<%=@post.contact_info%>
 				</div>
 			<%end%>
-      <div class="column col-2 flag"> <a href="<%= flag_path_builder(@post) %>">Flag</a></div>
+      <div id="flag_link_div" class="column col-2 flag"> <a id="flag_link" href="<%= flag_path_builder(@post) %>">Flag this post</a></div>
       <%= if assigns[:changeset] do %>
         <%= form_for @changeset, Routes.discussion_path(@conn, :create_comment), fn f -> %>
           Leave a comment: <%= text_input f, :text %>

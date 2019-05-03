@@ -8,17 +8,20 @@
     display: -ms-flexbox;
     width: 100%;
     min-width: 100px;
+    height: 380px;
     -ms-flex-direction: column;
     flex-direction: column;
     .card-body, .card-footer, .card-header {
         padding: .3rem;
         padding-bottom: 0;
+        height: 120px;
     }
     .card-body:last-child, .card-footer:last-child, .card-header:last-child {
         padding-bottom: 0.3rem;
     }
     .card-header{
-    	color:black;
+      color:black;
+      height: 70px;
     }
     .card-subtitle{
     	color:black;
@@ -42,12 +45,9 @@
          bottom:0;
     }
 	.card-image img{
-		height:100%;
+		height: 200px;
         -webkit-filter: grayscale(100%); /* Safari 6.0 - 9.0 */
         filter: grayscale(0%);
-
-		width:100%;
-
         -webkit-transition: all 500ms; /* Safari */
         transition: all 500ms;
 	}

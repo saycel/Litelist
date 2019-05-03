@@ -24,11 +24,11 @@
             </div>
           </a>
             <div class="card-header">
-              <div class="card-title h5"><%=post.title%></div>
+              <div class="card-title h5"><%= truncate(post.title, length: 30, omission: "...") %></div>
               <div class="card-subtitle">#<%=post.type%></div>
             </div>
             <div class="card-body">
-              <%= truncate(post.description, length: 100, omission: "...") %>
+              <%= truncate(post.description, length: 70, omission: "...") %>
             </div>
             <div class="card-footer">
               <div class="columns">
