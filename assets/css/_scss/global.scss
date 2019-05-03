@@ -68,14 +68,15 @@ body{
 	color:$unhealthy-poop;
 }
 .sign-in{
-	border:1px solid $pumpkin;
+	border:1px solid $lake;
 	padding:20px;
 	label{
 		font-size:9px
 	}
 	input{
-		border:1px solid $dark-pumpkin;
-	}
+		border:1px solid $lake;
+  }
+  height: 310px;
 }
 .sign-up{
 	border:1px solid $lake;
@@ -85,7 +86,8 @@ body{
 	}
 	input{
 		border:1px solid $lake;
-	}
+  }
+  font-size: 14px;
 
 
 
