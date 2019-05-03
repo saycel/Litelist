@@ -7,7 +7,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title><%= Litelist.Settings.get_settings().name %>.list</title>
+    <title><%= Litelist.Settings.get_settings().name %></title>
     <link rel="stylesheet" href="<%= Routes.static_path(@conn, "/css/app.css") %>">
    </head>
 

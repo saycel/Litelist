@@ -83,21 +83,21 @@ defmodule LitelistWeb.DashboardControllerTest do
       end
 
 
-      test "exports my discussions if logged in", %{conn: conn} do
-        neighbor = Factory.insert(:neighbor)
-        conn = conn
-          |> login_neighbor(neighbor)
-          |> get(Routes.dashboard_path(conn, :export_my_discussions))
+      # test "exports my discussions if logged in", %{conn: conn} do
+      #   neighbor = Factory.insert(:neighbor)
+      #   conn = conn
+      #     |> login_neighbor(neighbor)
+      #     |> get(Routes.dashboard_path(conn, :export_my_discussions))
   
-        assert get_resp_header(conn, "content-type") == ["text/csv; charset=utf-8"]
-        assert response(conn, 200)
-      end
-      test "redirects from export my discussions if not logged in", %{conn: conn} do
-        conn = conn
-          |> get(Routes.dashboard_path(conn, :export_my_discussions))
+      #   assert get_resp_header(conn, "content-type") == ["text/csv; charset=utf-8"]
+      #   assert response(conn, 200)
+      # end
+      # test "redirects from export my discussions if not logged in", %{conn: conn} do
+      #   conn = conn
+      #     |> get(Routes.dashboard_path(conn, :export_my_discussions))
   
-        assert response(conn, 401)
-      end
+      #   assert response(conn, 401)
+      # end
     end
 
     describe "posts" do
@@ -163,20 +163,20 @@ defmodule LitelistWeb.DashboardControllerTest do
     end
 
     describe "my_discussions" do
-      test "lists my_discussions", %{conn: conn} do
-        neighbor = Factory.insert(:neighbor)
-        conn = conn
-          |> login_neighbor(neighbor)
-          |> get(Routes.dashboard_path(conn, :my_discussions))
+      # test "lists my_discussions", %{conn: conn} do
+      #   neighbor = Factory.insert(:neighbor)
+      #   conn = conn
+      #     |> login_neighbor(neighbor)
+      #     |> get(Routes.dashboard_path(conn, :my_discussions))
   
-        assert html_response(conn, 200)
-        assert view_template(conn) == "my_discussions.html"
-      end
-      test "redirects from my_discussions if not logged in", %{conn: conn} do
-        conn = conn
-          |> get(Routes.dashboard_path(conn, :my_discussions))
-        assert response(conn, 401)
-      end
+      #   assert html_response(conn, 200)
+      #   assert view_template(conn) == "my_discussions.html"
+      # end
+      # test "redirects from my_discussions if not logged in", %{conn: conn} do
+      #   conn = conn
+      #     |> get(Routes.dashboard_path(conn, :my_discussions))
+      #   assert response(conn, 401)
+      # end
     end
 
     describe "delete_all" do
