@@ -20,18 +20,6 @@
       </a>
     </div>
   </div>
-
-  <div class="column col-4 col-md-12">
-    <a class='white' href="<%= Routes.dashboard_path(@conn, :my_discussions) %>">  
-      <div class="empty settings">
-        <div class="empty-icon">
-          <i class="icon icon-3x icon-apps"></i>
-        </div>
-        <p class="empty-title h5">My Discussions</p>
-      </div>
-    </a>
-  </div> 
-
 </div>
 
 

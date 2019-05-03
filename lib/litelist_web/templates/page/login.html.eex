@@ -5,14 +5,12 @@
   <div class="column col-3 col-md-12 sign-in">
   <%= form_for @changeset, @action, fn f -> %>
       <div class="form-group">
-        <h4>Sign in</h4>
-        <%= label f, :username, class: "control-label" %>
-        <%= text_input f, :username, class: "form-control" %>
+        <h4>Log in</h4>
+        <%= text_input f, :username, class: "form-control", placeholder: "username" %>
         <%= error_tag f, :username %>
       </div>
       <div class="form-group">
-        <%= label f, :password, class: "control-label" %>
-        <%= password_input f, :password, class: "form-control" %>
+        <%= password_input f, :password, class: "form-control", placeholder: "password" %>
         <%= error_tag f, :password %>
 
       </div>
@@ -29,29 +27,25 @@
   </div>
   <div class="col-2 hide-sm hide-md sep">or</div>
   <div class="column col-3 col-md-12 sign-up">
-    <h4>Signup</h4>
+    <h4>Sign up</h4>
     <%= form_for @changeset, @action, fn f -> %>
       <%= hidden_input f, :create_neighbor, value: true %>
       <div class="form-group">
-        <%= label f, :username, class: "control-label" %>
-        <%= text_input f, :username, class: "form-control" %>
+        <%= text_input f, :username, class: "form-control", placeholder: "username" %>
         <%= error_tag f, :username %>
       </div>
       <div class="form-group">
-        <%= label f, :password, class: "control-label" %>
-        <%= password_input f, :password, class: "form-control" %>
+        <%= password_input f, :password, class: "form-control", placeholder: "password" %>
         <%= error_tag f, :password %>
       </div>
 
       <div class="form-group">
-        <%= label f, :first_name, class: "control-label" %>
-        <%= text_input f, :first_name, class: "form-control" %>
+        <%= text_input f, :first_name, class: "form-control", placeholder: "first name" %>
         <%= error_tag f, :first_name %>
       </div>
 
       <div class="form-group">
-        <%= label f, :last_name, class: "control-label" %>
-        <%= text_input f, :last_name, class: "form-control" %>
+        <%= text_input f, :last_name, class: "form-control", placeholder: "last name" %>
         <%= error_tag f, :last_name %>
       </div>
 

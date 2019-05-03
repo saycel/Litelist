@@ -7,14 +7,14 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title><%= Litelist.Settings.get_settings().name %>.list</title>
+    <title><%= Litelist.Settings.get_settings().name %></title>
     <link rel="stylesheet" href="<%= Routes.static_path(@conn, "/css/app.css") %>">
    </head>
 
   <body>
     <div class="container">
       <header class="navbar">
-        <div class="column col-md-12 col-6">
+        <div class="column col-md-12 col-10">
           <section class="navbar-section">
             <a href="/" class="navbar-brand mr"><%= Litelist.Settings.get_settings().name %></a>
             <a href="/post2list" class="btn btn-link">Post</a>
@@ -27,9 +27,11 @@
 
               <%= link "Logout", to: Routes.page_path(@conn, :logout), method: :post, class: "btn btn-link hide-sm" %>
             <% else %>
-              <%= link "Login/Sign up", to: Routes.page_path(@conn, :login), method: :get, class: "btn btn-link"%>
+              <%= link "Log in/Sign up", to: Routes.page_path(@conn, :login), method: :get, class: "btn btn-link"%>
             <% end %>
           </section>
+        </div>
+        <div class="column col-md-12 col-2">
           <section class="form-section">
               <form action="/search" class='search'method="get">
                 <input id="search-form" class="search-form-input" type="text" name="search" placeholder="Search">         
