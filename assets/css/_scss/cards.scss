@@ -29,7 +29,7 @@
 	.card-image{
 		width:100%;
 		max-width:400px;
-		max-height: 300px;
+		height: 200px;
 		overflow:hidden;
 		margin:auto;
 		position:relative;
@@ -59,7 +59,8 @@
     .card-footer{
         text-align:center;
         margin-top:20px;
-        border-top: 1px solid $dark-pumpkin
+        border-top: 1px solid $dark-pumpkin;
+        max-height: 40px;
     }
     .card-footer a{
         color:$unhealthy-poop;

@@ -20,7 +20,6 @@
           <div class="card <%=get_color(~s(discussion))%>">
             <a href="/discussions/<%=discussion.id%>">
             <div class="card-image">
-
             </div>
           </a>
             <div class="card-header">

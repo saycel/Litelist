@@ -21,17 +21,17 @@
     <div class="divider text-center" data-content="Post: <%=@flag.post.title%>"></div>
  
     <div class="card">
-      <div class="card-image">
-        <%= for img <- @flag.post.images do %>
-          <img alt="Post image" src="/uploads/<%=img.image.file_name%>" class="img-responsive">
-        <% end %>
-      </div>
       <div class="card-header">
         <div class="card-title h5"><%=@flag.post.title%></div>
         <div class="card-subtitle text-gray"><%=@flag.post.type%></div>
       </div>
       <div class="card-body">
         <%=@flag.post.description %>
+      </div>
+      <div class="card-image">
+        <%= for img <- @flag.post.images do %>
+          <img alt="Post image" src="/uploads/<%=img.image.file_name%>" class="img-responsive">
+        <% end %>
       </div>
       <div class="card-footer">
         <%=@flag.post.contact_info %>
