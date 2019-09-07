@@ -21,7 +21,7 @@
     "optimize-css-assets-webpack-plugin": "^5.0.1",
     "sass-loader": "^7.1.0",
     "uglifyjs-webpack-plugin": "^2.1.1",
-    "webpack": "4.29.0",
+    "webpack": "4.39.3",
     "webpack-cli": "^3.2.1"
   }
 }
