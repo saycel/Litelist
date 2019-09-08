@@ -7,7 +7,7 @@
   },
   "dependencies": {
     "phoenix": "~1.4",
-    "phoenix_html": "2.12",
+    "phoenix_html": "2.13.2",
     "masonry-layout": "4.2.2"
   },
   "devDependencies": {
