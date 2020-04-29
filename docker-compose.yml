@@ -13,7 +13,7 @@ services:
     depends_on:
       - "postgres"
     ports:
-      - "4000:4000"
+      - "4001:4001"
     stdin_open: true
     tty: true
     volumes:
