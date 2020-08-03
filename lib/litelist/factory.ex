@@ -26,7 +26,7 @@ defmodule Litelist.Factory do
       username: Faker.Internet.user_name,
       first_name: FakerElixir.Name.first_name,
       last_name: FakerElixir.Name.last_name,
-      password: Comeonin.Bcrypt.hashpwsalt("password"),
+      password: Bcrypt.hash_pwd_salt("password"),
       admin: false
     }
   end
@@ -44,7 +44,7 @@ defmodule Litelist.Factory do
       username: Faker.Internet.user_name,
       first_name: FakerElixir.Name.first_name,
       last_name: FakerElixir.Name.last_name,
-      password: Comeonin.Bcrypt.hashpwsalt("password"),
+      password: Bcrypt.hash_pwd_salt("password"),
       admin: true
     }
   end

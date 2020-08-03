@@ -18,7 +18,7 @@ defmodule LitelistWeb.PageController do
     conn
     |> render("post2list.html")
   end
-  
+
   def url_handler(conn, _params) do
     host = get_host(conn)
     name =  Settings.get_settings().name
@@ -53,6 +53,19 @@ defmodule LitelistWeb.PageController do
     else
       conn
       |> render("login.html", changeset: changeset, action: Routes.page_path(conn, :post_login))
+    end
+  end
+
+  def signUp(conn, _params) do
+    changeset = Auth.change_neighbor(%Neighbor{})
+
+    if conn.assigns.current_neighbor do
+      conn
+      |> put_flash(:info, "Already logged in #{conn.assigns.current_neighbor.username}")
+      |> redirect(to: Routes.page_path(conn, :index))
+    else
+      conn
+      |> render("signUp.html", changeset: changeset, action: Routes.page_path(conn, :post_login))
     end
   end
 

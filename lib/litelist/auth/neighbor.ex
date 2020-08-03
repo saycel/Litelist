@@ -5,7 +5,7 @@ defmodule Litelist.Auth.Neighbor do
   use Ecto.Schema
   import Ecto.Changeset
   alias Litelist.Auth.Neighbor
-  alias Comeonin.Bcrypt
+  alias Bcrypt
 
   schema "neighbors" do
     field :password, :string
@@ -32,7 +32,7 @@ defmodule Litelist.Auth.Neighbor do
   end
 
   defp put_pass_hash(%Ecto.Changeset{valid?: true, changes: %{password: password}} = changeset) do
-    change(changeset, password: Bcrypt.hashpwsalt(password))
+    change(changeset, password: Bcrypt.hash_pwd_salt(password))
   end
     
   defp put_pass_hash(changeset), do: changeset
