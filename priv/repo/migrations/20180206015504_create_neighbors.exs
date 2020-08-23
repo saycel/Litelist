@@ -4,7 +4,7 @@ defmodule Litelist.Repo.Migrations.CreateNeighbors do
   def change do
     create table(:neighbors) do
       add :username, :string
-      add :password, :string
+      add :encrypted_password, :string
 
       timestamps()
     end

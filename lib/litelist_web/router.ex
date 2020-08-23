@@ -1,6 +1,7 @@
 defmodule LitelistWeb.Router do
   use LitelistWeb, :router
 
+
   pipeline :browser do
     plug :accepts, ["html"]
     plug :fetch_session
@@ -79,8 +80,9 @@ defmodule LitelistWeb.Router do
     get "/", PageController, :index
 
     get "/post2list", PageController, :information
+    get "/signup", PageController, :sign_up
+    post "/signup", PageController, :post_sign_up
     get "/login", PageController, :login
-    get "/signUp", PageController, :signUp
     post "/login", PageController, :post_login
     post "/logout", PageController, :logout
 

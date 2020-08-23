@@ -114,7 +114,7 @@ defmodule Litelist.Auth do
   defp check_password(nil, _), do: {:error, "Incorrect username or password"}
 
   defp check_password(neighbor, plain_text_password) do
-  case Bcrypt.verify_pass(plain_text_password, neighbor.password) do
+  case Bcrypt.verify_pass(plain_text_password, neighbor.encrypted_password) do
       true -> {:ok, neighbor}
       false -> {:error, "Incorrect username or password"}
     end

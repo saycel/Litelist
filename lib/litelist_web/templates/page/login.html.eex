@@ -1,8 +1,6 @@
-<div class="columns mt-60">
-  <div class="column col-2 hide-sm">
+<div class="columns">
 
-  </div>
-  <div class="column col-3 col-md-12 sign-in">
+  <div class="column col-3 col-mx-auto sign-in">
   <%= form_for @changeset, @action, fn f -> %>
       <div class="form-group">
         <h4>Log in</h4>
@@ -24,5 +22,6 @@
          <%= submit "Submit", class: "btn submit btn-primary" %>
       </div>
     <% end %>
-  </div>  
+  </div>
+  
 </div>

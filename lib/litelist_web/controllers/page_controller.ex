@@ -56,16 +56,23 @@ defmodule LitelistWeb.PageController do
     end
   end
 
-  def signUp(conn, _params) do
-    changeset = Auth.change_neighbor(%Neighbor{})
+  def sign_up(conn, _) do
+    neighbor = Neighbor.changeset(%Neighbor{}, %{})
+    conn
+    |> render("sign_up.html", neighbor: neighbor)
+  end
+  
+  def post_sign_up(conn, %{"neighbor" => neighbor_params}) do
 
-    if conn.assigns.current_neighbor do
+    with {:ok, neighbor} <- Auth.create_neighbor(neighbor_params) do
       conn
-      |> put_flash(:info, "Already logged in #{conn.assigns.current_neighbor.username}")
-      |> redirect(to: Routes.page_path(conn, :index))
+      |> put_flash(:info, "Neighbor Created!!")
+      |> redirect(to: "/signup")
     else
-      conn
-      |> render("signUp.html", changeset: changeset, action: Routes.page_path(conn, :post_login))
+      {:error, neighbor} ->
+        conn
+        |> put_flash(:error, "Error trying to create Neighbor")
+        |> render("sign_up.html", neighbor: neighbor, action: Routes.page_path(conn, :post_sign_up))
     end
   end
 
@@ -73,17 +80,8 @@ defmodule LitelistWeb.PageController do
         "neighbor" => %{
           "username" => username,
           "password" => password,
-          "create_neighbor" => _create_neighbor,
-          "first_name" => first_name,
-          "last_name" => last_name
         }
       }) do
-    Auth.create_neighbor(%{
-      username: username,
-      password: password,
-      first_name: first_name,
-      last_name: last_name
-    })
 
     # credo:disable-for-lines:2
     Auth.authenticate_neighbor(username, password)
@@ -93,6 +91,16 @@ defmodule LitelistWeb.PageController do
   def post_login(conn, %{"neighbor" => %{"username" => username, "password" => password}}) do
     # credo:disable-for-lines:2
     Auth.authenticate_neighbor(username, password)
+    |> login_reply(conn)
+  end
+  
+  defp sign_up_reply({:error, error}, conn) do
+    conn
+    |> redirect(to: Routes.page_path(conn, :sign_up))
+  end
+
+  defp sign_up_reply({:ok, neighbor}, conn) do
+    Auth.authenticate_neighbor(neighbor.username, neighbor.password)
     |> login_reply(conn)
   end
 

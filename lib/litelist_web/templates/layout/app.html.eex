@@ -18,7 +18,6 @@
           <section class="navbar-section">
             <a href="/" class="navbar-brand mr"><%= Litelist.Settings.get_settings().name %></a>
             <a href="/post2list" class="btn btn-link">Post</a>
-            <a href="/discussions" class="btn btn-link">Discuss</a>
             <%= if @conn.assigns.current_neighbor do %>
               <%= if @conn.assigns.current_neighbor.admin do %>
                   <a href="/admin" class="btn btn-link hide-sm hide-md">Administration</a>
@@ -28,7 +27,7 @@
               <%= link "Logout", to: Routes.page_path(@conn, :logout), method: :post, class: "btn btn-link hide-sm" %>
             <% else %>
               <%= link "Log in up", to: Routes.page_path(@conn, :login), method: :get, class: "btn btn-link"%>
-              <%= link "Sign up", to: Routes.page_path(@conn, :signUp), method: :get, class: "btn btn-link"%>
+              <%= link "Sign up", to: Routes.page_path(@conn, :sign_up), method: :get, class: "btn btn-link"%>
             <% end %>
           </section>
         </div>
