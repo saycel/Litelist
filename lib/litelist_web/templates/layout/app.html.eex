@@ -26,7 +26,7 @@
 
               <%= link "Logout", to: Routes.page_path(@conn, :logout), method: :post, class: "btn btn-link hide-sm" %>
             <% else %>
-              <%= link "Log in up", to: Routes.page_path(@conn, :login), method: :get, class: "btn btn-link"%>
+              <%= link "Log in", to: Routes.page_path(@conn, :login), method: :get, class: "btn btn-link"%>
               <%= link "Sign up", to: Routes.page_path(@conn, :sign_up), method: :get, class: "btn btn-link"%>
             <% end %>
           </section>

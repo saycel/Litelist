@@ -65,9 +65,12 @@ defmodule LitelistWeb.PageController do
   def post_sign_up(conn, %{"neighbor" => neighbor_params}) do
 
     with {:ok, neighbor} <- Auth.create_neighbor(neighbor_params) do
+      Auth.authenticate_neighbor(neighbor.username, neighbor.password)
       conn
       |> put_flash(:info, "Neighbor Created!!")
-      |> redirect(to: "/signup")
+      |> Guardian.Plug.sign_in(neighbor)
+      |> redirect(to: Routes.page_path(conn, :index))
+
     else
       {:error, neighbor} ->
         conn
@@ -94,16 +97,6 @@ defmodule LitelistWeb.PageController do
     |> login_reply(conn)
   end
   
-  defp sign_up_reply({:error, error}, conn) do
-    conn
-    |> redirect(to: Routes.page_path(conn, :sign_up))
-  end
-
-  defp sign_up_reply({:ok, neighbor}, conn) do
-    Auth.authenticate_neighbor(neighbor.username, neighbor.password)
-    |> login_reply(conn)
-  end
-
   defp login_reply({:error, error}, conn) do
     conn
     |> put_flash(:error, error)
