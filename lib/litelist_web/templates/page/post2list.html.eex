@@ -1,9 +1,12 @@
-
-<div class="columns mt-20 how-to">
-  <div class="column col-md-12 col-sm-12">
-    <h3>Post Something For Dominica.</h3>
-    <div class="columns">
-      <%= for color <- get_color_array() do %>
+ <div class="columns">
+    <div class="column col-8 col-md-12 col-sm-12 mt-12">
+      <h3>Post something</h3>
+    </div>
+    </div>
+      <%= for {color, i} <- Enum.with_index(get_color_array()) do %>
+        <%= if rem(i,2) == 0 do%>
+         <div class="columns">
+        <%end%>
         <div class="column col-4 col-md-6 col-sm-12 mt-10">
           <a href="<%=elem(color,2)%>">
             <div class="box <%=elem(color,1)%>">
@@ -11,11 +14,7 @@
             </div>
           </a>
         </div>
+        <%= if rem(i,2) != 0 do%>
+          </div>
+        <%end%>
       <%end%>
-    </div>
-  </div>
-
-
-
-
-</div>
