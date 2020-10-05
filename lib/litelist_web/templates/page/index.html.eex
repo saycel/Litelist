@@ -18,6 +18,11 @@
           <div class="card <%=get_color(post.type)%>">
             <a href="<%=path_builder(post)%>">
           </a>
+            <div class="card-image">
+              <%= for image <- post.images do %>
+                <img alt="Post image" src="<%= Litelist.ImageUploader.url({image.image, image})%>" class="img-responsive">
+              <% end %>
+            </div>
             <div class="card-header">
               <div class="card-title h5"><%= truncate(post.title, length: 30, omission: "...") %></div>
               <div class="card-subtitle">#<%=post.type%></div>
@@ -25,11 +30,7 @@
             <div class="card-body">
               <%= truncate(post.description, length: 70, omission: "...") %>
             </div>
-            <div class="card-image">
-              <%= for image <- post.images do %>
-                <img alt="Post image" src="<%= Litelist.ImageUploader.url({image.image, image})%>" class="img-responsive">
-              <% end %>
-            </div>
+            
             <div class="card-footer">
               <div class="columns">
                 <div class="column col-10">

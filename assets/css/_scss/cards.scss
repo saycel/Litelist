@@ -28,8 +28,8 @@
     }
 	.card-image{
 		width:100%;
-		max-width:400px;
-		height: 200px;
+        height: 400px;
+        padding-top: .0rem;
 		overflow:hidden;
 		margin:auto;
 		position:relative;
@@ -45,7 +45,8 @@
          bottom:0;
     }
 	.card-image img{
-		height: 200px;
+        width: 100%;
+		height: 100%;
         -webkit-filter: grayscale(100%); /* Safari 6.0 - 9.0 */
         filter: grayscale(0%);
         -webkit-transition: all 500ms; /* Safari */
@@ -107,9 +108,14 @@
     }
 }
 
+
 .card .card-image:hover:after{
     opacity:.7;
 }
 .card-footer a:hover{
     color:black;
+}
+
+.columns{
+	justify-content: left !important;
 }
