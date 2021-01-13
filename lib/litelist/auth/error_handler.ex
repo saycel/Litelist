@@ -3,10 +3,11 @@ defmodule Litelist.Auth.ErrorHandler do
   Handles authentication errors
   """
   import Plug.Conn
+  use LitelistWeb, :controller
+
   def auth_error(conn, {type, _reason}, _opts) do
-    body = "Please Login to Continue"
     conn
-    |> put_resp_content_type("text/plain")
-    |> send_resp(401, body)
+    |> redirect(to: Routes.page_path(conn, :login))
+
   end
 end

@@ -6,20 +6,20 @@
     "watch": "webpack --mode development --watch-stdin"
   },
   "dependencies": {
-    "phoenix": "~1.4.9",
-    "phoenix_html": "2.13.2",
-    "masonry-layout": "4.2.2"
+    "masonry-layout": "4.2.2",
+    "phoenix": "^1.4.17",
+    "phoenix_html": "2.13.2"
   },
   "devDependencies": {
-    "@babel/core": "^7.6.0",
-    "@babel/preset-env": "^7.6.0",
-    "babel-loader": "^8.0.6",
-    "copy-webpack-plugin": "^5.0.4",
-    "css-loader": "^3.2.0",
-    "mini-css-extract-plugin": "^0.8.0",
-    "node-sass": "4.12.0",
+    "@babel/core": "^7.11.1",
+    "@babel/preset-env": "^7.11.0",
+    "babel-loader": "^8.1.0",
+    "copy-webpack-plugin": "^5.1.1",
+    "css-loader": "^3.6.0",
+    "mini-css-extract-plugin": "^0.8.2",
+    "node-sass": "^4.12.1",
     "optimize-css-assets-webpack-plugin": "^5.0.3",
-    "sass-loader": "^8.0.0",
+    "sass-loader": "^8.0.2",
     "uglifyjs-webpack-plugin": "^2.2.0",
     "webpack": "4.39.3",
     "webpack-cli": "^3.2.1"

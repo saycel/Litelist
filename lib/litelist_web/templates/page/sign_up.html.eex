@@ -1,0 +1,40 @@
+  <div class="column col-3 col-mx-auto sign-up">
+
+    <h4>Sign up</h4>
+    <%= form_for @neighbor, Routes.page_path(@conn, :post_sign_up), fn f -> %>
+      <%= hidden_input f, :create_neighbor, value: true %>
+      <div class="form-group">
+        <%= text_input f, :first_name, class: "form-control", placeholder: "first name" %>
+        <%= error_tag f, :first_name %>
+      </div>
+
+      <div class="form-group">
+        <%= text_input f, :last_name, class: "form-control", placeholder: "last name" %>
+        <%= error_tag f, :last_name %>
+      </div>
+      <div class="form-group">
+        <%= text_input f, :username, class: "form-control", placeholder: "username" %>
+        <%= error_tag f, :username %>
+      </div>
+      <div class="form-group">
+        <%= password_input f, :password, class: "form-control", placeholder: "password" %>
+        <%= error_tag f, :password %>
+      </div>
+      <div class="form-group">
+        <%= password_input f, :password_confirmation, class: "form-control", placeholder: "password confirmation" %>
+        <%= error_tag f, :password_confirmation %>
+      </div>
+
+      <div class="form-group">
+        <label class="form-checkbox">
+          <input type="checkbox">
+          <i class="form-icon"></i> Remember me
+        </label>
+      </div>
+      <div class="form-group">
+         <%= submit "Submit", class: "btn submit btn-primary" %>
+      </div>
+    <% end %>
+  </div>
+  <div class="column col-4 hide-sm">
+  </div>

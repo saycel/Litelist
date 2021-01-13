@@ -5,14 +5,18 @@ defmodule Litelist.Auth.Neighbor do
   use Ecto.Schema
   import Ecto.Changeset
   alias Litelist.Auth.Neighbor
-  alias Comeonin.Bcrypt
+  alias Bcrypt
 
   schema "neighbors" do
-    field :password, :string
     field :username, :string
     field :first_name, :string
     field :last_name, :string
     field :admin, :boolean
+    field :encrypted_password, :string
+
+    field :password, :string, virtual: true
+    field :password_confirmation, :string, virtual: true
+
 
     timestamps()
 
@@ -25,14 +29,15 @@ defmodule Litelist.Auth.Neighbor do
   @doc false
   def changeset(%Neighbor{} = neighbor, attrs) do
     neighbor
-    |> cast(attrs, [:username, :password, :admin, :first_name, :last_name])
+    |> cast(attrs, [:username, :password, :password_confirmation, :admin, :first_name, :last_name])
+    |> validate_confirmation(:password, message: "does not match password!")
     |> unique_constraint(:username, message: "That username already exists. Try another one.")
     |> validate_required([:username, :password])
     |> put_pass_hash()  
   end
 
   defp put_pass_hash(%Ecto.Changeset{valid?: true, changes: %{password: password}} = changeset) do
-    change(changeset, password: Bcrypt.hashpwsalt(password))
+    change(changeset, encrypted_password: Bcrypt.hash_pwd_salt(password))
   end
     
   defp put_pass_hash(changeset), do: changeset

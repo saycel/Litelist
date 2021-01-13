@@ -1,4 +1,4 @@
-version: "3.6"
+version: "3.7"
 
 services:
   postgres:
@@ -14,14 +14,12 @@ services:
       - "postgres"
     ports:
       - "4000:4000"
-    stdin_open: true
-    tty: true
-    volumes:
-      - ".:/app"
-      - "static:/app/priv/static"
     command: "./run.sh"
+    volumes:
+      - "web:/app"
 
 volumes:
+  web:
   postgres: {}
   static:
     driver_opts:

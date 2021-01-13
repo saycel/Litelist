@@ -18,7 +18,7 @@ defmodule LitelistWeb.PageController do
     conn
     |> render("post2list.html")
   end
-  
+
   def url_handler(conn, _params) do
     host = get_host(conn)
     name =  Settings.get_settings().name
@@ -56,21 +56,35 @@ defmodule LitelistWeb.PageController do
     end
   end
 
+  def sign_up(conn, _) do
+    neighbor = Neighbor.changeset(%Neighbor{}, %{})
+    conn
+    |> render("sign_up.html", neighbor: neighbor)
+  end
+  
+  def post_sign_up(conn, %{"neighbor" => neighbor_params}) do
+
+    with {:ok, neighbor} <- Auth.create_neighbor(neighbor_params) do
+      Auth.authenticate_neighbor(neighbor.username, neighbor.password)
+      conn
+      |> put_flash(:info, "Neighbor Created!!")
+      |> Guardian.Plug.sign_in(neighbor)
+      |> redirect(to: Routes.page_path(conn, :index))
+
+    else
+      {:error, neighbor} ->
+        conn
+        |> put_flash(:error, "Error trying to create Neighbor")
+        |> render("sign_up.html", neighbor: neighbor, action: Routes.page_path(conn, :post_sign_up))
+    end
+  end
+
   def post_login(conn, %{
         "neighbor" => %{
           "username" => username,
           "password" => password,
-          "create_neighbor" => _create_neighbor,
-          "first_name" => first_name,
-          "last_name" => last_name
         }
       }) do
-    Auth.create_neighbor(%{
-      username: username,
-      password: password,
-      first_name: first_name,
-      last_name: last_name
-    })
 
     # credo:disable-for-lines:2
     Auth.authenticate_neighbor(username, password)
@@ -82,7 +96,7 @@ defmodule LitelistWeb.PageController do
     Auth.authenticate_neighbor(username, password)
     |> login_reply(conn)
   end
-
+  
   defp login_reply({:error, error}, conn) do
     conn
     |> put_flash(:error, error)
