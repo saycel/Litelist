@@ -4,6 +4,8 @@ Litelist is an opensource local network shopping portal. It is developed as a lo
 
 Lite.list is developed using Phoenix and Elixir programming language to provide a scalable, low latency solution for local networks or distributed systems.
 
+### Documentation below is a work in progress 
+
 ### Update from v0.0.1 to v0.1.0
 
 * Remove assets/node_modules from within your existing container
