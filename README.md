@@ -1,5 +1,9 @@
 # Litelist
 
+Litelist is an opensource local network shopping portal. It is developed as a local alternative to craigslist and Encuentro24, and can be installed on low resource computers like the Raspberry Pi. It was initially developed by Dhruv Mehrotra and Andrew Gimma as “Othernet” through Mozilla WINS (Wireless Innovation for Network Societies) Challenge grant. It is now currently being developed by SayCel, and is beta-testing on Ole.net, a community network in Olekasasi, Kenya. 
+
+Lite.list is developed using Phoenix and Elixir programming language to provide a scalable, low latency solution for local networks or distributed systems.
+
 ### Update from v0.0.1 to v0.1.0
 
 * Remove assets/node_modules from within your existing container
